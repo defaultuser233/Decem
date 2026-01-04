@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星座灵魂动物·究极版</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="breathing-text">✨ 星座灵魂动物·究极版 ✨</h1>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill">
+                <div class="progress-glow"></div>
+            </div>
+        </div>
+
+        <div id="quizContainer">
+            <div class="question-container" id="questionContainer">
+                <div class="question" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
+            </div>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <div class="result-card">
+                <div class="result-title" id="resultTitle"></div>
+                <div class="result-description" id="resultDescription"></div>
+                <button class="download-btn" onclick="downloadResult()">📱 下载结果壁纸</button>
+                <button class="restart-btn" onclick="restartQuiz()">🔄 重新测试</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

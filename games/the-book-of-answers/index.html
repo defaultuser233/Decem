@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>答案之书 - 探索未知的智慧</title>
+    <meta name="description" content="答案之书，为您提供智慧的指引。输入您的问题，获取来自宇宙的答案。">
+    <meta name="keywords" content="答案之书,占卜,决策,智慧,指引">
+    
+    <!-- 外部样式表 -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- 预加载音频 -->
+    <link rel="preload" href="https://assets.mixkit.co/sfx/preview/mixkit-book-page-turn-1141.mp3" as="audio" type="audio/mpeg">
+    <link rel="preload" href="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkles-300.mp3" as="audio" type="audio/mpeg">
+</head>
+<body>
+    <!-- 星空背景 -->
+    <div class="stars-bg"></div>
+
+    <!-- 顶部统计 -->
+    <div class="stats">
+        <span class="stats-icon">📖</span>
+        已回答：<span id="answeredCount">0</span> 个问题
+    </div>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <div class="book" id="book">
+            <!-- 封面 -->
+            <div class="page front-cover">
+                <div class="ornament">✦</div>
+                <h1>答案之书</h1>
+                <div class="subtitle">探索未知的智慧</div>
+                <div class="ornament">☾</div>
+                <div class="cover-hint">
+                    输入问题，让智慧指引你
+                </div>
+            </div>
+            
+            <!-- 答案页 -->
+            <div class="page back-cover">
+                <div class="question-display" id="questionDisplay"></div>
+                <div class="answer-display" id="answerDisplay">
+                    答案即将显现...
+                </div>
+                <div class="book-signature">
+                    —— 答案之书 · 智慧指引 ——
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 输入区域 -->
+    <div class="input-section">
+        <input type="text" class="question-input" id="questionInput" 
+               placeholder="在此输入你的问题（例如：我应该接受这份工作吗？）" 
+               maxlength="100"
+               aria-label="问题输入框">
+        <br>
+        <button class="seek-btn" id="seekBtn">
+            <span id="btnText">✨ 寻求答案 ✨</span>
+            <span class="loading-dots" id="loadingDots" style="display: none;"></span>
+        </button>
+    </div>
+
+    <!-- 返回封面按钮 -->
+    <button class="return-btn" id="returnBtn">📖 返回封面</button>
+
+    <!-- 音效 -->
+    <audio id="pageFlipSound" preload="auto" aria-hidden="true">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-book-page-turn-1141.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="windSound" preload="auto" aria-hidden="true">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkles-300.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 外部JavaScript -->
+    <script src="main.js" defer></script>
+</body>
+</html>

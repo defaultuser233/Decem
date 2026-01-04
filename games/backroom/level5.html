@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后室求生指南 - 第五层 · 恐怖旅馆</title>
+    <style>
+        :root{
+            --blood:#8b0000;     /* 暗血 */
+            --lobby:#2a1a1a;     /* 旅馆深棕 */
+            --gold:#FFD700;
+            --text:#d0c0c0;
+            --shadow:0 0 12px;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            background:var(--lobby) url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.6' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+            color:var(--text);
+            font-family:"Microsoft YaHei",Arial,serif;
+            line-height:1.8;
+            overflow-x:hidden;
+            animation:breathe 14s ease-in-out infinite;
+        }
+        @keyframes breathe{
+            0%,100%{filter:brightness(1)}
+            50%{filter:brightness(1.05)}
+        }
+        .container{max-width:780px;margin:0 auto;padding:50px 20px;position:relative;z-index:2}
+        h1{font-size:2.8em;color:var(--gold);text-align:center;text-shadow:var(--shadow) var(--gold);animation:flicker 3s infinite}
+        @keyframes flicker{0%,100%{opacity:1}50%{opacity:.75}}
+        h2{font-size:1.3em;color:#888;text-align:center;font-weight:400;margin-bottom:40px}
+        h3{font-size:1.7em;color:var(--gold);margin:35px 0 20px;border-left:4px solid var(--gold);padding-left:15px}
+        p{margin-bottom:20px;text-indent:2em;font-size:1.1em}
+        .highlight{color:var(--gold);font-weight:bold}
+        .danger{color:var(--blood);font-weight:bold}
+        .info-box{background:rgba(255,215,0,.1);border:1px solid var(--gold);padding:20px;margin:20px 0;border-radius:5px;position:relative;overflow:hidden}
+        .info-box::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:linear-gradient(45deg,transparent,var(--gold),transparent);animation:shimmer 3s infinite linear;z-index:-1}
+        @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+        .warning-box{background:rgba(139,0,0,.15);border:2px solid var(--blood);padding:20px;margin:20px 0;border-radius:5px;animation:pulse 2s infinite}
+        @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(139,0,0,.4)}70%{box-shadow:0 0 0 10px rgba(139,0,0,0)}100%{box-shadow:0 0 0 0 rgba(139,0,0,0)}}
+        .warning-icon{display:inline-block;width:30px;height:30px;background:var(--blood);color:#000;text-align:center;line-height:30px;border-radius:50%;font-weight:bold;margin-right:10px;animation:blink 1s infinite}
+        @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.3}}
+        ul{list-style:none;padding-left:20px}
+        li{margin-bottom:10px;position:relative;padding-left:20px}
+        li::before{content:'■';position:absolute;left:0;color:var(--gold)}
+        .entity{display:inline-block;color:var(--blood);font-weight:bold;cursor:pointer;transition:all .3s ease}
+        .entity:hover{text-shadow:0 0 8px var(--blood);transform:scale(1.05)}
+        .footer{text-align:center;margin-top:60px;padding-top:20px;border-top:1px solid #333;color:#666;font-style:italic}
+        .exit-link{display:inline-block;margin-top:25px;padding:10px 24px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;border-radius:4px;transition:.3s;position:relative;overflow:hidden}
+        .exit-link::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);opacity:.2;transition:left .4s}
+        .exit-link:hover{color:#000;background:var(--gold)}
+        .exit-link:hover::before{left:100%}
+        @media(max-width:600px){h1{font-size:2.2em}.chapter-title{font-size:1.8em}p{font-size:1em}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>后室求生指南</h1>
+    <h2>第五层 · 恐怖旅馆</h2>
+
+    <div class="chapter-title">第五层：恐怖旅馆（The Terror Hotel）</div>
+
+    <p>
+        推开生锈的旋转门，一股陈旧的血腥味与地毯霉味混合扑面而来。大堂水晶灯只剩几支蜡烛光，在天花板上投下摇曳的巨大黑影。前台的铜铃自动响起——“叮——”，却没有服务员，只有一排排锈蚀的钥匙盘，像无声的墓碑。
+    </p>
+    <p>
+        走廊深不见底，房门编号从001开始无限延伸。偶尔有门把自行转动，发出轻脆的“咔嗒”，像是邀请你走进陷阱。墙壁上的油画全部背对走廊，只留空画布面对行人；若强行翻转，会看到<span class="danger">你自己的背影</span>正在远去。
+    </p>
+
+    <h3>环境特征</h3>
+    <div class="info-box">
+        <ul>
+            <li><strong>空间结构：</strong>无限回字形走廊，每层404间客房；转角后走廊编号自动+1，原路折返会到达不同楼层</li>
+            <li><strong>照明：</strong>壁灯蜡烛光，亮度随你的心跳频率起伏；完全熄灭=有房门被打开</li>
+            <li><strong>地面：</strong>腐朽红地毯，踩上去会渗出暗红色潮气，留下<span class="danger">无法擦除的脚印</span></li>
+            <li><strong>声音：</strong>远处电梯缆绳滑动、门把转动、无人脚步声；突然安静=有“住客”正在你背后</li>
+            <li><strong>温度：</strong>恒温19°C，但越接近“午夜”时段体感越冷，甚至出现霜气</li>
+        </ul>
+    </div>
+
+    <h3>可用资源</h3>
+    <div class="info-box">
+        <ul>
+            <li><strong>客房迷你吧：</strong>随机出现杏仁水、罐装“血玛丽”（实为血袋），饮用后可短暂提升夜视，但会吸引<span class="entity" onclick="alert('客房女仆：对血腥味极度敏感')">客房女仆</span></li>
+            <li><strong>前台万能钥匙：</strong>铜制，可开启任意客房；每用一次，钥匙齿会<span class="danger">多出一枚</span>，形状与你指纹一致</li>
+            <li><strong>电梯卡：</strong>黑色磁卡，插槽后电梯直达“午夜层”——那是通往Level 6的出口，但只在23:59–00:00有效</li>
+        </ul>
+    </div>
+
+    <h3>旅馆守则</h3>
+    <ol style="margin-left:2em;color:#ccc">
+        <li>23:59前务必离开走廊，进入电梯或客房；钟声一响，走廊将<span class="danger">无限延伸</span>至00:01。</li>
+        <li>若房门自动打开，立即闭眼默数5秒再进入；否则你会看见<span class="highlight">“未来的你”</span>正在房内吊死。</li>
+        <li>油画不得翻转；若已翻转，需把画框重新背对走廊，否则背影会<span class="entity" onclick="alert('背影像：会逐步取代你，直至你成为画中人')">走出画布</span>。</li>
+        <li>电梯卡只能在23:59–00:00使用；提前或延后刷卡，电梯将直达<span class="danger">“锅炉层”</span>（Level 5.5，未建档）。</li>
+    </ol>
+
+    <h3>实体威胁</h3>
+    <p>除前述<span class="entity">客房女仆</span>与<span class="entity">背影像</span>，还有一种通体蜡黄的<span class="entity" onclick="alert('前台经理：穿旧式燕尾服，专猎持有万能钥匙的住客')">前台经理</span>。它只在电梯口徘徊，对钥匙齿数敏感：齿数=你的年龄时，它会鞠躬并打开电梯——门后可能是出口，也可能是深渊。</p>
+
+    <div class="warning-box">
+        <span class="warning-icon">!</span>
+        <strong>午夜电梯出口限时60秒</strong><br>
+        23:59插入黑卡→电梯门开→内部显示“00:00”→下降抵达Level 6“熄灯”。若00:01后仍滞留电梯，门将重新打开，你回到旅馆大堂，但所有房门编号变为<span class="danger">你的生日</span>——再也走不出去。
+    </div>
+
+    <div class="footer">
+        <p>钟声在远处回响，23:59的指针即将重合。</p>
+        <p>电梯门已敞开，是逃离，还是成为下一幅油画？</p>
+        <a class="exit-link" href="level6.html">→ 在午夜最后一秒，刷卡坠入黑暗</a>
+    </div>
+</div>
+
+<script>
+/* 心跳灯效：壁灯亮度随访客心跳频率起伏 */
+document.addEventListener('DOMContentLoaded',()=>{
+    let beat=1100; // ms
+    const lamps=document.querySelectorAll('.info-box, .warning-box');
+    setInterval(()=>{
+        lamps.forEach(box=>{
+            box.style.filter=`brightness(${1+0.15*Math.sin(Date.now()/beat*Math.PI)})`;
+        });
+        beat*=0.999; // 逐步加速，营造紧张
+        if(beat<400)beat=1100; // 重置
+    },120);
+});
+</script>
+</body>
+</html>

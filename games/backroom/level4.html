@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后室求生指南 - 第四层 · 遗弃办公室</title>
+    <style>
+        :root{
+            --paper:#f5f5f5;      /* 泛黄的A4纸色 */
+            --ink:#2a2a2a;        /* 干涸墨黑 */
+            --faded:#6b6b6b;      /* 褪字灰 */
+            --text:#d0d0d0;
+            --gold:#FFD700;
+            --blood:#ff4444;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            background:var(--ink) url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+            color:var(--text);
+            font-family:"Microsoft YaHei",Arial,serif;
+            line-height:1.8;
+            overflow-x:hidden;
+            animation:paperBurn 14s ease-in-out infinite;
+        }
+        @keyframes paperBurn{
+            0%,100%{filter:brightness(1)}
+            50%{filter:brightness(1.03)}
+        }
+        .container{max-width:780px;margin:0 auto;padding:50px 20px;position:relative;z-index:2}
+        h1{font-size:2.8em;color:var(--paper);text-align:center;text-shadow:0 0 15px var(--paper);animation:typeFlicker 2.5s infinite alternate}
+        @keyframes typeFlicker{0%{text-shadow:0 0 10px var(--paper)}100%{text-shadow:0 0 25px var(--paper)}}
+        h2{font-size:1.3em;color:#a0a0a0;text-align:center;font-weight:400;margin-bottom:40px}
+        h3{font-size:1.7em;color:var(--paper);margin:35px 0 18px;border-left:4px solid var(--paper);padding-left:12px}
+        p{margin-bottom:20px;text-indent:2em;font-size:1.1em}
+        .highlight{color:var(--gold);font-weight:bold}
+        .danger{color:var(--blood);font-weight:bold}
+        .info-box{background:rgba(245,245,245,.08);border:1px solid var(--paper);padding:20px;margin:22px 0;border-radius:6px;position:relative;overflow:hidden}
+        .info-box::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--paper),transparent);opacity:.5;animation:scanLine 3s linear infinite}
+        @keyframes scanLine{to{left:100%}}
+        .warning-box{background:rgba(255,68,68,.08);border:2px solid var(--blood);padding:20px;margin:22px 0;border-radius:6px;animation:throb 1.5s infinite}
+        @keyframes throb{0%,100%{box-shadow:inset 0 0 0 0 rgba(255,68,68,.3)}50%{box-shadow:inset 0 0 15px 8px rgba(255,68,68,0)}}
+        .warning-icon{display:inline-block;width:28px;height:28px;background:var(--blood);color:#000;text-align:center;line-height:28px;border-radius:50%;font-weight:bold;margin-right:10px;animation:blink 1s infinite}
+        @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.3}}
+        ul{list-style:none;padding-left:20px}
+        li{margin-bottom:10px;position:relative;padding-left:20px}
+        li::before{content:'■';position:absolute;left:0;color:var(--paper)}
+        .entity{display:inline-block;color:var(--blood);font-weight:bold;cursor:pointer;transition:.3s}
+        .entity:hover{text-shadow:0 0 10px var(--blood);transform:scale(1.06)}
+        .footer{text-align:center;margin-top:60px;padding-top:20px;border-top:1px solid #333;color:#888;font-style:italic}
+        .exit-link{display:inline-block;margin-top:25px;padding:10px 24px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;border-radius:4px;transition:.3s;position:relative;overflow:hidden}
+        .exit-link::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);opacity:.2;transition:left .4s}
+        .exit-link:hover{color:#000;background:var(--gold)}
+        .exit-link:hover::before{left:100%}
+        @media(max-width:600px){h1{font-size:2.2em}h3{font-size:1.5em}p{font-size:1em}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>后室求生指南</h1>
+    <h2>第三层 · 遗弃办公室</h2>
+
+    <h3>第三层：遗弃办公室（The Abandoned Office）</h3>
+
+    <p>
+        管道井在你脚下合拢，取而代之的是一片灰白——低矮的吊顶、沉默的日光灯、无穷无尽的隔间。空气里飘着<span class="highlight">陈旧碳粉与霉纸</span>的混合味，像某场永不完结的例会。地毯吸饱了水，踩下去渗出暗色脚印，几秒后又悄然淡去，仿佛这里在试图抹掉你来过的证据。
+    </p>
+    <p>
+        每一张办公桌都保持“临时离开”的状态：显示器黑屏却亮着待机灯，保温杯里干涸的咖啡结成黑色硬壳，椅背搭着外套，口袋里的员工卡只剩空白。你呼唤，回声被<span class="danger">吸音板墙</span>吞得干干净净；唯一能回应的，是复印机深处传来的低频嗡鸣——像某种巨大生物的心跳。
+    </p>
+
+    <h3>环境特征</h3>
+    <div class="info-box">
+        <ul>
+            <li><strong>空间结构：</strong>模块化立方体农场，隔间墙高1.6m，通道宽1.2m；每走过200m，布局会<span class="highlight">轻微错位</span>，回头即找不到来路</li>
+            <li><strong>照明：</strong>嵌入式日光灯24h常亮，色温6500K，照度均匀得令人眩晕；偶尔整排熄灭5秒，熄灯时待机灯仍亮，形成“鬼火通道”</li>
+            <li><strong>地面：</strong>吸水地毯，厚3cm，内含大量<span class="danger">不明液体</span>，踩压会渗出并留下短暂脚印；脚印消失时间=你的心率×2s</li>
+            <li><strong>声音：</strong>复印机低频嗡鸣+键盘敲击幻听；噪音恒定42dB，却会在你停步时突然降低，暴露你的位置</li>
+            <li><strong>温度：</strong>恒温21°C，但湿度高达70%，长时间静坐会体感发冷、文件纸张卷曲</li>
+        </ul>
+    </div>
+
+    <h3>可用资源</h3>
+    <div class="info-box">
+        <ul>
+            <li><strong>办公用杏仁水：</strong>饮水机蓝色桶装，开封后48h内自净；过量饮用会出现<span class="danger">短暂色盲</span>（只能看到黑白灰）</li>
+            <li><strong>免钉胶带与美工刀：</strong>抽屉常备，可快速修补地毯裂口、设置<span class="highlight">静音通道</span></li>
+            <li><strong>复印机：</strong>每复印一次，出纸口会吐出一张<span class="highlight">未来5分钟</span>的通道简图；若连续复印>5张，机器会启动“订书钉扫射”，钉针如飞刀</li>
+        </ul>
+    </div>
+
+    <h3>办公室守则</h3>
+    <ol style="margin-left:2em;color:#ccc">
+        <li>禁止坐在任何转椅上超过10分钟——椅子气压杆会缓慢下沉，把你“<span class="danger">归档</span>到地毯下方。</li>
+        <li>待机灯闪烁≥3次=附近隔间有<span class="entity" onclick="alert('影印员：穿西装无脸人，手持订书机，专钉活物')">影印员</span>巡逻；立即关闭手电，匍匐至下一通道。</li>
+        <li>发现桌面电脑屏幕突然亮起，并显示“会议邀请：现在”，<span class="highlight">不要点击接受</span>；三秒后屏幕会爆炸，玻璃碎片呈扇形杀伤。</li>
+        <li>复印机简图出现红色箭头，说明该方向通向<span class="highlight">Level 4</span>；但必须在5分钟内抵达，否则简图自燃，通道错位。</li>
+    </ol>
+
+    <h3>实体威胁</h3>
+    <p>除前述<span class="entity">影印员</span>，还有一种与地毯同色的<span class="entity" onclick="alert('地毯蛰客：扁平化人形，贴地爬行，沿脚印逆向追踪')">地毯蛰客</span>。它们会沿着你的脚印逆向爬回，在你停步处从地毯下伸出苍白手臂，抓住脚踝拖入吸水层。</p>
+
+    <div class="warning-box">
+        <span class="warning-icon">!</span>
+        <strong>出口仅于复印简图红色箭头指向时出现</strong><br>
+        红色箭头=安全通道=5分钟倒计时。抵达尽头会看见“安全出口”绿灯，推门即进入Level 4的干燥机房。若未在时限内到达，门将消失，并传出影印员集体奔走的脚步声。
+    </div>
+
+    <div class="footer">
+        <p>复印机又开始嗡鸣，下一张简图正在预热。</p>
+        <p>5分钟沙漏已倒转，出口或碎纸机，只隔一条通道。</p>
+        <a class="exit-link" href="level4.html">→ 抓住红箭，5分钟冲刺</a>
+    </div>
+</div>
+
+<script>
+  // 待机灯随机闪烁
+  setInterval(()=>{
+    const box=document.querySelector('.info-box');
+    box.style.borderColor='#00bfff';
+    setTimeout(()=>box.style.borderColor='var(--paper)',300);
+  },4000);
+
+  // 鼠标移动→地毯水印视差
+  document.addEventListener('mousemove',e=>{
+    const x=e.clientX/window.innerWidth;
+    const y=e.clientY/window.innerHeight;
+    document.body.style.backgroundPosition=`${x*5}px ${y*5}px`;
+  });
+</script>
+</body>
+</html>

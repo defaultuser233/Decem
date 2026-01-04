@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后室求生指南 - 第三层 · 发电站</title>
+    <style>
+        :root{
+            --volt:#00bfff;      /* 电火花蓝 */
+            --dark:#0a0a0a;      /* 焦黑 */
+            --slime:#5d8a66;     /* 电缆青绿 */
+            --text:#c0d8d8;
+            --gold:#FFD700;
+            --blood:#ff4444;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            background:var(--dark) url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+            color:var(--text);
+            font-family:"Microsoft YaHei",Arial,serif;
+            line-height:1.8;
+            overflow-x:hidden;
+            animation:hum 10s ease-in-out infinite;
+        }
+        @keyframes hum{
+            0%,100%{filter:brightness(1)}
+            50%{filter:brightness(1.05)}
+        }
+        .container{max-width:780px;margin:0 auto;padding:50px 20px;position:relative;z-index:2}
+        h1{font-size:2.8em;color:var(--volt);text-align:center;text-shadow:0 0 15px var(--volt);animation:spark .8s infinite alternate}
+        @keyframes spark{0%{text-shadow:0 0 10px var(--volt)}100%{text-shadow:0 0 25px var(--volt)}}
+        h2{font-size:1.3em;color:#88b8b8;text-align:center;font-weight:400;margin-bottom:40px}
+        h3{font-size:1.7em;color:var(--volt);margin:35px 0 18px;border-left:4px solid var(--volt);padding-left:12px}
+        p{margin-bottom:20px;text-indent:2em;font-size:1.1em}
+        .highlight{color:var(--gold);font-weight:bold}
+        .danger{color:var(--blood);font-weight:bold}
+        .info-box{background:rgba(0,191,255,.08);border:1px solid var(--volt);padding:20px;margin:22px 0;border-radius:6px;position:relative;overflow:hidden}
+        .info-box::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--volt),transparent);opacity:.6;animation:arc 2.5s linear infinite}
+        @keyframes arc{to{left:100%}}
+        .warning-box{background:rgba(255,68,68,.08);border:2px solid var(--blood);padding:20px;margin:22px 0;border-radius:6px;animation:short 1.2s infinite steps(2)}
+        @keyframes short{0%,100%{box-shadow:inset 0 0 0 0 rgba(255,68,68,.4)}50%{box-shadow:inset 0 0 15px 8px rgba(255,68,68,0)}}
+        .warning-icon{display:inline-block;width:28px;height:28px;background:var(--blood);color:#000;text-align:center;line-height:28px;border-radius:50%;font-weight:bold;margin-right:10px;animation:blink .8s infinite}
+        @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.3}}
+        ul{list-style:none;padding-left:20px}
+        li{margin-bottom:10px;position:relative;padding-left:20px}
+        li::before{content:'■';position:absolute;left:0;color:var(--volt)}
+        .entity{display:inline-block;color:var(--blood);font-weight:bold;cursor:pointer;transition:.3s}
+        .entity:hover{text-shadow:0 0 10px var(--blood);transform:scale(1.06)}
+        .footer{text-align:center;margin-top:60px;padding-top:20px;border-top:1px solid #2a4b4b;color:#669999;font-style:italic}
+        .exit-link{display:inline-block;margin-top:25px;padding:10px 24px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;border-radius:4px;transition:.3s;position:relative;overflow:hidden}
+        .exit-link::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);opacity:.2;transition:left .4s}
+        .exit-link:hover{color:#000;background:var(--gold)}
+        .exit-link:hover::before{left:100%}
+        @media(max-width:600px){h1{font-size:2.2em}h3{font-size:1.5em}p{font-size:1em}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>后室求生指南</h1>
+    <h2>第三层 · 发电站</h2>
+
+    <h3>第三层：发电站（The Power Station）</h3>
+
+    <p>
+        你顺着维修井坠入一片漆黑的空间，鞋底踩到冰冷潮湿的混凝土。远处传来低沉的变压器嗡鸣，像一头被囚禁的巨兽在喘息。空气中弥漫着臭氧与汽油的辛辣味，每一次呼吸都让喉咙发紧。
+    </p>
+    <p>
+        高压柜的指示灯在黑暗里闪烁，蓝与红交替跳动，把四周照得如同昼夜颠倒的手术室。电缆像巨蟒般盘踞地面，偶尔迸出<span class="danger">电火花</span>，照亮角落里缓慢蠕动的不明黑影。
+    </p>
+
+    <h3>环境特征</h3>
+    <div class="info-box">
+        <ul>
+            <li><strong>空间结构：</strong>非对称机房群，高压区与冷却井交错；部分走廊被水淹至脚踝，水中带有弱导电性</li>
+            <li><strong>照明：</strong>仅有高压柜指示灯与应急绿灯，完全熄灯周期≈43秒；熄灯期间可见远处<span class="danger">蓝色电弧</span></li>
+            <li><strong>地面：</strong>镂空格栅+积水混凝土，踩空会坠入<span class="danger">电缆井</span>，深度4–6m，水温4°C且带电</li>
+            <li><strong>声音：</strong>变压器嗡鸣+远距断路器“咔嗒”合闸；突然静默=电压即将过载，5秒内必出现大范围电弧</li>
+            <li><strong>温度：</strong>空气26°C，积水区14°C；靠近变压器区域升至40°C，伴有金属焦糊味</li>
+        </ul>
+    </div>
+
+    <h3>可用资源</h3>
+    <div class="info-box">
+        <ul>
+            <li><strong>绝缘工具箱：</strong>随机出现在高压柜脚下，内含绝缘手套、橡胶靴、断线钳——穿戴后可短暂免疫电击，但<span class="danger">浸水即失效</span></li>
+            <li><strong>应急杏仁水：</strong>绿色桶装，沿冷却渠每90m出现；可直接饮用，过量会导致短暂<span class="danger">心律不齐</span></li>
+            <li><strong>主电闸：</strong>红色拉杆，位于每层最深处；拉下后全段熄灯7分钟，水面出现<span class="highlight">荧光绝缘步道</span>（通往Level 4）</li>
+        </ul>
+    </div>
+
+    <h3>电站守则</h3>
+    <ol style="margin-left:2em;color:#ccc">
+        <li>指示灯完全熄灭的43秒内，切勿涉水——水中残压可达<span class="danger">220V</span>，绝缘靴亦可能击穿。</li>
+        <li>听见“咔嗒”合闸声后，5秒内必出现大范围电弧；立即蹲下并关闭所有光源，<span class="highlight">降低身体高度</span>可减少被击概率。</li>
+        <li>发现水面出现<strong>蓝色荧光涟漪</strong>，说明下方有电缆断裂；可沿光带行走，但超过10秒将吸引<span class="entity" onclick="alert('电蚀体：通体蓝白，触碰后肌肉瞬间麻痹')">电蚀体</span>。</li>
+        <li>拉下主电闸后，7分钟内必须抵达荧光步道尽头；超时则全线复电，水面电弧强度翻倍。</li>
+    </ol>
+
+    <h3>实体威胁</h3>
+    <p>除前述<span class="entity">电蚀体</span>外，还有半溶于水的<span class="entity" onclick="alert('电缆幻听：模仿你熟人说话，声音来自水下')">电缆幻听</span>与贴墙滑行的<span class="entity" onclick="alert('高压魇：贴柜滑行，对金属震动极度敏感')">高压魇</span>。它们不主动猎杀，却热衷于“修正”你的路线——让你永远走在带电的水里，像一颗被拨弄的磁珠。</p>
+
+    <div class="warning-box">
+        <span class="warning-icon">!</span>
+        <strong>出口仅于主电闸拉下后开启</strong><br>
+        红色拉杆→全段熄灯7分钟→水面荧光步道显现→尽头为<span class="highlight">绝缘升降梯</span>，通往Level 4“干燥机房”。若超时未抵达，步道崩解，水位暴涨至腰，只能潜入配电室底部的“电缆井”赌随机出口（Level 4 或 Level 5）。
+    </div>
+
+    <div class="footer">
+        <p>电弧在水面跳舞，你的心跳正与变压器同频。</p>
+        <p>7分钟倒计时开始，跑或沉，皆在一线之间。</p>
+        <a class="exit-link" href="level4.html">→ 拉下主电闸，7分钟冲刺</a>
+    </div>
+</div>
+
+<script>
+/* ===== 闪电特效 ===== */
+const canvas=document.createElement("canvas");
+canvas.style.position="fixed";canvas.style.top=0;canvas.style.left=0;canvas.style.width="100%";canvas.style.height="100%";canvas.style.pointerEvents="none";canvas.style.zIndex=1;
+document.body.appendChild(canvas);
+const ctx=canvas.getContext("2d"),w=innerWidth,h=innerHeight;
+canvas.width=w;canvas.height=h;
+
+/** 闪电参数 **/
+const LIGHTNING={maxSeg:12,deviation:15,brightness:120,prob:0.015}; // prob=每帧触发概率
+
+/** 生成单段闪电 **/
+function branch(from,to,curDev,gen){
+    if(gen<=0)return[];
+    const midX=(from.x+to.x)/2, midY=(from.y+to.y)/2;
+    const len=Math.hypot(to.x-from.x,to.y-from.y);
+    const perpX=-(to.y-from.y)/len, perpY=(to.x-from.x)/len;
+    const offset=(Math.random()-0.5)*curDev;
+    const newPoint={x:midX+perpX*offset,y:midY+perpY*offset};
+    const left=branch(from,newPoint,curDev/2,gen-1);
+    const right=branch(newPoint,to,curDev/2,gen-1);
+    return[...left,newPoint,...right];
+}
+/** 画一次闪电 + 闪屏 **/
+function drawLightning(start,end){
+    const points=branch(start,end,LIGHTNING.deviation,LIGHTNING.maxSeg);
+    points.unshift(start);points.push(end);
+    // 主电弧
+    ctx.strokeStyle=`rgba(0,191,255,${LIGHTNING.brightness/100})`;
+    ctx.lineWidth=2.5;
+    ctx.beginPath();ctx.moveTo(start.x,start.y);
+    points.forEach(p=>ctx.lineTo(p.x,p.y));
+    ctx.stroke();
+    // 外层辉光
+    ctx.strokeStyle=`rgba(0,191,255,${LIGHTNING.brightness/200})`;
+    ctx.lineWidth=6;ctx.stroke();
+    // 闪屏效果
+    document.body.style.backgroundColor='#1a1a2e';
+    setTimeout(()=>document.body.style.backgroundColor='',40);
+}
+/** 随机闪电 **/
+function randomStrike(){
+    if(Math.random()<LIGHTNING.prob){
+        const start={x:Math.random()*w,y:0};
+        const end={x:Math.random()*w,y:h};
+        drawLightning(start,end);
+        // 二次分支
+        if(Math.random()<0.4){
+            const branchEnd={x:end.x+(Math.random()-0.5)*200,y:end.y+Math.random()*100};
+            drawLightning(end,branchEnd);
+        }
+    }
+}
+/** 主循环 **/
+function animate(){ctx.clearRect(0,0,w,h);randomStrike();requestAnimationFrame(animate)}animate();
+addEventListener("resize",()=>{canvas.width=w;canvas.height=h});
+
+/* ===== 鼠标指向实体 → 精准电击 ===== */
+document.addEventListener('mousemove',e=>{
+    const target=e.target;
+    if(target.classList.contains('entity')&&Math.random()<0.08){ // 8%概率触发
+        const rect=target.getBoundingClientRect();
+        const start={x:rect.left+rect.width/2,y:rect.top};
+        const end={x:e.clientX,y:e.clientY};
+        drawLightning(start,end);
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后室求生指南 - 第二层 · 管道之梦</title>
+    <style>
+        :root{
+            --pipe:#3a5f4f;      /* 锈绿管色 */
+            --dark:#0f1414;      /* 深井黑 */
+            --echo:#7fdbda;      /* 回声青 */
+            --text:#c0d0d0;
+            --gold:#FFD700;
+            --blood:#ff4444;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            background:var(--dark) url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+            color:var(--text);
+            font-family:"Microsoft YaHei",Arial,serif;
+            line-height:1.8;
+            overflow-x:hidden;
+            animation:drain 12s ease-in-out infinite;
+        }
+        @keyframes drain{
+            0%,100%{background-position:0 0}
+            50%{background-position:0 12px}
+        }
+        .container{max-width:780px;margin:0 auto;padding:50px 20px;position:relative;z-index:2}
+        h1{font-size:2.8em;color:var(--echo);text-align:center;text-shadow:0 0 15px var(--echo);animation:drip 2s infinite alternate}
+        @keyframes drip{0%{text-shadow:0 0 10px var(--echo)}100%{text-shadow:0 0 25px var(--echo)}}
+        h2{font-size:1.3em;color:#88b8b8;text-align:center;font-weight:400;margin-bottom:40px}
+        h3{font-size:1.7em;color:var(--echo);margin:35px 0 18px;border-left:4px solid var(--echo);padding-left:12px}
+        p{margin-bottom:20px;text-indent:2em;font-size:1.1em}
+        .highlight{color:var(--gold);font-weight:bold}
+        .danger{color:var(--blood);font-weight:bold}
+        .info-box{background:rgba(127,219,218,.08);border:1px solid var(--echo);padding:20px;margin:22px 0;border-radius:6px;position:relative;overflow:hidden}
+        .info-box::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--echo),transparent);opacity:.5;animation:flow 3s linear infinite}
+        @keyframes flow{to{left:100%}}
+        .warning-box{background:rgba(255,68,68,.08);border:2px solid var(--blood);padding:20px;margin:22px 0;border-radius:6px;animation:throb 1.4s infinite}
+        @keyframes throb{0%,100%{box-shadow:inset 0 0 0 0 rgba(255,68,68,.3)}50%{box-shadow:inset 0 0 15px 8px rgba(255,68,68,0)}}
+        .warning-icon{display:inline-block;width:28px;height:28px;background:var(--blood);color:#000;text-align:center;line-height:28px;border-radius:50%;font-weight:bold;margin-right:10px;animation:blink 1s infinite}
+        @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.3}}
+        ul{list-style:none;padding-left:20px}
+        li{margin-bottom:10px;position:relative;padding-left:20px}
+        li::before{content:'■';position:absolute;left:0;color:var(--echo)}
+        .entity{display:inline-block;color:var(--blood);font-weight:bold;cursor:pointer;transition:.3s}
+        .entity:hover{text-shadow:0 0 10px var(--blood);transform:scale(1.06)}
+        .footer{text-align:center;margin-top:60px;padding-top:20px;border-top:1px solid #2a4b4b;color:#669999;font-style:italic}
+        .exit-link{display:inline-block;margin-top:25px;padding:10px 24px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;border-radius:4px;transition:.3s;position:relative;overflow:hidden}
+        .exit-link::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);opacity:.2;transition:left .4s}
+        .exit-link:hover{color:#000;background:var(--gold)}
+        .exit-link:hover::before{left:100%}
+        @media(max-width:600px){h1{font-size:2.2em}h3{font-size:1.5em}p{font-size:1em}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>后室求生指南</h1>
+    <h2>第二层 · 管道之梦</h2>
+
+    <h3>第二层：管道之梦（Pipe Dreams）</h3>
+
+    <p>
+        你踩断锈蚀的梯栏，坠入一条幽绿的管道隧道。空气湿冷，像刚被抽离阳光的地窖；管壁布满暗褐色水痕，手指轻触便留下黏稠的腥臭。头顶的保温棉滴着水，落在金属格栅上，发出无休止的“嗒——嗒——”，仿佛某颗巨型心脏在为你计时。
+    </p>
+    <p>
+        管道并非笔直，它们以违反几何的角度分叉、回环，像一条被随意扭折的金属蛇。每一次转弯，都能听见远处传来<span class="danger">空洞的敲击声</span>——那是管道在呼吸，还是别的什么东西在巡游？
+    </p>
+
+    <h3>环境特征</h3>
+    <div class="info-box">
+        <ul>
+            <li><strong>空间结构：</strong>非对称管廊迷宫，分叉角度随机；部分支管为死路，却会在你折返后悄悄转向</li>
+            <li><strong>照明：</strong>壁挂安全灯24V绿光，电压不稳导致频闪；完全熄灯周期≈37秒，黑暗里只剩滴水回声</li>
+            <li><strong>地面：</strong>镂空格栅与湿滑混凝土交替，踩空会坠入<span class="danger">冷凝水坑</span>，深度1.5–2m，水温4°C</li>
+            <li><strong>声音：</strong>滴水+金属热胀冷缩的“咔啦”脆响；回声延迟=你的步频×1.5，若突然不同步，说明有<span class="entity" onclick="alert('回声窃客：模仿你的脚步，逐步靠近后替换你')">第三者</span>加入</li>
+            <li><strong>温度：</strong>气温14°C，相对湿度85%；长时间停留会因湿冷出现幻听</li>
+        </ul>
+    </div>
+
+    <h3>可用资源</h3>
+    <div class="info-box">
+        <ul>
+            <li><strong>管道杏仁水：</strong>绿色塑料桶，沿主管道每120m出现一次；可直接饮用，但过量会导致短暂<span class="danger">失温症</span></li>
+            <li><strong>保温棉层：</strong>撕下后可裹身防潮，也可塞入格栅缝隙制造<span class="highlight">静音通道</span></li>
+            <li><strong>阀门扳手：</strong>挂在管壁，可拆卸用作武器；旋转任意阀门会改变局部管道走向，但也会惊动<span class="entity" onclick="alert('管壁魇：贴管滑行，对金属震动极度敏感')">管壁魇</span></li>
+        </ul>
+    </div>
+
+    <h3>管道守则</h3>
+    <ol style="margin-left:2em;color:#ccc">
+        <li>脚步节奏保持恒定；若听见身后出现<span class="danger">第二套回声</span>，立即停步10秒，让“它”先通过。</li>
+        <li>绿光灯完全熄灭的37秒内，切勿移动——黑暗中管道会<span class="highlight">自行移位</span>，盲行必坠入水坑。</li>
+        <li>发现地面格栅出现<strong>向上雾气</strong>，说明下方有暖管通过；可匍匐下去短暂取暖，但超过3分钟会被<span class="entity">管壁魇</span>从背后环抱。</li>
+        <li>不要随意关闭主阀门——每次关闭，整条管道会向<span class="danger">更深层</span>滑动一级；连续三次，你将直达Level 3的“发电站”冷却井。</li>
+    </ol>
+
+    <h3>实体威胁</h3>
+    <p>除前述<span class="entity">回声窃客</span>与<span class="entity">管壁魇</span>，还有一种半溶于水的<span class="entity" onclick="alert('冷凝影：体温低于12°C时可见，触碰会抽走热量')">冷凝影</span>。它们像黑色油膜附在管壁，等你经过时突然剥离，裹住四肢并急速吸热。</p>
+
+    <div class="warning-box">
+        <span class="warning-icon">!</span>
+        <strong>出口仅于第三次阀门关闭后开启</strong><br>
+        每次关闭主阀门，管道会整体下滑；第三次关闭时，主管末端出现<span class="highlight">竖直维修井</span>，铁梯通往Level 3冷却层。若未准备好，可反向开启阀门两次让管道回升，但第四次关闭将直接坠入Level 5的“恐怖旅馆”锅炉房。
+    </div>
+
+    <div class="footer">
+        <p>滴水声永不停歇，你的脚步正在与管道同频。</p>
+        <p>第三次阀门转动在即，回头或前行，皆已无路可退。</p>
+        <a class="exit-link" href="level3.html">→ 转动第三圈阀门，坠入冷却井</a>
+    </div>
+</div>
+
+<script>
+  // 水滴回声粒子
+  const canvas=document.createElement("canvas");
+  canvas.style.position="fixed";canvas.style.top=0;canvas.style.left=0;canvas.style.width="100%";canvas.style.height="100%";canvas.style.pointerEvents="none";canvas.style.zIndex=1;
+  document.body.appendChild(canvas);
+  const ctx=canvas.getContext("2d"),w=innerWidth,h=innerHeight;
+  canvas.width=w;canvas.height=h;
+  const drops=Array.from({length:60},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2+1,s:Math.random()*1.5+0.5,life:1}));
+  function fall(){ctx.clearRect(0,0,w,h);ctx.fillStyle="rgba(127,219,218,.6)";drops.forEach(d=>{d.y+=d.s;d.x+=Math.sin(d.y*0.02)*0.3;if(d.y>h){d.y=-10;d.x=Math.random()*w}ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fill()});requestAnimationFrame(fall)}fall();
+  addEventListener("resize",()=>{canvas.width=w;canvas.height=h});
+</script>
+</body>
+</html>

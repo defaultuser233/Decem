@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>后室求生指南 - 第三层 · 水淹电缆</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --spark:#00bfff;
+    --flood:#1b3b3b;
+    --slime:#5d8a66;
+    --text:#c0d8d8;
+    --gold:#FFD700;
+    --blood:#ff4444;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--flood) url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+    color:var(--text);
+    font-family:"Microsoft YaHei",Arial,serif;
+    line-height:1.7;
+    overflow-x:hidden;
+    animation:ripple 8s ease-in-out infinite;
+  }
+  @keyframes ripple{
+    0%,100%{background-position:0 0}
+    50%{background-position:0 20px}
+  }
+  .container{max-width:780px;margin:0 auto;padding:50px 20px;position:relative;z-index:2}
+  h1{font-size:2.8em;color:var(--spark);text-align:center;text-shadow:0 0 15px var(--spark);animation:sparkle .8s infinite alternate}
+  @keyframes sparkle{0%{text-shadow:0 0 10px var(--spark)}100%{text-shadow:0 0 25px var(--spark)}}
+  h2{font-size:1.3em;color:#88b8b8;text-align:center;font-weight:400;margin-bottom:40px}
+  h3{font-size:1.7em;color:var(--spark);margin:35px 0 18px;border-left:4px solid var(--spark);padding-left:15px}
+  p{margin-bottom:20px;text-indent:2em;font-size:1.1em}
+  .highlight{color:var(--gold);font-weight:bold}
+  .danger{color:var(--blood);font-weight:bold}
+  .info-box{background:rgba(0,191,255,.08);border:1px solid var(--spark);padding:20px;margin:22px 0;border-radius:6px;position:relative;overflow:hidden}
+  .info-box::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--spark),transparent);opacity:.6;animation:arc 2.5s linear infinite}
+  @keyframes arc{to{left:100%}}
+  .warning-box{background:rgba(255,68,68,.08);border:2px solid var(--blood);padding:20px;margin:22px 0;border-radius:6px;animation:short 1.2s infinite steps(2)}
+  @keyframes short{0%,100%{box-shadow:inset 0 0 0 0 rgba(255,68,68,.4)}50%{box-shadow:inset 0 0 15px 8px rgba(255,68,68,0)}}
+  .warning-icon{display:inline-block;width:28px;height:28px;background:var(--blood);color:#000;text-align:center;line-height:28px;border-radius:50%;font-weight:bold;margin-right:10px;animation:blink .8s infinite}
+  @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.3}}
+  ul{list-style:none;padding-left:20px}
+  li{margin-bottom:10px;position:relative;padding-left:20px}
+  li::before{content:'■';position:absolute;left:0;color:var(--spark)}
+  .entity{display:inline-block;color:var(--slime);font-weight:bold;cursor:pointer;transition:.3s}
+  .entity:hover{text-shadow:0 0 10px var(--slime);transform:scale(1.06)}
+  .footer{text-align:center;margin-top:60px;padding-top:20px;border-top:1px solid #2a4b4b;color:#669999;font-style:italic}
+  .exit-link{display:inline-block;margin-top:25px;padding:10px 24px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;border-radius:4px;transition:.3s;position:relative;overflow:hidden}
+  .exit-link::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);opacity:.2;transition:left .4s}
+  .exit-link:hover{color:#000;background:var(--gold)}
+  .exit-link:hover::before{left:100%}
+  @media(max-width:600px){h1{font-size:2.2em}h3{font-size:1.5em}p{font-size:1em}}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>后室求生指南</h1>
+  <h2>第三层 · 水淹电缆</h2>
+
+  <h3>第三层：水淹电缆（The Flooded Cableway）</h3>
+
+  <p>
+    你滑下检修梯，鞋底立刻灌进<span class="highlight">冰冷的水</span>。水面没过脚踝，倒映着幽蓝电火花，像无数条细小的闪电在皮肤上游走。
+  </p>
+  <p>
+    头顶是低矮的混凝土梁，电缆束像蟒蛇一样垂落，偶尔迸出“<span class="danger">噼啪</span>”一声，空气中瞬间弥漫臭氧的辛辣。远处传来持续的水滴回声——仿佛整座地下室正在缓慢下沉。
+  </p>
+
+  <h3>环境特征</h3>
+  <div class="info-box">
+    <ul>
+      <li><strong>水位：</strong>平均18 cm，以每小时2 cm速度上涨；整点时刻瞬间下降5 cm，随后继续爬升</li>
+      <li><strong>照明：</strong>裸露高压柜指示灯（蓝/红），亮度随负载波动；完全熄灯周期≈43 s</li>
+      <li><strong>地面：</strong>镂空排水格栅+积水混凝土，部分区域隐藏涡流坑，踩空会被<span class="danger">吸入电缆井</span></li>
+      <li><strong>温度：</strong>水体15°C，空气26°C，高湿导致体感寒冷；长时间站立会出现<span class="highlight">触电式幻痛</span></li>
+      <li><strong>背景声：</strong>滴水+远距变压器嗡鸣，偶尔混入<span class="entity" onclick="alert('电缆幻听：模仿你熟人说话，声音来自水下')">水下低语</span></li>
+    </ul>
+  </div>
+
+  <h3>可用资源</h3>
+  <div class="info-box">
+    <ul>
+      <li><strong>漂浮工具箱：</strong>随机漂过，内含绝缘手套、橡胶靴、断线钳——穿戴上可短暂免疫电击</li>
+      <li><strong>应急电闸：</strong>红黄色拉杆，位于每段通道尽头；拉下后全段熄灯，7分钟内水面出现<span class="highlight">荧光步道</span>（通往Level 4）</li>
+      <li><strong>电缆井：</strong>水下黑黢竖洞，水流湍急；被卷入后随机冲到Level 4或Level 5——<span class="danger">无法呼吸时才会被吐出</span></li>
+    </ul>
+  </div>
+
+  <h3>水下守则</h3>
+  <ol style="margin-left:2em;color:#ccc">
+    <li>看见水面出现<span class="danger">第二道影子</span>，立即闭眼默数3秒，再睁眼——它若还在，迅速沉水躲避。</li>
+    <li>电缆迸火花时，水中会短暂带电；<span class="highlight">火花熄灭后的3秒内</span>是唯一安全移动窗口。</li>
+    <li>工具箱若在同一位置停留超过1分钟，说明下方有<span class="entity" onclick="alert('箱底触手：伪装为工具箱锁扣，拖拽猎物入水')">箱底触手</span>，切勿靠近。</li>
+    <li>整点前1分钟，水位会突然下降——这是拉闸最佳时机；错过则再等60分钟。</li>
+  </ol>
+
+  <h3>实体威胁</h3>
+  <p>
+    除前述<span class="entity">电缆幻听</span>与<span class="entity">箱底触手</span>，还有一种半溶于水的<span class="entity" onclick="alert('电蚀体：通体蓝白荧光，触碰后肌肉瞬间麻痹，心跳同步电缆嗡鸣')">电蚀体</span>。它们像浮尸般漂在水面，却在熄灯后集体下沉，伺机抱腿。
+  </p>
+
+  <div class="warning-box">
+    <span class="warning-icon">!</span>
+    <strong>出口时限：7分钟</strong><br>
+    拉下总电闸→水面荧光步道显现→<span class="highlight">倒计时开始</span>。7分钟后步道崩解，水位暴涨至腰。若来不及跑完，可主动跳入电缆井赌随机出口，但窒息前无法脱身。
+  </div>
+
+  <div class="footer">
+    <p>水面已没过你的倒影，闪电在脚背跳舞。</p>
+    <p>整点将至，拉闸还是潜水？</p>
+    <a class="exit-link" href="#">→ 握住拉杆，7分钟冲刺</a>
+  </div>
+</div>
+
+<script>
+  // 电火花粒子
+  const canvas=document.createElement("canvas");
+  canvas.style.position="fixed";canvas.style.top=0;canvas.style.left=0;canvas.style.width="100%";canvas.style.height="100%";canvas.style.pointerEvents="none";canvas.style.zIndex=1;
+  document.body.appendChild(canvas);
+  const ctx=canvas.getContext("2d"),w=innerWidth,h=innerHeight;
+  canvas.width=w;canvas.height=h;
+  const sparks=Array.from({length:40},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2+1,vx:(Math.random()-0.5)*3,vy:(Math.random()-0.5)*3,life:1}));
+  function flash(){ctx.clearRect(0,0,w,h);sparks.forEach(s=>{s.x+=s.vx;s.y+=s.vy;s.life-=0.02;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(0,191,255,${s.life})`;ctx.fill();if(s.life<=0){s.x=Math.random()*w;s.y=Math.random()*h;s.life=1}});requestAnimationFrame(flash)}flash();
+  addEventListener("resize",()=>{canvas.width=w;canvas.height=h});
+</script>
+</body>
+</html>

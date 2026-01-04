@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>后室求生指南 - 第一层 · 宜居地带</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --gold:#FFD700;
+    --blood:#ff4444;
+    --wall:#1a1a17;   /* 军绿偏黄，像后室墙纸 */
+    --text:#b8b8b8;
+    --shadow:0 0 12px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--wall) url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='.6' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='.08'/%3E%3C/svg%3E");
+    color:var(--text);
+    font-family:"Microsoft YaHei",Arial,serif;
+    line-height:1.7;
+    overflow-x:hidden;
+    animation:breath 12s ease-in-out infinite;
+  }
+  @keyframes breath{
+    0%,100%{filter:brightness(1)}
+    50%{filter:brightness(1.05)}
+  }
+  .container{max-width:780px;margin:0 auto;padding:50px 20px;position:relative;z-index:2}
+  h1{font-size:2.8em;color:var(--gold);text-align:center;text-shadow:var(--shadow) var(--gold);animation:flicker 3s infinite alternate}
+  @keyframes flicker{0%,100%{opacity:1}50%{opacity:.75}}
+  h2{font-size:1.3em;color:#888;text-align:center;font-weight:400;margin-bottom:40px}
+  h3{font-size:1.7em;color:var(--gold);margin:35px 0 18px;border-left:4px solid var(--gold);padding-left:15px}
+  p{margin-bottom:20px;text-indent:2em;font-size:1.1em}
+  .highlight{color:var(--gold);font-weight:bold}
+  .danger{color:var(--blood);font-weight:bold}
+  .info-box{background:rgba(255,215,0,.08);border:1px solid var(--gold);padding:20px;margin:22px 0;border-radius:6px;position:relative;overflow:hidden}
+  .info-box::before{content:'';position:absolute;top:-2px;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4;animation:scan 4s linear infinite}
+  @keyframes scan{to{left:100%}}
+  .safe-box{background:rgba(68,255,120,.06);border:1px solid #44ff88;padding:20px;margin:22px 0;border-radius:6px;position:relative}
+  .safe-box::after{content:'✔';position:absolute;top:8px;right:12px;color:#44ff88;font-size:1.4em;animation:pop 2s infinite}
+  @keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+  .warning-box{background:rgba(255,68,68,.08);border:2px solid var(--blood);padding:20px;margin:22px 0;border-radius:6px;animation:heartbeat 1.6s infinite}
+  @keyframes heartbeat{0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,.35)}50%{box-shadow:0 0 0 12px rgba(255,68,68,0)}}
+  .warning-icon{display:inline-block;width:28px;height:28px;background:var(--blood);color:#000;text-align:center;line-height:28px;border-radius:50%;font-weight:bold;margin-right:10px;animation:blink 1s infinite}
+  @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.3}}
+  ul{list-style:none;padding-left:20px}
+  li{margin-bottom:10px;position:relative;padding-left:20px}
+  li::before{content:'■';position:absolute;left:0;color:var(--gold)}
+  .entity{display:inline-block;color:var(--blood);font-weight:bold;cursor:pointer;transition:.3s}
+  .entity:hover{text-shadow:var(--shadow) var(--blood);transform:scale(1.06)}
+  .footer{text-align:center;margin-top:60px;padding-top:20px;border-top:1px solid #333;color:#666;font-style:italic}
+  /* 出口按钮 */
+  .exit-link{display:inline-block;margin-top:25px;padding:10px 24px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;border-radius:4px;transition:.3s;position:relative;overflow:hidden}
+  .exit-link::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);opacity:.2;transition:left .4s}
+  .exit-link:hover{color:#000;background:var(--gold)}
+  .exit-link:hover::before{left:100%}
+  @media(max-width:600px){h1{font-size:2.2em}h3{font-size:1.5em}p{font-size:1em}}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>后室求生指南</h1>
+  <h2>第一层 · 宜居地带</h2>
+
+  <h3>第一层：宜居地带（The Habitable Zone）</h3>
+
+  <p>
+    你踩过那条潮湿的黄地毯，脚下忽然传来<span class="highlight">坚硬的金属回音</span>。灯光不再闪烁——它稳定得近乎冷漠，像手术室的无影灯，把一切阴影强行抹平。
+  </p>
+  <p>
+    四周是灰白色的隔板墙，整齐延伸成<span class="highlight">无限网格</span>。空气里混着淡淡的消毒水味，却不再腐臭。你本能地松了口气，可那股“被安排”的秩序感，反而让胃开始抽搐。
+  </p>
+
+  <h3>环境特征</h3>
+  <div class="safe-box">
+    <ul>
+      <li><strong>空间特性：</strong>欧几里得结构暂时稳定，走廊呈90°直角网格</li>
+      <li><strong>照明：</strong>嵌入式LED面板，亮度恒定，无可见电源</li>
+      <li><strong>地面：</strong>防滑镀锌钢板，脚步会产生轻微金属共震</li>
+      <li><strong>温度：</strong>恒22°C，相对湿度45%，体感“像空调房”</li>
+      <li><strong>背景噪声：</strong>48 dB低频嗡鸣，随心跳节律起伏</li>
+    </ul>
+  </div>
+
+  <h3>可用资源</h3>
+  <div class="info-box">
+    <ul>
+      <li><strong>杏仁水：</strong>大量未开封纸箱，堆放在十字路口；可安全饮用，但开封后24h内会莫名变质</li>
+      <li><strong>电源插座：</strong>每100 m出现一组，标称220 V，可充电，但接入设备会在满电后自动关机并<span class="danger">无法再次启动</span></li>
+      <li><strong>“社区公告板”：</strong>被钉在墙上的软木板，留有前人字条——有的给出路线，有的只剩<span class="danger">疯狂涂鸦</span></li>
+    </ul>
+  </div>
+
+  <h3>社区公约</h3>
+  <p>
+    有人用黑色马克笔在墙上写下五条“生存礼仪”：
+  </p>
+  <ol style="margin-left:2em;color:#ccc">
+    <li>不要长时间盯着自己的影子——灯光没闪，不代表它没动。</li>
+    <li>金属声突然变调时，立刻关掉所有光源，原地默数到30。</li>
+    <li>纸箱堆出现“第四层”高度，请把最顶层整箱搬到下一个路口，<span class="danger">别问为什么</span>。</li>
+    <li>若看见绿色出口标志亮着，先确认标志上写的是“EXIT”而不是“<span class="entity" onclick="alert('绿色标识实体：模仿出口标志，诱你进入墙内')">EXT</span>”。</li>
+    <li>有人拍你肩膀，先摸自己锁骨——如果冰冷，就别回头。</li>
+  </ol>
+
+  <h3>实体威胁</h3>
+  <p>
+    这里很少遇见“传统”怪物，取而代之的是<span class="entity" onclick="alert('墙中人：与墙面同色，移动时会留下新鲜水泥味')">墙中人</span>与<span class="entity" onclick="alert('嗡鸣聚合体：由背景噪声具现化，出现时耳压骤降')">嗡鸣聚合体</span>。它们不主动猎杀，却热衷于“修正”你的路线——让你永远走在网格里，像一颗被拨弄的磁珠。
+  </p>
+
+  <div class="warning-box">
+    <span class="warning-icon">!</span>
+    <strong>出口是不稳定的</strong><br>
+    绿色“EXIT”门每20分钟变换一次目的地：可能把你抛回Level 0，也可能直坠Level 3。若想“正常”下楼，请在整点时刻找到<span class="highlight">向下延伸的维修梯</span>——它藏在天花板夹层，需要爬进通风口才看得见。错过整点，梯子会收回墙内，像从未存在。
+  </div>
+
+  <div class="footer">
+    <p>网格井然有序，你的心跳却开始错位。</p>
+    <p>继续待在这“宜居”之地，还是赌一次梯子？</p>
+    <a class="exit-link" href="level2.html">→ 整点将至，爬进通风口</a>
+  </div>
+</div>
+
+<script>
+  // 背景低频心跳声模拟（视觉）
+  setInterval(()=>{
+    document.body.style.filter="brightness(1.08)";
+    setTimeout(()=>document.body.style.filter="brightness(1)",400);
+  },5500);
+
+  // 鼠标移动金属微震
+  document.addEventListener("mousemove",e=>{
+    const x=e.clientX/window.innerWidth;
+    const y=e.clientY/window.innerHeight;
+    document.body.style.backgroundPosition=`${x*6}px ${y*6}px`;
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测测你适合生活在地球哪个地方</title>
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6b8cbc;
+            --accent-color: #ff9a76;
+            --light-color: #f8f9fa;
+            --dark-color: #2c3e50;
+            --success-color: #5cb85c;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--dark-color);
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 700px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .emoji {
+            font-size: 3.5rem;
+            margin: 20px 0;
+            display: block;
+        }
+
+        /* 进度条 */
+        .progress-container {
+            margin: 30px 0;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--dark-color);
+            opacity: 0.8;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* 问题样式 */
+        .question {
+            font-size: 1.6rem;
+            margin: 30px 0;
+            line-height: 1.5;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        /* 选项样式 */
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin: 15px 0;
+            padding: 20px;
+            background-color: var(--light-color);
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .options li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--secondary-color);
+        }
+
+        .options li.selected {
+            background-color: rgba(74, 111, 165, 0.1);
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 7px 15px rgba(74, 111, 165, 0.2);
+        }
+
+        .options li .option-emoji {
+            font-size: 1.8rem;
+            margin-right: 15px;
+        }
+
+        /* 按钮样式 */
+        .button {
+            display: inline-block;
+            padding: 16px 40px;
+            margin: 20px 0 10px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 111, 165, 0.4);
+        }
+
+        #next-button {
+            display: none;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 结果页面 */
+        .result {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .result .emoji {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .result h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .result p {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 首页特定样式 */
+        #home .emoji {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 25px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .question {
+                font-size: 1.3rem;
+            }
+            
+            .options li {
+                padding: 16px;
+                font-size: 1rem;
+            }
+            
+            .result h2 {
+                font-size: 2rem;
+            }
+            
+            .result p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .emoji {
+                font-size: 2.5rem;
+            }
+            
+            .button {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="home" class="container">
+        <h1>测一测</h1>
+        <h2>你适合生活在地球哪个地方</h2>
+        <p>通过10个精心设计的问题，发现你最适合居住的地球角落</p>
+        <div class="emoji">🌍 🌎 🌏</div>
+        <a href="#" class="button" onclick="startTest()">开始测试</a>
+    </div>
+
+    <div id="test" class="container" style="display: none;">
+        <div class="progress-container">
+            <div class="progress-text">
+                <span>进度</span>
+                <span id="progress-text">0/10</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+        </div>
+        <div id="question" class="question"></div>
+        <ul id="options" class="options"></ul>
+        <button id="next-button" class="button" style="display: none;" onclick="nextQuestion()">下一题</button>
+    </div>
+
+    <div id="result" class="container" style="display: none;">
+        <div class="result">
+            <div id="result-emoji" class="emoji"></div>
+            <h2 id="result-title"></h2>
+            <p id="result-description"></p>
+            <a href="#" class="button" onclick="restartTest()">重新测试</a>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "你更喜欢哪种气候？",
+                options: ["🌞 热带气候", "🌤️ 温带气候", "❄️ 寒带气候"],
+                emoji: ["🌞", "🌤️", "❄️"]
+            },
+            {
+                question: "你更喜欢哪种地形？",
+                options: ["⛰️ 山地", "🏖️ 海滩", "🌾 平原"],
+                emoji: ["⛰️", "🏖️", "🌾"]
+            },
+            {
+                question: "你更喜欢哪种生活方式？",
+                options: ["🏙️ 大城市", "🏡 小城镇", "🌳 自然环境"],
+                emoji: ["🏙️", "🏡", "🌳"]
+            },
+            {
+                question: "你更喜欢哪种文化氛围？",
+                options: ["🎨 多元文化", "🏛️ 历史悠久", "🎉 热情奔放"],
+                emoji: ["🎨", "🏛️", "🎉"]
+            },
+            {
+                question: "你更喜欢哪种食物？",
+                options: ["🍖 肉类", "🥗 蔬菜", "🐟 海鲜"],
+                emoji: ["🍖", "🥗", "🐟"]
+            },
+            {
+                question: "你更喜欢哪种活动？",
+                options: ["⚽️ 运动", "🎨 艺术", "📚 学习"],
+                emoji: ["⚽️", "🎨", "📚"]
+            },
+            {
+                question: "你更喜欢哪种交通方式？",
+                options: ["🚗 汽车", "🚲 自行车", "🚶‍♂️ 步行"],
+                emoji: ["🚗", "🚲", "🚶‍♂️"]
+            },
+            {
+                question: "你更喜欢哪种天气？",
+                options: ["☀️ 晴天", "🌧️ 雨天", "☁️ 阴天"],
+                emoji: ["☀️", "🌧️", "☁️"]
+            },
+            {
+                question: "你更喜欢哪种季节？",
+                options: ["🌸 春季", "🌞 夏季", "🍁 秋季", "❄️ 冬季"],
+                emoji: ["🌸", "🌞", "🍁", "❄️"]
+            },
+            {
+                question: "你更喜欢哪种动物？",
+                options: ["🐶 狗", "🐱 猫", "🐴 马", "🦜 鹦鹉"],
+                emoji: ["🐶", "🐱", "🐴", "🦜"]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let answers = [];
+
+        function startTest() {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('test').style.display = 'block';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const questionElement = document.getElementById('question');
+            const optionsElement = document.getElementById('options');
+            const progressBarFill = document.getElementById('progress-bar-fill');
+            const progressText = document.getElementById('progress-text');
+
+            questionElement.innerHTML = questions[currentQuestionIndex].question;
+            optionsElement.innerHTML = '';
+            
+            questions[currentQuestionIndex].options.forEach((option, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="option-emoji">${questions[currentQuestionIndex].emoji[index]}</span> ${option.split(' ')[1]}`;
+                li.dataset.value = option;
+                li.addEventListener('click', () => selectOption(li));
+                optionsElement.appendChild(li);
+            });
+
+            const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+            progressBarFill.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${currentQuestionIndex + 1}/${questions.length}`;
+        }
+
+        function selectOption(li) {
+            const optionsElement = document.getElementById('options');
+            optionsElement.childNodes.forEach(child => {
+                child.classList.remove('selected');
+            });
+            li.classList.add('selected');
+            answers[currentQuestionIndex] = li.dataset.value;
+            document.getElementById('next-button').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+                document.getElementById('next-button').style.display = 'none';
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('test').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+
+            const resultEmoji = document.getElementById('result-emoji');
+            const resultTitle = document.getElementById('result-title');
+            const resultDescription = document.getElementById('result-description');
+
+            // 更精细的结果判断逻辑
+            const answerValues = answers.join(' ');
+            
+            if (answerValues.includes('热带') || answerValues.includes('海滩') || 
+                answerValues.includes('夏季') || answerValues.includes('晴天') ||
+                answerValues.includes('海鲜') || answerValues.includes('鹦鹉')) {
+                resultEmoji.textContent = '🏝️';
+                resultTitle.textContent = '你适合生活在热带海滨';
+                resultDescription.textContent = '你喜欢温暖的气候、阳光和海洋，适合生活在如夏威夷、巴厘岛、加勒比海地区等热带海滨胜地。这些地方充满活力，适合热爱户外和社交的你。';
+            } else if (answerValues.includes('寒带') || answerValues.includes('冬季') || 
+                       answerValues.includes('❄️') || answerValues.includes('滑雪')) {
+                resultEmoji.textContent = '🏔️';
+                resultTitle.textContent = '你适合生活在寒冷地区';
+                resultDescription.textContent = '你喜欢寒冷的气候和冬季活动，适合居住在北欧、加拿大、阿拉斯加等高纬度地区。这些地方宁静优美，适合喜欢冬季运动和安静生活的你。';
+            } else if (answerValues.includes('山地') || answerValues.includes('徒步') || 
+                       answerValues.includes('自然环境')) {
+                resultEmoji.textContent = '⛰️';
+                resultTitle.textContent = '你适合生活在山区';
+                resultDescription.textContent = '你喜欢山地地形和自然风光，适合居住在如瑞士阿尔卑斯、新西兰、科罗拉多等山区。这些地方空气清新，景色壮丽，适合喜欢户外探险的你。';
+            } else if (answerValues.includes('大城市') || answerValues.includes('多元文化') || 
+                       answerValues.includes('艺术')) {
+                resultEmoji.textContent = '🏙️';
+                resultTitle.textContent = '你适合生活在大都市';
+                resultDescription.textContent = '你喜欢城市的繁华、多元文化和丰富机会，适合居住在如纽约、东京、伦敦、上海等国际大都市。这些地方充满活力，适合追求事业和文化的你。';
+            } else {
+                resultEmoji.textContent = '🌤️';
+                resultTitle.textContent = '你适合生活在温带地区';
+                resultDescription.textContent = '你喜欢温和的气候和平衡的生活方式，适合居住在欧洲中部、美国西海岸、澳大利亚东南部等温带地区。这些地方四季分明，生活品质高，适合追求生活平衡的你。';
+            }
+        }
+
+        function restartTest() {
+            currentQuestionIndex = 0;
+            answers = [];
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('home').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

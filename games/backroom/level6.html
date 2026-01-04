@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后室求生指南 - 第六层 · 熄灯之时</title>
+    <style>
+        :root{
+            --void:#000000;      /* 绝对黑暗 */
+            --glow:#222222;      /* 应急微光 */
+            --text:#b0b0b0;
+            --gold:#FFD700;
+            --blood:#ff4444;
+            --iris:#9370db;      /* 夜视紫 */
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            background:var(--void);
+            color:var(--text);
+            font-family:"Microsoft YaHei",Arial,serif;
+            line-height:1.8;
+            overflow-x:hidden;
+            animation:blink 43s steps(1) infinite;
+        }
+        @keyframes blink{
+            0%,100%{background:var(--void)}
+            2%{background:var(--glow)} /* 模拟43s一闪烁 */
+        }
+        .container{max-width:780px;margin:0 auto;padding:50px 20px;position:relative;z-index:2}
+        h1{font-size:2.8em;color:var(--gold);text-align:center;text-shadow:0 0 20px var(--gold);animation:flicker 3s infinite}
+        @keyframes flicker{0%,100%{opacity:1}50%{opacity:.7}}
+        h2{font-size:1.3em;color:#888;text-align:center;font-weight:400;margin-bottom:40px}
+        h3{font-size:1.7em;color:var(--gold);margin:35px 0 20px;border-left:4px solid var(--gold);padding-left:12px}
+        p{margin-bottom:20px;text-indent:2em;font-size:1.1em}
+        .highlight{color:var(--gold);font-weight:bold}
+        .danger{color:var(--blood);font-weight:bold}
+        .info-box{background:rgba(255,255,255,.05);border:1px solid var(--glow);padding:20px;margin:20px 0;border-radius:5px;position:relative;overflow:hidden}
+        .info-box::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:linear-gradient(45deg,transparent,var(--gold),transparent);animation:shimmer 3s infinite linear;z-index:-1}
+        @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+        .warning-box{background:rgba(255,68,68,.08);border:2px solid var(--blood);padding:20px;margin:20px 0;border-radius:5px;animation:pulse 2s infinite}
+        @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,68,68,.4)}70%{box-shadow:0 0 0 10px rgba(255,68,68,0)}100%{box-shadow:0 0 0 0 rgba(255,68,68,0)}}
+        .warning-icon{display:inline-block;width:30px;height:30px;background:var(--blood);color:#000;text-align:center;line-height:30px;border-radius:50%;font-weight:bold;margin-right:10px;animation:blink 1s infinite}
+        @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:.3}}
+        ul{list-style:none;padding-left:20px}
+        li{margin-bottom:10px;position:relative;padding-left:20px}
+        li::before{content:'■';position:absolute;left:0;color:var(--gold)}
+        .entity{display:inline-block;color:var(--iris);font-weight:bold;cursor:pointer;transition:all .3s ease}
+        .entity:hover{text-shadow:0 0 8px var(--iris);transform:scale(1.05)}
+        .footer{text-align:center;margin-top:60px;padding-top:20px;border-top:1px solid #333;color:#666;font-style:italic}
+        .exit-link{display:inline-block;margin-top:25px;padding:10px 24px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;border-radius:4px;transition:.3s;position:relative;overflow:hidden}
+        .exit-link::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);opacity:.2;transition:left .4s}
+        .exit-link:hover{color:#000;background:var(--gold)}
+        .exit-link:hover::before{left:100%}
+        @media(max-width:600px){h1{font-size:2.2em}.chapter-title{font-size:1.8em}p{font-size:1em}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>后室求生指南</h1>
+    <h2>第六层 · 熄灯之时</h2>
+
+    <div class="chapter-title">第六层：熄灯之时（Lights Out）</div>
+
+    <p>
+        电梯门一开，黑暗像液体般灌入。没有灯，没有窗，只有绝对<span class="danger">零光</span>的走廊在你脚下延伸。你抬起手，却连五指都看不见——这里是“熄灯之时”，视觉被彻底剥夺的层级。
+    </p>
+    <p>
+        声音成为唯一的坐标：远处传来滴答水声、自己脚步的回声、还有……另一种<span class="highlight">不属于你</span>的呼吸。它们在你耳边游移，时而贴近，时而远去，像逗弄猎物的猫。
+    </p>
+
+    <h3>环境特征</h3>
+    <div class="info-box">
+        <ul>
+            <li><strong>光照：</strong>绝对黑暗，0 lux；任何光源（手电、打火机等）只能照亮自身，光束无法投射超过3cm</li>
+            <li><strong>空间：</strong>非欧几里得迷宫，墙壁触感像粗糙混凝土；每走100步，地形会在你背后悄然改变</li>
+            <li><strong>声音：</strong>回声延迟=你的步频×2；若突然安静，说明有<span class="entity" onclick="alert('暗噬体：专猎安静目标，移动无声音')">暗噬体</span>正在你背后</li>
+            <li><strong>温度：</strong>恒温15°C，但越接近“光缝”体感越冷，最低可降至-5°C</li>
+            <li><strong>特殊：</strong>每43秒出现一次全球闪烁（约0.3秒微光），此时可短暂看见周围5米；错过则再等43秒</li>
+        </ul>
+    </div>
+
+    <h3>可用资源</h3>
+    <div class="info-box">
+        <ul>
+            <li><strong>夜视杏仁水：</strong>黑色铝罐，沿墙根每200步出现；饮用后获得<span class="highlight">43秒夜视</span>（视野绿灰，仅可辨轮廓），过量会导致眼球灼痛</li>
+            <li><strong>声音哨：</strong>塑料小口哨，吹后可产生定向回声，帮助判断前方是否为<span class="danger">死路</span>；但哨声会吸引<span class="entity" onclick="alert('回声猎犬：对高频声音极度敏感')">回声猎犬</span></li>
+            <li><strong>光缝石：</strong>罕见，指甲大，自发微光；握在手中可<span class="highlight">微弱照亮脚下</span>，但持石超过10分钟会引来<span class="entity">暗噬体</span></li>
+        </ul>
+    </div>
+
+    <h3>熄灯守则</h3>
+    <ol style="margin-left:2em;color:#ccc">
+        <li>保持脚步声节奏；若听见第二套脚步，立即停步10秒，让“它”先通过。</li>
+        <li>全球闪烁（43秒周期）是<span class="highlight">唯一可视机会</span>，务必在闪烁瞬间记住周围出口方向；错过则再等43秒。</li>
+        <li>夜视杏仁水只能撑43秒；喝完最后一口，立刻把罐捏扁——空罐会<span class="danger">继续发光</span>，成为活靶。</li>
+        <li>发现脚下温度骤降（-5°C霜气），说明前方出现“光缝”出口；但温度越低，<span class="entity">暗噬体</span>越密集。</li>
+    </ol>
+
+    <h3>实体威胁</h3>
+    <p>除前述<span class="entity">暗噬体</span>与<span class="entity">回声猎犬</span>，还有一种<span class="entity" onclick="alert('影镜像：复制你的动作，逐步靠近后替换你')">影镜像</span>。它只在闪烁时出现，与你动作完全同步；若你眨眼，它便前进一步。当它与你的影子重叠，你将永远留在这片黑暗。</p>
+
+    <div class="warning-box">
+        <span class="warning-icon">!</span>
+        <strong>出口仅于“光缝”开启</strong><br>
+        每走1000步，会出现一道竖直“光缝”（高2米，宽30cm），持续<span class="highlight">43秒</span>。穿过即抵达Level 7“深海恐惧症”干燥平台。错过光缝，必须再走1000步等下一道；若影镜像已重叠，光缝将拒绝你。
+    </div>
+
+    <div class="footer">
+        <p>黑暗不是空无，而是满溢的“存在”。</p>
+        <p>43秒一闪，光缝已现——跑，或永远成为回声。</p>
+        <a class="exit-link" href="level7.html">→ 在下一闪之前，冲入光缝</a>
+    </div>
+</div>
+
+<script>
+/* 夜视闪烁特效 */
+let flashTimer=0;
+const flashInterval=43000; // 43秒
+setInterval(()=>{
+    document.body.style.background='rgba(255,255,255,.06)';
+    setTimeout(()=>document.body.style.background='',300);
+},flashInterval);
+
+/* 心跳声模拟（视觉） */
+setInterval(()=>{
+    const boxes=document.querySelectorAll('.info-box, .warning-box');
+    boxes.forEach(box=>{
+        box.style.filter=`brightness(${1+0.1*Math.sin(Date.now()/900*Math.PI)})`;
+    });
+},100);
+</script>
+</body>
+</html>

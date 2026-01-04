@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国庆喜庆页面</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #000080, #800080);
+            font-family: 'SimHei', sans-serif;
+        }
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .stars canvas {
+            display: block;
+        }
+        .flag {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 200px;
+            background: url('https://example.com/flag.png') no-repeat center center;
+            background-size: cover;
+            animation: wave 2s infinite;
+        }
+        @keyframes wave {
+            0%, 100% {
+                transform: translateX(-50%) rotate(0deg);
+            }
+            50% {
+                transform: translateX(-50%) rotate(5deg);
+            }
+        }
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: gold;
+            font-size: 48px;
+            font-family: 'Kaiti', sans-serif;
+            text-shadow: 0 0 10px gold, 0 0 20px gold;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        .fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .fireworks canvas {
+            display: block;
+        }
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .confetti canvas {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .flag {
+                width: 200px;
+                height: 133px;
+            }
+            .message {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars">
+        <canvas id="starsCanvas"></canvas>
+    </div>
+    <div class="flag"></div>
+    <div class="message" id="message"></div>
+    <div class="fireworks">
+        <canvas id="fireworksCanvas"></canvas>
+    </div>
+    <div class="confetti">
+        <canvas id="confettiCanvas"></canvas>
+    </div>
+    <script>
+        // 星星闪烁效果
+        const starsCanvas = document.getElementById('starsCanvas');
+        const starsCtx = starsCanvas.getContext('2d');
+        starsCanvas.width = window.innerWidth;
+        starsCanvas.height = window.innerHeight;
+
+        function drawStars() {
+            starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+            for (let i = 0; i < 200; i++) {
+                const x = Math.random() * starsCanvas.width;
+                const y = Math.random() * starsCanvas.height;
+                const size = Math.random() * 2;
+                starsCtx.fillStyle = 'white';
+                starsCtx.fillRect(x, y, size, size);
+            }
+        }
+
+        setInterval(drawStars, 1000);
+
+        // 烟花效果
+        const fireworksCanvas = document.getElementById('fireworksCanvas');
+        const fireworksCtx = fireworksCanvas.getContext('2d');
+        fireworksCanvas.width = window.innerWidth;
+        fireworksCanvas.height = window.innerHeight;
+
+        let fireworks = [];
+
+        function Firework(x, y) {
+            this.x = x;
+            this.y = y;
+            this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            this.particles = [];
+            for (let i = 0; i < 30; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 5 + 2;
+                this.particles.push({
+                    x: x,
+                    y: y,
+                    angle: angle,
+                    speed: speed,
+                    life: Math.random() * 50 + 50
+                });
+            }
+        }
+
+        Firework.prototype.update = function () {
+            for (let i = 0; i < this.particles.length; i++) {
+                const particle = this.particles[i];
+                particle.x += Math.cos(particle.angle) * particle.speed;
+                particle.y += Math.sin(particle.angle) * particle.speed;
+                particle.life--;
+                if (particle.life <= 0) {
+                    this.particles.splice(i, 1);
+                    i--;
+                }
+            }
+        };
+
+        Firework.prototype.draw = function () {
+            fireworksCtx.fillStyle = this.color;
+            for (let i = 0; i < this.particles.length; i++) {
+                const particle = this.particles[i];
+                fireworksCtx.beginPath();
+                fireworksCtx.arc(particle.x, particle.y, 2, 0, Math.PI * 2);
+                fireworksCtx.fill();
+            }
+        };
+
+        function updateFireworks() {
+            fireworksCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+            fireworks.forEach(firework => {
+                firework.update();
+                firework.draw();
+            });
+            requestAnimationFrame(updateFireworks);
+        }
+        updateFireworks();
+
+        document.addEventListener('click', function (e) {
+            const x = e.clientX;
+            const y = e.clientY;
+            fireworks.push(new Firework(x, y));
+            const messages = ['祖国万岁！', '国泰民安！', '繁荣昌盛！'];
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = message;
+            messageElement.classList.add('shake');
+            setTimeout(function () {
+                messageElement.textContent = '';
+                messageElement.classList.remove('shake');
+            }, 2000);
+        });
+
+        document.addEventListener('touchstart', function (e) {
+            const x = e.touches[0].clientX;
+            const y = e.touches[0].clientY;
+            fireworks.push(new Firework(x, y));
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === ' ') {
+                const x = window.innerWidth / 2;
+                const y = window.innerHeight / 2;
+                fireworks.push(new Firework(x, y));
+            }
+        });
+
+        // 彩带飘落效果
+        const confettiCanvas = document.getElementById('confettiCanvas');
+        const confettiCtx = confettiCanvas.getContext('2d');
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+
+        let confetti = [];
+
+        function Confetti() {
+            this.x = Math.random() * confettiCanvas.width;
+            this.y = -20;
+            this.width = Math.random() * 20 + 10;
+            this.height = Math.random() * 20 + 10;
+            this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            this.speed = Math.random() * 2 + 1;
+            this.angle = Math.random() * Math.PI * 2;
+        }
+
+        Confetti.prototype.update = function () {
+            this.y += this.speed;
+            this.x += Math.cos(this.angle) * this.speed;
+            if (this.y > confettiCanvas.height) {
+                this.y = -20;
+                this.x = Math.random() * confettiCanvas.width;
+            }
+        };
+
+        Confetti.prototype.draw = function () {
+            confettiCtx.fillStyle = this.color;
+            confettiCtx.fillRect(this.x, this.y, this.width, this.height);
+        };
+
+        function updateConfetti() {
+            confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            confetti.forEach(confetti => {
+                confetti.update();
+                confetti.draw();
+            });
+            requestAnimationFrame(updateConfetti);
+        }
+
+        updateConfetti();
+
+        for (let i = 0; i < 50; i++) {
+            confetti.push(new Confetti());
+        }
+    </script>
+</body>
+</html>
