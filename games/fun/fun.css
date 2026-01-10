@@ -1,0 +1,46 @@
+body{
+  height:100vh;
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#111;
+  color:#fff;
+  font:8vw/1 "PingFang SC", sans-serif;
+  cursor:pointer;
+  transition:background 1s ease;
+}
+h1{
+  user-select:none;
+  transition: all 0.3s ease;
+  text-align: center;
+  padding: 20px;
+  max-width: 90vw;
+  word-break: break-word;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* 温和的脉动动画 */
+@keyframes gentlePulse {
+  0%, 100% { 
+    transform: scale(1);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  50% { 
+    transform: scale(1.05);
+    text-shadow: 0 5px 20px rgba(255,255,255,0.2);
+  }
+}
+
+/* 淡入淡出效果 */
+@keyframes gentleFade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* 结尾时的样式 */
+.ending {
+  font-size: 6vw;
+  line-height: 1.4;
+  animation: gentleFade 3s infinite;
+}
