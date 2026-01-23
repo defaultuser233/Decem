@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
     font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
@@ -13,10 +19,10 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow-x: hidden;
     position: relative;
     color: #fff;
     padding: 20px;
+    overflow: hidden;
 }
 
 /* 星空背景效果 */
@@ -58,18 +64,18 @@ body {
 
 /* 顶部统计 */
 .stats {
-    position: fixed;
+    position: absolute;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.15);
-    padding: 12px 24px;
+    padding: 10px 20px;
     border-radius: 20px;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
-    font-size: 15px;
+    font-size: 14px;
     z-index: 1000;
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.3),
@@ -78,6 +84,8 @@ body {
     align-items: center;
     gap: 8px;
     transition: all 0.3s ease;
+    max-width: 90%;
+    white-space: nowrap;
 }
 
 .stats:hover {
@@ -89,27 +97,27 @@ body {
 }
 
 .stats-icon {
-    font-size: 18px;
+    font-size: 16px;
     color: #ffd700;
 }
 
 .stats span {
     font-weight: bold;
     color: #ffd700;
-    font-size: 18px;
+    font-size: 16px;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 /* 返回封面按钮 */
 .return-btn {
-    position: fixed;
-    bottom: 30px;
+    position: absolute;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.1);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 12px 24px;
+    padding: 10px 20px;
     border-radius: 25px;
     cursor: pointer;
     font-size: 14px;
@@ -132,22 +140,24 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* 主容器 */
+/* 主容器 - 响应式调整 */
 .container {
-    perspective: 1400px;
-    margin: 80px 0 40px;
+    perspective: 1200px;
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
+    height: 450px;
+    margin: 60px auto 40px;
+    flex-shrink: 0;
 }
 
 /* 书本 */
 .book {
     width: 100%;
-    height: 500px;
+    height: 100%;
     position: relative;
     transform-style: preserve-3d;
     transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
 }
 
 .book.flipped {
@@ -159,38 +169,19 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, #f8f8f8 0%, #ffffff 50%, #f0f0f0 100%);
     border: 3px solid #d4af37;
     border-radius: 12px;
     box-shadow: 
         inset 0 0 40px rgba(212, 175, 55, 0.15),
-        0 10px 60px rgba(0, 0, 0, 0.25);
+        0 10px 40px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 30px;
     overflow: hidden;
     position: relative;
     backface-visibility: hidden;
-}
-
-.page::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 24px,
-            rgba(212, 175, 55, 0.08) 25px
-        );
-    pointer-events: none;
-    z-index: 1;
 }
 
 /* 封面 */
@@ -202,13 +193,33 @@ body {
     z-index: 2;
 }
 
-.book.flipped .front-cover {
+/* 答案页 - 纯色背景 */
+.answer-page {
+    background: #ffffff; /* 纯白色背景 */
+    color: #2c1810;
+    text-align: center;
+    transform: rotateY(180deg); /* 关键：初始旋转180度 */
     z-index: 1;
 }
 
+/* 关键修复：答案内容包装器，用于反向旋转文字 */
+.answer-content-wrapper {
+    transform: rotateY(180deg); /* 反向旋转，使文字正常显示 */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.book.flipped .answer-page {
+    z-index: 2; /* 关键：翻页后显示在最前面 */
+}
+
 .front-cover h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
+    font-size: 36px;
+    margin-bottom: 10px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     font-weight: 700;
     letter-spacing: 2px;
@@ -219,15 +230,15 @@ body {
 .front-cover .subtitle {
     font-size: 16px;
     opacity: 0.85;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-style: italic;
     position: relative;
     z-index: 2;
 }
 
 .front-cover .ornament {
-    font-size: 50px;
-    margin: 20px 0;
+    font-size: 40px;
+    margin: 15px 0;
     animation: glow 4s ease-in-out infinite alternate;
     position: relative;
     z-index: 2;
@@ -235,7 +246,7 @@ body {
 
 .cover-hint {
     font-size: 14px;
-    margin-top: 40px;
+    margin-top: 30px;
     opacity: 0.7;
     position: relative;
     z-index: 2;
@@ -256,70 +267,63 @@ body {
     }
 }
 
-/* 答案页 */
-.back-cover {
-    background: linear-gradient(135deg, #f5f5dc 0%, #faf0e6 50%, #f5f5dc 100%);
-    transform: rotateY(180deg);
-    z-index: 1;
-}
-
-.book.flipped .back-cover {
-    z-index: 2;
-}
-
 .answer-display {
-    font-size: 26px;
+    font-size: 24px;
     text-align: center;
     color: #2c1810;
-    line-height: 1.6;
-    margin: 20px 0 30px;
-    min-height: 140px;
+    line-height: 1.5;
+    margin: 20px 0 25px;
+    min-height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 500;
     position: relative;
     z-index: 2;
-    padding: 0 20px;
+    padding: 0 15px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .question-display {
-    font-size: 15px;
+    font-size: 14px;
     color: #666;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-style: italic;
     opacity: 0.9;
     text-align: center;
-    line-height: 1.5;
-    padding: 0 20px;
+    line-height: 1.4;
+    padding: 0 15px;
     position: relative;
     z-index: 2;
     max-width: 100%;
     word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .book-signature {
-    font-size: 14px;
+    font-size: 13px;
     color: #888;
-    margin-top: 30px;
+    margin-top: 20px;
     position: relative;
     z-index: 2;
 }
 
 /* 输入区域 */
 .input-section {
-    margin: 40px auto;
+    margin: 20px auto;
     text-align: center;
     z-index: 10;
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
+    flex-shrink: 0;
 }
 
 .question-input {
     width: 100%;
-    padding: 18px 25px;
-    font-size: 16px;
+    padding: 15px 20px;
+    font-size: 15px;
     border: 2px solid rgba(255, 255, 255, 0.25);
     border-radius: 30px;
     background: rgba(255, 255, 255, 0.12);
@@ -328,9 +332,9 @@ body {
     color: white;
     outline: none;
     transition: all 0.3s ease;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     box-shadow: 
-        0 10px 40px rgba(0, 0, 0, 0.2),
+        0 8px 30px rgba(0, 0, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
@@ -343,13 +347,13 @@ body {
     border-color: rgba(255, 255, 255, 0.5);
     transform: scale(1.02);
     box-shadow: 
-        0 15px 50px rgba(0, 0, 0, 0.3),
+        0 12px 40px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .seek-btn {
-    padding: 18px 45px;
-    font-size: 17px;
+    padding: 15px 35px;
+    font-size: 16px;
     background: linear-gradient(45deg, #d4af37, #ffd700, #d4af37);
     background-size: 200% 200%;
     color: #2c1810;
@@ -359,11 +363,13 @@ body {
     transition: all 0.3s ease;
     font-weight: 600;
     box-shadow: 
-        0 10px 30px rgba(212, 175, 55, 0.4),
+        0 8px 25px rgba(212, 175, 55, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
     animation: shimmer 4s ease-in-out infinite;
     position: relative;
     overflow: hidden;
+    width: 100%;
+    max-width: 250px;
 }
 
 @keyframes shimmer {
@@ -374,7 +380,7 @@ body {
 .seek-btn:hover:not(:disabled) {
     transform: translateY(-3px);
     box-shadow: 
-        0 15px 40px rgba(212, 175, 55, 0.6),
+        0 12px 35px rgba(212, 175, 55, 0.6),
         inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
@@ -459,7 +465,7 @@ body {
     }
     100% {
         opacity: 0;
-        transform: translateY(-120px) scale(0) rotate(360deg);
+        transform: translateY(-100px) scale(0) rotate(360deg);
     }
 }
 
@@ -468,8 +474,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, transparent 70%);
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -489,7 +495,7 @@ body {
     }
     100% { 
         opacity: 0; 
-        transform: translate(-50%, -50%) scale(1.8); 
+        transform: translate(-50%, -50%) scale(1.5); 
     }
 }
 
@@ -501,15 +507,15 @@ body {
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.85);
     color: white;
-    padding: 18px 35px;
-    border-radius: 25px;
-    font-size: 16px;
+    padding: 15px 25px;
+    border-radius: 20px;
+    font-size: 14px;
     z-index: 2000;
     animation: toast-fade 2.5s ease-in-out;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     text-align: center;
     max-width: 80%;
     word-break: break-word;
@@ -535,67 +541,148 @@ body {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .container {
-        max-width: 320px;
-        margin: 60px 0 30px;
-    }
-    
-    .book {
-        height: 420px;
-    }
-    
-    .front-cover h1 {
-        font-size: 32px;
-    }
-    
-    .answer-display {
-        font-size: 22px;
-        min-height: 120px;
-        margin: 15px 0 25px;
-    }
-    
-    .question-input {
-        padding: 16px 22px;
-        font-size: 15px;
-    }
-    
-    .seek-btn {
-        padding: 16px 35px;
-        font-size: 16px;
-    }
-    
-    .stats {
-        font-size: 14px;
-        padding: 10px 18px;
-    }
-    
-    .stats span {
-        font-size: 16px;
-    }
-}
-
-@media (max-width: 480px) {
     body {
         padding: 15px;
     }
     
     .container {
-        max-width: 280px;
-    }
-    
-    .book {
-        height: 380px;
-    }
-    
-    .page {
-        padding: 30px 20px;
+        max-width: 300px;
+        height: 400px;
+        margin: 50px auto 30px;
     }
     
     .front-cover h1 {
-        font-size: 28px;
+        font-size: 30px;
+    }
+    
+    .answer-display {
+        font-size: 22px;
+        min-height: 90px;
+        margin: 15px 0 20px;
+    }
+    
+    .question-input {
+        padding: 14px 18px;
+        font-size: 14px;
+    }
+    
+    .seek-btn {
+        padding: 14px 30px;
+        font-size: 15px;
+        max-width: 220px;
+    }
+    
+    .stats {
+        font-size: 13px;
+        padding: 8px 16px;
+    }
+    
+    .stats span {
+        font-size: 15px;
+    }
+    
+    .page {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        justify-content: space-around;
+    }
+    
+    .container {
+        max-width: 280px;
+        height: 380px;
+        margin: 40px auto 20px;
+    }
+    
+    .page {
+        padding: 20px 15px;
+    }
+    
+    .front-cover h1 {
+        font-size: 26px;
     }
     
     .answer-display {
         font-size: 20px;
+        min-height: 80px;
+    }
+    
+    .input-section {
+        margin: 15px auto;
+        max-width: 280px;
+    }
+    
+    .question-input {
+        padding: 12px 16px;
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+    
+    .seek-btn {
+        padding: 12px 25px;
+        font-size: 14px;
+        max-width: 200px;
+    }
+    
+    .stats {
+        top: 15px;
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+    
+    .return-btn {
+        bottom: 15px;
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}
+
+@media (max-height: 700px) {
+    .container {
+        height: 350px;
+        max-width: 280px;
+        margin: 30px auto 20px;
+    }
+    
+    .input-section {
+        margin: 15px auto;
+    }
+    
+    .stats {
+        top: 10px;
+    }
+    
+    .return-btn {
+        bottom: 10px;
+    }
+}
+
+@media (max-height: 600px) {
+    .container {
+        height: 300px;
+        max-width: 250px;
+        margin: 20px auto 15px;
+    }
+    
+    .front-cover h1 {
+        font-size: 24px;
+    }
+    
+    .answer-display {
+        font-size: 18px;
+        min-height: 70px;
+    }
+    
+    .question-display {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    
+    .input-section {
+        margin: 10px auto;
     }
 }

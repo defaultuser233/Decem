@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>答案之书 - 探索未知的智慧</title>
     <meta name="description" content="答案之书，为您提供智慧的指引。输入您的问题，获取来自宇宙的答案。">
     <meta name="keywords" content="答案之书,占卜,决策,智慧,指引">
@@ -13,6 +13,15 @@
     <!-- 预加载音频 -->
     <link rel="preload" href="https://assets.mixkit.co/sfx/preview/mixkit-book-page-turn-1141.mp3" as="audio" type="audio/mpeg">
     <link rel="preload" href="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkles-300.mp3" as="audio" type="audio/mpeg">
+    
+    <style>
+        /* 防止页面滚动 */
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
     <!-- 星空背景 -->
@@ -38,14 +47,16 @@
                 </div>
             </div>
             
-            <!-- 答案页 -->
-            <div class="page back-cover">
-                <div class="question-display" id="questionDisplay"></div>
-                <div class="answer-display" id="answerDisplay">
-                    答案即将显现...
-                </div>
-                <div class="book-signature">
-                    —— 答案之书 · 智慧指引 ——
+            <!-- 答案页 - 修改为纯色背景 -->
+            <div class="page answer-page">
+                <div class="answer-content-wrapper">
+                    <div class="question-display" id="questionDisplay"></div>
+                    <div class="answer-display" id="answerDisplay">
+                        答案即将显现...
+                    </div>
+                    <div class="book-signature">
+                        —— 答案之书 · 智慧指引 ——
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,7 +65,7 @@
     <!-- 输入区域 -->
     <div class="input-section">
         <input type="text" class="question-input" id="questionInput" 
-               placeholder="在此输入你的问题（例如：我应该接受这份工作吗？）" 
+               placeholder="在此输入你的问题（例如：我能实现梦想吗？）" 
                maxlength="100"
                aria-label="问题输入框">
         <br>
