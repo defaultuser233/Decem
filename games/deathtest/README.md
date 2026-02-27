@@ -20,7 +20,12 @@
 
 GitHub Pages:
 
-[GitHub Pages](https://defaultuser233.github.io/DeathTest/)
+<a href="https://defaultuser233.github.io/DeathTest/">
+    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="64" height="64" alt="GitHub Pages">
+</a>
+
+<div style="margin: 20px 0;"></div>
+<!-- GitHub 会过滤 style，但 div 本身会占据空间，可以用这种方法来增加两个图片之间的间距 -->
 
 Netlify:
 
