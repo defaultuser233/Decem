@@ -17,8 +17,14 @@
 - 无需后端、数据库或额外配置。
 
 ## 🔗 链接
+
+GitHub Pages:
+
 [GitHub Pages](https://defaultuser233.github.io/DeathTest/)
-[Netlify](https://deathtest.netlify.app/index.html)
+
+Netlify:
+
+[![Netlify](https://www.netlify.com/assets/logos/monogram/darkmode/logo-netlify-monogram-fullcolor-darkmode.svg)](https://deathtest.netlify.app/index.html)
 
 ## 🧪 计分逻辑
 
