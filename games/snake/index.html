@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>贪吃蛇·无墙自由版</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{
+    background:#121212;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
+    color:#fff;
+}
+#scoreBox{
+    font-size:20px;
+    margin:10px 0;
+    display:flex;
+    gap:20px;
+}
+#canvas{
+    border:3px solid #fff;
+    background:#000;
+    border-radius:6px;
+}
+.controls{
+    margin-top:15px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+button{
+    padding:8px 14px;
+    border:none;
+    border-radius:6px;
+    background:#2d7dff;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{background:#1a66dc}
+.skinBtn{background:#7b61ff}
+.skinBtn:hover{background:#644bed}
+</style>
+</head>
+
+<body>
+<div id="scoreBox">
+    <div>得分：<span id="score">0</span></div>
+    <div>最高分：<span id="maxScore">0</span></div>
+</div>
+<canvas id="canvas" width="400" height="400"></canvas>
+
+<div class="controls">
+    <button onclick="startGame()">开始/暂停</button>
+    <button class="skinBtn" onclick="changeSkin()">切换皮肤</button>
+</div>
+
+<audio id="eatSound" src="https://cdn.jsdelivr.net/gh/hgl818/cdn@master/eat.wav" preload="auto">
+<audio id="dieSound" src="https://cdn.jsdelivr.net/gh/hgl818/cdn@master/die.wav" preload="auto">
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const scoreText = document.getElementById('score');
+const maxText = document.getElementById('maxScore');
+
+const grid = 20;
+let snake = [{x:10, y:10}];
+let food = {x:15, y:15};
+let dx=0, dy=0;
+let score = 0;
+
+let maxScore = localStorage.getItem('snake_max_score') || 0;
+maxText.textContent = maxScore;
+
+let gameRunning = false;
+let loop = null;
+
+let skinIndex = 0;
+const skins = [
+    {head:'lime', body:'green', food:'red'},
+    {head:'gold', body:'orange', food:'cyan'},
+    {head:'magenta', body:'purple', food:'yellow'},
+    {head:'white', body:'gray', food:'pink'}
+];
+
+const eatSound = document.getElementById('eatSound');
+const dieSound = document.getElementById('dieSound');
+
+function randomFood(){
+    return {
+        x: Math.floor(Math.random() * (canvas.width/grid)),
+        y: Math.floor(Math.random() * (canvas.height/grid))
+    };
+}
+
+function drawRect(x,y,color){
+    ctx.fillStyle = color;
+    ctx.fillRect(x*grid+1, y*grid+1, grid-2, grid-2);
+}
+
+function drawGame(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const skin = skins[skinIndex];
+    drawRect(food.x, food.y, skin.food);
+    snake.forEach((seg, i) => {
+        drawRect(seg.x, seg.y, i===0 ? skin.head : skin.body);
+    });
+}
+
+function move(){
+    const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+
+    // ======================
+    // 真正无墙！穿屏通行
+    // ======================
+    if(head.x >= 20) head.x = 0;
+    if(head.x < 0)  head.x = 19;
+    if(head.y >= 20) head.y = 0;
+    if(head.y < 0)  head.y = 19;
+
+    // 只有撞自己才会死
+    for(let i=1; i<snake.length; i++){
+        if(head.x === snake[i].x && head.y === snake[i].y){
+            dieSound.play();
+            resetGame();
+            return;
+        }
+    }
+
+    snake.unshift(head);
+
+    if(head.x === food.x && head.y === food.y){
+        eatSound.currentTime=0;
+        eatSound.play();
+        score +=10;
+        scoreText.textContent = score;
+
+        if(score > maxScore){
+            maxScore = score;
+            maxText.textContent = maxScore;
+            localStorage.setItem('snake_max_score', maxScore);
+        }
+        food = randomFood();
+    }else{
+        snake.pop();
+    }
+}
+
+function gameLoop(){
+    if(gameRunning){
+        move();
+        drawGame();
+    }
+}
+
+function startGame(){
+    gameRunning = !gameRunning;
+    if(gameRunning && !loop){
+        loop = setInterval(gameLoop, 120);
+    }
+}
+
+function resetGame(){
+    clearInterval(loop);
+    loop = null;
+    gameRunning = false;
+    snake = [{x:10, y:10}];
+    dx=0; dy=0;
+    score=0;
+    scoreText.textContent = 0;
+    food = randomFood();
+    drawGame();
+}
+
+function changeSkin(){
+    skinIndex = (skinIndex +1) % skins.length;
+    drawGame();
+}
+
+document.addEventListener('keydown', e=>{
+    if(e.key === 'ArrowUp' && dy !==1){ dx=0; dy=-1; }
+    if(e.key === 'ArrowDown' && dy !==-1){ dx=0; dy=1; }
+    if(e.key === 'ArrowLeft' && dx !==1){ dx=-1; dy=0; }
+    if(e.key === 'ArrowRight' && dx !==-1){ dx=1; dy=0; }
+});
+
+drawGame();
+</script>
+</body>
+</html>
