@@ -16,7 +16,7 @@
                 justify-content: flex-end;
                 position: relative;
                 overflow: hidden;
-                padding-bottom: 20px;
+                padding-bottom: 60px;
             }
             
             /* 图片容器 - 最底层 */
@@ -33,22 +33,96 @@
             }
             
             img {
-                width: 100vw; /* 与屏幕宽度一致 */
+                width: 100vw;
                 height: auto;
                 display: block;
             }
             
-            /* 底部红色光晕 */
+            /* Win11 OOBE 风格光晕容器 */
             .glow {
                 position: fixed;
-                bottom: -30%;
-                left: 50%;
-                transform: translateX(-50%);
+                top: 0;
+                left: 0;
                 width: 100%;
-                height: 80%;
-                background: radial-gradient(ellipse at center, rgba(220, 20, 60, 0.15) 0%, transparent 60%);
+                height: 100%;
                 pointer-events: none;
                 z-index: 2;
+            }
+            
+            /* 光斑基础样式 */
+            .glow-blob {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(80px);
+            }
+            
+            /* 光斑1 - 蓝紫色调 更大更淡 */
+            .glow-blob-1 {
+                width: 100vmin;
+                height: 100vmin;
+                background: radial-gradient(circle, 
+                    rgba(138, 43, 226, 0.35) 0%, 
+                    rgba(75, 0, 130, 0.25) 30%, 
+                    rgba(220, 20, 60, 0.15) 60%, 
+                    transparent 80%
+                );
+                animation: blob-wander-1 20s ease-in-out infinite;
+            }
+            
+            /* 光斑2 - 深红色调 更大更淡 */
+            .glow-blob-2 {
+                width: 90vmin;
+                height: 90vmin;
+                background: radial-gradient(circle, 
+                    rgba(220, 20, 60, 0.4) 0%, 
+                    rgba(178, 34, 34, 0.25) 40%, 
+                    rgba(255, 69, 0, 0.15) 70%, 
+                    transparent 85%
+                );
+                animation: blob-wander-2 25s ease-in-out infinite;
+            }
+            
+            /* 光斑3 - 橙红色调 更大更淡 */
+            .glow-blob-3 {
+                width: 80vmin;
+                height: 80vmin;
+                background: radial-gradient(circle, 
+                    rgba(255, 69, 0, 0.35) 0%, 
+                    rgba(220, 20, 60, 0.25) 50%, 
+                    transparent 75%
+                );
+                animation: blob-wander-3 18s ease-in-out infinite;
+            }
+            
+            /* 光斑1 - 大范围漫游 */
+            @keyframes blob-wander-1 {
+                0% { top: -30%; left: -20%; transform: scale(1); }
+                20% { top: 50%; left: 60%; transform: scale(1.2); }
+                40% { top: 70%; left: 10%; transform: scale(0.9); }
+                60% { top: 20%; left: 70%; transform: scale(1.1); }
+                80% { top: 0%; left: 30%; transform: scale(1.15); }
+                100% { top: -30%; left: -20%; transform: scale(1); }
+            }
+            
+            /* 光斑2 - 对角线穿越 */
+            @keyframes blob-wander-2 {
+                0% { top: 100%; left: 100%; transform: scale(1.1); }
+                25% { top: 10%; left: 0%; transform: scale(0.85); }
+                50% { top: 40%; left: 50%; transform: scale(1.25); }
+                75% { top: 70%; left: 20%; transform: scale(0.95); }
+                100% { top: 100%; left: 100%; transform: scale(1.1); }
+            }
+            
+            /* 光斑3 - 中心环绕 */
+            @keyframes blob-wander-3 {
+                0% { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); }
+                15% { top: 5%; left: 75%; transform: translate(-50%, -50%) scale(1.15); }
+                30% { top: 65%; left: 65%; transform: translate(-50%, -50%) scale(0.85); }
+                45% { top: 75%; left: 15%; transform: translate(-50%, -50%) scale(1.2); }
+                60% { top: 15%; left: 5%; transform: translate(-50%, -50%) scale(1.05); }
+                75% { top: 35%; left: 85%; transform: translate(-50%, -50%) scale(0.8); }
+                90% { top: 85%; left: 45%; transform: translate(-50%, -50%) scale(1.1); }
+                100% { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); }
             }
             
             /* 文字 */
@@ -64,6 +138,7 @@
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 animation: shine 3s linear infinite;
+                text-shadow: 0 0 30px rgba(220, 20, 60, 0.5);
             }
             
             @keyframes shine {
@@ -106,7 +181,11 @@
         <div class="image-container">
             <img src="images/Domain.jpg" alt="Domain" loading="eager" decoding="async">
         </div>
-        <div class="glow"></div>
+        <div class="glow">
+            <div class="glow-blob glow-blob-1"></div>
+            <div class="glow-blob glow-blob-2"></div>
+            <div class="glow-blob glow-blob-3"></div>
+        </div>
         <p>This is a Domain</p>
         <div class="stars" id="stars"></div>
 
