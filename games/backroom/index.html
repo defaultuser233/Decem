@@ -1,52 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<title>后室求生指南·层级目录</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-  :root{--gold:#FFD700;--bg:#121212;--text:#bbb;--accent:#ff4444}
-  body{background:var(--bg);color:var(--text);font-family:"Microsoft YaHei",sans-serif;margin:0;display:flex;min-height:100vh}
-  nav{width:260px;background:#000;padding:20px;overflow-y:auto;border-right:1px solid #333}
-  nav h2{color:var(--gold);margin-bottom:10px}
-  nav input{width:100%;padding:6px;margin-bottom:12px;background:#222;border:1px solid #444;color:var(--text);border-radius:4px}
-  nav ul{list-style:none;padding-left:0}
-  nav li{margin:4px 0}
-  nav a{color:var(--text);text-decoration:none}
-  nav a:hover{color:var(--gold)}
-  main{flex:1;padding:30px}
-  iframe{width:100%;height:100%;border:0}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>游戏索引</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; width: 100%; overflow: hidden; }
+        iframe { width: 100%; height: 100%; border: none; display: block; }
+    </style>
 </head>
 <body>
-<nav>
-  <h2>层级目录</h2>
-  <input id="filter" placeholder="搜索层级...">
-  <ul id="nav">
-    <li><a href="level0.html" target="content">Level 0  前厅</a></li>
-    <li><a href="level1.html" target="content">Level 1  宜居地带</a></li>
-    <li><a href="level2.html" target="content">Level 2  管道之梦</a></li>
-    <li><a href="level3.html" target="content">Level 3  发电站</a></li>
-    <li><a href="level4.html" target="content">Level 4  废弃办公室</a></li>
-    <li><a href="level5.html" target="content">Level 5  恐怖旅馆</a></li>
-    <li><a href="level6.html" target="content">Level 6  熄灯</a></li>
-    <li><a href="level7.html" target="content">Level 7  深海恐惧症</a></li>
-    <li><a href="level8.html" target="content">Level 8  岩洞系统</a></li>
-    <li><a href="level9.html" target="content">Level 9  郊区</a></li>
-    <li><a href="level10.html" target="content">Level 10 麦田</a></li>
-    <li><a href="level11.html" target="content">Level 11 无垠城市</a></li>
-    <li><a href="level!.html" target="content">Level !  不想死就快跑！</a></li>
-  </ul>
-</nav>
-<main><iframe name="content" src="level0.html"></iframe></main>
-<script>
-  const filter=document.getElementById('filter'),nav=document.getElementById('nav');
-  filter.addEventListener('input',()=>{
-    const v=filter.value.toLowerCase();
-    [...nav.querySelectorAll('li')].forEach(li=>{
-        li.style.display=li.textContent.toLowerCase().includes(v)?'':'none'
-    })
-  })
-</script>
+    <iframe src="level0.html" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-downloads"></iframe>
 </body>
 </html>
