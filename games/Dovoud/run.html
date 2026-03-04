@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>沃德快跑</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0a;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        #gameContainer {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 100vh;
+            max-height: 500px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            border: 3px solid #e94560;
+            box-shadow: 0 0 30px rgba(233, 69, 96, 0.3);
+        }
+        
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        #score {
+            position: absolute;
+            top: 20px;
+            right: 70px;
+            color: #e94560;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 0px #000;
+            letter-spacing: 2px;
+        }
+        
+        #settingsBtn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 2px solid #e94560;
+            color: #e94560;
+            font-size: 20px;
+            cursor: pointer;
+            pointer-events: auto;
+            clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #settingsBtn:hover {
+            background: #e94560;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(233, 69, 96, 0.5);
+        }
+        
+        #health {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 32px;
+            letter-spacing: 5px;
+            filter: drop-shadow(2px 2px 0px #000);
+            transition: transform 0.1s;
+        }
+        
+        #health.damage {
+            animation: shake 0.3s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        #gameOver {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: none;
+            pointer-events: auto;
+        }
+        
+        #gameOver h1 {
+            color: #e94560;
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0px #000;
+            letter-spacing: 4px;
+            animation: glitch 1s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(2px, 2px); }
+        }
+        
+        #finalScore {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 0px #000;
+        }
+        
+        #restartBtn {
+            background: #e94560;
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            transition: all 0.2s;
+        }
+        
+        #restartBtn:hover {
+            background: #ff6b6b;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.6);
+        }
+        
+        #startScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            pointer-events: auto;
+            z-index: 10;
+        }
+        
+        #startScreen h1 {
+            color: #e94560;
+            font-size: 56px;
+            margin-bottom: 10px;
+            text-shadow: 4px 4px 0px #000;
+            letter-spacing: 6px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        #startScreen p {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        #startScreen .controls {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+        
+        #startBtn {
+            background: transparent;
+            color: #e94560;
+            border: 3px solid #e94560;
+            padding: 18px 50px;
+            font-size: 24px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
+            transition: all 0.3s;
+        }
+        
+        #startBtn:hover {
+            background: #e94560;
+            color: #fff;
+            box-shadow: 0 0 30px rgba(233, 69, 96, 0.5);
+        }
+        
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 0, 0, 0.1) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        #damageOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 30%, rgba(255, 0, 0, 0.3) 100%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s;
+        }
+        
+        #damageOverlay.show {
+            opacity: 1;
+        }
+        
+        /* 设置面板 */
+        #settingsPanel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            pointer-events: auto;
+            z-index: 20;
+        }
+        
+        #settingsPanel.show {
+            display: flex;
+        }
+        
+        #settingsPanel h2 {
+            color: #e94560;
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 0px #000;
+            letter-spacing: 4px;
+        }
+        
+        .settingItem {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .settingLabel {
+            color: #fff;
+            font-size: 18px;
+            width: 120px;
+            text-align: right;
+        }
+        
+        .toggleBtn {
+            background: transparent;
+            border: 2px solid #e94560;
+            color: #e94560;
+            padding: 8px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            transition: all 0.2s;
+            min-width: 80px;
+        }
+        
+        .toggleBtn.active {
+            background: #e94560;
+            color: #fff;
+        }
+        
+        .toggleBtn:hover {
+            box-shadow: 0 0 15px rgba(233, 69, 96, 0.4);
+        }
+        
+        #imageUpload {
+            display: none;
+        }
+        
+        .uploadLabel {
+            background: transparent;
+            border: 2px solid #e94560;
+            color: #e94560;
+            padding: 8px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        
+        .uploadLabel:hover {
+            background: #e94560;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(233, 69, 96, 0.4);
+        }
+        
+        #fileName {
+            color: #888;
+            font-size: 14px;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        #closeSettings {
+            margin-top: 40px;
+            background: #e94560;
+            color: #fff;
+            border: none;
+            padding: 12px 40px;
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            transition: all 0.2s;
+        }
+        
+        #closeSettings:hover {
+            background: #ff6b6b;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.6);
+        }
+        
+        #pauseText {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #e94560;
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 3px 3px 0px #000;
+            letter-spacing: 8px;
+            display: none;
+            pointer-events: none;
+            z-index: 15;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        <div class="scanline"></div>
+        <div id="damageOverlay"></div>
+        <div id="pauseText">PAUSED</div>
+        
+        <div id="ui">
+            <div id="health">❤️❤️❤️❤️❤️</div>
+            <div id="score">0</div>
+            <button id="settingsBtn">⚙</button>
+            
+            <div id="startScreen">
+                <h1>沃德快跑</h1>
+                <p>按空格键或点击屏幕跳跃</p>
+                <p class="controls">跑快快</p>
+                <button id="startBtn">开始游戏</button>
+            </div>
+            
+            <div id="gameOver">
+                <h1>游戏结束</h1>
+                <div id="finalScore">得分: 0</div>
+                <button id="restartBtn">重新开始</button>
+            </div>
+        </div>
+        
+        <div id="settingsPanel">
+            <h2>设置</h2>
+            
+            <div class="settingItem">
+                <span class="settingLabel">游戏音效</span>
+                <button id="soundToggle" class="toggleBtn active">开启</button>
+            </div>
+            
+            <div class="settingItem">
+                <span class="settingLabel">自定义角色</span>
+                <label for="imageUpload" class="uploadLabel">选择图片</label>
+                <input type="file" id="imageUpload" accept="image/*">
+                <span id="fileName">默认</span>
+            </div>
+            
+            <button id="closeSettings">返回游戏</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const healthElement = document.getElementById('health');
+        const damageOverlay = document.getElementById('damageOverlay');
+        const gameOverScreen = document.getElementById('gameOver');
+        const finalScoreElement = document.getElementById('finalScore');
+        const startScreen = document.getElementById('startScreen');
+        const startBtn = document.getElementById('startBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsPanel = document.getElementById('settingsPanel');
+        const closeSettings = document.getElementById('closeSettings');
+        const soundToggle = document.getElementById('soundToggle');
+        const imageUpload = document.getElementById('imageUpload');
+        const fileName = document.getElementById('fileName');
+        const pauseText = document.getElementById('pauseText');
+        
+        // 设置状态
+        let soundEnabled = true;
+        let customImage = null;
+        let isPaused = false;
+        let animationId = null;
+        
+        // 设置画布大小
+        function resizeCanvas() {
+            const container = document.getElementById('gameContainer');
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // 游戏状态
+        let gameRunning = false;
+        let score = 0;
+        let gameSpeed = 5;
+        let frame = 0;
+        let maxHealth = 5;
+        let currentHealth = 5;
+        let invincible = false;
+        let invincibleTimer = 0;
+        
+        // 加载猫咪图片
+        const dovoudImage = new Image();
+        dovoudImage.src = 'dovoud.png';
+        let dovoudLoaded = false;
+        dovoudImage.onload = () => {
+            dovoudLoaded = true;
+        };
+        
+        // 音效系统（使用 Web Audio API）
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(type) {
+            if (!soundEnabled) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            if (type === 'jump') {
+                oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.1);
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } else if (type === 'doubleJump') {
+                oscillator.frequency.setValueAtTime(500, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.15);
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.15);
+            } else if (type === 'damage') {
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.3);
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            }
+        }
+        // 咪咪咪
+        // 玩家对象
+        const player = {
+            x: 100,
+            y: 0,
+            width: 60,
+            height: 60,
+            velocityY: 0,
+            jumping: false,
+            grounded: false,
+            jumpPower: -15,
+            gravity: 0.8,
+            maxJumps: 2,
+            remainingJumps: 2,
+            
+            update() {
+                // 重力
+                this.velocityY += this.gravity;
+                this.y += this.velocityY;
+                
+                // 地面检测
+                const groundY = canvas.height - 100;
+                if (this.y + this.height >= groundY) {
+                    this.y = groundY - this.height;
+                    this.velocityY = 0;
+                    this.grounded = true;
+                    this.jumping = false;
+                    this.remainingJumps = this.maxJumps; // 落地重置跳跃次数
+                } else {
+                    this.grounded = false;
+                }
+            },
+            
+            jump() {
+                if (this.remainingJumps > 0) {
+                    this.velocityY = this.jumpPower;
+                    this.jumping = true;
+                    this.remainingJumps--;
+                    
+                    // 播放音效
+                    const isDoubleJump = this.remainingJumps === 0;
+                    playSound(isDoubleJump ? 'doubleJump' : 'jump');
+                    
+                    // 二段跳特效
+                    createParticles(
+                        this.x + this.width/2, 
+                        this.y + this.height, 
+                        isDoubleJump ? 15 : 10,
+                        isDoubleJump ? '#00ffff' : '#ffffff'
+                    );
+                }
+            },
+            
+            draw() {
+                ctx.save();
+                
+                // 无敌时闪烁效果
+                if (invincible && Math.floor(frame / 4) % 2 === 0) {
+                    ctx.globalAlpha = 0.3;
+                }
+                
+                // 跳跃时的倾斜效果（二段跳翻转）
+                if (this.jumping) {
+                    ctx.translate(this.x + this.width/2, this.y + this.height/2);
+                    if (this.remainingJumps === 0 && !this.grounded) {
+                        // 二段跳时翻转
+                        ctx.rotate(0.2);
+                    } else {
+                        ctx.rotate(-0.1);
+                    }
+                    ctx.translate(-(this.x + this.width/2), -(this.y + this.height/2));
+                }
+                
+                // 绘制猫咪
+                const img = customImage || dovoudImage;
+                if (img.complete && img.naturalWidth !== 0) {
+                    ctx.drawImage(img, this.x, this.y, this.width, this.height);
+                } else {
+                    alert("图片加载失败")
+                    // 备用：绘制矩形
+                    ctx.fillStyle = '#e94560';
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+                
+                ctx.restore();
+                
+                // 阴影（不受无敌闪烁影响）
+                ctx.fillStyle = 'rgba(0,0,0,0.3)';
+                ctx.fillRect(this.x + 10, canvas.height - 95, this.width - 20, 10);
+            }
+        };
+        
+        // 障碍物类
+        class Obstacle {
+            constructor() {
+                this.width = 40 + Math.random() * 30;
+                this.height = 50 + Math.random() * 60;
+                this.x = canvas.width;
+                this.y = canvas.height - 100 - this.height;
+                this.passed = false;
+                this.type = Math.random() > 0.5 ? 'spike' : 'block';
+                this.hit = false; // 标记是否已经碰撞过（防止重复扣血）
+            }
+            
+            update() {
+                this.x -= gameSpeed;
+            }
+            
+            draw() {
+                ctx.save();
+                
+                if (this.type === 'spike') {
+                    // 绘制尖刺
+                    ctx.fillStyle = '#ff2e63';
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y + this.height);
+                    ctx.lineTo(this.x + this.width/2, this.y);
+                    ctx.lineTo(this.x + this.width, this.y + this.height);
+                    ctx.closePath();
+                    ctx.fill();
+                    
+                    // 高光
+                    ctx.strokeStyle = '#ff6b6b';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                } else {
+                    // 绘制方块障碍物
+                    ctx.fillStyle = '#533483';
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                    
+                    // 边框
+                    ctx.strokeStyle = '#e94560';
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(this.x, this.y, this.width, this.height);
+                    
+                    // 内部装饰
+                    ctx.fillStyle = '#e94560';
+                    ctx.fillRect(this.x + 10, this.y + 10, this.width - 20, 5);
+                    ctx.fillRect(this.x + 10, this.y + 25, this.width - 20, 5);
+                    
+                    // 危险侧标记（左边红色警示）
+                    ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
+                    ctx.fillRect(this.x, this.y, 5, this.height);
+                }
+                
+                ctx.restore();
+            }
+        }
+        
+        // 粒子系统
+        let particles = [];
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 6;
+                this.vy = (Math.random() - 0.5) * 6;
+                this.life = 1;
+                this.color = color || `hsl(${Math.random() * 60 + 330}, 100%, 60%)`;
+                this.size = Math.random() * 4 + 2;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.2; // 重力
+                this.life -= 0.02;
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.life;
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+                ctx.restore();
+            }
+        }
+        
+        function createParticles(x, y, count, color) {
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle(x, y, color));
+            }
+        }
+        
+        // 背景装饰
+        const stars = [];
+        for (let i = 0; i < 50; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * (canvas.height - 150),
+                size: Math.random() * 2,
+                speed: Math.random() * 0.5 + 0.1
+            });
+        }
+        
+        // 障碍物数组
+        let obstacles = [];
+        let obstacleTimer = 0;
+        
+        // 更新血量显示
+        function updateHealth() {
+            let hearts = '';
+            for (let i = 0; i < maxHealth; i++) {
+                hearts += i < currentHealth ? '❤️' : '🖤';
+            }
+            healthElement.textContent = hearts;
+        }
+        
+        // 受到伤害
+        function takeDamage() {
+            if (invincible) return;
+            
+            currentHealth--;
+            updateHealth();
+            playSound('damage');
+            
+            // 视觉反馈
+            healthElement.classList.add('damage');
+            damageOverlay.classList.add('show');
+            setTimeout(() => {
+                healthElement.classList.remove('damage');
+                damageOverlay.classList.remove('show');
+            }, 300);
+            
+            // 创建红色粒子效果
+            createParticles(player.x + player.width/2, player.y + player.height/2, 20, '#ff0000');
+            
+            // 无敌时间
+            invincible = true;
+            invincibleTimer = 120; // 2秒（60fps）
+            
+            // 检查死亡
+            if (currentHealth <= 0) {
+                gameOver();
+            }
+        }
+        
+        // 检查点是否在三角形内（用于尖刺碰撞检测）
+        function pointInTriangle(px, py, x1, y1, x2, y2, x3, y3) {
+            const area = 0.5 * (-y2 * x3 + y1 * (-x2 + x3) + x1 * (y2 - y3) + x2 * y3);
+            const s = 1 / (2 * area) * (y1 * x3 - y1 * x1 + py * (x1 - x3) + px * (y3 - y1));
+            const t = 1 / (2 * area) * (y1 * x2 - y1 * x1 + py * (x1 - x2) + px * (y2 - y1));
+            return s > 0 && t > 0 && (1 - s - t) > 0;
+        }
+        
+        // 改进的碰撞检测
+        function checkCollision(player, obstacle) {
+            // 如果已经碰撞过这个障碍物，不再处理
+            if (obstacle.hit) return false;
+            
+            if (obstacle.type === 'block') {
+                // 方形障碍：只有撞到左边（从左侧接近）才掉血
+                // 同时支持站在方块上
+                if (player.x < obstacle.x + obstacle.width &&
+                    player.x + player.width > obstacle.x &&
+                    player.y < obstacle.y + obstacle.height &&
+                    player.y + player.height > obstacle.y) {
+                    
+                    // 计算各方向重叠
+                    const overlapLeft = (player.x + player.width) - obstacle.x; // 玩家右边进入障碍物的深度
+                    const overlapRight = (obstacle.x + obstacle.width) - player.x; // 玩家左边进入障碍物的深度
+                    const overlapTop = (player.y + player.height) - obstacle.y; // 玩家底部进入障碍物的深度
+                    const overlapBottom = (obstacle.y + obstacle.height) - player.y; // 玩家顶部进入障碍物的深度
+                    
+                    // 找到最小的重叠量
+                    const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
+                    
+                    // 从上方落下（站在方块上）
+                    if (minOverlap === overlapTop && player.velocityY >= 0) {
+                        player.y = obstacle.y - player.height;
+                        player.velocityY = 0;
+                        player.grounded = true;
+                        player.jumping = false;
+                        player.remainingJumps = player.maxJumps; // 站在方块上重置跳跃
+                        return false;
+                    }
+                    
+                    // 只有从左边撞入（玩家右边碰到障碍物左边）才受伤
+                    if (minOverlap === overlapLeft) {
+                        obstacle.hit = true;
+                        takeDamage();
+                        return true;
+                    }
+                    
+                    // 从右边或下方撞入：推开但不受伤
+                    if (minOverlap === overlapRight) {
+                        player.x = obstacle.x + obstacle.width;
+                    } else if (minOverlap === overlapBottom) {
+                        player.y = obstacle.y + obstacle.height;
+                        player.velocityY = 0;
+                    }
+                    return false;
+                }
+            } else {
+                // 三角形障碍（尖刺）：只要碰到任意部分就掉血
+                // 三角形的三个顶点
+                const x1 = obstacle.x;
+                const y1 = obstacle.y + obstacle.height; // 左下
+                const x2 = obstacle.x + obstacle.width / 2;
+                const y2 = obstacle.y; // 顶部
+                const x3 = obstacle.x + obstacle.width;
+                const y3 = obstacle.y + obstacle.height; // 右下
+                
+                // 检查玩家的四个角是否有任何一个在三角形内
+                const corners = [
+                    {x: player.x, y: player.y}, // 左上
+                    {x: player.x + player.width, y: player.y}, // 右上
+                    {x: player.x, y: player.y + player.height}, // 左下
+                    {x: player.x + player.width, y: player.y + player.height} // 右下
+                ];
+                
+                // 也检查三角形顶点是否在玩家矩形内
+                const spikePoints = [
+                    {x: x1, y: y1},
+                    {x: x2, y: y2},
+                    {x: x3, y: y3}
+                ];
+                
+                // 检查碰撞
+                let collision = false;
+                
+                // 检查玩家角点是否在三角形内
+                for (let corner of corners) {
+                    if (pointInTriangle(corner.x, corner.y, x1, y1, x2, y2, x3, y3)) {
+                        collision = true;
+                        break;
+                    }
+                }
+                
+                // 检查三角形顶点是否在玩家矩形内
+                if (!collision) {
+                    for (let pt of spikePoints) {
+                        if (pt.x >= player.x && pt.x <= player.x + player.width &&
+                            pt.y >= player.y && pt.y <= player.y + player.height) {
+                            collision = true;
+                            break;
+                        }
+                    }
+                }
+                
+                // 简单的矩形包围盒预检测（优化性能）
+                if (!collision) {
+                    const spikeBounds = {
+                        x: obstacle.x,
+                        y: obstacle.y,
+                        width: obstacle.width,
+                        height: obstacle.height
+                    };
+                    if (!(player.x > spikeBounds.x + spikeBounds.width ||
+                          player.x + player.width < spikeBounds.x ||
+                          player.y > spikeBounds.y + spikeBounds.height ||
+                          player.y + player.height < spikeBounds.y)) {
+                        // 矩形相交，进行更精确的检测
+                        // 检查边相交
+                        collision = true;
+                    }
+                }
+                
+                if (collision) {
+                    obstacle.hit = true;
+                    takeDamage();
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+        
+        // 绘制背景
+        function drawBackground() {
+            // 绘制星星
+            ctx.fillStyle = '#fff';
+            stars.forEach(star => {
+                ctx.globalAlpha = Math.random() * 0.5 + 0.3;
+                ctx.fillRect(star.x, star.y, star.size, star.size);
+                star.x -= star.speed;
+                if (star.x < 0) star.x = canvas.width;
+            });
+            ctx.globalAlpha = 1;
+            
+            // 绘制地面
+            ctx.fillStyle = '#0f0f23';
+            ctx.fillRect(0, canvas.height - 100, canvas.width, 100);
+            
+            // 地面线条
+            ctx.strokeStyle = '#e94560';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height - 100);
+            ctx.lineTo(canvas.width, canvas.height - 100);
+            ctx.stroke();
+            
+            // 地面网格装饰
+            ctx.strokeStyle = 'rgba(233, 69, 96, 0.2)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < canvas.width; i += 40) {
+                const offset = (frame * 2) % 40;
+                ctx.beginPath();
+                ctx.moveTo(i - offset, canvas.height - 100);
+                ctx.lineTo(i - offset - 20, canvas.height);
+                ctx.stroke();
+            }
+        }
+        
+        // 游戏循环
+        function gameLoop() {
+            if (!gameRunning || isPaused) return;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 更新无敌时间
+            if (invincible) {
+                invincibleTimer--;
+                if (invincibleTimer <= 0) {
+                    invincible = false;
+                }
+            }
+            
+            // 绘制背景
+            drawBackground();
+            
+            // 更新玩家
+            player.update();
+            
+            // 生成障碍物
+            obstacleTimer++;
+            if (obstacleTimer > 60 + Math.random() * 60) {
+                obstacles.push(new Obstacle());
+                obstacleTimer = 0;
+            }
+            
+            // 更新障碍物位置
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                obstacles[i].update();
+            }
+            
+            // 检测碰撞
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                const obs = obstacles[i];
+                checkCollision(player, obs);
+                
+                // 计分
+                if (!obs.passed && obs.x + obs.width < player.x) {
+                    obs.passed = true;
+                    score++;
+                    scoreElement.textContent = score;
+                    
+                    // 增加难度
+                    if (score % 10 === 0) {
+                        gameSpeed += 0.5;
+                    }
+                }
+                
+                // 移除屏幕外的障碍物
+                if (obs.x + obs.width < 0) {
+                    obstacles.splice(i, 1);
+                }
+            }
+            
+            // 绘制玩家
+            player.draw();
+            
+            // 绘制障碍物
+            obstacles.forEach(obs => obs.draw());
+            
+            // 更新和绘制粒子
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.update();
+                p.draw();
+                if (p.life <= 0) particles.splice(i, 1);
+            }
+            
+            frame++;
+            animationId = requestAnimationFrame(gameLoop);
+        }
+        
+        // 游戏结束
+        function gameOver() {
+            gameRunning = false;
+            finalScoreElement.textContent = `得分: ${score}`;
+            gameOverScreen.style.display = 'block';
+            createParticles(player.x + player.width/2, player.y + player.height/2, 50, '#ff0000');
+        }
+        
+        // 重置游戏
+        function resetGame() {
+            score = 0;
+            gameSpeed = 5;
+            frame = 0;
+            currentHealth = maxHealth;
+            invincible = false;
+            invincibleTimer = 0;
+            obstacles = [];
+            particles = [];
+            obstacleTimer = 0;
+            player.y = 0;
+            player.velocityY = 0;
+            player.grounded = false;
+            player.remainingJumps = player.maxJumps;
+            scoreElement.textContent = '0';
+            updateHealth();
+            gameOverScreen.style.display = 'none';
+            startScreen.style.display = 'none';
+            gameRunning = true;
+            isPaused = false;
+            pauseText.style.display = 'none';
+            gameLoop();
+        }
+        
+        // 打开设置
+        function openSettings() {
+            if (!gameRunning) return;
+            isPaused = true;
+            pauseText.style.display = 'block';
+            settingsPanel.classList.add('show');
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        }
+        
+        // 关闭设置
+        function closeSettingsFunc() {
+            settingsPanel.classList.remove('show');
+            pauseText.style.display = 'none';
+            isPaused = false;
+            if (gameRunning) {
+                gameLoop();
+            }
+        }
+        
+        // 设置按钮事件
+        settingsBtn.addEventListener('click', openSettings);
+        closeSettings.addEventListener('click', closeSettingsFunc);
+        
+        // 音效开关
+        soundToggle.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            soundToggle.textContent = soundEnabled ? '开启' : '关闭';
+            soundToggle.classList.toggle('active', soundEnabled);
+        });
+        
+        // 图片上传
+        imageUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        customImage = img;
+                        fileName.textContent = file.name;
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // 控制
+        function handleJump(e) {
+            if (e.type === 'keydown' && e.code !== 'Space') return;
+            if (e.type === 'keydown') e.preventDefault();
+            
+            if (gameRunning && !isPaused) {
+                player.jump();
+            }
+        }
+        
+        window.addEventListener('keydown', handleJump);
+        canvas.addEventListener('click', () => {
+            if (gameRunning && !isPaused) player.jump();
+        });
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (gameRunning && !isPaused) player.jump();
+        });
+        
+        startBtn.addEventListener('click', resetGame);
+        restartBtn.addEventListener('click', resetGame);
+        
+        // 防止空格键滚动页面
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && gameRunning) {
+                e.preventDefault();
+            }
+        });
+        
+        // 点击设置面板外部关闭
+        settingsPanel.addEventListener('click', (e) => {
+            if (e.target === settingsPanel) {
+                closeSettingsFunc();
+            }
+        });
+    </script>
+</body>
+</html>
