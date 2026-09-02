@@ -5,6 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Domain</title>
         <style>
+            :root {
+                --accent: rgba(220, 20, 60, 0.8);
+                --accent-weak: rgba(220, 20, 60, 0.5);
+            }
+            
             * { margin: 0; padding: 0; box-sizing: border-box; }
             
             body {
@@ -22,20 +27,26 @@
             /* 图片容器 - 最底层 */
             .image-container {
                 position: fixed;
-                top: 0;
-                left: 0;
+                inset: 0;
                 width: 100%;
                 height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
                 z-index: 1;
             }
             
             img {
-                width: 100vw;
-                height: auto;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
                 display: block;
+            }
+            
+            /* 窄屏（手机竖屏）下完整显示整张图片，避免横向裁切 */
+            @media (max-width: 768px) {
+                img {
+                    object-fit: contain;
+                    object-position: center;
+                }
             }
             
             /* Win11 OOBE 风格光晕容器 */
@@ -53,7 +64,9 @@
             .glow-blob {
                 position: absolute;
                 border-radius: 50%;
-                filter: blur(80px);
+                filter: blur(40px);
+                will-change: transform, top, left;
+                contain: layout paint;
             }
             
             /* 光斑1 - 蓝紫色调 更大更淡 */
@@ -126,19 +139,20 @@
             }
             
             /* 文字 */
-            p {
+            h1 {
                 color: #fff;
                 font-family: 'Arial Black', sans-serif;
-                font-size: 2rem;
+                font-size: clamp(1.5rem, 4vw, 2.5rem);
                 z-index: 3;
                 position: relative;
                 letter-spacing: 2px;
                 background: linear-gradient(90deg, #fff, #ff4444, #fff);
                 background-size: 200% auto;
                 -webkit-background-clip: text;
+                background-clip: text;
                 -webkit-text-fill-color: transparent;
                 animation: shine 3s linear infinite;
-                text-shadow: 0 0 30px rgba(220, 20, 60, 0.5);
+                text-shadow: 0 0 30px var(--accent-weak);
             }
             
             @keyframes shine {
@@ -160,9 +174,9 @@
                 position: absolute;
                 width: 2px;
                 height: 2px;
-                background: rgba(220, 20, 60, 0.8);
+                background: var(--accent);
                 border-radius: 50%;
-                box-shadow: 0 0 4px rgba(220, 20, 60, 0.8);
+                box-shadow: 0 0 4px var(--accent);
                 animation: twinkle 2s infinite;
             }
             
@@ -175,19 +189,31 @@
                 0%, 100% { opacity: 0.2; transform: scale(1); }
                 50% { opacity: 1; transform: scale(1.3); }
             }
+            
+            /* 减少动画偏好 */
+            @media (prefers-reduced-motion: reduce) {
+                .glow-blob,
+                .star,
+                h1 {
+                    animation: none;
+                }
+                .glow-blob {
+                    opacity: 0.4;
+                }
+            }
         </style>
     </head>
     <body>
-        <div class="image-container">
-            <img src="images/Domain.jpg" alt="Domain" loading="eager" decoding="async">
+        <div class="image-container" aria-hidden="true">
+            <img src="images/Domain.jpg" alt="This is a Domain" loading="lazy" decoding="async">
         </div>
-        <div class="glow">
+        <div class="glow" aria-hidden="true">
             <div class="glow-blob glow-blob-1"></div>
             <div class="glow-blob glow-blob-2"></div>
             <div class="glow-blob glow-blob-3"></div>
         </div>
-        <p>This is a Domain</p>
-        <div class="stars" id="stars"></div>
+        <h1>This is a Domain</h1>
+        <div class="stars" id="stars" aria-hidden="true"></div>
 
         <script>
             const starsContainer = document.getElementById('stars');
