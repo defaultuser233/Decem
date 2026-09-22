@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en" translate="no">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Domain</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <title>This is a Domain</title>
+        <meta name="description" content="Neon line-art character illustration — Domain.">
+        <meta name="color-scheme" content="dark">
+        <meta name="theme-color" content="#000000">
+        <meta name="google" content="notranslate">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://valedecem.top/">
+        <meta property="og:title" content="This is a Domain">
+        <meta property="og:description" content="Neon line-art character illustration — Domain.">
+        <meta property="og:image" content="https://valedecem.top/images/Domain.jpg">
+        <link rel="icon" href="images/icon.ico">
         <style>
             :root {
                 --accent: rgba(220, 20, 60, 0.8);
@@ -14,6 +24,7 @@
             
             body {
                 min-height: 100vh;
+                min-height: 100dvh;
                 background: #000;
                 display: flex;
                 flex-direction: column;
@@ -21,43 +32,16 @@
                 justify-content: flex-end;
                 position: relative;
                 overflow: hidden;
-                padding-bottom: 60px;
+                padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
             }
             
-            /* 图片容器 - 最底层 */
-            .image-container {
-                position: fixed;
-                inset: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 1;
-            }
-            
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-                display: block;
-            }
-            
-            /* 窄屏（手机竖屏）下完整显示整张图片，避免横向裁切 */
-            @media (max-width: 768px) {
-                img {
-                    object-fit: contain;
-                    object-position: center;
-                }
-            }
-            
-            /* Win11 OOBE 风格光晕容器 */
+            /* Win11 OOBE 风格光晕 —— 位于画作之下，只照亮画作周围的黑暗 */
             .glow {
                 position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
+                inset: 0;
+                overflow: hidden;
                 pointer-events: none;
-                z-index: 2;
+                z-index: 1;
             }
             
             /* 光斑基础样式 */
@@ -65,12 +49,12 @@
                 position: absolute;
                 border-radius: 50%;
                 filter: blur(40px);
-                will-change: transform, top, left;
-                contain: layout paint;
             }
             
             /* 光斑1 - 蓝紫色调 更大更淡 */
             .glow-blob-1 {
+                top: -30%;
+                left: -20%;
                 width: 100vmin;
                 height: 100vmin;
                 background: radial-gradient(circle, 
@@ -84,6 +68,8 @@
             
             /* 光斑2 - 深红色调 更大更淡 */
             .glow-blob-2 {
+                top: 100%;
+                left: 100%;
                 width: 90vmin;
                 height: 90vmin;
                 background: radial-gradient(circle, 
@@ -97,6 +83,9 @@
             
             /* 光斑3 - 橙红色调 更大更淡 */
             .glow-blob-3 {
+                top: 50%;
+                left: 50%;
+                margin: -40vmin 0 0 -40vmin;
                 width: 80vmin;
                 height: 80vmin;
                 background: radial-gradient(circle, 
@@ -107,35 +96,60 @@
                 animation: blob-wander-3 18s ease-in-out infinite;
             }
             
+            /* 漫游动画只改 transform，避免每帧触发布局与重绘 */
             /* 光斑1 - 大范围漫游 */
             @keyframes blob-wander-1 {
-                0% { top: -30%; left: -20%; transform: scale(1); }
-                20% { top: 50%; left: 60%; transform: scale(1.2); }
-                40% { top: 70%; left: 10%; transform: scale(0.9); }
-                60% { top: 20%; left: 70%; transform: scale(1.1); }
-                80% { top: 0%; left: 30%; transform: scale(1.15); }
-                100% { top: -30%; left: -20%; transform: scale(1); }
+                0% { transform: translate3d(0, 0, 0) scale(1); }
+                20% { transform: translate3d(80vw, 90vh, 0) scale(1.2); }
+                40% { transform: translate3d(100vw, 40vh, 0) scale(0.9); }
+                60% { transform: translate3d(50vw, 100vh, 0) scale(1.1); }
+                80% { transform: translate3d(30vw, 60vh, 0) scale(1.15); }
+                100% { transform: translate3d(0, 0, 0) scale(1); }
             }
             
             /* 光斑2 - 对角线穿越 */
             @keyframes blob-wander-2 {
-                0% { top: 100%; left: 100%; transform: scale(1.1); }
-                25% { top: 10%; left: 0%; transform: scale(0.85); }
-                50% { top: 40%; left: 50%; transform: scale(1.25); }
-                75% { top: 70%; left: 20%; transform: scale(0.95); }
-                100% { top: 100%; left: 100%; transform: scale(1.1); }
+                0% { transform: translate3d(0, 0, 0) scale(1.1); }
+                25% { transform: translate3d(-90vw, -100vh, 0) scale(0.85); }
+                50% { transform: translate3d(-60vw, -50vh, 0) scale(1.25); }
+                75% { transform: translate3d(-30vw, -80vh, 0) scale(0.95); }
+                100% { transform: translate3d(0, 0, 0) scale(1.1); }
             }
             
             /* 光斑3 - 中心环绕 */
             @keyframes blob-wander-3 {
-                0% { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); }
-                15% { top: 5%; left: 75%; transform: translate(-50%, -50%) scale(1.15); }
-                30% { top: 65%; left: 65%; transform: translate(-50%, -50%) scale(0.85); }
-                45% { top: 75%; left: 15%; transform: translate(-50%, -50%) scale(1.2); }
-                60% { top: 15%; left: 5%; transform: translate(-50%, -50%) scale(1.05); }
-                75% { top: 35%; left: 85%; transform: translate(-50%, -50%) scale(0.8); }
-                90% { top: 85%; left: 45%; transform: translate(-50%, -50%) scale(1.1); }
-                100% { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); }
+                0% { transform: translate3d(0, 0, 0) scale(1); }
+                15% { transform: translate3d(-45vw, 25vh, 0) scale(1.15); }
+                30% { transform: translate3d(15vw, 15vh, 0) scale(0.85); }
+                45% { transform: translate3d(25vw, -35vh, 0) scale(1.2); }
+                60% { transform: translate3d(-35vw, -45vh, 0) scale(1.05); }
+                75% { transform: translate3d(-15vw, 35vh, 0) scale(0.8); }
+                90% { transform: translate3d(35vw, -5vh, 0) scale(1.1); }
+                100% { transform: translate3d(0, 0, 0) scale(1); }
+            }
+            
+            /* 画作 - 任何宽高比都完整显示，不裁切王冠与下摆 */
+            /* screen 混合：黑底让光晕透出来，霓虹线条保持锐利且不被染色 */
+            .art {
+                position: fixed;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+                mix-blend-mode: screen;
+                z-index: 2;
+            }
+            
+            /* 底部渐隐遮罩，保证标题压在画面上也清晰 */
+            body::after {
+                content: '';
+                position: fixed;
+                inset: auto 0 0 0;
+                height: 34vh;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+                pointer-events: none;
+                z-index: 3;
             }
             
             /* 文字 */
@@ -143,7 +157,7 @@
                 color: #fff;
                 font-family: 'Arial Black', sans-serif;
                 font-size: clamp(1.5rem, 4vw, 2.5rem);
-                z-index: 3;
+                z-index: 4;
                 position: relative;
                 letter-spacing: 2px;
                 background: linear-gradient(90deg, #fff, #ff4444, #fff);
@@ -190,7 +204,7 @@
                 50% { opacity: 1; transform: scale(1.3); }
             }
             
-            /* 减少动画偏好 */
+            /* 减少动画偏好：动画关闭后光斑仍要停在合理位置，不能塌到角落 */
             @media (prefers-reduced-motion: reduce) {
                 .glow-blob,
                 .star,
@@ -200,24 +214,35 @@
                 .glow-blob {
                     opacity: 0.4;
                 }
+                .glow-blob-1 {
+                    top: -25%;
+                    left: -15%;
+                }
+                .glow-blob-2 {
+                    top: 35%;
+                    left: 45%;
+                }
+                .glow-blob-3 {
+                    top: 45%;
+                    left: 55%;
+                }
             }
         </style>
     </head>
     <body>
-        <div class="image-container" aria-hidden="true">
-            <img src="images/Domain.jpg" alt="This is a Domain" loading="lazy" decoding="async">
-        </div>
         <div class="glow" aria-hidden="true">
             <div class="glow-blob glow-blob-1"></div>
             <div class="glow-blob glow-blob-2"></div>
             <div class="glow-blob glow-blob-3"></div>
         </div>
+        <img class="art" src="images/Domain.jpg" alt="" width="1065" height="1138" fetchpriority="high" decoding="async">
         <h1>This is a Domain</h1>
         <div class="stars" id="stars" aria-hidden="true"></div>
 
         <script>
             const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 80; i++) {
+            const starCount = window.innerWidth < 768 ? 32 : 48;
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = Math.random() > 0.85 ? 'star white' : 'star';
                 star.style.left = Math.random() * 100 + '%';
