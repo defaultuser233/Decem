@@ -18,6 +18,10 @@
             :root {
                 --accent: rgba(220, 20, 60, 0.8);
                 --accent-weak: rgba(220, 20, 60, 0.5);
+                --violet: rgba(147, 51, 234, 0.4);
+                /* 指针位置，-1 ~ 1，由脚本写入，供各层视差取用 */
+                --px: 0;
+                --py: 0;
             }
             
             * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,9 +43,9 @@
             .glow {
                 position: fixed;
                 inset: 0;
-                overflow: hidden;
                 pointer-events: none;
                 z-index: 1;
+                transform: translate3d(calc(var(--px) * -30px), calc(var(--py) * -30px), 0);
             }
             
             /* 光斑基础样式 */
@@ -58,8 +62,8 @@
                 width: 100vmin;
                 height: 100vmin;
                 background: radial-gradient(circle, 
-                    rgba(138, 43, 226, 0.35) 0%, 
-                    rgba(75, 0, 130, 0.25) 30%, 
+                    rgba(147, 51, 234, 0.45) 0%, 
+                    rgba(88, 28, 135, 0.3) 30%, 
                     rgba(220, 20, 60, 0.15) 60%, 
                     transparent 80%
                 );
@@ -81,7 +85,7 @@
                 animation: blob-wander-2 25s ease-in-out infinite;
             }
             
-            /* 光斑3 - 橙红色调 更大更淡 */
+            /* 光斑3 - 橙红色调，尾部补一道淡紫 更大更淡 */
             .glow-blob-3 {
                 top: 50%;
                 left: 50%;
@@ -91,7 +95,8 @@
                 background: radial-gradient(circle, 
                     rgba(255, 69, 0, 0.35) 0%, 
                     rgba(220, 20, 60, 0.25) 50%, 
-                    transparent 75%
+                    rgba(147, 51, 234, 0.12) 68%, 
+                    transparent 84%
                 );
                 animation: blob-wander-3 18s ease-in-out infinite;
             }
@@ -130,6 +135,7 @@
             
             /* 画作 - 任何宽高比都完整显示，不裁切王冠与下摆 */
             /* screen 混合：黑底让光晕透出来，霓虹线条保持锐利且不被染色 */
+            /* 随指针轻微倾斜，配合光晕与粒子形成景深 */
             .art {
                 position: fixed;
                 inset: 0;
@@ -138,7 +144,22 @@
                 object-fit: contain;
                 display: block;
                 mix-blend-mode: screen;
+                transform-origin: 50% 46%;
+                transform: perspective(1400px) 
+                    rotateX(calc(var(--py) * 3.5deg)) 
+                    rotateY(calc(var(--px) * -4deg));
                 z-index: 2;
+            }
+            
+            /* 火星粒子 */
+            .embers {
+                position: fixed;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 5;
+                transform: translate3d(calc(var(--px) * 12px), calc(var(--py) * 12px), 0);
             }
             
             /* 底部渐隐遮罩，保证标题压在画面上也清晰 */
@@ -166,7 +187,7 @@
                 background-clip: text;
                 -webkit-text-fill-color: transparent;
                 animation: shine 3s linear infinite;
-                text-shadow: 0 0 30px var(--accent-weak);
+                text-shadow: 0 0 30px var(--accent-weak), 0 0 60px var(--violet);
             }
             
             @keyframes shine {
@@ -182,6 +203,7 @@
                 height: 100%;
                 pointer-events: none;
                 z-index: 10;
+                transform: translate3d(calc(var(--px) * 16px), calc(var(--py) * 16px), 0);
             }
             
             .star {
@@ -204,7 +226,7 @@
                 50% { opacity: 1; transform: scale(1.3); }
             }
             
-            /* 减少动画偏好：动画关闭后光斑仍要停在合理位置，不能塌到角落 */
+            /* 减少动画偏好：动画关闭后光斑仍要停在合理位置，不能塌到角落；视差与火星完全不启用 */
             @media (prefers-reduced-motion: reduce) {
                 .glow-blob,
                 .star,
@@ -226,6 +248,16 @@
                     top: 45%;
                     left: 55%;
                 }
+                .glow,
+                .art,
+                .stars,
+                .embers {
+                    transform: none;
+                }
+                /* 动画关闭后星星会全部停在最亮状态，压暗一档 */
+                .star {
+                    opacity: 0.55;
+                }
             }
         </style>
     </head>
@@ -236,10 +268,15 @@
             <div class="glow-blob glow-blob-3"></div>
         </div>
         <img class="art" src="images/Domain.jpg" alt="" width="1065" height="1138" fetchpriority="high" decoding="async">
+        <canvas class="embers" id="embers" aria-hidden="true"></canvas>
         <h1>This is a Domain</h1>
         <div class="stars" id="stars" aria-hidden="true"></div>
 
         <script>
+            const root = document.documentElement;
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            /* 星星粒子 */
             const starsContainer = document.getElementById('stars');
             const starCount = window.innerWidth < 768 ? 32 : 48;
             for (let i = 0; i < starCount; i++) {
@@ -250,6 +287,122 @@
                 star.style.animationDelay = Math.random() * 2 + 's';
                 star.style.animationDuration = (1.5 + Math.random() * 2) + 's';
                 starsContainer.appendChild(star);
+            }
+
+            if (!reduceMotion) {
+                /* ---- 指针视差 ---- */
+                let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+                let pointerActive = false;
+
+                window.addEventListener('pointermove', (e) => {
+                    targetX = (e.clientX / window.innerWidth) * 2 - 1;
+                    targetY = (e.clientY / window.innerHeight) * 2 - 1;
+                    pointerActive = true;
+                }, { passive: true });
+
+                window.addEventListener('pointerleave', () => { pointerActive = false; });
+                ['pointerup', 'pointercancel'].forEach((type) => {
+                    window.addEventListener(type, (e) => {
+                        if (e.pointerType !== 'mouse') pointerActive = false;
+                    }, { passive: true });
+                });
+
+                /* ---- 火星粒子 ---- */
+                const canvas = document.getElementById('embers');
+                const ctx = canvas.getContext('2d');
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                const embers = [];
+
+                function makeSprite(rgb) {
+                    const size = 32;
+                    const sprite = document.createElement('canvas');
+                    sprite.width = sprite.height = size;
+                    const g = sprite.getContext('2d');
+                    const grad = g.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+                    grad.addColorStop(0, 'rgba(' + rgb + ', 1)');
+                    grad.addColorStop(0.3, 'rgba(' + rgb + ', 0.45)');
+                    grad.addColorStop(1, 'rgba(' + rgb + ', 0)');
+                    g.fillStyle = grad;
+                    g.fillRect(0, 0, size, size);
+                    return sprite;
+                }
+
+                /* 暖橙红为主，掺少量紫罗兰 */
+                const warmSprite = makeSprite('255, 96, 48');
+                const violetSprite = makeSprite('168, 85, 247');
+
+                function spawn(spreadOut) {
+                    const r = 0.9 + Math.random() * 1.2;
+                    return {
+                        x: Math.random() * window.innerWidth,
+                        y: spreadOut ? Math.random() * window.innerHeight : window.innerHeight + r * 4,
+                        r: r,
+                        speed: 14 + Math.random() * 24,
+                        sway: 6 + Math.random() * 16,
+                        swaySpeed: 0.4 + Math.random() * 0.9,
+                        drift: (Math.random() - 0.5) * 8,
+                        phase: Math.random() * Math.PI * 2,
+                        life: 8 + Math.random() * 8,
+                        age: spreadOut ? Math.random() * 8 : 0,
+                        alpha: 0.25 + Math.random() * 0.45,
+                        sprite: Math.random() < 0.28 ? violetSprite : warmSprite
+                    };
+                }
+
+                function resize() {
+                    const w = window.innerWidth;
+                    const h = window.innerHeight;
+                    canvas.width = Math.round(w * dpr);
+                    canvas.height = Math.round(h * dpr);
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                    const count = Math.round(Math.min(72, Math.max(12, (w * h) / 22000)));
+                    if (embers.length > count) embers.length = count;
+                    while (embers.length < count) embers.push(spawn(true));
+                }
+
+                window.addEventListener('resize', resize, { passive: true });
+                resize();
+
+                /* ---- 单一 rAF 同时驱动视差与火星 ---- */
+                let last = 0;
+                function frame(now) {
+                    const dt = Math.min((now - last) / 1000, 0.05);
+                    last = now;
+
+                    if (!pointerActive) {
+                        /* 没有指针时缓慢自转，画面不至于死掉 */
+                        targetX = Math.sin(now / 9000) * 0.3;
+                        targetY = Math.cos(now / 12000) * 0.25;
+                    }
+                    currentX += (targetX - currentX) * Math.min(1, dt * 2.4);
+                    currentY += (targetY - currentY) * Math.min(1, dt * 2.4);
+                    root.style.setProperty('--px', currentX.toFixed(4));
+                    root.style.setProperty('--py', currentY.toFixed(4));
+
+                    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                    ctx.globalCompositeOperation = 'lighter';
+                    for (let i = 0; i < embers.length; i++) {
+                        const e = embers[i];
+                        e.age += dt;
+                        if (e.age > e.life || e.y < -20) {
+                            embers[i] = spawn(false);
+                            continue;
+                        }
+                        e.y -= e.speed * dt;
+                        e.x += (e.drift + Math.sin(e.age * e.swaySpeed + e.phase) * e.sway) * dt;
+
+                        const t = e.age / e.life;
+                        const fade = Math.min(1, t / 0.15) * Math.min(1, (1 - t) / 0.4);
+                        ctx.globalAlpha = Math.max(0, e.alpha * fade);
+                        const size = e.r * 6;
+                        ctx.drawImage(e.sprite, e.x - size / 2, e.y - size / 2, size, size);
+                    }
+                    ctx.globalAlpha = 1;
+                    ctx.globalCompositeOperation = 'source-over';
+
+                    requestAnimationFrame(frame);
+                }
+                requestAnimationFrame(frame);
             }
         </script>
     </body>
