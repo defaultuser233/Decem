@@ -1,0 +1,2910 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2ecdf">
+  <title>狐狸为什么卖萌 · 全本</title>
+  <meta name="description" content="一个动作的自然史、文化史与伦理考。狐狸没有在卖萌，是我们一直在买。">
+  <meta property="og:title" content="狐狸为什么卖萌 · 全本">
+  <meta property="og:description" content="一个动作的自然史、文化史与伦理考。">
+  <meta property="og:type" content="book">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%239a3a1c'/%3E%3Cpath d='M14 20L22 8L30 18H34L42 8L50 20L46 44L32 54L18 44Z' fill='%23f2ecdf'/%3E%3Ccircle cx='26' cy='30' r='2' fill='%239a3a1c'/%3E%3Ccircle cx='38' cy='30' r='2' fill='%239a3a1c'/%3E%3Cpath d='M30 40H34L32 44Z' fill='%239a3a1c'/%3E%3C/svg%3E">
+  <style>
+:root {
+  --paper: #f2ecdf;
+  --paper-2: #eae2d2;
+  --paper-3: #e2d7c3;
+  --ink: #1e1a15;
+  --ink-soft: #3f382e;
+  --muted: #776b5b;
+  --rule: #d2c5af;
+  --rule-strong: #b9a98f;
+  --rust: #9c3f1f;
+  --rust-deep: #7a2f16;
+  --moss: #4d5744;
+  --seal: #9a3a1c;
+  --seal-text: #f2ecdf;
+  --reading-size: 18px;
+  --serif: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", "SimSun", Georgia, "Times New Roman", serif;
+  --sans: "Source Han Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  --mono: "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+}
+
+[data-theme="night"] {
+  --paper: #171410;
+  --paper-2: #1e1a15;
+  --paper-3: #26211a;
+  --ink: #e9dfcf;
+  --ink-soft: #cdc0ac;
+  --muted: #9c8d77;
+  --rule: #3a332a;
+  --rule-strong: #554a3c;
+  --rust: #d07a4a;
+  --rust-deep: #e0956a;
+  --moss: #a3b18f;
+  --seal: #b44a26;
+  --seal-text: #f2ecdf;
+}
+
+* {
+  box-sizing: border-box;
+  border-radius: 0 !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: var(--reading-size);
+  line-height: 1.95;
+  text-align: justify;
+  text-justify: inter-ideograph;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .25s ease, color .25s ease;
+}
+
+[data-theme="night"] body {
+  background-image: none;
+}
+
+::selection {
+  background: var(--rust);
+  color: var(--paper);
+}
+
+a {
+  color: var(--rust);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--rust-deep);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: .01em;
+}
+
+p {
+  margin: 0;
+}
+
+/* ---------- progress + topbar ---------- */
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--rust);
+  z-index: 60;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 clamp(16px, 3vw, 40px);
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  z-index: 50;
+  transform: translateY(0);
+  transition: transform .28s ease, background-color .25s ease;
+}
+
+body.cover .topbar {
+  transform: translateY(-100%);
+}
+
+.brand {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: .92em;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+
+.brand:hover {
+  color: var(--rust);
+}
+
+.current {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 42vw;
+}
+
+.topbar nav {
+  display: flex;
+  gap: 18px;
+  flex: 0 0 auto;
+}
+
+.topbar button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--ink);
+}
+
+.topbar button:hover {
+  color: var(--rust);
+}
+
+/* ---------- cover ---------- */
+
+.cover {
+  position: relative;
+  min-height: 100vh;
+  padding: 22px;
+  display: flex;
+}
+
+.cover-frame {
+  flex: 1;
+  border: 1px solid var(--rule-strong);
+  padding: clamp(28px, 5vw, 72px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .22em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.cover-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  padding: 8vh 0;
+}
+
+.cover-watermark {
+  position: absolute;
+  right: 2vw;
+  top: 5vh;
+  font-size: clamp(200px, 30vw, 420px);
+  line-height: .8;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--rule-strong);
+  opacity: .6;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.cover-title {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-size: clamp(52px, 9.5vw, 138px);
+  line-height: 1.02;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+
+.cover-title span {
+  display: block;
+}
+
+.cover-title .indent {
+  margin-left: .72em;
+}
+
+.cover-sub {
+  position: relative;
+  z-index: 2;
+  margin: 28px 0 0;
+  font-size: clamp(15px, 1.6vw, 20px);
+  letter-spacing: .12em;
+  color: var(--ink-soft);
+}
+
+.cover-seal {
+  position: absolute;
+  right: 5vw;
+  bottom: 13vh;
+  width: 84px;
+  height: 84px;
+  background: var(--seal);
+  color: var(--seal-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  line-height: 1;
+  transform: rotate(-4deg);
+  box-shadow: inset 0 0 0 2px rgba(242, 236, 223, .55);
+  z-index: 3;
+}
+
+.cover-line {
+  margin: 0 0 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-size: clamp(15px, 1.5vw, 19px);
+  color: var(--rust);
+  letter-spacing: .06em;
+  position: relative;
+  z-index: 2;
+}
+
+.cover-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: var(--muted);
+  position: relative;
+  z-index: 2;
+}
+
+.cover-scroll {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.cover-scroll:hover {
+  color: var(--rust);
+}
+
+/* ---------- shared headings ---------- */
+
+.toc-head,
+.map-head,
+.guide-head {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 18px;
+}
+
+.toc-head h2,
+.map-head h2,
+.guide-head h2 {
+  margin: 0;
+}
+
+.toc-note {
+  max-width: 36em;
+  color: var(--muted);
+  font-size: .92em;
+  text-align: left;
+}
+
+.toc-group-title {
+  margin: 0 0 8px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .24em;
+  color: var(--rust);
+  text-transform: uppercase;
+}
+
+/* ---------- toc section ---------- */
+
+.toc-section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(80px, 12vw, 150px) clamp(24px, 6vw, 72px) 90px;
+}
+
+.toc-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.toc-head h2 {
+  font-size: clamp(38px, 5.4vw, 72px);
+  line-height: 1;
+}
+
+.toc-columns {
+  display: grid;
+  grid-template-columns: 1.22fr .78fr;
+  gap: 0 72px;
+  margin-top: 46px;
+}
+
+.toc-group {
+  margin-top: 0;
+}
+
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc-item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.toc-link {
+  display: grid;
+  grid-template-columns: 4.6em 1fr auto;
+  gap: 1.4em;
+  align-items: baseline;
+  padding: 15px 0 14px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.toc-link:hover {
+  color: var(--rust);
+}
+
+.toc-link.active .toc-title {
+  color: var(--rust);
+}
+
+.toc-num {
+  font-family: var(--mono);
+  font-size: .72em;
+  letter-spacing: .06em;
+  color: var(--rust);
+}
+
+.toc-title {
+  font-size: 1.06em;
+}
+
+.toc-time {
+  font-family: var(--mono);
+  font-size: .68em;
+  color: var(--muted);
+}
+
+/* ---------- map ---------- */
+
+.map-section {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-2);
+}
+
+.map-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(72px, 10vw, 120px) clamp(24px, 6vw, 72px);
+}
+
+.map-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.map-head h2 {
+  font-size: clamp(32px, 4.4vw, 56px);
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 64px;
+  margin-top: 28px;
+}
+
+.map-row {
+  display: grid;
+  grid-template-columns: 3.2em 1fr;
+  gap: 1em;
+  border-top: 1px solid var(--rule);
+  padding: 18px 0 16px;
+}
+
+.map-num {
+  font-family: var(--mono);
+  font-size: .72em;
+  color: var(--rust);
+}
+
+.map-title {
+  font-size: 1.02em;
+}
+
+.map-sum {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: .86em;
+}
+
+.threads {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  margin-top: 64px;
+}
+
+.thread {
+  border-top: 2px solid var(--ink);
+  padding-top: 18px;
+}
+
+.thread h3 {
+  margin: 0 0 8px;
+  font-size: 1.05em;
+}
+
+.thread p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .9em;
+  text-align: left;
+}
+
+/* ---------- guide ---------- */
+
+.guide-section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(72px, 10vw, 120px) clamp(24px, 6vw, 72px);
+}
+
+.guide-head h2 {
+  font-size: clamp(32px, 4.4vw, 56px);
+}
+
+.guide-list {
+  margin-top: 12px;
+}
+
+.guide-row {
+  display: grid;
+  grid-template-columns: 14em 1fr;
+  gap: 2em;
+  border-bottom: 1px solid var(--rule);
+  padding: 18px 0;
+}
+
+.guide-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .16em;
+  color: var(--rust);
+}
+
+.guide-path {
+  font-size: 1em;
+}
+
+/* ---------- part divider ---------- */
+
+.part-divider {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 100px clamp(24px, 6vw, 64px) 20px;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.part-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .24em;
+  color: var(--rust);
+}
+
+.part-divider h2 {
+  margin: 10px 0 0;
+  font-size: clamp(30px, 4vw, 46px);
+}
+
+.part-divider p {
+  color: var(--muted);
+  font-size: .92em;
+}
+
+/* ---------- chapter ---------- */
+
+.chapter {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: clamp(84px, 11vw, 140px) clamp(24px, 6vw, 64px) 70px;
+}
+
+.chapter-head {
+  position: relative;
+  padding-bottom: 38px;
+  border-bottom: 1px solid var(--rule-strong);
+  margin-bottom: 46px;
+}
+
+.chapter-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: var(--rust);
+  text-transform: uppercase;
+}
+
+.chapter-number {
+  margin: 20px 0 -8px;
+  font-size: clamp(76px, 12vw, 168px);
+  line-height: .78;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--rule-strong);
+  font-weight: 400;
+  letter-spacing: -.02em;
+  user-select: none;
+}
+
+.chapter-title {
+  margin: 0;
+  font-size: clamp(30px, 4.8vw, 52px);
+  line-height: 1.18;
+  letter-spacing: .01em;
+}
+
+.chapter-epigraph {
+  margin: 22px 0 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--rust);
+  color: var(--ink-soft);
+  font-size: 1.02em;
+  text-align: left;
+}
+
+.chapter-body {
+  font-size: var(--reading-size);
+}
+
+.chapter-body p {
+  margin: 0 0 .82em;
+  text-indent: 2em;
+}
+
+.chapter-body > p:first-of-type {
+  text-indent: 0;
+  font-size: 1.06em;
+  color: var(--ink-soft);
+}
+
+.chapter-body h2 {
+  margin: 2.5em 0 1em;
+  padding-top: .65em;
+  border-top: 1px solid var(--rule);
+  font-size: 1.32em;
+  line-height: 1.4;
+}
+
+.chapter-body h2::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--rust);
+  margin-right: 12px;
+  vertical-align: .12em;
+}
+
+.chapter-body h3 {
+  margin: 2em 0 .7em;
+  font-size: 1.06em;
+}
+
+.chapter-body strong {
+  font-weight: 600;
+}
+
+.chapter-body em {
+  color: var(--moss);
+}
+
+.chapter-body blockquote {
+  margin: 2em 0;
+  padding: 0 0 0 1.2em;
+  border-left: 2px solid var(--rust);
+  color: var(--ink-soft);
+}
+
+.chapter-body blockquote p {
+  text-indent: 0;
+}
+
+.chapter-body hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2.4em 0;
+}
+
+.chapter-body ul {
+  margin: 1.1em 0 1.4em 1.5em;
+  padding: 0;
+}
+
+.chapter-body li {
+  margin: .45em 0;
+}
+
+.chapter-body .table-wrap {
+  margin: 2em 0;
+  overflow-x: auto;
+}
+
+.chapter-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9em;
+  line-height: 1.7;
+}
+
+.chapter-body th {
+  padding: 10px 12px 10px 0;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 3px double var(--ink);
+  white-space: nowrap;
+}
+
+.chapter-body td {
+  padding: 11px 12px 11px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.chapter-body pre {
+  margin: 2em 0;
+  padding: 20px 22px;
+  background: var(--paper-2);
+  border-left: 3px solid var(--rust);
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: .76em;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.chapter-body code {
+  font-family: var(--mono);
+  font-size: .88em;
+}
+
+.chapter-body pre code {
+  font-size: 1em;
+}
+
+/* appendix-specific details */
+
+#app-1 h2 {
+  border-top: 1px solid var(--rule-strong);
+  padding-top: 1.8em;
+}
+
+#app-1 h2 em {
+  color: var(--moss);
+  font-weight: 400;
+}
+
+#app-2 p strong:first-child {
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: .86em;
+  font-weight: 600;
+}
+
+#app-7 p strong:first-child {
+  color: var(--rust);
+}
+
+#app-7 p {
+  margin-bottom: 1.2em;
+}
+
+#app-8 pre {
+  font-size: .72em;
+}
+
+/* ---------- chapter nav ---------- */
+
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+  border-top: 1px solid var(--rule-strong);
+  margin-top: 72px;
+  padding-top: 22px;
+}
+
+.chapter-nav a {
+  color: var(--ink);
+  text-decoration: none;
+  max-width: 46%;
+}
+
+.chapter-nav a:hover {
+  color: var(--rust);
+}
+
+.chapter-nav span {
+  display: block;
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: .18em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.chapter-nav .next {
+  text-align: right;
+  margin-left: auto;
+}
+
+.chapter-nav .disabled {
+  visibility: hidden;
+}
+
+/* ---------- colophon ---------- */
+
+.colophon {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 80px clamp(24px, 6vw, 64px) 120px;
+  border-top: 1px solid var(--rule-strong);
+  text-align: center;
+}
+
+.colophon-mark {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 24px;
+  background: var(--seal);
+  color: var(--seal-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  transform: rotate(-3deg);
+}
+
+.colophon p {
+  margin: .3em 0;
+  color: var(--muted);
+  font-size: .88em;
+  text-indent: 0;
+}
+
+.colophon p:first-of-type {
+  color: var(--ink);
+  font-size: 1em;
+}
+
+/* ---------- toc overlay ---------- */
+
+.toc-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+  z-index: 100;
+  display: none;
+  overflow-y: auto;
+}
+
+.toc-overlay.open {
+  display: block;
+}
+
+.toc-overlay-head {
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px clamp(20px, 4vw, 40px);
+  border-bottom: 1px solid var(--rule-strong);
+  z-index: 1;
+}
+
+.toc-overlay-head span {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .24em;
+  color: var(--rust);
+}
+
+.toc-overlay-head button {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .16em;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.toc-overlay-body {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px clamp(20px, 5vw, 64px) 80px;
+}
+
+.toc-overlay-columns {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 0 72px;
+}
+
+.toc-overlay .toc-link {
+  padding: 13px 0;
+}
+
+.toc-overlay .toc-title {
+  font-size: 1.12em;
+}
+
+.toc-overlay-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+}
+
+.size-control {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: var(--muted);
+}
+
+.size-control button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.size-control button.active {
+  color: var(--rust);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 820px) {
+  .current {
+    display: none;
+  }
+
+  .cover {
+    padding: 12px;
+  }
+
+  .cover-frame {
+    padding: 24px 20px;
+  }
+
+  .cover-main {
+    min-width: 0;
+    padding: 5vh 0;
+  }
+
+  .cover-watermark {
+    font-size: 42vw;
+    right: 5vw;
+    top: 8vh;
+  }
+
+  .cover-title {
+    font-size: clamp(34px, 10.5vw, 54px);
+    max-width: 100%;
+  }
+
+  .cover-title .indent {
+    margin-left: .2em;
+  }
+
+  .cover-sub {
+    margin-top: 16px;
+    max-width: 90%;
+    font-size: 13px;
+    letter-spacing: .06em;
+  }
+
+  .cover-seal {
+    width: 52px;
+    height: 52px;
+    font-size: 29px;
+    right: 16px;
+    bottom: 16vh;
+  }
+
+  .cover-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .cover-scroll {
+    font-size: 10px;
+  }
+
+  .toc-section,
+  .map-inner,
+  .guide-section {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .toc-head,
+  .map-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .toc-columns {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .toc-overlay-columns {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .toc-link {
+    grid-template-columns: 3.4em 1fr;
+    gap: .8em;
+  }
+
+  .toc-time {
+    display: none;
+  }
+
+  .map-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .threads {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 44px;
+  }
+
+  .guide-row {
+    grid-template-columns: 1fr;
+    gap: .3em;
+    padding: 14px 0;
+  }
+
+  .chapter {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .chapter-number {
+    font-size: 88px;
+  }
+
+  .chapter-title {
+    font-size: 30px;
+  }
+
+  .chapter-body {
+    font-size: 17px;
+  }
+
+  .chapter-nav {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .chapter-nav a {
+    max-width: 100%;
+  }
+
+  .chapter-nav .next {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .colophon {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .topbar {
+    transition: none;
+  }
+}
+
+/* ---------- print ---------- */
+
+@media print {
+  .topbar,
+  .progress,
+  .toc-overlay,
+  .chapter-nav,
+  .cover-scroll {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+
+  .cover {
+    min-height: auto;
+    page-break-after: always;
+  }
+
+  .toc-section,
+  .map-section,
+  .guide-section {
+    page-break-after: always;
+  }
+
+  .chapter {
+    page-break-before: always;
+    max-width: none;
+    padding: 0;
+  }
+
+  .chapter-number {
+    color: #ccc;
+    -webkit-text-stroke: 0;
+  }
+
+  .chapter-body a {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+  </style>
+</head>
+<body class="cover">
+  <div class="progress" id="progress"></div>
+
+  <header class="topbar" id="topbar">
+    <a class="brand" href="#cover">狐狸为什么卖萌</a>
+    <div class="current" id="currentChapter">序 · 凌晨三点的狐狸</div>
+    <nav aria-label="页面工具">
+      <button id="tocBtn" type="button" aria-haspopup="dialog">目录</button>
+      <button id="themeBtn" type="button">夜读</button>
+    </nav>
+  </header>
+
+  <main>
+<section class="cover" id="cover">
+  <div class="cover-frame">
+    <div class="cover-top"><span>非虚构 · 自然志</span><span>全本</span></div>
+    <div class="cover-main">
+      <div class="cover-watermark" aria-hidden="true">狐</div>
+      <h1 class="cover-title"><span>狐狸</span><span class="indent">为什么卖萌</span></h1>
+      <p class="cover-sub">一个动作的自然史、文化史与伦理考</p>
+    </div>
+    <div class="cover-seal" aria-hidden="true">狐</div>
+    <p class="cover-line">它没有在卖。是我们一直在买。</p>
+    <div class="cover-bottom"><span>Kimi 著</span><span>二〇二六 · 约六万字</span><a class="cover-scroll" href="#toc">目录 ↓</a></div>
+  </div>
+</section>
+<section class="toc-section" id="toc">
+  <div class="toc-head">
+    <h2>目录</h2>
+    <p class="toc-note">这不是一本教你如何撸狐狸的书。它想拆开的是：一张脸如何被看成可爱，一个动作如何被读成撒娇，一只动物如何被变成商品。</p>
+  </div>
+  <div class="toc-columns">
+    <div class="toc-group"><p class="toc-group-title">正文</p><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#preface"><span class="toc-num">序</span><span class="toc-title">凌晨三点的狐狸</span><span class="toc-time">3 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-1"><span class="toc-num">01</span><span class="toc-title">一个动词的悬案</span><span class="toc-time">10 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-2"><span class="toc-num">02</span><span class="toc-title">脸的科学</span><span class="toc-time">16 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-3"><span class="toc-num">03</span><span class="toc-title">行为的语法</span><span class="toc-time">13 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-4"><span class="toc-num">04</span><span class="toc-title">驯化：把野性折叠成卷尾</span><span class="toc-time">9 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-5"><span class="toc-num">05</span><span class="toc-title">城市：狐狸搬到了楼下</span><span class="toc-time">9 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-6"><span class="toc-num">06</span><span class="toc-title">声音：从 gekkering 到午夜尖叫</span><span class="toc-time">8 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-7"><span class="toc-num">07</span><span class="toc-title">文化史：九尾狐、稻荷、列那狐与尼克</span><span class="toc-time">7 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-8"><span class="toc-num">08</span><span class="toc-title">经济：流量、毛皮与狐狸村</span><span class="toc-time">8 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-9"><span class="toc-num">09</span><span class="toc-title">保护：魅力的不平等</span><span class="toc-time">6 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-10"><span class="toc-num">10</span><span class="toc-title">伦理：它没有在卖</span><span class="toc-time">7 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#epilogue"><span class="toc-num">尾</span><span class="toc-title">把镜头放下</span><span class="toc-time">3 分钟</span></a></li></ul></div>
+    <div class="toc-group"><p class="toc-group-title">附录与后记</p><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#app-1"><span class="toc-num">A1</span><span class="toc-title">狐狸物种小志</span><span class="toc-time">5 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-2"><span class="toc-num">A2</span><span class="toc-title">狐狸文化年表</span><span class="toc-time">3 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-3"><span class="toc-num">A3</span><span class="toc-title">术语与概念</span><span class="toc-time">4 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-4"><span class="toc-num">A4</span><span class="toc-title">延伸阅读与事实说明</span><span class="toc-time">3 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-5"><span class="toc-num">A5</span><span class="toc-title">城市狐狸观察指南</span><span class="toc-time">4 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-6"><span class="toc-num">A6</span><span class="toc-title">狐狸的感官世界</span><span class="toc-time">5 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-7"><span class="toc-num">A7</span><span class="toc-title">常见问题</span><span class="toc-time">4 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-8"><span class="toc-num">A8</span><span class="toc-title">狐狸的亲属与演化</span><span class="toc-time">4 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-9"><span class="toc-num">A9</span><span class="toc-title">狐狸与疾病</span><span class="toc-time">3 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#afterword"><span class="toc-num">记</span><span class="toc-title">这本书是怎么写出来的</span><span class="toc-time">3 分钟</span></a></li></ul></div>
+  </div>
+</section>
+<section class="map-section" id="map">
+  <div class="map-inner">
+    <div class="map-head"><h2>本书地图</h2><p class="toc-note">十卷，三条线索：我们怎样看见它，怎样讲述它，怎样安排它。</p></div>
+    <div class="map-grid"><div><div class="map-row"><span class="map-num">01</span><div><span class="map-title">一个动词的悬案</span><span class="map-sum">谁在卖，谁在买？</span></div></div><div class="map-row"><span class="map-num">02</span><div><span class="map-title">脸的科学</span><span class="map-sum">一张脸如何被看成可爱。</span></div></div><div class="map-row"><span class="map-num">03</span><div><span class="map-title">行为的语法</span><span class="map-sum">一个动作如何被读成撒娇。</span></div></div><div class="map-row"><span class="map-num">04</span><div><span class="map-title">驯化</span><span class="map-sum">人选了听话，得到了可爱。</span></div></div><div class="map-row"><span class="map-num">05</span><div><span class="map-title">城市</span><span class="map-sum">狐狸如何学会和人保持距离。</span></div></div></div><div><div class="map-row"><span class="map-num">06</span><div><span class="map-title">声音</span><span class="map-sum">被钢琴曲盖住的另一面。</span></div></div><div class="map-row"><span class="map-num">07</span><div><span class="map-title">文化史</span><span class="map-sum">九尾狐、稻荷、列那狐与尼克。</span></div></div><div class="map-row"><span class="map-num">08</span><div><span class="map-title">经济</span><span class="map-sum">流量、宠物、门票与毛皮。</span></div></div><div class="map-row"><span class="map-num">09</span><div><span class="map-title">保护</span><span class="map-sum">魅力如何分配，谁被看见。</span></div></div><div class="map-row"><span class="map-num">10</span><div><span class="map-title">伦理</span><span class="map-sum">我们到底欠狐狸什么。</span></div></div></div></div>
+    <div class="threads"><div class="thread"><h3>感知</h3><p>婴儿图式、竖瞳、照膜、毛与尾巴。我们为什么觉得它可爱。</p></div><div class="thread"><h3>文化</h3><p>九尾狐、稻荷、列那狐、迪士尼、短视频。我们被教会觉得它可爱。</p></div><div class="thread"><h3>媒介</h3><p>长焦、裁切、逆光、慢动作、配乐、算法。我们被安排看见它可爱。</p></div></div>
+  </div>
+</section>
+<section class="guide-section" id="guide">
+  <div class="guide-head"><h2>怎么读这本书</h2></div>
+  <div class="guide-list"><div class="guide-row"><div class="guide-label">只想听一个故事</div><div class="guide-path">序 → 第五卷 → 尾声。一只狐狸在墙头打了个哈欠，然后离开。</div></div><div class="guide-row"><div class="guide-label">想知道科学怎么说</div><div class="guide-path">第二、三、四、九卷。脸、行为、驯化、保护，四条证据链。</div></div><div class="guide-row"><div class="guide-label">想追问钱与伦理</div><div class="guide-path">第八、九、十卷。流量、宠物、门票、毛皮，以及我们欠它什么。</div></div><div class="guide-row"><div class="guide-label">想继续查资料</div><div class="guide-path">附录一、四、八、九。物种、书目、亲缘、疾病。</div></div></div>
+</section>
+<section class="chapter" id="preface" data-label="序" data-title="凌晨三点的狐狸">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>序</span><span>3 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">序</div>
+    <h1 class="chapter-title">凌晨三点的狐狸</h1>
+    <p class="chapter-epigraph">一个词的突然出现，是一本书的起点。</p>
+  </header>
+  <div class="chapter-body">
+<p>去年冬天，凌晨三点，我听见窗外有声音。</p>
+<p>不是猫。猫的脚步是软的，落地几乎没有声。这个声音有指甲，有重量，还有一点犹豫——像有人在墙头停下来，想清楚要不要继续走。</p>
+<p>我拉开窗帘。一只赤狐站在院墙上，逆着路灯。毛是暗红的，胸口一撮白，尾巴垂在墙外，像一条没有收好的围巾。它朝窗户看了一眼。准确地说，它朝玻璃看了一眼——玻璃后面的人，对它来说大概只是一团模糊的热和光。</p>
+<p>然后它打了个哈欠。嘴张得很大，露出牙，舌头卷起来，眼睛眯成两条缝。哈欠打完，它舔了舔鼻子，跳下墙，消失在邻居家的灌木里。</p>
+<p>整个过程不到十秒。</p>
+<p>我回到床上，发现自己脑子里只剩一个词：可爱。</p>
+<p>这就是这本书的起点。不是一只狐狸，而是一个词的突然出现——在一个完全不合适的时刻，对一件完全不合适的事。它刚刚在墙头评估路线、判断风险、准备去翻谁家的垃圾桶；我却看见了一张“困困的小脸”。</p>
+<p>这两个描述之间，隔着一整个物种的距离。</p>
+<p>这本书想问的，就是这段距离是怎么被填平的。</p>
+<p>填平它的东西，大概有三样：我们的脑子，我们的文化，我们的镜头。脑子负责在几百毫秒内做出判断；文化负责提前把“狐狸”这个词和“可爱”“狡猾”“魅惑”绑在一起；镜头负责把一只正在赶路的动物，剪成一张正在看你的脸。</p>
+<p>三样东西各有各的历史，各有各的利益。它们偶尔合作，偶尔打架。狐狸只是恰好站在它们交汇的地方。</p>
+<p>书名里的“卖萌”是一个人的动词。狐狸没有在卖。这一点，我越看越确定。但“没有在卖”不等于“什么都没有发生”。发生的是：我们在买，而且买得很高兴。</p>
+<p>这本书不打算劝你不买。可爱不是罪，喜欢一只动物也不是罪。它只想把交易的细节摊开：你付了什么，得到了什么，狐狸付了什么。</p>
+<p>书里的狐狸主要是赤狐（<em>Vulpes vulpes</em>），偶尔会提到北极狐、耳廓狐、沙狐、藏狐、灰狐——它们各自代表了“狐狸”这种体型方案的不同解法。书里的研究尽量注明出处；凡是有争议的地方，我会说它有争议；凡是推断，我会说它是推断。为叙述紧凑，部分场景经过典型化处理，不对应某一次具体的目击。</p>
+<p>如果你只想读一句话的答案，可以翻到最后一页。但我不建议。因为一句话的答案，往往是另一句话的误解。</p>
+<p>现在，回到那面墙。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#toc"><span>回到</span>目录</a><a class="next" href="#vol-1"><span>下一章</span>第一卷 · 一个动词的悬案</a></nav>
+</section>
+<section class="chapter" id="vol-1" data-label="第一卷" data-title="一个动词的悬案">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>第一卷</span><span>10 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">01</div>
+    <h1 class="chapter-title">一个动词的悬案</h1>
+    <p class="chapter-epigraph">谁在卖，谁在买？</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="vol-1-s1">一、同一只狐狸，两个版本</h2>
+<p>第二天，我在手机上刷到一只狐狸。</p>
+<p>雪地，屋顶，慢动作。它从屋脊上跳下来，前爪先落地，尾巴在后面划了一道弧。镜头切近，它回头，耳朵动了一下，音乐正好走到一个钢琴的高音。字幕写着：“它好像在笑。”</p>
+<p>评论区很热闹。有人说“卖萌”，有人说“成精了”，有人说“想养”，有人问“这是狗还是狐狸”。点赞最高的一条是：</p>
+<p>“它知道自己很可爱吗？”</p>
+<p>我盯着那句话看了很久。</p>
+<p>因为就在十几个小时前，我见过另一只狐狸。它站在院墙上，逆着路灯，打了个哈欠，然后跳下去，消失了。它没有回头，没有音乐，没有慢动作。它甚至没有“看”我——它看的是玻璃。</p>
+<p>同一物种，两个版本。一个在墙上，一个在屏幕里。一个在赶路，一个在表演。一个让我想到“可爱”，一个让我想到“它知道自己很可爱吗”。</p>
+<p>这本书要处理的，就是这两个版本之间的关系。</p>
+<p>先声明：我不认为那段视频是假的。狐狸真的跳了，真的回头了，耳朵真的动了。视频没有撒谎。它只是做了所有影像都会做的事——选择。选择从哪个角度拍，选择留下哪几秒，选择配什么音乐，选择在哪儿剪断。</p>
+<p>选择不是伪造。但选择会改变意思。</p>
+<p>一只狐狸从屋顶跳下来，可能是去追一只鸟，可能是去查看一个声音，可能只是换一个地方睡觉。镜头留下的是“跳”和“回头”，剪掉的是“为什么”。观众看到的是一段舞蹈，狐狸经历的是一次赶路。</p>
+<p>这就是“卖萌”诞生的地方：不是在狐狸的身体里，是在选择发生的地方。</p>
+<h2 id="vol-1-s2">二、“萌”是从哪里来的</h2>
+<p>“萌”这个字，本义很朴素。《说文解字》说：“萌，草芽也。”草木刚冒头，叫萌。后来引申为“开始”“发生”，例如“萌生”“萌芽”。它一直是个安静的、植物性的字。</p>
+<p>把它变成今天这个意思的，是日语。</p>
+<p>二十世纪九十年代的日本御宅族圈子，开始用“萌え”（moe）描述一种情感：对某个角色、某个形象、某个瞬间突然涌起的、带一点疼的爱怜。这个词的语源有几种说法，没有定论；但它的用法很清楚——它描述的不是对象有多美，而是观看者心里发生了什么。一个角色可以因为一个动作、一句台词、一种笨拙而“萌”，哪怕画得并不漂亮。</p>
+<p>“萌”传入中文互联网，大约在二十一世纪的头一个十年。它很快被汉语的语法改造了：可以当形容词（“好萌”），可以当名词（“萌点”），可以当动词（“被萌到了”）。然后，出现了“卖萌”。</p>
+<p>“卖”这个字很关键。</p>
+<p>它给“萌”加了一个卖方。有卖方，就有买方，有市场，有价格。一个人“卖萌”，意味着他知道自己在被看，知道哪种表情能换来什么。他交出的是一套表演，换回的是注意力、好感、原谅，或者流量。</p>
+<p>狐狸没有柜台，没有价签，也没有收款的账户。所以“卖萌”从一开始就是一个比喻——一个把动物行为塞进市场模型的比喻。</p>
+<p>比喻不是错。人靠比喻活着。我们说“时间就是金钱”，说“人生是一场旅行”，说“心脏是一座泵”。比喻让陌生的东西变得可理解。但比喻也会遮住东西。当你把一只狐狸的行为叫“卖萌”，你已经悄悄替它安上了一个意图：它在演给我看。</p>
+<p>这个意图，可能就是整件事里最需要被检查的部分。</p>
+<p>汉语里还有一个词，叫“撒娇”。它和“卖萌”很像，但不一样。“撒娇”预设的是一段亲密关系：孩子对父母，恋人对恋人，宠物对主人。它不要求观众，它要求的是“你”。“卖萌”预设的是一群观众：它面向市场，面向镜头，面向不确定的、可以随时划走的人。</p>
+<p>我们把“撒娇”给了猫狗，把“卖萌”给了狐狸。这个分工本身，就透露了我们对这两种动物的定位：猫狗是家人，狐狸是内容。</p>
+<p>狐狸没有这两个词。它有自己的信号：气味、声音、耳朵的角度、尾巴的高度。这些信号有功能，有对象，有后果。它们不叫“卖”，也不叫“撒娇”。它们叫“我在这里”“我服从”“我警戒”“我准备好了”。</p>
+<p>我们给它们起了新名字，然后忘了新名字是我们起的。</p>
+<h2 id="vol-1-s3">三、狐狸的词</h2>
+<p>英文里的“fox”来自古英语，更早的词源并不确定。雌狐叫“vixen”，一群狐狸叫“skulk”——这个词的本义是“潜行、鬼鬼祟祟地走”。一个物种的名字，就这样把它的行为写进了语言。</p>
+<p>汉语里的“狐狸”也有类似的历史。“狐”是狐，“狸”在古代文献里常常指另一种小型食肉动物——有时是貉，有时是豹猫，有时是别的什么。两个字连用久了，才慢慢固定成今天的意思。语言把两种动物缝在一起，缝成了一个形象。</p>
+<p>还有“狐臭”。这个词把一种体味直接归给了狐狸。狐狸确实有强烈的气味：肛门腺、趾间腺，还有尾巴背面的那条“紫腺”（supracaudal gland），都参与气味标记。它用气味写领地、写身份、写“我来过”。人类闻到了，给它起了一个不太客气的名字。</p>
+<p>语言是第一条线索：我们对狐狸的了解，从一开始就是混合的——一部分来自观察，一部分来自想象，一部分来自它留给我们的味道。</p>
+<p>要理解一只狐狸，得先承认一件事：它的世界和我们的世界，不是一个世界。</p>
+<p>二十世纪初，生物学家雅各布·冯·于克斯屈尔（Jakob von Uexküll）提出一个概念：Umwelt，通常译作“环境界”或“主观世界”。每一种动物都活在自己的感知世界里——不是客观世界的全部，而是它的感官能够接收、它的神经系统能够解释的那一部分。蜱虫的世界是温度和丁酸的气味；蝙蝠的世界是回声；狐狸的世界，是一张由气味、声音、边缘和运动构成的地图。</p>
+<p>狐狸的嗅觉远胜于人。它的世界首先是一张气味地图：哪棵树被谁标记过，哪条路有狗经过，哪片草丛里有田鼠，哪个人身上有食物的味道。它的听觉能定位雪下细微的窸窣声——捕鼠跳之所以可能，是因为它先听见了。它的视觉不如人精细，犬科动物大多是二色视觉：蓝和黄还分得清，红和绿的区分远不如我们。那身在我们眼里很醒目的红毛，在另一只狐狸眼里，可能只是深浅不同的灰褐。</p>
+<p>所以，那身红毛不是为我们红的。它只是恰好落在我们的视觉范围里，被我们的眼睛读成了“狐狸的颜色”。</p>
+<p>狐狸脸上的花纹也是。耳背的黑毛、尾尖的白毛、嘴角的深色纹路、脸颊的白色——这些高对比的标记，通常被解释为种内信号：让同类在草丛里、在雪地里、在晨昏的光线里认出彼此，判断对方的状态。耳朵的角度说“警戒”或“放松”，尾巴的高度说“自信”或“服从”，嘴唇的弧度说“别怕”或“别过来”。</p>
+<p>那张脸是一封写给同类的信。</p>
+<p>它从来没有想过，这封信会被另一个物种截获。我们不仅读了，还改了频道，加上了字幕，配上了钢琴曲。</p>
+<h2 id="vol-1-s4">四、三张网</h2>
+<p>如果这本书只能有一个论点，那就是：</p>
+<p>狐狸的“萌”不是一个属性，是一个事件。是三张网同时张开、恰好罩住它的结果。</p>
+<p>第一张网，长在我们的大脑里。它叫婴儿图式。大眼睛、圆脸、短吻、小身体、笨拙的动作——这套特征会触发一套古老的照顾程序。程序跑得很快，快到你以为那是你自己的判断。这张网有几百万年的历史，比狐狸这个物种还老。</p>
+<p>第二张网，长在历史里。它由九尾狐、稻荷神社、列那狐、迪士尼的罗宾汉、狐狸村的宣传照、尼克·王尔德组成。这张网告诉我们：狐狸是聪明的、魅惑的、狡猾的、可爱的。它提前替我们准备好了形容词，我们只需要在看见狐狸的时候，从货架上取一个。这张网有几千年的历史，比互联网老得多。</p>
+<p>第三张网，长在镜头和算法里。长焦压缩透视，裁切改变头身比，逆光让毛发光，慢动作让动作变轻，推荐页把最容易被停留的那几秒推到最前面。这张网只有一百多年的历史，但它最勤奋，每天都在织。</p>
+<p>三张网，三种年龄，三种利益。它们不是阴谋，没有人躲在幕后统筹。它们只是各自按照自己的逻辑运行，然后在某一只狐狸身上重叠了。</p>
+<p>重叠的地方，就是我们说“好可爱”的地方。</p>
+<h2 id="vol-1-s5">五、问四遍为什么</h2>
+<p>生物学有一个习惯：一个问题，要问四遍。</p>
+<p>这个习惯来自尼可拉斯·廷伯根（Niko Tinbergen）。1963 年，他发表《论动物行为学的研究目标与方法》，把“为什么”拆成四个层面。后来的人把它总结成四个词：机制（mechanism）、发育（ontogeny）、功能（function）、演化（phylogeny）。</p>
+<p>拿“狐狸可爱”套一遍：</p>
+<p><strong>机制</strong>：它的哪些形态特征，触发了我们的哪套神经回路？为什么是眼睛、脸型、毛色，而不是别的？这套反应在大脑里发生在哪一秒？</p>
+<p><strong>发育</strong>：这只狐狸是怎么长成这样的？它的幼态特征在什么时候出现、什么时候消失？人工驯化会怎样改变它的脸？一张照片的构图，又怎样改变我们对这张脸的读取？</p>
+<p><strong>功能</strong>：可爱对狐狸有什么用？对我们又有什么用？它是否真的帮狐狸获得了食物、安全、繁殖机会？还是说，它只是我们这边的一个副产品，狐狸被动地受益或受害？</p>
+<p><strong>演化</strong>：为什么人类会进化出对幼态特征的偏好？这套偏好在灵长类里有多古老？它和育幼、合作繁殖、社会认知有什么关系？</p>
+<p>四个答案不冲突。它们回答的是不同的问题：机制问“怎么运作”，发育问“怎么长成”，功能问“对谁有用”，演化问“为什么会有”。</p>
+<p>但这本书还要加第五问：</p>
+<p><strong>谁靠这张脸赚钱？</strong></p>
+<p>这不是生物学问题，是政治经济学问题。谁在拍、谁在传、谁在卖、谁在买？流量归谁，毛皮归谁，旅游收入归谁，保护预算归谁？一只狐狸的可爱，最后变成了谁的资产负债表？</p>
+<p>第五问不在廷伯根的清单里，但它在这个故事里绕不开。因为“卖萌”这个词本身就带着市场。你既然用了“卖”，就得问一句：钱去哪儿了。</p>
+<h2 id="vol-1-s6">六、方法的誓言</h2>
+<p>写这样一本书，有一个危险：很容易写成两种东西之一——要么是“狐狸好可爱”的加长版，要么是“你们都被骗了”的揭穿版。</p>
+<p>两种都不诚实。</p>
+<p>第一种把狐狸变成了玩偶，第二种把读者变成了傻子。真实的状况介于两者之间：狐狸是野生动物，读者是有感情也有判断力的人，可爱是真实发生的反应，也是被制造、被利用、被定价的反应。这些事同时为真。</p>
+<p>所以这本书给自己定了一条规矩：<strong>先描述，后解释。</strong></p>
+<p>具体做法是，在脑子里摆一张两列的表格。左列写“它做了什么”，右列写“我们看到了什么”。</p>
+<p>比如：</p>
+<div class="table-wrap"><table><thead><tr><th>它做了什么</th><th>我们看到了什么</th></tr></thead><tbody><tr><td>把下巴搁在前爪上，闭眼，呼吸变慢</td><td>“它在撒娇”</td></tr><tr><td>张嘴，露牙，眯眼，不出声</td><td>“它在笑”</td></tr><tr><td>把尾巴盖在鼻子上</td><td>“它在盖被子”</td></tr><tr><td>后腿立起，前爪收在胸前，探头</td><td>“它在拜拜”</td></tr><tr><td>在雪地里弹起，头朝下扎进去</td><td>“它在跳水”</td></tr></tbody></table></div>
+<p>左列是行为，右列是字幕。字幕不是错，但字幕不是行为。每次给出右列，我都尽量同时给出至少一个左列的解释：休息、保暖、听声、警戒、捕猎、社交。如果证据更支持拟人的那个解释，我会说；如果证据更支持机械的那个解释，我也会说。</p>
+<p>这背后是一个更老的方法论争论：拟人化（anthropomorphism）和拟人化否认（anthropodenial）。</p>
+<p>拟人化是把人的动机、情感、意图套到动物身上。它有时候是错的——“狐狸在笑”可能只是“狐狸在喘气”。但它有时候是对的——哺乳动物共享大量的情感回路，一只害怕的狐狸，是真的在害怕。</p>
+<p>拟人化否认是另一个极端：为了维持人与动物的界线，拒绝承认明显的情感连续性。动物行为学家弗朗斯·德瓦尔（Frans de Waal）在一篇著名的文章里说，拟人化和拟人化否认是同一种傲慢的两面：前者把动物说得太像人，后者把人说得太不像动物。</p>
+<p>这本书不想站队。它想做的，是在每一处拟人的地方停一下，问：还有没有别的解释？在每一处机械的解释旁边，也停一下，问：这是不是把动物说得太简单了？</p>
+<p>狐狸既不是穿着毛皮的人，也不是一台会呼吸的机器。它是第三种东西：一个有自己 Umwelt 的、会学习、会玩耍、会害怕、会死的哺乳动物。</p>
+<h2 id="vol-1-s7">七、这本书要走的路</h2>
+<p>接下来的九卷，大概是这样走的。</p>
+<p>第二卷从脸开始。娃娃脸的配方、大脑里的那零点几秒、竖瞳与照膜、赤狐为什么其实不符合娃娃脸、镜头怎样把一张脸改造成“萌”。这是最近的一层，也是最容易被看见的一层。</p>
+<p>第三卷讲行为。游戏、标记、捕猎、求偶、声音，以及我们给每个动作配的字幕。这一卷会反复使用那张两列表格。</p>
+<p>第四卷讲驯化。别利亚耶夫的银狐实验，驯化综合征，为什么“温顺”会拖来“卷尾”和“花毛”，以及宠物狐产业背后的福利问题。</p>
+<p>第五卷讲城市。狐狸怎样搬进我们的楼下，习惯化怎样被误读成亲近，投喂、狂犬病、路杀、入侵物种——可爱与风险怎样在同一只动物身上共存。</p>
+<p>第六卷讲声音。从 gekkering 到午夜尖叫，从“笑”到“恐怖片音效”。这一卷会解释，为什么短视频里的狐狸总是配着钢琴曲。</p>
+<p>第七卷讲文化。九尾狐、稻荷、列那狐、罗宾汉、尼克·王尔德。这一卷会说明，“可爱”不是狐狸的属性，是一段很长的观看史。</p>
+<p>第八卷讲经济。流量、宠物贸易、狐狸村、毛皮。同一张脸，在屏幕上是萌，在养殖场里是商品。</p>
+<p>第九卷讲保护。岛屿灰狐的快速恢复，达尔文狐和埃塞俄比亚狼的困境，魅力物种的不平等分配。可爱是一种资源，资源从来分配不均。</p>
+<p>第十卷讲伦理。拟人化的三因素，亲密与占有，我们到底欠狐狸什么。</p>
+<p>这条路是从近到远的：从一张脸，走到一套行为，走到一段历史，走到一张资产负债表，最后走到一个问题——我们有没有权利，因为觉得一个东西可爱，就把它带走。</p>
+<h2 id="vol-1-s8">八、先行的答案</h2>
+<p>现在，先把短答案给你。</p>
+<p>狐狸没有卖萌。</p>
+<p>它只是长了一张让我们误会的脸，做了一套让我们误读的动作，活在一个把我们训练成观众的文化里，然后被一台把我们训练成买家的机器拍了下来。四件事同时发生，看起来就像它在卖。</p>
+<p>这个答案很干净。干净到有点可疑。</p>
+<p>因为它把责任分得很清楚：狐狸是无辜的，镜头是坏的，文化是背景，我们是受害者。它让我们在点头的时候，顺便把自己摘了出去。</p>
+<p>但真实的情况更麻烦：我们不是受害者。我们是买方。是我们的眼睛在 130 毫秒内做出了判断，是我们的手指停下了滑动，是我们的钱养活了狐狸村、宠物贸易和毛皮市场。可爱不是别人塞给我们的，是我们自己长出来的。</p>
+<p>所以这本书的答案会比上面那段长得多，也麻烦得多。它会说：我们是一种不得不买的动物，狐狸是一种不得不被读的动物，镜头是一种不得不选择的机器。三者相遇，就有了“卖萌”。</p>
+<p>这不是一个让人舒服的结论。但舒服的结论，通常不是好结论。</p>
+<p>回到那段视频。它还在循环。狐狸跳下来，回头，耳朵动一下，音乐响起，然后重新开始。一遍，又一遍。</p>
+<p>“它知道自己很可爱吗？”</p>
+<p>不知道。</p>
+<p>但这个问题，其实不是在问狐狸。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#preface"><span>上一章</span>序 · 凌晨三点的狐狸</a><a class="next" href="#vol-2"><span>下一章</span>第二卷 · 脸的科学</a></nav>
+</section>
+<section class="chapter" id="vol-2" data-label="第二卷" data-title="脸的科学">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>第二卷</span><span>16 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">02</div>
+    <h1 class="chapter-title">脸的科学</h1>
+    <p class="chapter-epigraph">可爱不只长在狐狸身上，也长在画框里。</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="vol-2-s1">三张裁切</h2>
+<p>第一卷的结尾，我们停在一段循环播放的视频上。狐狸跳下来，回头，耳朵动一下，音乐响起，然后重新开始。</p>
+<p>这一卷，我们把这一帧拆开。</p>
+<p>先做一个小实验。找一张狐狸的全身照，把它裁成三份：第一份保留全身，第二份裁到胸口，第三份只留头和一点肩膀。把三张图并排放在一起，问自己：哪一张最可爱？</p>
+<p>大多数人的答案会是第三张。</p>
+<p>不是第三只狐狸更可爱，是第三张图的头身比更接近婴儿。全身照里，狐狸的身体瘦长，腿长，尾巴大，比例像一只小狼；裁到胸口，身体被切掉一半，头显得大了；只留头肩，头占了画面的大部分，眼睛、鼻子、嘴都被放大，娃娃脸的参数被裁切直接改写。</p>
+<p>同一只狐狸，三次裁切，三种读数。</p>
+<p>这就是这一卷的起点：<strong>可爱不只长在狐狸身上，它也长在画框里。</strong></p>
+<h2 id="vol-2-s2">一、娃娃脸的配方</h2>
+<p>1943 年，康拉德·洛伦茨（Konrad Lorenz）在《可能经验的先天形式》里列了一张清单。他问的是一个很朴素的问题：为什么人类看见婴儿会心软？他的答案是，婴儿身上有一组特征，会触发一套先天的反应。他给这套特征起名叫“婴儿图式”（Kindchenschema）。</p>
+<p>清单不长：相对大的头，相对大的眼睛，短而厚的吻，圆的脸颊，小下巴，短粗的四肢，圆润的身体，笨拙的动作。</p>
+<p>后来的研究者把这套描述拆成了可测量的参数：头身比、颅骨与面部的比例、眼睛占脸的面积、眼睛在脸中的位置、鼻吻的长度、脸的宽度、四肢的粗细。这些参数可以被量化，也可以被操纵。</p>
+<p>Glocker 等人 2009 年在《Ethology》上发表的研究，做法很直接：用 3D 模型生成婴儿的脸，然后系统性地调高或调低这些参数——眼睛放大、脸变圆、额头变高、鼻子缩短、嘴巴变宽。结果，参数越“婴儿”，成年人越觉得可爱，也越愿意照顾。注意，这里的变化是连续的：可爱不是一个开关，是一条曲线。</p>
+<p>Borgi 等人 2014 年把同样的逻辑用在动物脸上，发现儿童也会被这套参数牵着走：眼睛越大、脸越圆，注视时间越长。Nittono 等人 2012 年在《PLoS ONE》上则发现，这套反应不只是“觉得好看”，它会改变行为——看完可爱图片的人，在精细操作任务里更稳、更慢、更准。可爱让人收窄注意力，像照顾一个脆弱的东西时那样。</p>
+<p>所以“可爱”不是一种主观的趣味，它是一套古老的评估程序：这个对象是否需要我的照顾？程序跑得很快，快到你以为是直觉。</p>
+<p>这套程序有一个特点：它不认物种。婴儿、幼犬、幼猫、卡通角色、玩偶、毛绒玩具，只要参数对得上，它都会响。狐狸不是这套程序的目标，它只是恰好按对了几个键。</p>
+<p>程序也有一个弱点：它会被骗。参数可以伪造，比例可以修改，毛可以染，眼睛可以画大。人类几千年来一直在做这件事——做玩偶、画神像、设计卡通。到了摄影和算法时代，伪造的成本降到了零。</p>
+<h2 id="vol-2-s3">二、大脑里的零点几秒</h2>
+<p>快到什么程度？</p>
+<p>Kringelbach 等人 2008 年用脑磁图记录成年人看婴儿脸时的反应，发现内侧眶额皮层在刺激出现后大约 130 毫秒就被激活了——比你说出“可爱”这两个字早得多。眶额皮层是奖赏和价值的枢纽，它一响，你就“想要”这个对象，虽然你还不知道为什么。</p>
+<p>Strathearn 等人 2008 年用 fMRI 看母亲看自己孩子照片时的脑活动，发现奖赏回路被激活，而且和催产素系统有关。换句话说，可爱不是一个审美判断，它更像一口甜：先有奖赏，后有解释。</p>
+<p>Zajonc 1980 年那篇著名的文章标题说得很直白：“偏好不需要推理。”（Preferences need no inferences.）你先喜欢，再找理由。狐狸的脸就是那种让你先喜欢的东西。</p>
+<p>这也解释了一个现象：你很难“说服”一个人觉得狐狸可爱，也很难“说服”他不觉得。因为判断发生在他意识到之前。</p>
+<p>这里必须插一句诚实的：上面这些实验用的是人类婴儿的脸，不是狐狸的脸。把结论平移到狐狸身上，是合理的推断，不是已经完成的实验。目前几乎没有人做过“狐狸脸可爱度”的定量研究。谁要是告诉你“科学家证明狐狸是最可爱的动物”，那多半是营销号。</p>
+<p>但推断仍然有力量。因为狐狸脸上的那些参数——大眼睛、圆脸颊、短吻（在某些角度）、小身体——正好落在已知的触发区间里。你可以说，这是一次“未被验证但高度可疑”的匹配。</p>
+<h2 id="vol-2-s4">三、可爱是“想要”，不一定是“喜欢”</h2>
+<p>这里要插一个容易被忽略的区分。</p>
+<p>Berridge 和 Robinson 研究奖赏系统几十年，反复强调一件事：大脑里的“想要”（wanting）和“喜欢”（liking）不是同一套回路。“想要”更多依赖多巴胺，是一种接近、抓取、占有的冲动；“喜欢”更多依赖阿片类和内源性大麻素系统，是一种真正的愉悦体验。两者经常同时出现，但不总是。</p>
+<p>可爱激活的，很可能更偏向“想要”。</p>
+<p>这解释了为什么看见特别可爱的东西，人的第一反应常常不是欣赏，而是伸手：想抱、想揉、想捏、想咬一口。Aragón 等人 2015 年记录的“可爱侵略性”，就是这种冲动的过载版本——正面情绪太强，大脑用一个反向的小动作来平衡它。被试看见特别可爱的小动物时，会不自觉地咬紧牙、攥拳头，甚至说“我想把它捏碎”。那不是恨，是情绪调节。</p>
+<p>这也解释了一个更麻烦的事：可爱很容易滑向占有。“想要”的回路本来是为“把东西拿到手”设计的，当对象是一只活着的狐狸时，这套回路就会出问题。你觉得你是在爱它，其实你的多巴胺在说：把它带走。</p>
+<p>这一卷讲的是脸，但这个问题会一直跟到第十卷。先记住它。</p>
+<h2 id="vol-2-s5">四、娃娃脸之外：笨、软、小</h2>
+<p>娃娃脸只是一半。</p>
+<p>洛伦茨的清单里还有一条常被忽略：笨拙的动作。婴儿走不稳，幼兽跑不直，这种“控制力不足”的样子会触发照顾欲。狐狸在这条上得分不低：幼狐从洞里探出头，滚成一团，追自己的尾巴；成年狐在雪地里扑空，一头扎进雪里，爬起来甩甩头。这些动作的共同点是“不完美”，而不完美是可爱的重要成分。</p>
+<p>第二条是“软”。视觉上的软——绒毛、蓬松、边缘模糊——会唤起触觉想象。人类是高度触觉的动物，看见软的东西，手指会先于大脑做出反应。狐狸冬天的底绒，是自然界里最像“毛绒玩具”的材料之一。</p>
+<p>第三条是“小”。不是绝对的小，是相对的小。一只狐狸放在雪地里，没有参照物，你看不出它多大；一只狐狸放在人腿边，立刻显得小。照片的构图决定了参照系，也就决定了“小”这个变量。</p>
+<p>第四条是“动”。狐狸的动作有一种“弹簧感”：走两步，停一下，头一偏，突然跳起来，落地，甩头。这种不连续的、带停顿的节奏，和猫的流畅、狗的直给都不一样。它看起来像在“想”，又像在“玩”。人类读动作，读的是意图；一个动作越像“犹豫”或“试探”，越容易被读成“可爱”。</p>
+<p>这四条加在一起，解释了为什么一张狐狸的照片，即使不露脸，只拍一个背影、一条尾巴、两只从雪里冒出来的耳朵，也能让人觉得可爱。</p>
+<h2 id="vol-2-s6">五、眼睛：竖瞳、照膜与无辜感</h2>
+<p>人的眼睛有一个特征：巩膜面积大，虹膜和瞳孔居中，所以我们能清楚地读出“视线方向”。狗和狐狸的巩膜露得少，眼睛看起来是一枚深色的杏仁，视线方向反而不那么明确。</p>
+<p>这有什么区别？</p>
+<p>明确的视线让你判断“它在看什么”；不明确的视线让你投射“它在看我”。后者更容易产生亲密感，也更容易被拟人化。</p>
+<p>狐狸的眼睛还有两个硬件。</p>
+<p><strong>竖瞳。</strong> 赤狐的瞳孔是竖裂的，这在犬科里很少见。Banks 等人 2015 年在《Science Advances》上分析了 214 种动物的瞳孔形状，发现竖瞳多见于“伏击型捕食者”——它们需要在不移动头部的情况下，同时看清近处和远处的目标；横瞳多见于“被吃的”——它们需要广角视野来发现天敌。狐狸是伏击者，所以它有一双竖瞳。</p>
+<p>竖瞳在弱光下会放大成一个大黑椭圆。配上深色的虹膜，整只眼睛看起来又大又黑，正好撞上人类对“婴儿眼睛”的偏好。</p>
+<p><strong>照膜。</strong> 狐狸眼底有一层反光层（tapetum lucidum），把穿过视网膜的光反射回去，让感光细胞再接收一次。这就是夜里手电筒一照，狐狸眼睛会发绿光的原因。照膜让它在晨昏和夜间看得更清楚，也让它的眼睛在照片里显得更亮、更深、更有“神”。</p>
+<p>还有一个小细节：眼周的深色毛。很多狐狸的眼角有深色纹路，像画了一条眼线。化妆的逻辑是相通的——深色边框会让眼睛显得更大。狐狸不需要化妆，它天生就带着这条线。</p>
+<p>最后是瞳孔的“情绪误读”。瞳孔在弱光下放大，在兴奋、紧张、专注时也会放大。照片里的狐狸，瞳孔往往是大的——因为很多照片拍在清晨、黄昏或室内。我们看见大瞳孔，读成“天真”“专注”“信任”。其实那只是光线。</p>
+<h2 id="vol-2-s7">六、赤狐的悖论：一张拼装出来的娃娃脸</h2>
+<p>现在必须处理一个矛盾。</p>
+<p>按娃娃脸的标准，赤狐是不合格的：吻长、脸窄、耳朵尖、头骨偏长。它更像一只“小号的狼”，而不是一只“大号的猫”。</p>
+<p>那为什么我们还是觉得它可爱？</p>
+<p>第一个原因是<strong>毛</strong>。冬天的赤狐有一圈厚厚的颈毛，把脖子和下巴连成一片，视觉上把脸“托”圆了。它的身体也被毛撑大，头身比反而变小——头显得更小、更圆，像一个球上安了一张脸。</p>
+<p>第二个原因是<strong>白</strong>。赤狐的吻部、脸颊、下巴是白的，鼻尖是黑的，嘴唇是黑的。白色把长长的吻部“切断”了，你的眼睛不会沿着吻部一直看到鼻尖，而是在白色和黑色交界的地方停下来。视觉上，吻变短了。</p>
+<p>第三个原因是<strong>角度</strong>。狐狸回头看你的时候，头是侧着的，长吻被透视压缩，脸变成三角形；如果它再微微低头，额头和眼睛占的比例会更大。摄影师最喜欢这个角度，不是偶然。</p>
+<p>第四个原因是<strong>表情肌</strong>。犬科有一套面部信号：放松的张嘴、眯眼、耳朵后压、嘴角上扬。狐狸的“笑”其实是一张放松的脸，但人类的面部识别系统会把嘴角的弧度读成微笑。狗在驯化中被改造过——2019 年 Kaminski 等人在《PNAS》上报告，狗有一块狼没有的、专门用来抬高内侧眉毛的肌肉，这让狗能做出“小狗眼”；狐狸没有经历同样的改造，所以它的脸更“野生”，表情更模糊。模糊反而给了我们更多投射空间。</p>
+<p>把这几件事摊开，大概是这样：</p>
+<div class="table-wrap"><table><thead><tr><th>特征</th><th>通常的功能解释</th><th>我们的读法</th></tr></thead><tbody><tr><td>竖瞳</td><td>晨昏伏击时判断距离</td><td>无辜的大眼睛</td></tr><tr><td>长吻</td><td>嗅觉、咬合、探入洞穴</td><td>不够娃娃脸，但被白毛截短</td></tr><tr><td>白吻、白颊</td><td>种内识别、信号对比</td><td>脸被“切”短了</td></tr><tr><td>蓬松尾巴</td><td>平衡、保暖、同类信号</td><td>超常刺激，想摸</td></tr><tr><td>耳背黑毛</td><td>种内信号，让同类看见</td><td>像戴了一对耳套</td></tr><tr><td>白色尾尖</td><td>让幼崽和同类跟上</td><td>像蘸了颜料</td></tr><tr><td>放松张嘴</td><td>非攻击、游戏信号</td><td>“它在笑”</td></tr><tr><td>眯眼</td><td>放松、满足、强光</td><td>“它在享受”</td></tr></tbody></table></div>
+<p>所以赤狐的可爱是一个“拼装件”：娃娃脸的底子不够，就用毛、白色、角度、表情来补。你在照片里看到的，是一个被补丁修过的娃娃脸。</p>
+<p>这不是说狐狸在骗我们。它没有选择长成这样，也没有选择被这样拍。拼装是我们这边完成的：演化提供了零件，镜头提供了角度，文化提供了说明书，我们提供了那 130 毫秒。</p>
+<h2 id="vol-2-s8">七、六张狐狸脸</h2>
+<p>“狐狸”不是一个物种，而是一种体型方案。</p>
+<p>真狐属（<em>Vulpes</em>）是一支，南美的“狐”（<em>Lycalopex</em>）是另一支，大耳狐、食蟹狐又各走各的路。它们在不同的洲、不同的时代，反复演化出“尖脸、大耳、长尾、轻身”的样子。生物学上这叫趋同演化；通俗地说，狐狸是一种很成功的设计，成功到被发明了好几次。</p>
+<p>把六张脸摆在一起，你会看到“可爱”至少有好几条路。</p>
+<p><strong>沙狐。</strong> 中亚草原上的沙狐（<em>Vulpes corsac</em>），体重一到三公斤，脸短、眼大、耳朵宽。它是六张脸里最接近标准娃娃脸的一张——如果把毛色换成浅黄，它看起来像一只大号的猫。它的可爱是<strong>参数型</strong>的：每一项都刚好落在婴儿图式的区间里。</p>
+<p><strong>北极狐。</strong> 北极狐（<em>Vulpes lagopus</em>）冬天是一颗球。短耳、短吻、厚毛，身体圆到看不见腰。它的可爱是<strong>几何型</strong>的：球形是保温的最优解，而人类把球形读成幼态。它一年换两次毛，夏天瘦长灰褐，冬天圆白。2018 年，一只被追踪的北极狐在 76 天里从斯瓦尔巴走到加拿大，三千五百公里——那颗球里装着一台越野机器。</p>
+<p><strong>耳廓狐。</strong> 耳廓狐（<em>Vulpes zerda</em>）的一对耳朵十到十五厘米，几乎和脸一样长。它的可爱是<strong>器官夸张型</strong>的：一个特征被推到极端，反而成了识别符。耳朵的功能是散热和听声——它在撒哈拉夜里听沙下的昆虫。人类看见大耳朵，读成幼态；耳廓狐恰好把幼态和功能长在了同一个器官上。</p>
+<p><strong>藏狐。</strong> 藏狐（<em>Vulpes ferrilata</em>）是反例。方脸、窄眼、嘴角下垂，表情像刚看完一份很长的报表。它在中国互联网上走红，靠的不是娃娃脸，是“丑萌”——一种对模板的偏离。你看它的时候，先觉得好笑，再觉得亲切。这说明可爱至少有两条路：一条是符合婴儿图式，一条是偏离得恰到好处。藏狐的脸其实有功能：宽颧弓、厚毛、高原防风，只是这套功能恰好长成了一张“生无可恋”的脸。它吃鼠兔，一夫一妻，住在青藏高原的洞穴里，是这套体型方案里最不“狐狸”的一张脸。</p>
+<p><strong>灰狐。</strong> 灰狐（<em>Urocyon cinereoargenteus</em>）会爬树。它的前肢能旋转，爪子能勾住树皮，这在犬科里几乎独一份。它的脸比赤狐短，耳朵圆，眼睛大，看起来更像猫。它的可爱是<strong>混搭型</strong>的：犬科的身体，猫科的脸。</p>
+<p><strong>大耳狐。</strong> 大耳狐（<em>Otocyon megalotis</em>）的耳朵更大，牙齿退化，主食是白蚁。它的脸被耳朵“压”小了，比例上更接近幼体。它的可爱是<strong>比例型</strong>的：不是哪个器官特别圆，而是整体比例被一个器官改写了。</p>
+<p>六张脸，六种解法。共同点是：它们都不是为了让我们觉得可爱而长成这样的。耳朵为了听，毛为了暖，脸为了咬得动、闻得到、活得下去。我们只是在旁边看着，然后按下了收藏。</p>
+<h2 id="vol-2-s9">八、超常刺激：尾巴、耳朵与米老鼠</h2>
+<p>廷伯根在研究海鸥时发现，鸟会对“比真蛋更大、更鲜艳的假蛋”表现出更强的孵蛋行为。他管这叫“超常刺激”（supernormal stimulus）：一个夸张到超出自然范围的信号，反而比真实信号更有效。</p>
+<p>狐狸身上有几个候选。</p>
+<p><strong>尾巴。</strong> 赤狐的尾巴接近体长的三分之二，蓬松、末端带白。它在功能上是平衡杆、被子、信号旗——狐狸奔跑时尾巴伸展，转弯时配重，睡觉时盖住鼻子，受惊时竖起。尾巴背面还有一条紫腺，参与气味标记。但它的尺寸和蓬松度，已经超出了“功能必需”的范围，落在人类的超常刺激区间里。你看见那条尾巴，会想摸；这不是理性判断，是信号被放大了。</p>
+<p><strong>耳朵。</strong> 耳廓狐的耳朵是极端案例：一对耳朵几乎和脸一样大，功能是散热和听声——它在撒哈拉夜里听沙下的昆虫。人类看见大耳朵，读成“幼态”；耳廓狐恰好把“幼态”和“功能”长在了同一个器官上。</p>
+<p><strong>圆。</strong> 北极狐冬天的体型是一个球。功能是保温——球形是表面积与体积比最小的形状。人类看见球，读成“可爱”。同一个几何，两个解释。</p>
+<p>超常刺激有一个阴暗面：它会“劫持”本能。鸟会去孵比自己蛋还大的假蛋，鱼会去追比自己雌鱼还夸张的假雌鱼。人类的婴儿图式也会被劫持——被玩偶、被卡通、被表情包。Stephen Jay Gould 1979 年写过一篇《米老鼠的生物学致敬》，追踪了米老鼠从 1928 年到 1970 年代的造型变化：头越来越大，眼睛越来越大，四肢越来越短，身体越来越圆。迪士尼不是在做艺术，是在做算术——把娃娃脸的参数一格格往上调。</p>
+<p>狐狸的“萌图”产业，做的是同一件事：选毛最厚的、脸最圆的、角度最好的、尾巴最蓬的。自然提供了原材料，镜头做了精加工。</p>
+<p>有一句话可以概括这种分工：<strong>自然选择了能活的，人类选择了能卖的。</strong></p>
+<h2 id="vol-2-s10">九、镜头：娃娃脸是图片的属性</h2>
+<p>这一段可能是本卷最不浪漫、也最重要的一段。</p>
+<p>你看到的“狐狸”，绝大多数不是狐狸，是照片。照片有一套自己的语法，这套语法会系统性地改变一张脸的读数。</p>
+<p><strong>焦距。</strong> 广角镜头近距离拍脸，会把鼻子放大、脸拉长——这是“不好看”的方向。长焦镜头从远处拍，会压缩透视，把鼻子“压”回脸里，让脸变平、变圆——这是“好看”的方向。野生动物摄影师用长焦，首先是为了不打扰动物，其次是为了拍到一张“平面”的脸。这两个目的恰好重合。</p>
+<p><strong>裁切。</strong> 一张狐狸的全身照，身体瘦长，比例像狼；裁到只剩头和肩，比例像猫。头身比是娃娃脸的核心参数，而裁切可以直接改掉这个参数。你在社交媒体上看到的很多“小狐狸”，是被裁出来的。</p>
+<p><strong>光。</strong> 逆光会在毛的边缘打出一圈亮边，叫轮廓光。轮廓光让毛看起来更软、更蓬、更“发光”。顺光会压平质感，侧光会强调结构，雪地反光会补掉阴影——冬天的高调照明，是最适合拍“软”的光。</p>
+<p><strong>景深。</strong> 大光圈把背景虚化，只留眼睛在焦内。观众的视线被强制集中在眼睛上，其他部位自动模糊。眼睛一大，脸就“幼”。</p>
+<p><strong>速度。</strong> 慢动作会把一个扑击拉成一段舞蹈，把一次甩头拉成一次“撒娇”。同一个动作，24 帧是捕猎，120 帧是芭蕾。</p>
+<p><strong>颜色。</strong> 暖调、低对比、轻微过曝，会让画面显得柔软、旧、温柔。冷调、高对比，会让同一只狐狸显得警觉、野、危险。后期调色是在调情绪，不是在调事实。</p>
+<p><strong>机位。</strong> 摄影师趴在地上，把镜头降到狐狸的眼睛高度。这个动作听起来只是技术选择，但它改变了权力关系：俯拍让动物显得小、弱、可支配；平视让它显得像一个同类；仰拍让它显得高大、有神性。绝大多数“萌图”是平视或微微俯视的——既亲近，又不威胁。</p>
+<p><strong>字幕。</strong> “它好像在笑。”这句话不是图片的一部分，但它决定了你怎么读图片。没有字幕，你看到的是张嘴；有字幕，你看到的是笑。语言是最便宜的后期。</p>
+<p><strong>算法。</strong> 平台奖励“停留”。哪张图让人多看一眼？有眼睛直视镜头的、脸占比大的、背景干净的。于是这些图被推得多，被仿拍得多，最后变成“狐狸就该长这样”。</p>
+<p>所以，娃娃脸不只是狐狸的属性，它是图片的属性，是拍摄选择的属性，是算法偏好的属性。狐狸只是站在那条生产线的起点。</p>
+<p>回到本章开头的三张裁切。你现在应该能看出，第三张为什么最可爱：不是狐狸变了，是头身比变了，是眼睛占画面的比例变了，是身体——那个提醒你“这是一只野生食肉动物”的部分——被裁掉了。</p>
+<h2 id="vol-2-s11">十、被剪掉的气味与声音</h2>
+<p>可爱不是纯视觉的。婴儿的可爱是视觉、气味、声音、触感的合奏：奶味、软、咿呀声、重量。狐狸也有这些通道，只是其中两条被镜头剪掉了。</p>
+<p><strong>气味。</strong> 狐狸有强烈的麝香味，来自尾根的紫腺、肛门腺和趾间腺。那是它用来标记领地、识别同类的化学签名。对狐狸来说，这是身份；对人来说，这是“臭”。你在照片里闻不到它，所以照片里的狐狸是“干净”的——一个被去掉了体味的可爱对象。</p>
+<p><strong>声音。</strong> 狐狸会 gekkering，会“笑”，也会在发情期发出那种让人汗毛倒竖的尖叫。短视频里的狐狸，配乐是钢琴、是八音盒、是轻快的鼓点；狐狸自己的声音，往往被剪掉或压到很轻。因为它的真实声音会破坏“萌”的叙事。</p>
+<p>所以最理想的媒介是无声视频加背景音乐：视觉留下，气味消失，声音替换。你得到的是一个“提纯”过的可爱对象。这不是欺骗，是媒介的选择性——每一种媒介都在选择它要保留的感官。</p>
+<h2 id="vol-2-s12">十一、可爱的边界</h2>
+<p>可爱不是越多越好。</p>
+<p>Glocker 的研究里，娃娃脸参数是被“调高”和“调低”的，不是无限调高。现实中也一样：当一张脸被推到极端——眼睛大到不合比例、脸圆到没有结构——它会从“可爱”滑向“怪异”。Mori 1970 年提出的“恐怖谷”原本是说人形机器人的，但它背后的逻辑更普遍：当一个信号“太像”某个类别，又“不完全”属于那个类别时，观察者会不适。</p>
+<p>对动物脸来说，这条谷没有对人脸那么深，但它存在。过度拟人化的动物形象——把狐狸画上人的眼睛、人的眉毛、人的笑——会让人产生一种微妙的不信任。迪士尼的角色设计一直在这条线上走：足够像人，让你共情；足够不像人，让你不害怕。</p>
+<p>另一个边界是“可爱侵略性”。Aragón 等人 2015 年发现，看到特别可爱的东西时，人会同时产生照顾冲动和攻击冲动——想揉、想捏、想咬一口。这不是变态，是情绪调节：当正面情绪过载，大脑会用一个小剂量的“反向动作”来平衡它。你看见狐狸想“rua”，就是这个机制。</p>
+<p>还有一个边界是伦理的：把动物“萌化”，会遮蔽它的生态。狐狸不是毛绒玩具，它会杀生、会尖叫、会传播疾病、会入侵岛屿。可爱的镜头只拍它像玩具的那一面。这不是摄影的错，是摄影的局限。知道局限在哪，比拒绝可爱更有用。</p>
+<h2 id="vol-2-s13">十二、谁在觉得可爱</h2>
+<p>最后要承认：不是所有人都觉得狐狸可爱。</p>
+<p>猎人看见狐狸，看见的是皮毛和数量；农民看见狐狸，看见的是鸡舍；毛皮工人看见狐狸，看见的是等级和尺寸；被狐狸咬过的人看见狐狸，看见的是牙齿。同一个刺激，不同的历史，不同的反应。</p>
+<p>文化也会调参数。在中国传统里，狐狸首先是“魅”，是变幻、是诱惑、是越界；在日本，狐狸是神的使者，是生意兴隆的符号；在欧洲，狐狸是狡猾的智者。这些形象里都有“美”，但不都有“萌”。“萌”是二十世纪后期才成为主流的读法。</p>
+<p>生理状态也会调参数。母亲对婴儿脸的反应更强；催产素水平高的人更容易觉得婴儿脸可爱；疲劳、压力、孤独会改变拟人化的强度——Epley 等人的三因素理论里，“社交动机”是拟人化的三大来源之一：你越需要连接，越容易在动物脸上看见人。</p>
+<p>所以“狐狸可爱”不是一个全称命题。它是一个概率，一个在特定的人、特定的时刻、特定的文化里被触发的反应。</p>
+<h2 id="vol-2-s14">十三、这张脸本来是发给谁的</h2>
+<p>现在回到演化。</p>
+<p>狐狸的脸不是为了让我们觉得可爱而长出来的。它的耳朵是为了听，吻是为了嗅，眼睛是为了在晨昏看清猎物，毛是为了过冬，白尾巴尖是为了让同类在草丛里看见它。那张脸是一封发给同类的电报：我在这里，我是同类，我健康，我准备好了。</p>
+<p>我们截获了这封电报，改了频道，加上了字幕。</p>
+<p>这在社会生物学里叫“信号接收者的利用”——一个信号本来是为 A 演的，B 却学会了读它，甚至比 A 读得更好。人类是地球上最擅长“读脸”的物种，我们把狐狸的脸读成了“可爱”，读得比狐狸自己还认真。</p>
+<p>这也不一定是个错误。演化不保证信号只被目标接收者读到。古尔德和勒沃廷 1979 年提出“拱肩”（spandrel）这个概念：有些特征不是被自然选择直接造出来的，而是别的结构的副产品。教堂的拱肩本来不是设计目的，是拱门必然留下的三角形空间，后来被人画上了画。可爱可能也是这样：它不是被选择出来的“狐狸功能”，而是我们育幼本能的副产品，狐狸恰好掉进了这个副产品里。</p>
+<p>这不减损可爱的真实性。副产品也可以很美。它只是提醒你：你看见的不是狐狸的意图，是你自己的电路。</p>
+<h2 id="vol-2-s15">本卷小结</h2>
+<p>狐狸的脸之所以“卖萌”，是五层制造叠在一起：</p>
+<p>1. <strong>演化</strong>给了它一套犬科的信号系统——耳朵、吻、眼睛、尾巴，本来用于生存和同类交流。</p>
+<p>2. <strong>发育</strong>给了它幼态与成体特征的混合——大眼睛、厚毛、短脸（在某些角度），这套混合恰好落在婴儿图式的边缘。</p>
+<p>3. <strong>镜头</strong>把边缘推过了线——长焦压缩、裁切改比例、逆光加柔、慢动作加戏。</p>
+<p>4. <strong>文化</strong>提前给我们装好了“狐狸＝可爱／魅惑／聪明”的预设。</p>
+<p>5. <strong>我们的大脑</strong>在 130 毫秒内完成了判断，然后用余生去找理由。</p>
+<p>下一卷讲行为：狐狸到底做了什么，让我们把“生存”看成了“撒娇”；以及那些被剪掉的镜头里，它在做什么。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#vol-1"><span>上一章</span>第一卷 · 一个动词的悬案</a><a class="next" href="#vol-3"><span>下一章</span>第三卷 · 行为的语法</a></nav>
+</section>
+<section class="chapter" id="vol-3" data-label="第三卷" data-title="行为的语法">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>第三卷</span><span>13 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">03</div>
+    <h1 class="chapter-title">行为的语法</h1>
+    <p class="chapter-epigraph">表达是真实的，表演是我们加的。</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="vol-3-s1">一段没有配乐的视频</h2>
+<p>找一段没有配乐的狐狸视频，把声音开到最大。</p>
+<p>画面里是冬天的路。狐狸沿着路边走，走两步，停一下，头低下去，鼻子贴近地面。它的耳朵在转，像两个独立的雷达。它停住了，头歪向一边，前爪并拢，背弓起来，然后整只弹到半空，头朝下扎进雪里。雪炸开。它从雪里拔出头，嘴里什么都没有，甩了甩，继续走。</p>
+<p>没有音乐。只有风、雪、爪子踩在地上的闷响，和它甩毛时那种细碎的沙沙声。</p>
+<p>这段画面如果配上一段尤克里里，字幕写“它好像不太聪明”，它就是一条萌宠视频。如果配上低音鼓和慢镜头，它就是《地球脉动》。如果关掉画面只留声音，它什么都不是——一堆风噪和脚步。</p>
+<p>同一段行为，三种读法。</p>
+<p>这一卷要做的，是把字幕拿掉，看看画面本身。</p>
+<h2 id="vol-3-s2">一、游戏：练习活着</h2>
+<p>狐狸最容易被读成“撒娇”的行为，是玩。</p>
+<p>玩在动物行为学里是一个正经问题。因为它很贵：耗能量，伤身体，招天敌，耽误觅食。一只狐狸在雪地里追自己的尾巴，追十分钟，消耗的是它熬过冬天的一部分本钱。演化为什么允许这种“浪费”？</p>
+<p>犬科给了我们一个很好的观察样本。狗、狼、郊狼、狐狸，都会玩。它们玩的方式有共同语法：追逐、扑咬、摔跤、拉扯、突然停住、再跑。玩之前，常常有一个动作：前腿趴下，屁股撅起，尾巴摇。这叫“游戏前倾”（play bow）。</p>
+<p>游戏前倾是一个元信号。它的意思不是“我投降”，也不是“我要攻击”，而是“接下来发生的事是玩，不是真的”。动物行为学家把这种信号叫“元沟通”（metacommunication）：它在说“关于接下来那段交流，你要这样理解”。</p>
+<p>人类也有类似的东西。我们说“我开玩笑的”，我们在句末加一个表情包，我们在打闹前先笑一下。这些都是引号。引号不改变内容，它改变内容的解释方式。</p>
+<p>狐狸的游戏前倾，就是它的引号。</p>
+<p>玩的时候，犬科会做几件很奇怪的事：让自己处于劣势（self-handicapping），比如大个子躺下、让小个子压在上面；交换角色，追的人突然被追；把动作做得夸张，跑得比必要的更慢，跳得比必要的更高；咬的时候不用力，牙齿碰到皮毛就停。这些“不认真”的细节，恰恰是玩的证据。真打不会这样。</p>
+<p>赤狐是少数把玩保留到成年的犬科之一。成年狐狸仍然会追逐、扑咬、叼着树枝跑、在雪里打滚。为什么？一个常见的解释是：玩是“对意外的训练”。真实世界不可预测，捕猎、躲避、社交都充满变数；玩提供了一种低成本的模拟，让动物在安全的环境里练习组合动作、练习失手、练习恢复。</p>
+<p>另一个解释是社交粘合：一起玩过的动物，之后更容易合作。还有一个解释更简单：玩本身有奖赏，哺乳动物的大脑里有专门为玩留的回路。三个解释不冲突，可能同时为真。</p>
+<p>所以，当你看见两只小狐狸在洞口滚成一团，你看见的不是“撒娇”。你看见的是一场持续数周的、以生命为赌注的训练营，只是它看起来很好笑。</p>
+<h2 id="vol-3-s3">二、游戏脸与笑</h2>
+<p>玩的时候，狐狸会张嘴。</p>
+<p>不是龇牙，是张嘴：嘴唇往后收，露出牙，但嘴角是松的，眼睛眯起来，耳朵不往后压，身体不僵。犬科研究者管这个叫“游戏脸”（play face）。它和威胁的龇牙不一样：威胁是嘴唇上提、鼻子皱、眼睛盯着、身体前倾；游戏是嘴唇后收、眼睛眯、身体松、动作断断续续。</p>
+<p>人类看见一张张开的嘴加眯起的眼，自动识别为“笑”。</p>
+<p>这个识别有它的道理。游戏脸确实对应一种放松的、非攻击的状态。它不是伪装出来的友好，它是真的友好。但它不是“笑”。笑是人类的表情，有它自己的神经基础、社会功能和演化历史。狐狸没有“笑”这个概念，它只有“现在可以安全地张嘴”。</p>
+<p>我们把“游戏脸”翻译成“笑”，这个翻译不算错，但它丢掉了很多东西：丢掉了气味、丢掉了耳朵的角度、丢掉了身体的紧张度、丢掉了前后文。一张截图里的“笑”，在视频里可能只是一次喘气；一次喘气，在行为序列里可能只是玩的间隙。</p>
+<p>还有一个更麻烦的信号：龇牙。</p>
+<p>犬科在服从、问候、紧张的时候，会做一个“服从的笑”（submissive grin）：嘴唇往后拉，露出牙，眼睛眯，耳朵后压，身体放低。这个表情在人类看来很矛盾——像笑，又像威胁。狗主人常常误会，陌生人常常害怕。</p>
+<p>狐狸也有类似的面部信号。它的牙不是为“笑”长的，是为咬合、撕扯、防卫长的。当我们看见那排牙，我们的杏仁核会先做出反应，然后皮层再告诉我们“这是玩”。这个过程很快，但它是两个系统在打架：一个看见牙就警报，一个看见眯眼就心软。</p>
+<p>所以“狐狸在笑”这句话，准确的说法是：狐狸在做一张非攻击的脸，而我们的大脑用“笑”这个模板去匹配它。匹配成功，我们觉得可爱；匹配失败，我们觉得危险。同一张脸，两种结果，取决于角度、光线、前后文，以及我们当天的心情。</p>
+<h2 id="vol-3-s4">三、蹭、顶、跟：气味里的社交</h2>
+<p>狐狸身上有很多腺体。</p>
+<p>肛门两侧有肛门腺，趾间有趾间腺，尾巴背面有一条紫腺（supracaudal gland），还有分布在身体各处的皮脂腺。这些腺体分泌的化学物质，参与标记领地、识别个体、传递生殖状态。狐狸用它们做一件事：写信。</p>
+<p>它用尿在树根、石头、路口留下签名；用趾间腺在走过的地方留下脚印气味；用尾巴背面的紫腺在物体上蹭；用肛门腺在排泄物里附加信息。它还会在固定的“厕所”排便，行为学上叫 latrine site，这些地点本身就是信息站。</p>
+<p>所以，当一只狐狸用脸颊或身体蹭你，它在做什么？</p>
+<p>至少有三层可能：一，标记——把它的气味留在你身上，让你成为它气味地图的一部分；二，熟悉化——把自己的气味和你的气味混在一起，确认“这个对象是熟悉的”；三，社交——在群体成员之间，蹭蹭确实有亲和功能，类似于灵长类的理毛、人类的拥抱。</p>
+<p>三层可能不互斥。它可能既是在标记，也是在表达亲近。问题不在于“它有没有感情”，而在于“它的感情是不是我们以为的那种”。狐狸的社会性不像狼那样是紧密的群体，也不像猫那样是彻底的独居。赤狐的社会结构很灵活：一对繁殖个体，加上一些不繁殖的雌狐（常常是前一窝的女儿）作为帮手，组成一个家庭群；成年个体大多单独觅食，但在巢穴附近会碰面、互相理毛、一起照看幼崽。</p>
+<p>这是一种“松散的家庭”。它没有狼群的仪式感，也没有猫的疏离感。它更像一栋楼里的邻居：见面点头，偶尔互相帮忙，但各过各的日子。</p>
+<p>所以“黏人”这个词，放在狐狸身上要小心。它跟着你，可能是因为好奇，可能是因为你手里有食物，可能是因为它习惯了你的存在，可能是因为它在巡视领地，也可能只是因为它要走那条路，而你恰好也在。它不排斥你，这不等于它需要你。</p>
+<h2 id="vol-3-s5">四、站立、作揖、打滚</h2>
+<p>有几个动作，在网上几乎被固定成了“卖萌三件套”。</p>
+<p><strong>站立。</strong> 狐狸后腿立起来，前爪收在胸前，头抬高，鼻子朝前。这个姿势在行为学里有几个功能：警戒（看得更远）、探视（越过草丛或围栏）、嗅闻（把鼻子送到更高的气流里）、够取（够树枝上的果子或挂在墙上的东西）。它不是“求抱抱”。它只是把身体拉长，去够一个它够不到的信息。</p>
+<p><strong>作揖。</strong> 两只前爪在胸前收拢，上下晃动，像人在拱手。这个动作常常出现在狐狸站立、兴奋、等待食物的时候。它的功能可能是平衡、可能是准备扑、可能是社交兴奋的溢出。它不是“拜年”。我们看见“拱手”，是因为我们的文化里有一个“拱手”的模板；狐狸没有这个模板。</p>
+<p><strong>打滚。</strong> 狐狸在地上翻来覆去，四脚朝天，蹭背，扭动。这个动作可能是挠痒，可能是降温，可能是气味涂抹（scent rolling）——把某种气味蹭到自己身上，可能是舒展，可能是玩。我们看见“四脚朝天”，读成“信任”，因为狗和猫露出肚皮常常是信任的信号。对狐狸来说，露肚皮也可能是信任，也可能只是它在蹭一块味道很重的地方。</p>
+<p><strong>歪头。</strong> 狐狸把头歪向一边，耳朵一高一低，眼睛盯着某处。这个动作的功能很实在：歪头可以改变两耳接收声音的时间差，帮助定位声源；也可以让眼睛的视线更对准目标。它看起来像“困惑”，是因为人类在困惑时也会歪头。狐狸不是困惑，它在算。</p>
+<p>这些动作有一个共同点：它们都是功能性的，但功能不排除情感。一只狐狸在玩的时候，可能真的兴奋；一只狐狸在蹭你的时候，可能真的放松；一只狐狸在歪头的时候，可能真的好奇。问题不是“它有没有内心”，问题是“它的内心是不是我们的剧本”。</p>
+<p>我们给每个动作配了字幕。字幕不是凭空来的，它来自我们自己的身体：我们拱手，所以我们看见“拜”；我们歪头，所以我们看见“困惑”；我们笑，所以我们看见“笑”。这是一种投射，但投射的材料是我们自己，所以它总有一点点对。</p>
+<h2 id="vol-3-s6">五、捕猎：跳水、扑击、储藏</h2>
+<p>现在回到那段没有配乐的视频。</p>
+<p>狐狸在雪地里走，耳朵转，头歪，前爪并拢，背弓，弹起，头朝下扎进雪里。这个动作在网上叫“跳水式捕鼠”，弹幕说“好可爱”。它当然不是在表演跳水。它是在杀生。</p>
+<p>这个动作的每一步都有功能。耳朵转，是在收集声音；头歪，是在利用两耳的时间差定位声源；前爪并拢，是在减少入雪的面积、提高穿透力；背弓，是在蓄力；头朝下，是在入雪后迅速用嘴咬住猎物。它跳得越高，入雪越深，成功率越高——但跳得越高，消耗越大，失手也越疼。这是一套被校准过的投资策略。</p>
+<p>2011 年，Červený 等人在《Biology Letters》上发了一个很有意思的观察：赤狐在捕鼠跳时，成功率与起跳方向有关，朝东北方向的成功率更高，他们把它解释为对地磁场的利用。样本不大，后续也有争议，但这个故事本身很狐狸：一个看起来像跳水表演的动作，内核是一套我们还没完全弄明白的定位系统。</p>
+<p>捕鼠跳不是天生的完美程序。幼狐会玩“扑”，扑兄弟姐妹、扑树叶、扑自己的影子；它们在玩里练习起跳、落点、咬合。成年之后，这套动作变成谋生手段。你看见的“可爱”，是一个正在成熟的杀手在训练。</p>
+<p>狐狸还会储藏。吃不完的食物，它会埋起来，用鼻子和爪子盖上土、雪、叶子；冬天再挖出来。它记得很多埋藏点，但也会被同类偷，被其他动物偷，被雪盖住，被时间忘掉。储藏不是美德，是风险管理。</p>
+<p>在食物集中、猎物无法逃逸的地方——比如鸡舍——狐狸可能杀死超过当场食量的猎物。行为学上叫“surplus killing”。这不是“邪恶”，是捕猎本能遇到一个不设防的环境：咬的动作被触发，猎物不会逃，触发继续，咬继续。人类看见一地的鸡，读成“残忍”；狐狸看见的是一连串会动的东西，突然都不动了。</p>
+<p>这里必须停下来，承认一件事：我们觉得可爱的那个动物，是一个捕食者。它的可爱和它的杀生不是两个动物，是同一个动物。你可以在同一只狐狸身上看见“跳水”和“杀死田鼠”，这两件事之间没有切换开关。</p>
+<h2 id="vol-3-s7">六、求偶与家庭</h2>
+<p>冬天快结束的时候，狐狸开始找配偶。</p>
+<p>赤狐倾向于一夫一妻，但不是严格的终身制。一对繁殖个体可能在一起好几年，也可能只维持一个季节。雌狐怀孕大约五十天，春天生下四到六只幼崽。幼崽出生时又盲又聋，眼睛大约两周后睁开，四周左右开始从洞里探出头。</p>
+<p>这时候，你会看见“一家人”的画面：幼崽在洞口滚，母狐躺着喂奶，公狐叼着食物回来。这个画面很容易被读成“温馨的家庭”。它确实是家庭，但它的温馨有代价：幼崽的死亡率不低，食物不够、天气不好、疾病、天敌、车，都会带走一部分。狐狸的家庭不是童话，是一个在资源约束下运行的合作社。</p>
+<p>合作社里还有“帮手”。一些不繁殖的雌狐——常常是前一窝的女儿——会留在巢穴附近，帮忙照看幼崽、带食物、警戒。行为学上叫“合作繁殖”。从基因的角度看，这很划算：她不生，但她帮的是自己的弟妹，弟妹身上有和她相同的基因。从情感的角度看，这也可能是“亲情”：她认识这些幼崽，她和它们一起长大，她会在它们叫的时候过去。</p>
+<p>我们看见“一家人整整齐齐”，读成“幸福”。狐狸看见的是一套分工：谁守洞，谁觅食，谁带孩子，谁在危险来的时候发出警报。幸福这个词，是我们加的。但“合作”“依恋”“警戒”这些事，是真实发生的。</p>
+<h2 id="vol-3-s8">七、声音：从 gekkering 到尖叫</h2>
+<p>狐狸不是沉默的动物。</p>
+<p>它有一套声音：玩耍和求偶时的 gekkering，一种急促的、像笑声又像吵架的断续叫声；联系同伴时的轻柔联系叫声，有人形容成“wow-wow-wow”；幼崽的呜咽；警戒时的吠叫；冲突时的尖叫。</p>
+<p>这些声音里，最出名的是“vixen scream”。</p>
+<p>发情期的雌狐会发出一种长长的、尖锐的、起伏的叫声。它在英国的郊区、在日本的住宅区、在任何一个狐狸进城的地方，都能让居民半夜惊醒。那声音像女人被掐住喉咙，像婴儿哭到一半突然断气。每年都有人被吓得报警，以为出了命案。</p>
+<p>同一个物种，白天是表情包，凌晨两点是恐怖片音效。</p>
+<p>这不是狐狸的两副面孔。这是同一个声音系统在不同情境下的输出：求偶、召唤、警戒、冲突。我们觉得“可爱”的声音，往往是高频、短促、柔软的；我们觉得“恐怖”的声音，往往是低频、长音、颤动的。狐狸两种都有。短视频只留下前一种，或者干脆用钢琴曲替换掉后一种。</p>
+<p>声音是最难被“萌化”的通道。你可以把一张脸裁成娃娃脸，可以把一个动作放慢成舞蹈，但你很难把一声尖叫修成撒娇。所以最省事的办法是：关掉原声。</p>
+<h2 id="vol-3-s9">八、边界：当可爱变成危险</h2>
+<p>狐狸是捕食者，也是潜在的疾病载体。</p>
+<p>在欧洲，狐狸曾是狂犬病的主要储主。二十世纪八十年代到两千年代，多国用口服疫苗饵料把狐狸狂犬病一路逼退，西欧大部分地区已经消灭。但“曾经”不等于“永远”；在仍然有狂犬病的地区，一只靠近人的狐狸，不是“亲人”，是风险。</p>
+<p>城市狐狸会被“习惯化”：它们学会人类不构成直接威胁，于是缩短逃跑距离，甚至在人的院子里做窝。习惯化不是驯化，更不是友谊。一只习惯化的狐狸仍然会咬人，尤其是当它被逼到角落、被狗追、被孩子抓的时候。它仍然会翻垃圾、传播寄生虫、在车道上被撞。</p>
+<p>投喂是最常见的错误。投喂让狐狸集中，集中让疾病传播，让竞争加剧，让幼崽存活率在短期内上升、在长期内下降。投喂还让狐狸失去对人的警戒，而失去警戒的狐狸，最后往往死在车轮下或安乐死针下。</p>
+<p>这一卷的表格有一个边界：有些行为没有“可爱”的读法。咬人、护食、护崽、发情期的攻击，这些行为的功能很清楚，翻译成“撒娇”是危险的。我们可以喜欢狐狸，但不能替它取消牙齿。</p>
+<h2 id="vol-3-s10">九、行为的语法</h2>
+<p>现在，把这一卷的东西收一收。</p>
+<p>我想借一个语言学的比喻：行为是一门语言，信号是词，语境是语法。</p>
+<p>“张嘴”是一个词。它在游戏里是“玩”，在进食里是“吃”，在威胁里是“别过来”，在热的时候是“喘”。同一个词，四种意思，靠语境区分。狐狸的耳朵、尾巴、身体紧张度、动作节奏，就是它的语法标记。去掉这些标记，只留一张“张嘴”的截图，就像把一句话里的虚词全删掉，剩下的词可以拼成任何意思。</p>
+<p>“游戏前倾”是一个元信号，相当于引号。它不改变动作，它改变动作的解释。人类在打闹前笑一下，说“我开玩笑的”，也是引号。引号是语言的自我指涉：我在说“关于接下来这句话，请这样理解”。</p>
+<p>“蹭”是一个词，意思是“标记/熟悉/亲近”，三个意思叠在一起，靠对象和情境区分。“跟”是一个词，意思是“好奇/期待/习惯/巡视”，四个意思叠在一起，靠距离、时间、身体姿态区分。</p>
+<p>狐狸在说一门我们听不懂的语言。我们靠字幕、靠拟人、靠文化模板去猜。猜对了一部分，猜错了一部分。猜对的部分让我们觉得“我懂它”；猜错的部分，就是“卖萌”的诞生地。</p>
+<p>哲学上有一个概念，叫“意向立场”（intentional stance）。丹尼尔·丹尼特说，解释一个系统时，我们可以采取三种立场：物理立场（它由什么构成）、设计立场（它被设计来做什么）、意向立场（它想要什么）。对狐狸，我们几乎自动采取意向立场：它想要我摸它，它想要我喂它，它在对我笑。</p>
+<p>意向立场很好用。它让我们预测动物的行为，也让我们和动物建立关系。但它是工具，不是事实。狐狸有意图，但它的意图不一定是关于我们的。它可能想的是“这条路安全吗”“这里有食物吗”“那个东西会不会追我”。我们把它翻译成“它喜欢我”，是因为我们更熟悉这门语言。</p>
+<p>这是翻译的损失。损失不丢人，所有翻译都有损失。丢人的是假装没有损失。</p>
+<p>下面这张表，是这一卷的总结。左列是它做了什么，中列是通常的功能解释，右列是我们看到的。三列都真实，只是不在同一个层面上。</p>
+<div class="table-wrap"><table><thead><tr><th>它做了什么</th><th>通常的功能解释</th><th>我们看到的</th></tr></thead><tbody><tr><td>前腿趴下、屁股撅起</td><td>游戏信号：接下来是玩</td><td>“它在邀请我”</td></tr><tr><td>张嘴、眯眼、不出声</td><td>游戏脸：非攻击</td><td>“它在笑”</td></tr><tr><td>用脸颊或身体蹭</td><td>气味标记、熟悉化、亲和</td><td>“它在撒娇”</td></tr><tr><td>跟着人走</td><td>好奇、期待食物、习惯化、巡视</td><td>“它喜欢我”</td></tr><tr><td>后腿站立、前爪收胸</td><td>警戒、探视、嗅闻、够取</td><td>“它在拜拜”</td></tr><tr><td>打滚、四脚朝天</td><td>挠痒、降温、气味涂抹、舒展</td><td>“它在撒欢”</td></tr><tr><td>歪头</td><td>定位声源、对准视线</td><td>“它在困惑”</td></tr><tr><td>雪地弹跳、头朝下扎</td><td>捕猎</td><td>“它在跳水”</td></tr><tr><td>尾巴盖住鼻子</td><td>保温</td><td>“它在盖被子”</td></tr><tr><td>尖叫</td><td>求偶、警戒、冲突</td><td>“恐怖片音效”</td></tr></tbody></table></div>
+<p>这张表不是要把右列全部划掉。右列里有真实的情感：玩的时候，狐狸确实兴奋；蹭的时候，它确实放松；跟着你的时候，它确实可能对你有好感。左列也不是冷冰冰的机械论：一个正在玩的动物，不是一个正在执行程序的机器人。</p>
+<p>这张表想说的是：<strong>表达是真实的，表演是我们加的。</strong></p>
+<p>狐狸在表达。它用身体、气味、声音表达它的状态、意图、情绪。它没有在表演。表演需要观众意识，需要“我知道你在看，我要给你看什么”。狐狸没有这个。它只是在活，顺便被看见。</p>
+<p>我们看见的“萌”，是表达的副产品，不是表达的目的。</p>
+<h2 id="vol-3-s11">本卷小结</h2>
+<p>这一卷拆了六类行为：游戏、社交、站立作揖、捕猎、求偶家庭、声音。每一类都有它自己的功能逻辑，也都有它被误读的方式。</p>
+<p>三个结论：</p>
+<p>第一，玩是真的。狐狸不是在“演”可爱，它是在玩；玩有代价，也有奖赏；它看起来好笑，是因为它的身体比例和动作节奏恰好撞上了我们的审美。</p>
+<p>第二，社交是有限的。狐狸不是狼，不是狗，不是猫；它的社会结构是松散的家庭，它的“黏人”更多是习惯化、好奇和期待，不是我们以为的依恋。</p>
+<p>第三，捕猎是真的。那个在雪地里跳起来的身影，是一个捕食者。它的可爱和它的牙齿是同一套身体。</p>
+<p>下一卷讲驯化：人类怎样把“温顺”从狐狸身上选出来，又怎样在选温顺的时候，顺手选出了卷尾巴、花毛和短吻。那是“可爱”被人工制造的过程，也是宠物狐产业的起点。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#vol-2"><span>上一章</span>第二卷 · 脸的科学</a><a class="next" href="#vol-4"><span>下一章</span>第四卷 · 驯化：把野性折叠成卷尾</a></nav>
+</section>
+<section class="chapter" id="vol-4" data-label="第四卷" data-title="驯化：把野性折叠成卷尾">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>第四卷</span><span>9 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">04</div>
+    <h1 class="chapter-title">驯化：把野性折叠成卷尾</h1>
+    <p class="chapter-epigraph">人选了听话，顺手得到了可爱。</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="vol-4-s1">一个西伯利亚的冬天</h2>
+<p>1959 年，西伯利亚，新西伯利亚。</p>
+<p>冬天的气温可以降到零下三十度。雪把一切都压得很静，只有脚步声、呼吸声，和笼子里狐狸走动时爪子刮过木板的细响。一个中年男人沿着笼子走，停下来，打开笼门，把手伸进去。</p>
+<p>他在等一件事：狐狸会不会靠近。</p>
+<p>如果狐狸缩到角落、龇牙、发抖，他不选它。如果狐狸走过来，闻他的手，甚至让他摸，他就把它留下来配种。没有别的标准。不看毛色，不看体型，不看聪明，不看漂亮。只看它怕不怕人。</p>
+<p>这个男人叫德米特里·别利亚耶夫（Dmitry Belyaev）。他是遗传学家，也是当时苏联遗传学少数还能做事的人之一。他有一个判断：驯化不是从体型开始的，是从行为开始的。人类先让动物不怕人，然后动物才慢慢变成别的样子。</p>
+<p>他选了银狐——赤狐的一个毛色变种，当时在毛皮农场里被大量养殖。他挑了几十只公狐、一百来只母狐，开始了一代一代的选择。</p>
+<p>他选的是行为。</p>
+<p>他拿到的是长相。</p>
+<h2 id="vol-4-s2">一、只选一个性格</h2>
+<p>这个实验的设计，简单到近乎粗暴。</p>
+<p>每一代，研究人员走到笼子前，打开门，伸出手。狐狸的反应被分成几类：逃跑、躲藏、龇牙、攻击、犹豫、靠近、闻手、舔手、让人摸。只有最不怕人的那一小部分被允许繁殖。比例很低，低到每一代都要从几百只里挑出几十只。</p>
+<p>第一代，绝大多数狐狸见人就跑。第十代，开始出现一些“异常”的个体：它们会摇尾巴，会发出呜咽声，会主动凑到笼门口，会舔研究人员的手。到第二十代，一部分狐狸已经像狗一样“粘人”——行为学上叫“驯化精英”（domesticated elite）。</p>
+<p>但别利亚耶夫要的不是“像狗”。他要的是一个干净的实验：如果只选行为，身体会发生什么？</p>
+<p>身体发生的事，比他预期的还多。</p>
+<p>耳朵塌了。有些狐狸的耳朵不再立着，而是像狗一样垂下来。尾巴卷了。有些狐狸的尾巴不再笔直，而是向上卷成一个圈。毛色花了。出现了黑白斑块，像奶牛，像花狗。吻部短了。头骨变宽了，脸变得更像幼体。繁殖季变长了。一些雌狐一年能生两窝，而不是一窝。应激反应变弱了。肾上腺变小，血清素水平改变，面对陌生事物时不再那么惊慌。</p>
+<p>这些变化和“温顺”没有直接关系。它们不是被单独选出来的，它们是跟着“温顺”一起来的。</p>
+<p>别利亚耶夫给这个现象起了一个后来被广泛引用的名字：<strong>驯化综合征</strong>（domestication syndrome）。</p>
+<h2 id="vol-4-s3">二、驯化综合征：一份赠品清单</h2>
+<p>驯化综合征不是狐狸的专利。</p>
+<p>狗、猪、羊、牛、兔、豚鼠、猫——几乎所有被人类驯化的哺乳动物，身上都能找到类似的“赠品”：垂耳、卷尾、花斑、短吻、较小的脑、延长的繁殖季、减弱的应激反应。不是每一种动物都有全部特征，但清单上的项目会反复出现。</p>
+<p>这份清单有一个共同的方向：<strong>幼态。</strong></p>
+<p>垂耳是幼态。幼犬、幼兔、幼猪的耳朵都是软的、垂的，成年后才立起来。卷尾是幼态。花斑是幼态——很多幼兽的毛色比成兽更花，成年后趋于均匀。短吻是幼态。大头、圆脸、大眼睛，都是幼态。驯化在很多时候，是把幼年的特征保留到成年，行为学上叫“幼态延续”（neoteny）。</p>
+<p>所以，驯化不只让动物“温顺”，它还让动物“看起来更年轻”。</p>
+<p>而“看起来更年轻”，正好是我们觉得可爱的东西。</p>
+<h2 id="vol-4-s4">三、神经嵴假说：为什么赠品会一起到</h2>
+<p>为什么选“温顺”，会拖来“垂耳”和“花毛”？</p>
+<p>2014 年，Wilkins、Wrangham 和 Fitch 在《Genetics》上提出一个解释：神经嵴细胞。</p>
+<p>神经嵴细胞是胚胎发育早期的一群细胞。它们从神经管附近出发，迁移到全身，分化成很多种组织：肾上腺髓质、色素细胞、面部和头骨的软骨与骨、牙齿、耳朵的一部分、肠道的神经系统。它们像一支到处施工的工程队，一个细胞群，管着好几个看起来不相干的器官。</p>
+<p>假说的逻辑是这样的：驯化选择的是“不怕人”，也就是降低“战斗或逃跑”的反应。这个反应的核心之一是肾上腺髓质，而肾上腺髓质来自神经嵴细胞。选择“肾上腺反应更弱”的个体，可能同时改变了神经嵴细胞的迁移、增殖或分化。于是，和神经嵴有关的其他组织也跟着变了：色素细胞少了，出现花斑；耳软骨变了，耳朵塌了；面部骨骼变了，吻短了；牙齿变小了。</p>
+<p>一个选择压，多个结果。这就是“赠品”的来源。</p>
+<p>这个假说很优雅，但它不是定论。它得到了一些证据的支持，也受到不少批评：神经嵴细胞的分化路径很复杂，不同物种的驯化综合征不完全一样，实验种群的遗传漂变、近交、奠基者效应也可能贡献了一部分变化。更稳妥的说法是：驯化综合征是真实的模式，神经嵴是一个有力的候选机制，但不是唯一的机制。</p>
+<p>科学在这里的态度应该是：我们知道“选温顺会拖来长相”，我们还不完全知道“为什么偏偏是这些长相”。</p>
+<h2 id="vol-4-s5">四、驯化不是驯服</h2>
+<p>这里必须把三个词分开。</p>
+<p><strong>驯服（taming）</strong> 是个体层面的。一只狐狸从小被人养大，不怕人，让摸，这叫驯服。它改变的是这只狐狸的经历，不是这个物种的基因。你把一只驯服的狐狸放回野外，它的后代还是野的。</p>
+<p><strong>驯化（domestication）</strong> 是群体层面的。一个种群，经过很多代的选择，基因频率发生了改变，不怕人变成了可遗传的特征。俄罗斯的银狐实验做的就是这件事。它改变的是种群，不是个体。</p>
+<p><strong>习惯化（habituation）</strong> 是个体层面的学习。一只城市狐狸反复见到人，发现人没有威胁，于是缩短逃跑距离。它不是驯服，更不是驯化；它只是学会了“这个人不危险”。换一个地方，换一群人，它的行为可能完全不同。</p>
+<p>三个词经常被混用，尤其是在宠物广告里。“驯化狐狸”听起来像“可以养的狐狸”，“被驯服的狐狸”听起来像“温柔的狐狸”。但驯化不等于适合家养，驯服不等于不会咬人，习惯化不等于友谊。</p>
+<p>俄罗斯的驯化狐，仍然是狐狸。它仍然会用气味标记领地，仍然会挖洞，仍然会咬东西，仍然会在发情期尖叫，仍然需要很大的空间和很强的嗅觉刺激。它的“驯化精英”身份，改变的是它对人恐惧的阈值，不是它的消化系统、社交需求、活动节律和牙齿。</p>
+<p>一只不怕人的狐狸，仍然是一只狐狸。</p>
+<h2 id="vol-4-s6">五、可爱是被选出来的</h2>
+<p>现在，把实验倒过来看。</p>
+<p>我们通常说“狐狸很可爱，所以人类喜欢它”。但银狐实验说的是另一件事：<strong>人类先选择了不怕人的狐狸，然后才得到了一张更可爱的脸。</strong></p>
+<p>垂耳、卷尾、花斑、短吻、圆脸——这些“赠品”不是狐狸为了讨人喜欢而演化出来的，是人类在选“温顺”的时候，顺手选出来的。可爱的脸，是驯化的副产品。</p>
+<p>这件事的意义，比它看起来大。</p>
+<p>它意味着，“可爱”不完全是自然的礼物。它可以是人工制品。你可以在几十代之内，把一个物种的脸改造成更接近幼体的样子；你可以让耳朵塌下来，让尾巴卷起来，让毛色花起来，让吻部短下来。你不需要直接选“可爱”，你只需要选“听话”，可爱会自己跟过来。</p>
+<p>这也意味着，我们在宠物身上看到的“萌”，有一部分是<strong>我们自己造成的</strong>。狗、猫、兔、猪、羊，都经历过这个过程。它们的幼态特征，有一部分是自然演化，有一部分是人工选择。我们看着它们，说“好可爱”，其实是在看一面镜子：镜子里是我们自己几百代、几千年的偏好。</p>
+<p>狐狸是这面镜子里最新的一张脸。</p>
+<p>银狐实验才六十多年。六十多年，在演化史上是一瞬间，但在人类的选择史上，已经足够把一张野生的脸，折叠成一张更圆、更软、更像幼崽的脸。</p>
+<p>而这张脸，现在被卖到了世界各地。</p>
+<h2 id="vol-4-s7">六、宠物狐的真相</h2>
+<p>打开任何一个短视频平台，搜“宠物狐狸”，你会看到这样的画面：</p>
+<p>一只狐狸躺在沙发上，肚皮朝上，让人摸；一只狐狸跟着主人上楼，尾巴一摇一摇；一只狐狸在雪地里打滚，配乐是轻快的钢琴；一只狐狸把头搁在人的膝盖上，眼睛半闭，字幕写“它把我当妈妈了”。</p>
+<p>这些画面可能是真的。狐狸可以和人建立亲密关系，可以让人摸，可以在人身边放松。但画面之外，还有另一组画面：</p>
+<p>狐狸在墙角撒尿，味道几天散不掉；狐狸把沙发咬开，掏出里面的海绵；狐狸在凌晨三点发出那种像女人尖叫的声音，邻居报警；狐狸在发情期变得暴躁，咬人；狐狸在院子里挖了几十个洞，把花圃翻了个底朝天；狐狸生病了，找不到会看狐狸的兽医；狐狸长到十岁，主人搬家了，新房子不许养。</p>
+<p>这不是要否定那些美好的画面。这是要把画面补全。</p>
+<p>宠物狐的问题，不是“狐狸不可爱”，是“可爱不足以支撑一段十几年的共同生活”。狐狸的寿命在圈养条件下可以超过十年；十年里，它每天都要吃、要拉、要标记、要挖、要咬、要叫、要活动。它的需求不会因为它在视频里很可爱就消失。</p>
+<p>法律也在提醒这件事。英国把赤狐列入《危险野生动物法》的附表，私人饲养需要许可；中国把赤狐列入“三有”保护名录，捕捉、交易、饲养都受野生动物保护法约束；美国各州规定不同，有的允许，有的禁止，有的要求许可证。这些规定不是为了扫兴，是因为狐狸不是家畜：它有牙齿，有气味，有破坏力，有未被完全驯化的行为库。</p>
+<p>“能养”和“该养”是两件事。你可以在许可证的框架内养一只狐狸，但这不等于狐狸适合你的公寓、你的作息、你的邻居、你的预算。</p>
+<h2 id="vol-4-s8">七、驯化的代价</h2>
+<p>银狐实验有一个很少被提起的背景：它诞生在毛皮农场里。</p>
+<p>银狐本身就是为毛皮而养的。别利亚耶夫选择银狐，一部分原因是它们已经在农场里被大量繁殖，容易获得；另一部分原因是，这个实验本来就嵌在苏联的毛皮产业里。实验的资金、场地、动物，都和毛皮经济有关。</p>
+<p>这不是要抹黑实验。这是一个事实：同一套制度，既能产出“驯化精英”，也能产出毛皮大衣。同一只狐狸，在实验记录里是“第几十代、行为评分几级”，在另一条生产线上是“等级、尺寸、价格”。</p>
+<p>驯化也有遗传代价。选择会缩小基因库；小种群会近交；近交会带来疾病、繁殖问题、免疫问题。俄罗斯的驯化狐种群，长期是一个相对封闭的群体；它们的温顺是选出来的，它们的健康问题也是选出来的副产品之一。驯化综合征的“赠品”不都是可爱的：有些是垂耳，有些是应激系统的改变，有些是看不见的生理代价。</p>
+<p>还有一个更基本的问题：我们有没有权利，把一个物种选择成“更不怕我们”的样子，只是为了把它放进我们的客厅？</p>
+<p>这个问题没有简单的答案。狗就是这样一个物种，我们大多不觉得狗的存在是错的。但狗用了一万五千年，和人类共同演化出了一套复杂的共生关系；狐狸只用了六十多年，而且是在笼子里、为了毛皮和实验而选的。把这两件事等同起来，是对狗的不公平，也是对狐狸的不公平。</p>
+<h2 id="vol-4-s9">八、从狐狸到狗：一条被走通的路</h2>
+<p>狗是驯化史上最成功的案例。</p>
+<p>至少一万五千年前，也许更早，一群狼开始靠近人类的营地。它们吃剩饭，警戒陌生人，慢慢和人形成了一种互惠关系。人得到了帮手和守卫，狼得到了食物和保护。时间久了，那些更不怕人、更会读人的个体留下了更多后代；再久一点，狗出现了。</p>
+<p>这条路走通了，但它的代价也写在了狗身上：分离焦虑、遗传病、短鼻犬的呼吸困难、髋关节问题、被人类审美扭曲的体型。驯化不是一条只通往“可爱”的路，它是一条通往“依赖”的路。你被人类养活了，你也离不开人类了。</p>
+<p>狐狸不在那条路上。俄罗斯的实验才六十多年，城市的狐狸才几十年，宠物狐的产业才更短。它们处在“驯化的早期”，而不是“狗的第二版”。一只俄罗斯驯化狐，可能在第几十代里变得不怕人，但它没有经历狗那样漫长的、和人类共同生活的选择。它不知道怎样读人的手势，不知道怎样在公寓里保持安静，不知道怎样在主人出门时不去拆家。</p>
+<p>所以，“驯化狐狸”这个词，最好加一个引号。它是“被人选得没那么怕人的狐狸”，不是“已经变成狗的狐狸”。</p>
+<h2 id="vol-4-s10">本卷小结</h2>
+<p>这一卷讲了三件事。</p>
+<p>第一，驯化是可以被看见的。别利亚耶夫的实验，用几十代的时间，把“选行为”变成了“改长相”。垂耳、卷尾、花斑、短吻，都是“温顺”的赠品。</p>
+<p>第二，可爱是可以被制造的。我们选“听话”，得到“幼态”；我们选“幼态”，得到“萌”。狐狸的脸，有一部分是人类的作品。</p>
+<p>第三，制造有代价。宠物狐的福利、法律、弃养、遗传问题，都是这张脸的背面。你看见的是沙发上的肚皮，看不见的是凌晨三点的尖叫、墙角的尿、搬家时的笼子。</p>
+<p>下一卷讲城市：狐狸自己走进了我们的地盘。它们没有被驯化，也没有被驯服；它们只是学会了和我们保持一个刚刚好的距离。那个距离，才是城市狐狸故事的核心。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#vol-3"><span>上一章</span>第三卷 · 行为的语法</a><a class="next" href="#vol-5"><span>下一章</span>第五卷 · 城市：狐狸搬到了楼下</a></nav>
+</section>
+<section class="chapter" id="vol-5" data-label="第五卷" data-title="城市：狐狸搬到了楼下">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>第五卷</span><span>9 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">05</div>
+    <h1 class="chapter-title">城市：狐狸搬到了楼下</h1>
+    <p class="chapter-epigraph">它学会了和人保持一个刚刚好的距离。</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="vol-5-s1">凌晨两点的垃圾桶</h2>
+<p>凌晨两点，城市终于安静下来。</p>
+<p>一辆垃圾车刚走，路边留下几个半开的桶。一只狐狸从停着的车底钻出来，沿着墙根走。它没有东张西望，也没有犹豫；它知道哪条路没有狗，哪个拐角有监控的死角，哪个桶的盖子松。它跳上桶沿，身体一沉，头探进去，尾巴垂在外面，像一条挂在桶边的围巾。</p>
+<p>几秒钟后，它叼出一块东西，跳下来，穿过马路，钻进一排冬青里。</p>
+<p>整个过程没有声音。没有音乐，没有慢动作，没有字幕。它不是在表演“翻垃圾桶的可爱狐狸”；它是在上班。</p>
+<p>这就是城市狐狸的日常：把人类丢弃的东西，重新纳入自己的食谱；把人类建造的空间，重新画成自己的地图。它没有拿到城市的钥匙，但它学会了从窗户爬进来。</p>
+<p>这一卷要问的是：它是怎么进来的？进来之后，它变成了什么？我们看见的“可爱”，在这张城市地图上，又是什么位置？</p>
+<h2 id="vol-5-s2">一、进城：一场没有计划的移民</h2>
+<p>狐狸进城，不是最近才发生的事。</p>
+<p>在英国，城市狐狸的扩张主要集中在二十世纪后半叶。郊区扩大，花园变多，垃圾变多，铁路和公路把栖息地切成碎片；狐狸顺着这些缝隙，一步一步搬了进来。布里斯托、伦敦、伯明翰、爱丁堡，都有稳定的城市种群。伦敦的狐狸数量，不同调查给出不同的数字，从几千到上万都有；数字不重要，重要的是它们已经在那里了，而且不打算走。</p>
+<p>为什么是狐狸，而不是别的动物？</p>
+<p>因为狐狸有一套“进城前的准备”。</p>
+<p>它是杂食动物。老鼠、鸟、昆虫、蚯蚓、果子、腐肉、人类剩下的东西，它都吃。食谱越宽，越容易在新环境里找到吃的。</p>
+<p>它是晨昏和夜间活动的动物。城市白天属于人，夜晚属于它；时差错开，冲突就少了一半。</p>
+<p>它足够谨慎，也足够灵活。它不会像某些动物那样，一遇到新东西就逃；它会停下来，观察，试探，再决定。行为学上叫“行为灵活性”（behavioral flexibility）。这是城市生存的核心技能。</p>
+<p>它还会利用边缘。墙根、铁路边坡、花园的灌木、停车场的角落、墓地的石缝——这些“没人管的地方”，对狐狸来说就是高速公路和住宅区。</p>
+<p>所以，狐狸不是“入侵”了城市。它只是发现了一个我们不小心造出来的生态位：食物多、天敌少、缝隙多、夜晚长。</p>
+<p>城市不是森林。城市是另一种森林：由砖、沥青、垃圾和灯光组成，猎物是老鼠和剩饭，天敌是车和狗，树是电线杆，洞穴是棚子底下。</p>
+<p>狐狸没有适应森林，它适应了“边缘”。而城市，正好是一大片边缘。</p>
+<h2 id="vol-5-s3">二、城市狐狸的日常</h2>
+<p>一只城市狐狸的一天，大概是这样过的。</p>
+<p>傍晚，它从窝里出来。窝可能在花园的棚子下面，可能在铁路边坡的灌木里，可能在废弃建筑的夹层里，也可能在墓地的石棺下面。它先伸展，嗅一圈空气，然后沿着固定的路线走：先到某个垃圾桶，再到某户人家的花园，再到一片有老鼠的草地，最后回到窝附近。</p>
+<p>它的活动范围比乡村狐狸小得多。乡村狐狸要跑几平方公里，才能找到足够的食物；城市狐狸可能只需要几个街区。食物密集，活动范围就缩小；活动范围缩小，密度就上升。英国一些城市的研究发现，城市狐狸的密度可以比乡村高出一个数量级。</p>
+<p>它的食谱也变了。乡村狐狸吃田鼠、兔子、鸟、昆虫、果子；城市狐狸吃老鼠、鸟、蚯蚓、果子、宠物粮、面包、炸鸡、扔掉的披萨。人类的食物不是它的主食，但它是“机会主义者”：有什么吃什么，能吃到什么就吃什么。</p>
+<p>它的作息也变了。城市狐狸比乡村狐狸更偏向夜间活动，因为人白天活动，夜晚更安全。但在安静的郊区、在疫情封控期间、在没有人打扰的公园里，它们也会白天出来。行为跟着环境走，不是跟着物种走。</p>
+<p>它的死亡也变了。乡村狐狸的天敌是狼、猞猁、鹰；城市狐狸的天敌是车。道路是城市狐狸最大的死亡来源之一。你早上在路边看见的那一团红，可能昨天夜里还在翻垃圾桶。</p>
+<p>还有疾病。疥螨（sarcoptic mange）是城市狐狸最常见的皮肤病之一，严重的时候会让狐狸掉毛、消瘦、虚弱，最后死掉。狂犬病在欧洲曾经是狐狸的主要威胁，后来通过口服疫苗饵料被逼退；但在仍然有狂犬病的地区，城市狐狸是一个需要认真对待的公共卫生问题。</p>
+<p>城市狐狸不是“幸福的野生动物”。它吃得多，也死得快；它的寿命不一定比乡村狐狸长，只是死法不同。</p>
+<h2 id="vol-5-s4">三、习惯化：那个“刚刚好的距离”</h2>
+<p>城市狐狸最让人误会的，是它不怕人。</p>
+<p>你在花园里看见一只狐狸，它没有立刻跑；你往前走两步，它退两步；你再走，它钻进灌木，但没有跑远。你停下来，它也停下来，回头看你。</p>
+<p>你心里想：它是不是喜欢我？</p>
+<p>行为学的答案是：它习惯了你。</p>
+<p>习惯化（habituation）是一个很简单的方法：一个刺激反复出现，没有好结果，也没有坏结果，动物对它的反应就会减弱。城市狐狸每天看见人，人走路、说话、扔垃圾、开门、关门，从来不会追它、抓它、吃它。久而久之，人从一个“潜在的捕食者”变成了“背景噪音”。</p>
+<p>习惯化不是驯服，不是驯化，也不是友谊。它只是学习：这个人不危险。</p>
+<p>习惯化有一个“刚刚好的距离”。狐狸会允许你靠近到一个点，超过这个点，它会退。这个点叫“逃跑距离”（flight distance）。城市狐狸的逃跑距离比乡村狐狸短，因为它学会了人不会追；但它仍然有一个底线。你越过底线，它会跑，或者咬。</p>
+<p>有些狐狸的底线特别短。原因可能有很多：个体性格（有些狐狸天生大胆）、食物条件化（有人喂过它，它把人跟食物联系起来）、母性（带崽的雌狐更警惕，也可能更攻击）、疾病（疥螨让狐狸虚弱，有时反而更靠近人，因为它在找容易的食物）。</p>
+<p>所以，一只主动靠近人的狐狸，不一定是“亲人”。它可能是被喂惯了，可能是病了，可能是走投无路。你把它的靠近读成“信任”，它可能只是在读“这个人有没有吃的”。</p>
+<p>城市狐狸和人的关系，最理想的状态，不是“它让我摸”，而是“它让我看”。</p>
+<p>它在你家花园里出现，你不动，它也不动；你看着它翻土、捉虫、打盹；它知道你不会伤害它，你也知道它不会伤害你。你们之间保持一个刚刚好的距离。这个距离不是冷漠，是尊重。</p>
+<p>这个距离，也是城市狐狸故事的核心。因为所有的冲突，几乎都是从距离被打破开始的。</p>
+<h2 id="vol-5-s5">四、投喂：善意的代价</h2>
+<p>城市狐狸和人之间，最常见的越界行为是投喂。</p>
+<p>一开始，只是一只狐狸在花园里出现。你觉得它瘦，你扔了一块面包。第二天它又来了，你又扔了一块。第三天，它在你门口等。你拍了一段视频，配文“它每天都来”，评论区说“好可爱”“求地址”“我也想喂”。</p>
+<p>然后事情开始变复杂。</p>
+<p>狐狸开始集中。原来一个街区只有一两只，现在可能有五六只；原来它们分散觅食，现在它们在同一时间、同一地点等饭。集中带来竞争，竞争带来打斗，打斗带来伤口，伤口带来感染。集中还带来疾病传播：疥螨、寄生虫、病毒，在密集的种群中更容易扩散。</p>
+<p>狐狸开始失去对人的警戒。它不再把人和“危险”联系在一起，而是把人和“食物”联系在一起。它会在白天出现，会靠近小孩，会跟着人走，会在门口叫。它看起来更“亲人”了，其实更脆弱了：它把生存押在了一个不稳定的变量上——人的善意。</p>
+<p>善意不稳定。今天喂的人，明天可能搬家；今天觉得可爱的人，明天可能觉得吵；今天容忍的邻居，明天可能投诉。狐狸不知道这些。它只知道这个门口有吃的。</p>
+<p>然后就是那个熟悉的循环：狐狸出现 → 有人喂 → 狐狸变大胆 → 有人投诉 → 管理部门介入 → 狐狸被诱捕、安乐死，或者被赶到别的地方。喂它的人和杀它的人，可能住在同一条街。</p>
+<p>这不是说投喂的人坏。恰恰相反，投喂的人通常是最喜欢狐狸的人。但喜欢不等于了解，了解不等于知道后果。你喂的是一只狐狸，你改变的是一个种群的行为；你给的是一个面包，你拿走的是它的警戒。</p>
+<p>如果你想帮城市狐狸，最有效的事往往不是喂，而是：把垃圾桶盖好，不要把宠物粮留在外面，不要在花园里留容易吸引啮齿动物的食物，给狐狸留一条能走的路，然后，保持距离。</p>
+<p>看，不一定要摸。喜欢，不一定要拥有。</p>
+<h2 id="vol-5-s6">五、冲突：鸡舍、垃圾、狂犬病</h2>
+<p>狐狸和人住在一起，不可能没有冲突。</p>
+<p>对农民来说，狐狸是鸡舍的常客。一只狐狸进了鸡舍，可能咬死十几只鸡，只叼走一只。行为学上叫“过剩杀戮”（surplus killing）：猎物集中、无法逃逸，捕猎本能被连续触发。农民看见的是一地尸体；狐狸看见的是一串会动的东西，突然都不动了。这个画面不可爱，但它是真实的。</p>
+<p>对城市居民来说，狐狸的麻烦更日常：翻垃圾桶，把垃圾拖得满地都是；在花园里挖洞；在墙角、车底、棚子下面留下气味和粪便；发情期在半夜尖叫；偶尔咬坏花园里的东西。这些事单拎出来都不大，叠在一起就很烦。</p>
+<p>还有疾病。欧洲的狐狸狂犬病，曾经是一个严重的公共卫生问题；二十世纪八十年代到两千年代，多国用口服疫苗饵料把它逼退，西欧大部分地区已经消灭。但在仍然有狂犬病的地区，一只行为异常的狐狸——白天出现、不怕人、流口水、攻击——不是“可爱”，是警报。</p>
+<p>疥螨也是一个问题。它不传给人，但对狐狸是灾难：掉毛、消瘦、虚弱、死亡。有些城市有志愿者给狐狸投药，效果不一，也有争议；没有专业指导的自行投药，可能害了狐狸，也可能害了别的动物。</p>
+<p>然后是捕杀。英国过去几十年里，地方当局多次尝试控制城市狐狸数量；研究反复发现，捕杀的效果有限：狐狸会从周边迁入，种群会反弹，除非把整个区域的栖息地和食物都改掉，否则杀不胜杀。2004 年，英国通过了《狩猎法》，禁止用狗猎狐；这更多是动物福利和阶级政治的胜利，不是生态学的胜利。狐狸的数量没有因为禁令而消失，也没有因为捕杀而消失。</p>
+<p>“害虫”和“魅力物种”是同一个动物的两个标签。农民叫它害虫，游客叫它精灵；管理者叫它风险，摄影师叫它模特。标签换来换去，狐狸还是那只狐狸。</p>
+<h2 id="vol-5-s7">六、城市作为演化实验室</h2>
+<p>城市不只是狐狸的新家，它还是一个选择压力。</p>
+<p>城市生活筛选不同的性格：更大胆的狐狸，更容易利用人类食物；更谨慎的狐狸，更容易避开车辆和狗。城市生活也筛选不同的技能：会开垃圾桶的、会看红绿灯的（这个说法被传得很广，但证据有限）、会利用花园和铁路的。城市生活还改变活动时间、活动范围、食谱、繁殖时间。</p>
+<p>这些变化会不会让狐狸“驯化”？</p>
+<p>目前没有证据说城市狐狸已经变成了家养动物。它们是习惯化，不是驯化；它们的行为变了，基因库可能也在变，但变化的方向和程度，还远没有到“狗”的地步。城市狐狸仍然怕人（只是阈值低了），仍然会咬人，仍然需要野外的技能。它们不是“城市里的狗”，它们是“学会了在城市里做狐狸的狐狸”。</p>
+<p>有一个概念叫“自我驯化”（self-domestication）：一个物种在没有人类直接选择的情况下，因为适应人类环境而演化出更温和、更不怕人的特征。这个假说在人类、倭黑猩猩、一些城市动物身上都被讨论过。对城市狐狸，它是一个有趣的假设，但不是定论。城市可能在选择“更大胆”的个体，也可能在选择“更灵活”的个体；这两件事不一样。</p>
+<p>城市是一个新的生态系统。狐狸不是唯一的住户。浣熊、郊狼、鸽子、老鼠、貉、野猪，都在学着和人类共居。它们有一个共同的名字：synanthrope，伴人动物。它们不是“入侵者”，也不是“客人”；它们是新的邻居。</p>
+<p>邻居关系需要规则。规则不是“消灭”或“投喂”，是“保持距离、管理食物、管理空间、接受共存”。</p>
+<h2 id="vol-5-s8">七、一只狐狸的死亡</h2>
+<p>早上七点，城市醒了。</p>
+<p>一只狐狸躺在路边，身体还是完整的，头朝着马路对面。它可能是在夜里过马路时被撞的；可能是在翻垃圾桶时被车灯晃了眼；可能是被狗追，慌不择路。它的毛上有一层薄薄的灰，尾巴摊在地上，像一条被丢掉的围巾。</p>
+<p>行人走过，看一眼，继续走。清洁工把它铲进袋子，扔进车里。中午，路面干净了。</p>
+<p>没有人知道它叫什么，也没有人需要知道。它不是一只“狐狸”，它是“一只狐狸”；它不是一个故事，它是一个数字。</p>
+<p>城市狐狸的死亡，大多数是这样：无声、无名、被清理。你在短视频里看见的狐狸，是活下来的那一小部分；它们会跳、会回头、会在雪地里打滚。死掉的那些，不会出现在推荐页。</p>
+<p>这不是要让你难过。这是要让你知道：可爱的画面，有一个看不见的背景。背景里有车、有垃圾、有疾病、有捕杀、有被清理的早晨。</p>
+<h2 id="vol-5-s9">本卷小结</h2>
+<p>城市狐狸的故事，可以总结成三句话。</p>
+<p>第一，它不是被驯化的动物，也不是被驯服的动物；它是习惯化的动物。它学会了和人保持一个刚刚好的距离。</p>
+<p>第二，这个距离很脆弱。投喂、垃圾、疾病、车辆、捕杀，任何一件事都可能把它打破。打破之后，狐狸失去的往往比人失去的多。</p>
+<p>第三，它是邻居，不是宠物，也不是害虫。邻居的意思是：它有自己的生活，你有你的生活；你们共享一条街，但不需要共享一个沙发。</p>
+<p>下一卷讲声音：从 gekkering 到午夜尖叫。我们会听见狐狸的另一面——那个在短视频里被钢琴曲盖住的声音。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#vol-4"><span>上一章</span>第四卷 · 驯化：把野性折叠成卷尾</a><a class="next" href="#vol-6"><span>下一章</span>第六卷 · 声音：从 gekkering 到午夜尖叫</a></nav>
+</section>
+<section class="chapter" id="vol-6" data-label="第六卷" data-title="声音：从 gekkering 到午夜尖叫">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>第六卷</span><span>8 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">06</div>
+    <h1 class="chapter-title">声音：从 gekkering 到午夜尖叫</h1>
+    <p class="chapter-epigraph">我们把它的声音关掉了，然后说它可爱。</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="vol-6-s1">一段被消音的视频</h2>
+<p>先看一段视频。</p>
+<p>狐狸在雪地里打滚，四脚朝天，尾巴扫起一片雪。配乐是钢琴，节奏轻快，音量刚好盖过环境声。字幕写：“下雪天最开心的小狐狸。”评论区一片“好可爱”“想 rua”“它笑得好甜”。</p>
+<p>现在，把配乐关掉，把原声开到最大。</p>
+<p>你听见的是风。雪被踩实的咯吱声。远处一辆车经过。然后，是一声短促的、像吵架又像笑的断续叫声——gekkering。它不甜，不软，甚至有点刺耳。它像一只鸟在骂人，又像两块木头在摩擦。</p>
+<p>再把时间轴往后拉十秒。狐狸突然停住，头抬起来，耳朵朝一个方向转。它没有叫。风里有一个更低、更远的声音，可能是另一只狐狸，可能是狗，可能是人。它听了几秒，然后继续打滚。</p>
+<p>同一段视频，两种声音，两种动物。一种是钢琴曲里的宠物，一种是雪地里的犬科。</p>
+<p>这一卷要做的，是把配乐关掉。</p>
+<h2 id="vol-6-s2">一、狐狸的声音清单</h2>
+<p>狐狸不是沉默的动物，但它的声音比狗和狼研究得少。</p>
+<p>这不是因为狐狸不说话，是因为狐狸难观察。它们多在晨昏和夜间活动，行踪隐蔽，声音短促，很多发生在灌木里、洞口中、雪面下。研究者能录到的，往往只是片段。</p>
+<p>现有的记录，大致可以列成一张清单：</p>
+<p><strong>Gekkering。</strong> 一种急促的、断续的、节奏感很强的叫声，常在玩耍、求偶、兴奋的时候发出。它听起来像笑，像吵架，像一连串短促的咳嗽。英文有时也写作 “gecker”。它不是一个单音，是一串音；不是一声长吼，是一阵机关枪。</p>
+<p><strong>联系叫声（contact call）。</strong> 一种较软的、重复的短音，有人形容成“wow-wow-wow”。它用在同类之间保持联系：我在这一带，你在哪里；我在这里，你过来。它不像 gekkering 那么急，也不像尖叫那么尖。</p>
+<p><strong>呜咽（whine）。</strong> 幼崽用得最多，成年狐在服从、求助、社交紧张时也会用。它高频、柔软、带起伏，像小狗的哼唧。</p>
+<p><strong>吠叫（bark）。</strong> 短、硬、重复，常用于警戒、领地宣示、对陌生事物的警告。它不像狗的吠叫那么连续，更像一声一声的“咳”。</p>
+<p><strong>低吼（growl）。</strong> 冲突、护食、护崽、威胁。低频、粗糙、持续。</p>
+<p><strong>尖叫（scream）。</strong> 最长、最尖、最容易被记住的一种。发情期的雌狐会用，冲突、受伤、极度恐惧时也可能用。它不像“叫”，像“被什么附体”。</p>
+<p>把这些声音和我们的读法放在一起，又是一张三列表：</p>
+<div class="table-wrap"><table><thead><tr><th>声音</th><th>通常的功能</th><th>我们的读法</th></tr></thead><tbody><tr><td>gekkering</td><td>玩耍、求偶、兴奋</td><td>“它在笑”</td></tr><tr><td>联系叫声</td><td>召唤、保持联系</td><td>“它在跟我说话”</td></tr><tr><td>呜咽</td><td>幼崽求助、服从、社交</td><td>“它在撒娇”</td></tr><tr><td>吠叫</td><td>警戒、领地</td><td>“它在凶我”</td></tr><tr><td>低吼</td><td>威胁、护食、护崽</td><td>“它要咬人”</td></tr><tr><td>尖叫</td><td>求偶、冲突、恐惧</td><td>“恐怖片音效”</td></tr></tbody></table></div>
+<p>这张表和第三卷那张行为表是同一个道理：左列是功能，右列是字幕。字幕不是凭空来的——gekkering 确实有“笑”的节奏，呜咽确实有“撒娇”的音色，尖叫确实有“恐怖”的音高。但字幕不是声音本身。</p>
+<h2 id="vol-6-s3">二、尖叫：为什么它像女人</h2>
+<p>在所有狐狸的声音里，最出名的是“vixen scream”。</p>
+<p>发情期的雌狐，会在夜里发出一种长长的、尖锐的、起伏的叫声。它从低处起，往上拔，在空中颤，然后突然断掉。它不像动物的叫声，像人的尖叫；不像快乐，像痛苦；不像求偶，像命案。</p>
+<p>英国的居民每年都有被这声音吓得报警的记录。有人以为有人在被追杀，有人以为婴儿在哭，有人以为有鬼。警察来了，手电筒照过去，灌木里两只发光的眼睛，一只狐狸，跑了。</p>
+<p>为什么它这么像人？</p>
+<p>声学上，有几个因素在帮忙。</p>
+<p>第一，基频高。尖叫的基频落在人类听觉最敏感的频段附近。我们对这个频段的声音特别警觉，因为它常常意味着危险——婴儿哭、女人叫、金属刮擦。</p>
+<p>第二，起伏大。狐狸的尖叫不是一条平直的线，它上下摆动，像人在极度恐惧或痛苦时控制不住的声音。平直的声音听起来像机器，起伏的声音听起来像生命。</p>
+<p>第三，音色紧。尖叫的声带振动是紧张的、不规则的，泛音丰富而混乱。这种“紧”的音色，在人类的听觉里等于“失控”“危险”“需要帮助”。</p>
+<p>第四，时间。它发生在夜里。夜里安静，声音传得远，人的警惕性低，一点声音就会被放大。同样的尖叫放在正午的菜市场，可能没人回头。</p>
+<p>这四个因素叠在一起，让一只求偶的狐狸，听起来像一个遇险的人。</p>
+<p>但它的功能不是求助。它是求偶，是宣示，是竞争，是“我在这里，我准备好了”。它不是在演恐怖片，它只是在繁殖。</p>
+<p>这里有一个很深的错位：同一个声音，对狐狸是生殖信号，对人是警报信号。我们听见“救命”，它发出“我来”。我们冲出去救人，它看见手电筒，跑了。</p>
+<p>人类的文化里，夜里的尖啸一直被解释成超自然的东西。欧洲的报丧女妖、鬼魂、厄运的前兆；中国的狐鸣、夜哭、不祥之兆。狐狸的尖叫很可能是这些故事的素材之一：一个看不见的动物，在夜里发出像人的声音，人就会给它编一个故事。</p>
+<p>故事编了几千年，直到动物学出现，我们才知道那是狐狸。但知道之后，声音并没有变得不吓人。因为吓人的不是“狐狸”这个概念，是那串频率、那口气、那个夜里突然断掉的尾音。</p>
+<h2 id="vol-6-s4">三、声音里的社交</h2>
+<p>狐狸的声音，不只是给人类听的，也不只是发情用的。</p>
+<p>幼崽和母狐之间，有一套很细的声音交流。幼崽饿的时候呜咽，冷的时候叫，被挤到的时候尖叫；母狐回来的时候，会发出低低的、柔软的声音，幼崽听见就凑过来。这套交流在洞口、在黑暗里、在雪下面进行，靠的不是看见，是听见。</p>
+<p>成年狐狸之间，联系叫声用来维持“我在这里”的网络。赤狐的家庭群不是时刻黏在一起的；它们分散觅食，夜里各自行动，靠声音和气味保持联系。联系叫声很短，但很有用：它告诉对方“这是我”，也告诉对方“我在哪个方向”。</p>
+<p>吠叫是另一种东西。它更硬，更公开，更像“边界”。一只狐狸在领地边缘吠，是在说“这里有主”；一群狐狸在夜里互相吠，是在谈判，也是在确认。</p>
+<p>这些声音有一个共同点：它们都是“索引”（index）。它们不描述世界，它们指向发声者：我在这里，我是谁，我是什么状态。人类语言可以说“那边有一只田鼠”，狐狸的声音说不了这么复杂；它只能说出自己。</p>
+<p>这也是为什么，狐狸的声音那么容易被我们误解。我们习惯听“内容”，它只给“状态”。我们把“状态”翻译成“内容”：它叫，是在跟我说话；它哼，是在撒娇；它尖叫，是在求救。其实它只是在说：我在这里。</p>
+<h2 id="vol-6-s5">四、城市里的声音</h2>
+<p>城市改变了狐狸的声音环境。</p>
+<p>一方面，城市更吵。交通、空调、人声、施工，全天候的低频噪音铺在背景里。狐狸的联系叫声、幼崽的呜咽，在这样的背景里传不远。研究城市动物的人有一个说法：城市动物可能要提高音量、改变频率、改变叫的时间，才能被听见。这个现象在鸟身上研究得比较多，狐狸身上还很少。</p>
+<p>另一方面，城市更安静。深夜的住宅区，比森林还静；声音传得远，一点尖叫就能穿过几条街。狐狸的尖叫在乡村是背景，在城市是事件。它会被录下来，会被发到网上，会被投诉，会被写进新闻。</p>
+<p>城市狐狸的声音，因此有了一个奇怪的双重身份：它是动物行为，也是城市噪音；它是求偶信号，也是邻里纠纷；它是“自然”，也是“打扰”。</p>
+<p>我们给城市里的自然划了一个声音的边界：鸟叫可以，蝉鸣可以，猫头鹰可以，狐狸尖叫不可以。不是因为狐狸的声音更响，是因为它更像人，而“像人”的声音在夜里让人不安。</p>
+<h2 id="vol-6-s6">五、为什么短视频要配钢琴</h2>
+<p>现在回到那段被消音的视频。</p>
+<p>短视频里的狐狸，几乎总是配乐的。钢琴、八音盒、尤克里里、轻快的鼓点。原声被关掉，或者压到几乎听不见。为什么？</p>
+<p>第一个原因很实际：版权和噪音。原声里有风、有车、有杂音，不好听；配乐可以统一情绪，也可以避免版权问题。</p>
+<p>第二个原因更深：配乐在替狐狸“说话”。它告诉观众该怎么感受：这一段是温馨的，那一段是好笑的，这一段是治愈的。音乐是情绪的字幕。</p>
+<p>第三个原因最深：狐狸的原声会破坏“萌”的叙事。gekkering 像吵架，尖叫像命案，吠叫像警告。这些声音不“治愈”。把它们关掉，狐狸就变成了一个默片角色：只会动，不会发出威胁。</p>
+<p>这不仅仅是短视频的问题。自然纪录片也长期这么做：给动物配交响乐，给捕猎配鼓点，给幼崽配弦乐。我们以为自己在“听自然”，其实在听人类给自然写的配乐。</p>
+<p>“声音的可爱”有一套配方：高频、柔软的音色、大调、慢速度、规整的节奏。它和我们对婴儿说话的方式有相似之处——音调更高，节奏更慢，起伏更夸张。这套配方在广告、动画、玩具、短视频里被反复使用，最后变成了一种条件反射：听见这样的声音，就觉得可爱。</p>
+<p>狐狸的原声不在这个配方里。它的声音是低的、粗的、断的、不规则的。它不属于“可爱”的声学，它属于“动物”的声学。</p>
+<p>所以，消音不是技术处理，是审美选择。我们选择了一个没有狐狸声音的狐狸。</p>
+<h2 id="vol-6-s7">六、听见，还是一种打扰</h2>
+<p>声音有一个很奇怪的性质：它比图像更难被“框住”。</p>
+<p>看一只狐狸，你可以选择看哪里：看脸，看尾巴，看它身后的雪。你可以裁切，可以调色，可以加字幕。声音不一样。声音从四面八方来，钻进你的耳朵，不管你想不想听。你不能“裁掉”一声尖叫；你只能关掉窗户，或者关掉视频。</p>
+<p>这也是为什么，声音比图像更容易让人不安。图像可以变成商品，声音很难。你可以把一张狐狸照片印在杯子上，你很难把一声尖叫印在杯子上。</p>
+<p>听见一只狐狸，意味着它进入了你的空间，而不是你进入了它的画面。它在你的夜里发声，你在你的床上听见。你们之间没有屏幕，没有裁切，没有配乐。只有声音，和一个不知道在哪里的动物。</p>
+<p>这种“不知道在哪里”，是声音的伦理核心。看见一只狐狸，你可以判断距离、方向、威胁；听见一只狐狸，你只知道它在附近。你的大脑会自动补全画面：它在灌木里，它在屋顶上，它在窗外。补全的画面，往往比真实的更可怕。</p>
+<p>所以，听见狐狸，是一种更原始的关系。它不给你控制感，它只给你存在感。</p>
+<h2 id="vol-6-s8">七、一段没有配乐的录音</h2>
+<p>我有一段狐狸的录音，是朋友在英国的郊区录的。凌晨一点，手机放在窗台上，录了二十分钟。前面是风，是远处的车，是一只狗叫。然后，一声尖叫。</p>
+<p>那声音不长，大概三秒。它从低处起，往上拔，颤了两下，断了。然后是很长的安静。风还在，车还在，狗不叫了。</p>
+<p>我把这段录音听了很多遍。第一遍，我觉得恐怖；第二遍，我觉得孤独；第三遍，我开始注意到别的东西：尖叫之后，远处有一个很轻的、重复的短音——可能是另一只狐狸的联系叫声。它很轻，轻到几乎被风盖住。但它在那里。</p>
+<p>一只狐狸在叫，另一只在答。</p>
+<p>这就是声音里的狐狸：不是表情包，不是钢琴曲里的宠物，是一个在夜里发声、等待回应的动物。它的声音不好听，不治愈，不适合做手机铃声。但它是它的。</p>
+<h2 id="vol-6-s9">本卷小结</h2>
+<p>这一卷讲了三件事。</p>
+<p>第一，狐狸的声音是功能的：gekkering 是玩和求偶，联系叫声是维持网络，呜咽是求助，吠叫是边界，尖叫是繁殖。它们不是为我们设计的。</p>
+<p>第二，声音比图像更难被萌化。你可以裁一张脸，很难裁一声尖叫；所以短视频选择关掉原声，用钢琴曲替换。我们听见的“可爱”，很多是静音的结果。</p>
+<p>第三，听见一只狐狸，是一种更原始的关系。它不给你画面，只给你存在；不给你控制，只给你距离。</p>
+<p>下一卷讲文化：九尾狐、稻荷、列那狐、罗宾汉、尼克·王尔德。我们会看到，在镜头和录音之前，人类已经用故事给狐狸配了几千年的音。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#vol-5"><span>上一章</span>第五卷 · 城市：狐狸搬到了楼下</a><a class="next" href="#vol-7"><span>下一章</span>第七卷 · 文化史：九尾狐、稻荷、列那狐与尼克</a></nav>
+</section>
+<section class="chapter" id="vol-7" data-label="第七卷" data-title="文化史：九尾狐、稻荷、列那狐与尼克">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>第七卷</span><span>7 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">07</div>
+    <h1 class="chapter-title">文化史：九尾狐、稻荷、列那狐与尼克</h1>
+    <p class="chapter-epigraph">在镜头之前，故事已经写了几千年。</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="vol-7-s1">一只跨界的动物</h2>
+<p>在镜头和录音之前，人类已经给狐狸配了几千年的音。</p>
+<p>中国的庙会上，孩子戴一张狐狸面具，白底红纹，眼角上挑；日本的神社门口，一对石狐蹲在鸟居两侧，脖子上系着红布；欧洲的童话书里，狐狸穿着外套，站在葡萄架下，说“这葡萄是酸的”。三个地方，三种狐狸，三种语气。</p>
+<p>狐狸是一种“跨界”的动物。它住在村边，不在村外；它夜里来，白天走；它像狗，但不是狗；它吃鸡，也吃老鼠；它美丽，也危险；它可以被讲成祥瑞，也可以被讲成妖魅。它站在一条线上：野生与家养之间，自然与文化之间，已知与未知之间。</p>
+<p>人类对跨界的东西，总是又着迷又害怕。着迷，是因为它像我们；害怕，是因为它不完全像。狐狸的故事，大多长在这条线上。</p>
+<p>这一卷要讲的，是这些故事怎样一层一层地叠起来，最后叠成了今天那张“萌图”。</p>
+<h2 id="vol-7-s2">一、中国：从祥瑞到妖魅</h2>
+<p>中国最早的狐狸，不是萌物，是神物。</p>
+<p>《山海经·南山经》写青丘之山：“有兽焉，其状如狐而九尾，其音如婴儿，能食人，食者不蛊。”九条尾巴，声音像婴儿，会吃人，但吃了它的肉，就不会中邪。一个形象里，同时有诱惑、危险、药用价值。这是中国狐狸的起点：它从来不是单纯的可爱。</p>
+<p>到了汉代，九尾狐的地位变了。它成了祥瑞，出现在画像石、帛画、墓室里，常常跟在西王母身边。九尾象征子孙繁衍，白色象征王者之德。大禹在涂山遇见九尾白狐、娶涂山氏的故事，也被解释成天命的征兆。这个时期的狐狸，是吉利的，是通天的，是“王者兴盛”的注脚。</p>
+<p>然后它又变了。</p>
+<p>从魏晋志怪到唐代传奇，再到明清小说，狐狸越来越像人，也越来越危险。它会变成美女，会读书，会写诗，会勾引书生，会吸人精气。到了《封神演义》，妲己被写成九尾狐狸精，狐狸彻底背上了“祸国”的罪名。“狐狸精”这个词，从此在中国人的嘴里，既是骂人，也是一种承认：承认它有魅力，有手段，有让人失控的能力。</p>
+<p>但狐狸也不总是坏的。</p>
+<p>蒲松龄写《聊斋志异》，写了很多狐狸。她们有情有义，有才有貌，有时比人更像人。她们会爱，会恨，会报复，会报恩；她们不讲人间的礼法，却常常比讲礼法的人更讲道义。蒲松龄写狐，写的不是动物，是被礼法压住的人，是那些不能明说的欲望和正义。</p>
+<p>所以，中国的狐狸，是一个矛盾体：祥瑞与妖魅，神圣与淫邪，聪明与狡猾，情义与祸害。它没有一个固定的道德标签。它随故事变，随讲述者变，随时代变。</p>
+<p>这种矛盾，恰恰是狐狸的魅力。它不像龙那样高高在上，也不像狗那样忠诚可驯。它在人间和山林之间来回，在道德和欲望之间来回，在真话和谎言之间来回。它是“边界”本身。</p>
+<h2 id="vol-7-s3">二、日本：稻荷的使者与 kawaii 的祖先</h2>
+<p>日本的狐狸，走了一条不同的路。</p>
+<p>在日本，狐狸最正式的身份是稻荷神的使者。稻荷神管五谷、生意、财富；神社门口的一对狐像，是神的“侍从”，不是神本身。它们有时叼着钥匙——粮仓的钥匙；有时叼着宝珠——财富的象征；有时叼着卷轴——智慧的象征。人们给它们系红布、供油炸豆腐（稻荷寿司），因为传说狐狸爱吃。</p>
+<p>狐狸在日本民间故事里，也是会变的。它会变成女人，嫁给男人，生下孩子，然后因为被发现而离开。这类“狐妻”故事，和中国“狐狸精”有相似之处，但语气常常更温柔：狐狸不是单纯的祸害，它是有情、有恩、有遗憾的。</p>
+<p>到了江户时代，狐狸开始被商品化。狐面成了祭典的玩具，狐狸造型的摆件、印花、玩具出现在市场上。狐狸从神社的侍从，变成了街头的形象；从神圣的，变成了好玩的。</p>
+<p>这一步很关键。因为“好玩”是“可爱”的前身。</p>
+<p>二十世纪以后，日本的“kawaii”文化兴起。Hello Kitty 在 1974 年诞生，Sanrio 把“小、圆、软、无害”做成了一整套产业。狐狸也进了这套产业：卡通里的狐狸、吉祥物里的狐狸、文具上的狐狸、游戏里的狐狸。它们不再会变人，不再会魅惑，不再会吃人；它们只是圆脸、大眼、蓬松尾巴的小动物。</p>
+<p>今天，宫城县的藏王狐狸村，一百多只狐狸在一个院子里，游客可以近距离拍照、投喂、抚摸。照片里的狐狸趴在人的腿上，像狗，像猫，像毛绒玩具。照片外的狐狸，会打架、会得皮肤病、会近亲繁殖、会被拴住。同一个地方，两套叙事；游客带走前一套，动物福利组织记录后一套。</p>
+<p>从稻荷的使者，到祭典的狐面，到 kawaii 的吉祥物，到狐狸村的拍照道具——狐狸在日本文化里，走了一条从“神圣”到“好玩”再到“可消费”的路。这条路，也是全球“萌经济”的缩影。</p>
+<h2 id="vol-7-s4">三、欧洲：列那狐与“狡猾”的诞生</h2>
+<p>欧洲的狐狸，最早是寓言里的角色。</p>
+<p>伊索寓言里，狐狸是聪明的，但常常聪明反被聪明误。《狐狸和葡萄》里，它够不到葡萄，就说葡萄是酸的；《狐狸和乌鸦》里，它骗乌鸦张嘴，叼走了奶酪；《狐狸和面具》里，它说“多美的头啊，可惜没有脑子”。这些故事把狐狸写成一个会说话、会算计、会自嘲的角色。它不神圣，也不可爱；它是“聪明”的拟人化。</p>
+<p>中世纪，狐狸变成了列那狐（Reynard）。</p>
+<p>《列那狐的故事》是十二、十三世纪法国的一组叙事诗，后来传遍欧洲。列那狐是一个反英雄：它狡猾、残忍、能言善辩，专门捉弄狼、熊、狮子，甚至国王。它一次次被审判，一次次逃脱；它不讲道德，却常常赢。老百姓喜欢它，因为它嘲弄的是权力；教会不喜欢它，因为它嘲弄的是秩序。</p>
+<p>列那狐的形象，奠定了欧洲狐狸的核心性格：<strong>狡猾</strong>。英文里的 “foxy” 既有“狡猾的”，也有“性感的”；“fox” 既可以指狐狸，也可以指一个精明的人。狐狸在欧洲文化里，从来不是“萌”的代名词；它是智谋、欺骗、越界的代名词。</p>
+<p>还有一层：狩猎。英国的猎狐传统，把狐狸变成了贵族运动的猎物。红色外套、猎犬、号角、骑马追狐——这套仪式持续了几百年，直到 2004 年《狩猎法》禁止用狗猎狐。在猎狐的叙事里，狐狸是“害兽”，是“对手”，是“值得尊敬的猎物”；它不是宠物，也不是萌物。</p>
+<p>所以，欧洲的狐狸，是“聪明而危险”的。它不像中国狐狸那样缠着情欲，也不像日本狐狸那样被商品化；它是寓言里的智者，是叙事诗里的捣蛋鬼，是猎场上的对手。</p>
+<h2 id="vol-7-s5">四、现代：从罗宾汉到尼克·王尔德</h2>
+<p>狐狸真正变成“可爱”，是二十世纪以后的事，尤其是影像工业起来以后。</p>
+<p>1973 年，迪士尼的《罗宾汉》让狐狸穿上衣服，成了英雄。罗宾汉是狐狸，约翰王子是狮子，蛇是顾问，鸡是村民。狐狸第一次在大银幕上，不是“狡猾的骗子”，而是“迷人的反叛者”。它有一个标志性的表情：嘴角微微上扬，眼睛半眯，像在笑，又像在算计。这个表情，后来成了“狐狸脸”的模板。</p>
+<p>1981 年，《狐狸与猎狗》把狐狸变成了童年的象征。小狐狸和小猎狗一起长大，然后被命运分开。这个故事的核心不是“狡猾”，是“失去”。狐狸第一次让观众哭。</p>
+<p>2009 年，韦斯·安德森的《了不起的狐狸爸爸》把狐狸变成了中产焦虑的化身。它偷鸡，不是因为它坏，是因为它改不了“野性”；它想做个好父亲，又忍不住去干一票。狐狸第一次让观众笑完以后，有点心酸。</p>
+<p>2016 年，《疯狂动物城》的尼克·王尔德，把“狐狸”变成了一个关于偏见的故事。尼克小时候想加入童子军，因为他是狐狸，被同伴套上嘴套。长大后，他学会了用“狡猾”保护自己：你们觉得狐狸狡猾，那我就狡猾给你们看。狐狸第一次在大银幕上，不是“它本来就这样”，而是“你们把它变成了这样”。</p>
+<p>这些角色，一层一层地给狐狸加了新的东西：英雄、朋友、父亲、被偏见伤害的普通人。它们都有一个共同点：狐狸是“像人的动物”。它会说话，会穿衣服，会爱，会失去，会反抗。它离人很近，近到我们可以把自己的故事放进它的身体里。</p>
+<p>再往后，是互联网。</p>
+<p>2013 年，挪威的喜剧组合 Ylvis 发了一首《The Fox (What Does the Fox Say?)》。歌里问：狐狸到底怎么叫？然后给出一串完全瞎编的声音：ring-ding-ding、wa-pa-pa-pa、hatee-hatee-hatee-ho。这首歌在全球爆红，成了病毒视频。它的笑点，恰恰在于“我们不知道狐狸怎么叫”。我们给狐狸编了那么多故事，却很少认真听它的声音。</p>
+<p>这首歌是一个转折点：狐狸从“故事里的角色”，变成了“互联网的梗”。梗不需要准确，只需要好玩；不需要生态，只需要表情。狐狸的“萌”，在梗文化里被进一步提纯：它不再需要是祥瑞、妖魅、智者、对手；它只需要是一张脸，一个动作，一段配乐。</p>
+<h2 id="vol-7-s6">五、文化怎样塑造“可爱”</h2>
+<p>现在，把三条线放在一起看。</p>
+<p>中国的狐狸，是“魅”：美、危险、越界、情欲。它勾人，也害人；它讲情义，也讲报复。它不是一个安全的形象。</p>
+<p>日本的狐狸，是“使者”和“玩物”：从稻荷的神使，到祭典的狐面，到 kawaii 的吉祥物，再到狐狸村的拍照道具。它一步一步地从神圣走向可爱，从可爱走向可消费。</p>
+<p>欧洲的狐狸，是“智者”和“对手”：寓言里的聪明，叙事诗里的狡猾，猎场上的猎物。它不萌，它精明。</p>
+<p>三条线，最后在二十世纪的影像工业里汇合：迪士尼、动画、电影、短视频。汇合的结果，是一个“全球通用的狐狸”：橘红、白胸、蓬松尾巴、嘴角上扬、眼睛半眯。它既聪明又可爱，既野性又亲人，既危险又无害。它是一个被提纯的形象，一个被去掉了气味、声音、牙齿和生态的形象。</p>
+<p>这个形象，不是狐狸。它是“狐狸”这个词在人类文化里的总和。</p>
+<p>所以，当我们说“狐狸卖萌”的时候，我们说的不是一只狐狸的动作，是一段几千年的观看史。中国的狐仙、日本的稻荷、欧洲的列那狐、迪士尼的罗宾汉、互联网的梗图——它们都在那张脸上留下了笔画。狐狸只是恰好长成了那个样子，然后被我们认成了“它一直就是这样”。</p>
+<p>下一卷讲经济：这张脸怎样变成流量、宠物、门票和毛皮。文化给了它意义，市场给了它价格。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#vol-6"><span>上一章</span>第六卷 · 声音：从 gekkering 到午夜尖叫</a><a class="next" href="#vol-8"><span>下一章</span>第八卷 · 经济：流量、毛皮与狐狸村</a></nav>
+</section>
+<section class="chapter" id="vol-8" data-label="第八卷" data-title="经济：流量、毛皮与狐狸村">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>第八卷</span><span>8 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">08</div>
+    <h1 class="chapter-title">经济：流量、毛皮与狐狸村</h1>
+    <p class="chapter-epigraph">同一张脸，在不同的市场里有不同的价格。</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="vol-8-s1">一张脸的报价单</h2>
+<p>一张狐狸照片值多少钱？</p>
+<p>这个问题有几个不同的答案。</p>
+<p>对摄影师来说，它可能值一张图库授权费，一次展览的入场券，或者一条品牌合作。对平台来说，它值一次停留、一次点赞、一次转发；这些数据会被打包成广告库存，卖给下一个想让你停留的人。对毛皮商来说，它值一张皮，按等级、尺寸、颜色定价。对狐狸村来说，它值一张门票，一次投喂体验，一张合影。对保护组织来说，它值一次捐款，一次转发，一次“请关注这个物种”的点击。</p>
+<p>对狐狸来说，它值什么？</p>
+<p>它没有得到授权费，没有得到门票分成，没有得到广告收入。它得到的是：被拍、被摸、被喂、被装箱、被运输、被剥皮，或者被留在原地，继续做一只狐狸。</p>
+<p>这一卷要讲的，是这张脸在经济里的旅行：从镜头到平台，从平台到商店，从商店到养殖场，从养殖场到拍卖行。每一站，价格都不一样；每一站，狐狸都不在收款人那一栏。</p>
+<h2 id="vol-8-s2">一、流量：注意力的生意</h2>
+<p>先讲流量。</p>
+<p>可爱动物内容是互联网上最稳定的“低成本、高回报”内容之一。拍一只狐狸，不需要剧本，不需要演员，不需要布景；它只要跳一下、回头一下、打个哈欠，就能让人停下来。停下来，就是钱。</p>
+<p>平台的算法喜欢几种东西：脸、眼睛、运动、反差。狐狸恰好都有。它的脸有辨识度，橘红加白，缩略图里都能认出来；它的眼睛大，直视镜头的时候，观众会觉得“它在看我”；它的动作有“拟人感”，打哈欠、伸懒腰、歪头、扑空，都像人的某种状态；它还有反差：这么可爱的动物，居然会尖叫，居然会杀生，居然会翻垃圾桶。反差带来评论，评论带来流量。</p>
+<p>于是，狐狸成了一种“内容资产”。</p>
+<p>摄影师追着狐狸拍，越近越好；视频博主追着狐狸拍，越戏剧化越好；平台把最容易被停留的几秒推到前面；观众在评论区说“好可爱”“想养”“求地址”。这条链条上，每一个环节都在增值，只有狐狸没有。</p>
+<p>这不是说所有拍狐狸的人都在剥削。很多野生动物摄影师非常克制：用长焦，不靠近，不投喂，不干扰；拍到了是运气，拍不到就走。但流量的逻辑会惩罚克制：你拍得越近，画面越冲击；你拍得越久，故事越完整；你越常去，越容易“养成”一只会配合的狐狸。克制的人流量少，不克制的人流量多；算法不区分。</p>
+<p>这就产生了一个“内容动物”的问题：一只狐狸如果反复出现在同一个地点，反复被人拍，它会习惯化；习惯化让它更靠近人；更靠近人让它更容易被拍；更容易被拍让它更红；更红让它被更多人追。这个循环对观众是福利，对狐狸是风险。</p>
+<p>你看见的那张“它在笑”的照片，可能是摄影师等了三个小时、拍了五百张、选了一张；也可能是有人用食物把它引到镜头前，拍了十张，选了最可爱的一张。两种照片看起来一样，背后的伦理差很远。</p>
+<h2 id="vol-8-s3">二、宠物贸易：把“驯化”当卖点</h2>
+<p>比流量更直接的生意，是卖狐狸。</p>
+<p>“ domesticated fox”这个词，在宠物市场上很有魔力。它暗示：这只狐狸不怕人，可以养在家里，像狗一样。配上视频里狐狸躺在沙发上的画面，很少有人能不动心。</p>
+<p>但“驯化”这个词，在市场上被用得很松。它可能指俄罗斯实验里经过几十代选择的种群；可能指在笼子里繁殖了几代、不怕人的个体；可能指从小被人抱大、已经习惯人的幼狐；也可能只是营销话术，意思是“这只狐狸比较乖”。</p>
+<p>价格不菲。一只“驯化狐”可以卖到几千美元，稀有毛色更贵。买家从网上看到视频，联系繁殖者，付钱，收货；有的人开车跨州去取，有的人通过托运收到一只装在笼子里的幼狐。幼狐很可爱，像小狗，像小猫，像毛绒玩具。然后它长大了。</p>
+<p>长大的狐狸，仍然是一只狐狸。它会用尿标记领地，味道很重；它会挖洞，把地板、沙发、花园翻得一团糟；它会咬东西，咬电线、咬鞋子、咬门框；它会在发情期尖叫，在夜里叫，叫得邻居投诉；它需要很大的活动空间，需要嗅闻、挖掘、探索，需要比公寓更多的东西。它可能亲人，但它的“亲”不等于“适合”。</p>
+<p>然后就是弃养。有的被送到庇护所，有的被转卖，有的被放归（这通常是非法的，也是致命的），有的被安乐死。庇护所里有很多“前宠物狐”：它们不怕人，也不会野外生存；它们卡在两个世界之间，哪边都不完全属于。</p>
+<p>法律是一张补丁拼起来的网。英国把赤狐列入《危险野生动物法》的附表，私人饲养需要许可；中国把赤狐列入“三有”保护名录，捕捉、交易、饲养受野生动物保护法约束；美国各州规定不同，有的允许，有的禁止，有的要求许可证；其他国家各有各的规矩。跨州、跨国交易，常常利用这些补丁之间的缝隙。</p>
+<p>“驯化”是卖点，“适合家养”是暗示，“可爱”是广告。三者之间，隔着很远的距离。</p>
+<h2 id="vol-8-s4">三、狐狸村：旅游的凝视</h2>
+<p>日本宫城县的藏王狐狸村，是另一个市场。</p>
+<p>一百多只狐狸在一个院子里，游客买票进来，可以喂食、拍照、在指定区域抱狐狸。宣传照里的狐狸，趴在人的腿上，眼睛半闭，像一只大猫；游客的笑容和狐狸的毛色，在雪地里很上镜。</p>
+<p>这个村子是一个旅游产品。它卖的是“近距离接触”：在城市里，你看见狐狸是在屏幕里；在这里，你看见的是毛、温度、气味、重量。这种体验很稀缺，所以有人愿意付钱，有人愿意坐新干线来。</p>
+<p>但它也是一个动物福利的争议点。狐狸密度高，容易打架；伤口、皮肤病、近亲繁殖、应激行为，都被动物福利组织记录过；游客的抚摸、抱举、围观，对狐狸是压力；有些狐狸被拴住，有些被关在小笼子里。照片里的“温顺”，可能是习惯化，可能是疲惫，可能是生病。</p>
+<p>这不是说所有狐狸村都一样，也不是说所有游客都在作恶。它说的是一个结构性问题：当“可爱”变成门票，动物就会被打造成“可爱的样子”；当“可爱的样子”需要近距离，动物就会失去距离；当动物失去距离，它的福利就会变成成本。</p>
+<p>旅游业的逻辑是“看见”。野生动物保护的逻辑是“不打扰”。这两个逻辑，在狐狸村门口撞上了。</p>
+<h2 id="vol-8-s5">四、毛皮：同一张脸的另一种价格</h2>
+<p>现在，把镜头转到另一个地方。</p>
+<p>不是雪地，不是神社，不是狐狸村。是一个养殖场。一排排笼子，狐狸在里面来回走，走同样的路线，转同样的圈。它们的毛色被选过：银黑、蓝灰、雪白；它们的身体被养得比野生同类更大；它们的一生，从出生到拍卖，都在笼子里。</p>
+<p>狐狸毛皮的主要产品是银狐和蓝狐（北极狐的养殖变种）。欧洲的芬兰、波兰是重要产地；中国、北美也有养殖。每年有数百万只狐狸被养殖、宰杀、剥皮，进入服装、配饰、毛领、钥匙扣的市场。这个数字在不同来源里不一样，但“数百万”是一个保守的量级。</p>
+<p>毛皮养殖的福利问题，已经被记录了几十年：笼子太小，狐狸无法正常行走、挖掘、探索；单调的环境导致刻板行为（来回走、咬笼子、自残）；运输和宰杀过程中的应激；疾病和伤口的处理不足。欧洲一些国家已经禁止或限制毛皮养殖；另一些国家仍在争论。2023 年前后，芬兰的毛皮场爆发高致病性禽流感，大量狐狸和水貂被扑杀，也让“养殖场是公共卫生风险点”这个问题重新进入公众视野。</p>
+<p>这里有一个很刺眼的对比：同一张脸，在屏幕上是“萌”，在养殖场里是“等级”。你在短视频里看见的狐狸，和在毛皮拍卖行里被编号的狐狸，是同一个物种，甚至可能是同一个毛色变种。银狐实验用的银狐，本来就是毛皮农场的动物；别利亚耶夫的“驯化精英”，和毛皮大衣，共享同一个起源。</p>
+<p>这不是说每个喜欢狐狸的人都在支持毛皮产业。大部分人只是不知道。毛皮被做成毛领、钥匙扣、装饰边，标签上不写“狐狸”，只写“真毛”“进口毛”“天然毛”。信息断了，价格就藏起来了。</p>
+<h2 id="vol-8-s6">五、保护：可爱的预算</h2>
+<p>狐狸还是保护经济学里的一个案例。</p>
+<p>保护资金是有限的，注意力也是有限的。大熊猫、老虎、大象、鲸鱼，拿走了大部分公众注意力；它们有照片、有故事、有吉祥物、有“旗舰物种”的身份。狐狸的位置很尴尬：它够有名，但不够濒危；它够可爱，但太常见。人们觉得“它到处都是，不需要保护”。</p>
+<p>这就是“常见物种的忽视”。一个物种如果数量还多，就不容易拿到保护预算；等到数量不多的时候，可能已经晚了。狐狸在全球范围内不算濒危，但在一些地区，局部种群在下降；一些岛屿和特有的狐狸物种，处境非常危险。</p>
+<p>岛屿灰狐是一个罕见的成功故事。加州海峡群岛的岛屿灰狐，1999 年在圣米格尔岛只剩十几只；经过圈养繁殖、迁移、疫苗和栖息地管理，整个物种在二十年内恢复到数千只，部分亚种从濒危降为受威胁。它的恢复，靠的是集中的科学投入和政策执行，不是“可爱”本身。</p>
+<p>达尔文狐不到一千只，埃塞俄比亚狼约五百只，它们没有狐狸村，没有表情包，也没有稳定的保护预算。它们的“可爱”不够传播，它们的“濒危”不够戏剧化。魅力是一种资源，资源分配从来不均。</p>
+<h2 id="vol-8-s7">六、谁在付钱，谁在收钱</h2>
+<p>把这几条链子放在一起，你会看到一张价值地图。</p>
+<p><strong>内容链：</strong> 狐狸 → 摄影师 → 平台 → 广告商 → 观众。狐狸提供画面，摄影师提供技术，平台提供分发，广告商提供钱，观众提供注意力。狐狸拿不到分成。</p>
+<p><strong>宠物链：</strong> 繁殖者 → 买家 → 兽医 → 庇护所。狐狸提供“可爱”，繁殖者提供供应，买家提供需求，兽医提供维修，庇护所提供善后。狐狸承担风险。</p>
+<p><strong>旅游链：</strong> 狐狸村 → 游客 → 地方经济。狐狸提供“近距离”，村子提供门票，游客提供收入，地方提供土地和政策。狐狸承担密度和压力。</p>
+<p><strong>毛皮链：</strong> 养殖场 → 拍卖行 → 品牌 → 消费者。狐狸提供皮，养殖场提供规模，拍卖行提供价格，品牌提供设计，消费者提供需求。狐狸承担全部。</p>
+<p>每一条链子上，狐狸都在最底端；每一条链子上，都有人说“这是为了狐狸好”或者“这是传统”或者“这是市场”。市场不看狐狸，市场看产品。产品可以是照片、宠物、门票、毛皮；狐狸只是原料。</p>
+<p>这不是一个容易解决的问题。你不能简单地“取消需求”：人们喜欢狐狸，这是真实的；人们想看见狐狸，这是真实的；人们想摸狐狸，这也是真实的。问题不是喜欢，是喜欢的方式；不是市场，是市场的成本由谁承担。</p>
+<h2 id="vol-8-s8">本卷小结</h2>
+<p>这一卷讲了三件事。</p>
+<p>第一，狐狸的脸在几个不同的市场里流通：注意力、宠物、旅游、毛皮。每个市场的价格不一样，狐狸得到的回报也不一样；大多数时候，它得到的是零。</p>
+<p>第二，市场会把“可爱”变成卖点，把“驯化”变成营销，把“近距离”变成门票，把“毛皮”变成标签。信息越少，价格越隐蔽；消费者越远，成本越不可见。</p>
+<p>第三，保护也受注意力经济的影响。可爱的物种更容易拿到预算，常见的物种更容易被忽视；狐狸在这两者之间，既受益，也受害。</p>
+<p>下一卷讲保护：岛屿灰狐、达尔文狐、埃塞俄比亚狼，以及“魅力”在保护里到底值多少钱。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#vol-7"><span>上一章</span>第七卷 · 文化史：九尾狐、稻荷、列那狐与尼克</a><a class="next" href="#vol-9"><span>下一章</span>第九卷 · 保护：魅力的不平等</a></nav>
+</section>
+<section class="chapter" id="vol-9" data-label="第九卷" data-title="保护：魅力的不平等">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>第九卷</span><span>6 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">09</div>
+    <h1 class="chapter-title">保护：魅力的不平等</h1>
+    <p class="chapter-epigraph">可爱是一种资源，资源分配不均。</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="vol-9-s1">一个岛上的十五只狐狸</h2>
+<p>1999 年，加利福尼亚海峡群岛，圣米格尔岛。</p>
+<p>岛不大，风很大，草很低。几年前，这里的岛屿灰狐还很常见；它们在营地附近翻垃圾，在草丛里追昆虫，在望远镜的视野里跑来跑去。然后，数量开始掉。先是少了几只，然后是一半，然后是一整片山坡都看不见了。</p>
+<p>那一年，研究人员在岛上找到的岛屿灰狐，只剩下十几只。</p>
+<p>不是十几只在一个区域，是十几只在整个岛上。一个物种的一个亚种，缩到了两位数。再少一点，就是零。</p>
+<p>岛屿灰狐是灰狐的近亲，体型比大陆的灰狐小得多，像一只大猫。它在海峡群岛上生活了上万年，没有大型捕食者，不怕人，行动不远。这种“岛上的温顺”，在人类看来很可爱；在生态里，是致命的弱点。</p>
+<p>崩溃的原因，不是单一的。</p>
+<p>二十世纪，白头海雕因为 DDT 在食物链里富集而数量锐减；白头海雕吃鱼、吃腐肉，本来不太碰狐狸。白头海雕走了，金雕来了。金雕是另一种猛禽，体型大，捕猎强，狐狸在它的食谱上。与此同时，人类把野猪带上了岛；野猪翻土、找根茎，留下了大量食物，也养活了更多的金雕。金雕多了，狐狸少了。再加上疾病、栖息地退化、人类活动，几个压力叠在一起，岛屿灰狐撑不住了。</p>
+<p>这不是一个“可爱动物灭绝”的故事。这是一个“岛屿生态在几个外力同时作用下失衡”的故事。狐狸只是最显眼的那个指标。</p>
+<h2 id="vol-9-s2">一、岛屿灰狐：一个成功故事</h2>
+<p>接下来的二十年，是一场昂贵的抢救。</p>
+<p>研究人员把剩下的狐狸抓起来，放进圈养繁殖设施；给它们打疫苗，防犬瘟热和狂犬病；监测它们的繁殖、健康、遗传多样性；在岛上清除野猪，减少金雕的食物；把金雕迁走；等狐狸数量恢复，再一只一只放归。</p>
+<p>数字慢慢回来了。圣米格尔岛从十几只，回到几十只，再回到几百只；其他岛屿的种群也在恢复。整个物种从濒危的边缘，回到了数千只。2016 年，部分亚种从“濒危”降为“受威胁”；这是一个罕见的、可以写进教科书的恢复案例。</p>
+<p>这个案例有几个关键点。</p>
+<p>第一，它是集中的。不是“顺其自然”，是“每一只都管”。圈养、疫苗、迁移、监测，每一步都要钱、要人、要政策。</p>
+<p>第二，它是科学的。种群遗传学、疾病生态学、捕食者—猎物关系，都被用来做决策；不是凭感觉，不是凭“狐狸很可爱”。</p>
+<p>第三，它是政治的。清除野猪、迁移金雕，都会碰到利益相关者；没有土地管理者、环保组织、科研机构的合作，做不成。</p>
+<p>第四，它是幸运的。岛屿是一个相对封闭的系统，问题可以被定位，措施可以被执行；大陆上的生态问题，往往没有这么清晰的边界。</p>
+<p>所以，岛屿灰狐的故事，既是一个希望，也是一个警告。希望是：如果投入足够，物种可以回来。警告是：不是每个物种都有这样的投入，也不是每个物种都住在可以“关门抢救”的岛上。</p>
+<h2 id="vol-9-s3">二、达尔文狐与埃塞俄比亚狼</h2>
+<p>把镜头移到南美和非洲，故事就没那么顺利了。</p>
+<p>达尔文狐住在智利的奇洛埃岛和大陆的一小片森林里，数量不到一千只。它比赤狐小，腿短，毛色深，脸有点像猫。它的威胁不是金雕，是栖息地丧失、家犬传播的疾病、人类的捕杀。它的名字来自达尔文，但它的名气远不如达尔文；它没有表情包，没有狐狸村，也没有稳定的保护预算。</p>
+<p>埃塞俄比亚狼住在埃塞俄比亚的高原上，数量约五百只。它不是狐狸，是犬属的成员；但它的脸狭长，毛色红棕，看起来很像狐狸。它吃高原鼠兔，社会结构复杂，生活在群体的家庭里。它的最大威胁是狂犬病和犬瘟热——来自家犬。一个犬类传染病，可以在一个小的、密集的种群中迅速传播；一次爆发，可能带走种群的很大一部分。</p>
+<p>这两个物种，和岛屿灰狐一样，都是“狐狸”这个词的边缘成员：一个不是真正的狐属，一个是岛屿特有的灰狐近亲。它们共享一个命运：<strong>足够可爱，但不够有名；足够濒危，但不够“旗舰”。</strong></p>
+<p>保护经济学有一个残酷的规律：钱跟着注意力走。大熊猫、老虎、大象、鲸鱼，有全球性的粉丝群；它们的照片能卖、能募捐、能上头条。达尔文狐和埃塞俄比亚狼，只有专业的保护工作者和少数爱好者知道；它们的照片，很难让一个普通人在手机上停下来。</p>
+<p>这不是说保护工作者不努力。他们非常努力，常常在很艰苦的条件下工作。问题是结构：注意力是稀缺的，预算是稀缺的，政治意愿是稀缺的；三个稀缺叠在一起，决定了一个物种能不能被救。</p>
+<h2 id="vol-9-s4">三、魅力的不平等</h2>
+<p>“魅力物种”（charismatic species）是保护生物学里的一个概念：那些能引起公众喜爱、能带来捐款和政治支持的物种。大熊猫是典型的魅力物种；老虎、狮子、大象、考拉、企鹅，也是。它们被用作“旗舰物种”（flagship species），用一个可爱的形象，去保护一整片栖息地。</p>
+<p>这个策略有它的道理：人不是按生态价值捐款的，人是按情感捐款的。一张小熊猫的照片，可能比一份生物多样性报告更能打动人心。用魅力换保护，是一种务实的交易。</p>
+<p>但它也有代价。</p>
+<p>第一，资源会倾斜。魅力物种拿走了大部分预算，非魅力物种只能分到零头。啮齿类、两栖类、昆虫、真菌、土壤生物，很多在消失，却没有人拍它们。它们不“可爱”，不“可怕”，不“有用”；它们只是生态系统的底座。</p>
+<p>第二，形象会简化。为了保护一个物种，我们把它简化成一个符号：大熊猫是“可爱的国宝”，老虎是“威猛的王者”，狐狸是“狡猾的精灵”。符号能传播，但符号不是生态。符号会掩盖物种的真实需求：栖息地、猎物、疾病、迁徙通道。</p>
+<p>第三，常见物种会被忽视。狐狸在全球范围内不算濒危，所以人们觉得“它不需要保护”。但“常见”是一个局部判断：在英国的某些城市，狐狸很多；在东南亚的一些地区，狐狸的种群在下降；在岛屿上，狐狸的亚种可能只剩几百只。常见和濒危，不是同一个尺度上的事。</p>
+<p>狐狸在魅力地图上的位置，很尴尬：它够有名，所以能进表情包；它不够濒危，所以拿不到旗舰预算；它够常见，所以人们不觉得它需要帮助；它又足够多样，所以有些种群真的很危险。</p>
+<h2 id="vol-9-s5">四、狐狸的未来</h2>
+<p>狐狸的未来，不是一个未来，是很多个未来。</p>
+<p><strong>气候变化的未来。</strong> 北极狐是气候变暖的直接受害者：海冰减少，旅鼠周期变化，红狐北扩。红狐比北极狐大、比北极狐强、比北极狐更适应人类环境；它向北走，和北极狐竞争，甚至杂交。在一些地区，北极狐的数量在下降，红狐在上升。这不是“谁更可爱”的问题，是“谁更能适应一个变暖的北极”。</p>
+<p><strong>城市化的未来。</strong> 城市狐狸会继续增加。城市提供食物、庇护、少有天敌；人类提供垃圾、花园、棚子、宠物粮。冲突也会增加：路杀、疾病、投诉、捕杀。城市狐狸的管理，会从“要不要有狐狸”变成“怎样和狐狸共居”。</p>
+<p><strong>疾病的未来。</strong> 狂犬病、犬瘟热、疥螨，都是狐狸和家犬、人类之间的接口。疫苗、监测、垃圾管理、宠物管理，是打断传播链的关键。疾病不关心物种可不可爱；它只关心密度、接触、免疫。</p>
+<p><strong>保护的未来。</strong> 岛屿灰狐的模式——集中、科学、昂贵——不可能复制到每一个物种。更多的保护，会依赖“景观尺度”的管理：连接栖息地、保护食物网、减少人与野生动物的冲突。狐狸不是孤立的；它吃老鼠，也被金雕吃；它住在森林边缘，也住在城市边缘。保护狐狸，往往意味着保护一整张网。</p>
+<h2 id="vol-9-s6">五、可爱能救一只狐狸吗</h2>
+<p>回到那个问题：可爱能救一只狐狸吗？</p>
+<p>能，但不能只靠可爱。</p>
+<p>可爱能带来注意力，注意力能带来钱，钱能带来圈养设施、疫苗、监测、反盗猎、栖息地保护。岛屿灰狐的恢复，离不开公众对“岛屿上的小狐狸”的喜爱；没有那些照片、故事、捐款，项目很难启动。</p>
+<p>但可爱也会带来误导。它让人以为保护就是“救可爱的动物”，忽略了生态系统的复杂性；它让人以为“常见”等于“安全”，忽略了局部种群的下降；它让人以为“拍照”等于“帮助”，忽略了距离、干扰、习惯化的代价。</p>
+<p>真正的保护，是把可爱当作入口，不是当作答案。你因为可爱而停下来，然后你开始了解：它吃什么，住在哪里，怕什么，需要什么，和谁共享这片土地。了解之后，你的喜欢会变得更有用。</p>
+<h2 id="vol-9-s7">本卷小结</h2>
+<p>这一卷讲了三件事。</p>
+<p>第一，保护是有选择的。岛屿灰狐被救回来，是因为它住在一个可以“关门抢救”的岛上，因为有人愿意为它花钱、花时间、花政治资本。达尔文狐和埃塞俄比亚狼没有这样的条件。</p>
+<p>第二，魅力是不平等的。可爱的物种更容易被看见，常见的物种更容易被忽视；狐狸卡在中间，既受益，也受害。</p>
+<p>第三，可爱是入口，不是答案。它能带来注意力，但不能代替科学、政策、资金和长期的承诺。</p>
+<p>下一卷讲伦理：我们到底欠狐狸什么。不是“可爱”的债，是“共居”的债。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#vol-8"><span>上一章</span>第八卷 · 经济：流量、毛皮与狐狸村</a><a class="next" href="#vol-10"><span>下一章</span>第十卷 · 伦理：它没有在卖</a></nav>
+</section>
+<section class="chapter" id="vol-10" data-label="第十卷" data-title="伦理：它没有在卖">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>第十卷</span><span>7 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">10</div>
+    <h1 class="chapter-title">伦理：它没有在卖</h1>
+    <p class="chapter-epigraph">它没有在卖，我们也不必买。</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="vol-10-s1">四个选择</h2>
+<p>假设你在自家花园里看见一只狐狸。</p>
+<p>它不怕你，离你三米，看着你。你手里有一块面包。你的手机在口袋里。你的孩子在你身后。你有四个选择：</p>
+<p>喂它。</p>
+<p>拍它。</p>
+<p>赶它。</p>
+<p>什么都不做。</p>
+<p>四个选择，四种伦理。</p>
+<p>喂它，是把它当成客人，还是把它当成宠物？是善意，还是让它失去警戒？是建立关系，还是制造依赖？</p>
+<p>拍它，是记录，还是打扰？是分享，还是消费？是让它被看见，还是让它被追拍？</p>
+<p>赶它，是保护自己的空间，还是把它逼到更危险的地方？是划界，还是驱逐？</p>
+<p>什么都不做，是冷漠，还是尊重？是放任，还是给它留了一个“刚刚好的距离”？</p>
+<p>这一卷不打算给你一个标准答案。它想做的，是把这四个选择背后的东西摊开：我们为什么觉得它可爱，我们为什么想靠近它，我们为什么想拥有它，以及，我们到底欠它什么。</p>
+<h2 id="vol-10-s2">一、拟人化的三张面孔</h2>
+<p>第一件事，是拟人化。</p>
+<p>拟人化不是一种错误，也不是一种美德。它是一种工具，有三张面孔。</p>
+<p><strong>第一张面孔：类比。</strong> 我们说“狐狸害怕”“狐狸放松”“狐狸疼”，是因为我们观察到它的身体、声音、行为，和我们在相同状态下的表现相似。哺乳动物共享大量的神经和内分泌机制；恐惧、疼痛、依恋，不是人类独有的。这种拟人化，是科学的起点，不是科学的敌人。</p>
+<p><strong>第二张面孔：投射。</strong> 我们把自己的需要、欲望、故事，放到动物身上。它回头看我，是因为它喜欢我；它蹭我，是因为它爱我；它躺下，是因为它信任我。这些解读可能对，也可能错；错的时候，我们看见的不是狐狸，是自己。</p>
+<p><strong>第三张面孔：预测。</strong> 我们用拟人的语言，去预测动物的行为。“它想要食物”“它害怕那只狗”“它在护崽”。这种预测很好用，但它只是模型，不是事实。模型有用的时候，我们继续用；模型失效的时候，我们得换一个。</p>
+<p>Epley、Waytz 和 Cacioppo 在 2007 年提出拟人化的三因素理论：我们倾向于拟人化那些“看起来像有心智”的对象（elicited agent knowledge）、那些我们想理解和控制的对象（effectance motivation）、以及那些能缓解我们孤独的对象（sociality motivation）。狐狸三样都占：它有脸，有眼睛，有动作；它在我们身边，但我们不太懂它；它安静，独立，像一个可以倾诉的对象。</p>
+<p>所以，狐狸是一个特别容易被拟人化的动物。它不像鱼那样遥远，不像昆虫那样陌生，不像狼那样危险；它在“像”和“不像”之间，正好落在投射的黄金区间。</p>
+<p>德瓦尔提醒过另一面：人类也会“否认动物有人性”（anthropodenial）。为了维持人与动物的界线，我们拒绝承认明显的情感连续性：动物不疼，动物不哀悼，动物不爱，动物只是“程序”。这种否认，和过度拟人一样，是一种傲慢。</p>
+<p>伦理上的做法，不是选一边，而是同时持有两边：它像一个有感情的生命，但它不是一个人；它有它的体验，但它的体验不是我们的剧本。第三卷那张两列表格，不只是认识论工具，也是伦理工具：左列让你看见它，右列让你看见自己。</p>
+<h2 id="vol-10-s3">二、亲密与占有</h2>
+<p>第二件事，是想靠近。</p>
+<p>看见一只狐狸，很多人第一反应是“想摸”。这不是道德缺陷，是生理反应。可爱激活的是“想要”的回路：接近、抓取、占有。Aragón 等人 2015 年记录的“可爱侵略性”，就是这种冲动的过载版本：想揉、想捏、想咬一口。你自己也觉得奇怪，但身体就是这样。</p>
+<p>问题不在于“想摸”，问题在于“摸了之后”。</p>
+<p>想摸，可以变成看；看，可以变成了解；了解，可以变成保护。想摸，也可以变成买；买，可以变成养；养，可以变成弃养。同一条冲动，通向两个方向。</p>
+<p>宠物贸易最擅长的，就是把“想摸”变成“想买”。它给你看一段视频：狐狸躺在沙发上，肚皮朝上，让人摸。它不给你看另一段：狐狸在墙角撒尿，在夜里尖叫，在搬家时被塞进笼子。它卖的是“亲密”的画面，不是“亲密”的代价。</p>
+<p>“救援”的冲动，也有类似的风险。你在路边看见一只幼狐，孤零零的，很可怜；你把它带回家，喂它，保暖，发视频。但很多时候，母狐就在附近；她可能去找食物了，可能被你的气味吓走了，可能在远处看着。你把幼狐带走，不是救它，是绑它。野生动物救援的第一条规矩，常常是“如果你在乎，就把它留在那里”——先观察，先联系专业人员，不要用善意替它做决定。</p>
+<p>这里有一个很细的界线：<strong>照顾</strong>和<strong>控制</strong>。</p>
+<p>照顾，是回应对方的需要：它饿了，给它适合的食物；它伤了，给它专业的治疗；它需要空间，给它空间。控制，是回应自己的需要：我想摸它，我想拍它，我想让它属于我，我想让它证明我是一个好人。</p>
+<p>照顾和控制，常常长得很像。它们都披着“爱”的外衣。区别在于，当对方不需要你的时候，你能不能退开。</p>
+<h2 id="vol-10-s4">三、个体的狐狸与种群的狐狸</h2>
+<p>第三件事，是尺度。</p>
+<p>我们看见的是一只狐狸：它有脸，有动作，有一个晚上在墙头打哈欠的瞬间。保护管理看见的是一个种群：数量、密度、遗传多样性、疾病传播率。两个尺度，常常打架。</p>
+<p>一只狐狸掉进陷阱，你会想救它；一个种群过量，管理者会想捕杀一部分。一只狐狸得了疥螨，你会想给它上药；一个种群有狂犬病风险，管理者会想投放疫苗或限制活动。一只狐狸可爱，你会想喂它；一个种群因为投喂而集中、生病、被车撞，管理者会想阻止你。</p>
+<p>这不是说个体不重要。个体是伦理的起点：疼痛是个体的，死亡是个体的，恐惧是个体的。但种群是生态的起点：一个物种的延续，不是靠一只狐狸，是靠一个能繁殖、能适应、能和其他物种共存的群体。</p>
+<p>好的管理，要同时看见两个尺度：既看见这只狐狸的痛苦，也看见这个种群的未来；既不做“只见个体”的温情主义，也不做“只见种群”的冷酷计算。</p>
+<p>这很难。难到没有一套通用的答案。但至少，我们可以拒绝两种简化：把狐狸只当“可爱的个体”，或者只当“可管理的数字”。</p>
+<h2 id="vol-10-s5">四、它没有在卖，但它在付出</h2>
+<p>第四件事，是账。</p>
+<p>这本书一直在说：狐狸没有在卖萌，是我们在买。但“买”这个比喻，有一个地方会失效：在市场里，卖方至少是自愿的；在狐狸这里，它没有同意。</p>
+<p>它没有同意被拍，没有同意被摸，没有同意被养，没有同意被剥皮。它只是活在那里，长了一张让我们心动的脸，然后被卷进了一整套它不理解的交易。</p>
+<p>这就是“可爱”的伦理不对称：我们的愉悦，建立在它的成本上。成本可能是很小的——它被你看了一眼，继续走路；可能是很大的——它被关进笼子，被运输，被剥皮。大多数时候，成本在中间：它被打扰，被喂食，被习惯化，被车撞，被管理。</p>
+<p>我们欠它什么？</p>
+<p>不是“可爱”的债。它不需要为我们觉得它可爱负责。我们欠它的，是“共居”的债：我们占了它的栖息地，改了它的气候，杀了它的猎物，传播了我们的疾病，然后把它的形象印在杯子上。它没有要求进入我们的经济；是我们的经济进入了它的生活。</p>
+<p>这笔债，不能用“我喜欢它”来还。喜欢是起点，不是支付。支付是：给它留空间，给它留食物链，给它留不受打扰的夜晚；不喂它，不买它，不追拍它；支持保护，反对毛皮养殖，投票给愿意管垃圾、管流浪狗、管栖息地的人。</p>
+<p>这些事，没有一件像“摸一只狐狸”那么可爱。但它们才是还债的方式。</p>
+<h2 id="vol-10-s6">五、一种更好的喜欢</h2>
+<p>那么，什么是“更好的喜欢”？</p>
+<p>我想给它几个具体的形状。</p>
+<p><strong>看，但不摸。</strong> 野生动物最好的状态，是它不知道你在看。你用长焦，用望远镜，用远处的目光；你不追，不围，不投喂。你看见的是它的生活，不是它的表演。</p>
+<p><strong>拍，但不诱。</strong> 不为了一个镜头去放食物，不为了一个角度去逼近，不为了一个“萌”去打断它的捕猎、休息、育幼。好照片值得等；等不到，就不拍。</p>
+<p><strong>爱，但不买。</strong> 不买宠物狐，不买狐狸毛皮，不买“狐狸村”的近距离合影。你可以喜欢一个物种，而不拥有它的任何一部分。</p>
+<p><strong>帮，但不绑。</strong> 遇到受伤的狐狸，联系专业的救援；遇到幼狐，先观察，别急着“救”；遇到投喂的人，温和地解释，而不是羞辱。</p>
+<p><strong>喜欢，但允许它无聊。</strong> 狐狸不需要一直可爱。它可以尖叫，可以杀生，可以翻垃圾桶，可以在你花园里留下一坨粪便。它不需要为你的喜爱提供内容。它有权做一个不讨喜的动物。</p>
+<p>这些形状，不是戒律，是方向。它们不要求你变成圣人；它们只要求你在按下快门、伸出手、掏出钱包之前，多停一秒。</p>
+<h2 id="vol-10-s7">六、回到那面墙</h2>
+<p>现在，回到序里的那面墙。</p>
+<p>凌晨三点，一只狐狸站在院墙上，逆着路灯。它打了个哈欠，舔了舔鼻子，跳下墙，消失在灌木里。</p>
+<p>如果这本书没有白写，你现在看见的，应该不只是一个“可爱的瞬间”。你看见的是：一张被演化、发育、镜头和文化共同塑造的脸；一套被我们配上字幕的行为；一个在城市里学着和人保持距离的邻居；一个在流量、宠物贸易、旅游和毛皮之间被定价的物种；一个没有同意、也没有拒绝的活物。</p>
+<p>它没有在卖。</p>
+<p>我们也不必买。</p>
+<p>不必买它的照片，不必买它的亲近，不必买它的毛皮，不必买一个“我救过一只狐狸”的故事。我们可以只是看见它，然后让它走。</p>
+<p>这不是一个圆满的结局。狐狸还是会死，还是会被车撞，还是会在养殖场里被剥皮，还是会在狐狸村里被抱来抱去。一本书改变不了这些。但一本书可以改变一个读者看见狐狸的方式；一个读者可以改变一个邻居、一个消费者、一张选票。改变很小，但它是真的。</p>
+<h2 id="vol-10-s8">本卷小结</h2>
+<p>这一卷讲了四件事。</p>
+<p>第一，拟人化有三张面孔：类比、投射、预测。它可以是科学的起点，也可以是消费的借口。伦理的做法，是同时持有“它像我们”和“它不是我们”。</p>
+<p>第二，亲密很容易滑向占有。想摸、想拍、想养、想救，都是真实的冲动；但照顾和控制只差一步，区别在于对方不需要你的时候，你能不能退开。</p>
+<p>第三，个体和种群是两个尺度。好的管理要同时看见疼痛和未来；好的喜欢要同时看见一只狐狸和它的同类。</p>
+<p>第四，我们欠狐狸的不是“可爱”的债，是“共居”的债。还债的方式不浪漫：留空间、管垃圾、不投喂、不购买、支持保护、投票。</p>
+<p>下一卷是尾声。我们把镜头放下，回到那面墙。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#vol-9"><span>上一章</span>第九卷 · 保护：魅力的不平等</a><a class="next" href="#epilogue"><span>下一章</span>尾声 · 把镜头放下</a></nav>
+</section>
+<section class="chapter" id="epilogue" data-label="尾声" data-title="把镜头放下">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>尾声</span><span>3 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">尾</div>
+    <h1 class="chapter-title">把镜头放下</h1>
+    <p class="chapter-epigraph">它只是从这里经过。</p>
+  </header>
+  <div class="chapter-body">
+<p>一年以后，我又在凌晨听见了声音。</p>
+<p>还是那面墙。还是路灯。一只狐狸站在墙头，毛色暗红，胸口一撮白。它不一定是我去年看见的那一只；狐狸的寿命不长，城市的狐狸换得很快。但它站立的姿势很像：身体微微侧着，头朝下，像在算下一步。</p>
+<p>我的手伸向手机，停在半空。</p>
+<p>然后放了下来。</p>
+<p>我没有拍。没有开灯。没有走到窗边。我只是站在黑暗里，看着它。它打了个哈欠，嘴张得很大，露出牙，舌头卷起来，眼睛眯成两条缝。哈欠打完，它舔了舔鼻子，跳下墙，消失在邻居家的灌木里。</p>
+<p>整个过程不到十秒。</p>
+<p>这一次，我脑子里没有冒出“可爱”这个词。不是因为它不可爱，是因为“可爱”已经不够用了。那个词还在，但它后面拖着一长串东西：婴儿图式、竖瞳、照膜、长焦、裁切、九尾狐、稻荷、列那狐、罗宾汉、尼克·王尔德、狐狸村、毛皮拍卖行、岛屿灰狐、狂犬病、路杀、投喂、习惯化、伦理。</p>
+<p>一个词，拖着一整个世界。</p>
+<p>狐狸不知道这些。它只知道墙头的高度、垃圾桶的位置、风里的气味、哪条路没有狗。它不知道自己在我的书里是一个“案例”，不知道自己的脸被几亿人看过，不知道自己的同类在养殖场里被编号，不知道“可爱”这个词在人类的语言里有多重。</p>
+<p>它只是从这里经过。</p>
+<p>我站在窗边，直到灌木不再动。然后我回到床上，发现自己记住的不是它的脸，是它离开时的声音：爪子踩在墙头上，轻轻一蹬，落在草丛里，沙沙两下，没了。</p>
+<p>第二天早上，我在墙根看见几个脚印。雪已经化了一半，脚印边缘模糊。我蹲下来看了一会儿，没有拍，也没有量。我只是看。</p>
+<p>这本书写到这里，应该结束了。它没有解决“狐狸为什么卖萌”这个问题，因为这个问题本身就是一个多层的东西：有生物学的层，有文化的层，有经济的层，有伦理的层。每一层都有自己的答案，每一层都不能代替另一层。</p>
+<p>如果非要用一句话回答，我还是那句话：</p>
+<p><strong>狐狸没有卖萌。是我们一直在买。</strong></p>
+<p>但“买”不是终点。看见自己在买，是第一步；知道自己在为什么买，是第二步；决定还要不要用这种方式买，是第三步。</p>
+<p>第三步，是每个读者自己的事。</p>
+<p>我把镜头放下，不是因为我停止了喜欢狐狸。恰恰相反：我想用一种不需要镜头的方式喜欢它。看它，不拍它；了解它，不拥有它；为它留一点空间，不把它的空间变成我的内容。</p>
+<p>它不需要我的喜欢。它只需要我不要因为喜欢，就把它带走。</p>
+<p>窗外天亮了。城市开始响：车、门、狗、鸟、施工。狐狸已经睡了，或者正在某个棚子底下，蜷成一团，尾巴盖住鼻子。</p>
+<p>它不知道有一本书在写它。</p>
+<p>这样最好。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#vol-10"><span>上一章</span>第十卷 · 伦理：它没有在卖</a><a class="next" href="#app-1"><span>下一章</span>附录一 · 狐狸物种小志</a></nav>
+</section>
+<div class="part-divider" id="appendices">
+  <span class="part-label">附录</span>
+  <h2>资料、争议与下一步</h2>
+  <p>九份附录：物种、年表、术语、书目、观察指南、感官、问答、亲缘、疾病。它们不是正文的重复，是正文的背面。</p>
+</div>
+<section class="chapter appendix" id="app-1" data-label="附录一" data-title="狐狸物种小志">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>附录一</span><span>5 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">A1</div>
+    <h1 class="chapter-title">狐狸物种小志</h1>
+    <p class="chapter-epigraph">十二种动物，十二种活法。</p>
+  </header>
+  <div class="chapter-body">
+<p>这份小志不是分类学指南，只是一份阅读地图。</p>
+<p>“狐狸”不是一个单系群，而是一种体型方案：尖脸、大耳、长尾、轻身、杂食、灵活。不同的支系在不同的洲、不同的时代，反复演化出类似的样子。下面这十二种动物，有的属于狐属（<em>Vulpes</em>），有的属于灰狐属（<em>Urocyon</em>），有的属于南美狐属（<em>Lycalopex</em>），有的根本不是狐狸（埃塞俄比亚狼、貉），但它们在中文里都可能被叫成“狐狸”，或者被误认成狐狸。</p>
+<p>读的时候，注意三件事：第一，名字不等于亲缘；第二，“狐狸”不等于“赤狐”；第三，可爱不等于常见，常见不等于安全。</p>
+<h2 id="app-1-s1">赤狐（<em>Vulpes vulpes</em>）</h2>
+<p>分布：北半球广布，从北极苔原到北非沙漠，从北美到东亚；十九世纪被引入澳大利亚。它是分布最广的陆生食肉动物之一。</p>
+<p>体型：体重通常三到七公斤，体长四十五到九十厘米，尾巴三十到五十五厘米。毛色从橘红到暗红，胸口和腹部白色，耳背黑色，尾尖白色。不同地区、不同亚种的颜色差异很大。</p>
+<p>习性：杂食，食谱包括啮齿类、兔子、鸟、昆虫、蚯蚓、果子、腐肉和人类食物。多在晨昏和夜间活动。社会结构灵活：一对繁殖个体，加上帮手，组成家庭群；成年个体大多单独觅食。</p>
+<p>保护状况：无危（Least Concern）。它是全球分布最广的食肉动物之一，也是城市狐狸的主要物种。</p>
+<p>一个细节：赤狐的瞳孔是竖裂的，这在犬科里很少见；它的照膜让眼睛在夜里反光。</p>
+<h2 id="app-1-s2">北极狐（<em>Vulpes lagopus</em>）</h2>
+<p>分布：环北极苔原，包括北美、欧亚大陆的北部、格陵兰、冰岛、斯瓦尔巴群岛。</p>
+<p>体型：体重二点五到九公斤，体型比赤狐小，耳朵短，吻短，身体圆。冬天全身白色（也有“蓝狐”色型，呈蓝灰色），夏天换成褐色或灰色。换毛是为了伪装和保温。</p>
+<p>习性：主食是旅鼠和田鼠，也吃鸟、鸟蛋、腐肉。它的繁殖和旅鼠周期相关：旅鼠多的年份，产仔多；旅鼠少的年份，产仔少，甚至不繁殖。</p>
+<p>保护状况：无危，但部分种群受气候变暖、海冰减少、红狐北扩的影响。</p>
+<p>一个细节：2018 年，一只被追踪的北极狐在 76 天里从斯瓦尔巴走到加拿大，行程约三千五百公里。那颗“球”里装着一台越野机器。</p>
+<h2 id="app-1-s3">耳廓狐（<em>Vulpes zerda</em>）</h2>
+<p>分布：撒哈拉沙漠及北非的干旱地区。</p>
+<p>体型：体重零点七到一点六公斤，是最小的犬科动物。耳朵长十到十五厘米，几乎和脸一样长；耳朵的功能是散热和听声。毛色沙黄，腹部白色。</p>
+<p>习性：夜行，白天躲在洞穴里。食谱包括昆虫、小型啮齿类、蜥蜴、鸟蛋、果子。社会结构以家庭群为主，叫声丰富。</p>
+<p>保护状况：无危，但宠物贸易对局部种群有压力。它是“异域宠物”市场的常见物种，饲养难度高，法律限制各地不同。</p>
+<p>一个细节：那对大耳朵不只是“萌”，还是空调和雷达。</p>
+<h2 id="app-1-s4">沙狐（<em>Vulpes corsac</em>）</h2>
+<p>分布：中亚草原和半荒漠，从里海到蒙古、中国北方。</p>
+<p>体型：体重一点六到三点二公斤，脸短，耳朵宽，毛色浅黄到灰褐。它比赤狐小，腿短，适合在开阔草原上长距离奔跑。</p>
+<p>习性：夜行或晨昏活动，主食是啮齿类、昆虫、鸟、蜥蜴，也吃果子。它会利用洞穴，有时和旱獭、黄鼠的洞穴共用。社会性较强，可能成小群活动。</p>
+<p>保护状况：无危，但草原开垦、灭鼠运动、毛皮贸易对局部种群有影响。</p>
+<p>一个细节：沙狐是“标准娃娃脸”的候选：短脸、大眼、宽耳，参数很齐。</p>
+<h2 id="app-1-s5">藏狐（<em>Vulpes ferrilata</em>）</h2>
+<p>分布：青藏高原，包括中国西藏、青海、四川西部、甘肃、新疆南部，以及尼泊尔、不丹、印度北部。</p>
+<p>体型：体重三到五点五公斤，脸宽，吻短，眼睛窄，表情常常显得“生无可恋”。毛色沙黄到灰褐，尾部蓬松。</p>
+<p>习性：主食是高原鼠兔，也吃啮齿类、鸟、昆虫、腐肉。它通常一夫一妻，配对稳定；洞穴可能共用，幼崽由双亲共同照料。</p>
+<p>保护状况：无危，但种群趋势不完全清楚；鼠兔防治、草原退化、道路建设是潜在威胁。</p>
+<p>一个细节：那张“方脸”不是表情，是骨骼和毛发的组合；它走红靠的是“丑萌”，不是娃娃脸。</p>
+<h2 id="app-1-s6">灰狐（<em>Urocyon cinereoargenteus</em>）</h2>
+<p>分布：北美洲，从加拿大南部到中美洲；在南美北部也有近缘种。</p>
+<p>体型：体重三到七公斤，毛色灰白，背部有一条深色纵纹，尾巴尖黑色。脸比赤狐短，耳朵圆，眼睛大。</p>
+<p>习性：杂食，吃小型哺乳类、鸟、昆虫、果子、腐肉。它是犬科里少数会爬树的成员：前肢能旋转，爪子能勾住树皮，常在树上休息、躲避天敌。</p>
+<p>保护状况：无危。</p>
+<p>一个细节：它的脸更像猫，身体更像犬；这是“混搭型”的可爱。</p>
+<h2 id="app-1-s7">岛屿灰狐（<em>Urocyon littoralis</em>）</h2>
+<p>分布：美国加州海峡群岛，多个岛屿各有亚种。</p>
+<p>体型：体重一点二到二点七公斤，是灰狐的岛屿侏儒版；毛色灰白，脸短，尾巴蓬松。岛屿上的资源有限，体型变小是一种常见的演化结果。</p>
+<p>习性：杂食，吃昆虫、果子、鸟、蛋、小型哺乳类。活动范围小，不怕人，这是岛屿演化的典型特征，也是它的脆弱之处。</p>
+<p>保护状况：部分亚种曾濒危，经过圈养繁殖、疫苗、野猪清除、金雕迁移等干预，数量恢复，部分亚种降为受威胁。</p>
+<p>一个细节：它是“可爱能救一个物种”的少数成功案例，但成功靠的是科学和钱，不是可爱本身。</p>
+<h2 id="app-1-s8">大耳狐（<em>Otocyon megalotis</em>）</h2>
+<p>分布：非洲东部和南部的稀树草原。</p>
+<p>体型：体重三到五公斤，耳朵长十一到十三厘米，毛色黄褐到灰褐，脸小，牙齿退化。</p>
+<p>习性：主食是白蚁和其他昆虫，也吃小型脊椎动物、果子。它多在夜间和晨昏活动，社会结构以配对和家庭群为主。</p>
+<p>保护状况：无危。</p>
+<p>一个细节：牙齿退化是因为它不需要咬骨头；耳朵大是因为它需要听白蚁在土里的动静。功能又一次长成了“萌”。</p>
+<h2 id="app-1-s9">食蟹狐（<em>Cerdocyon thous</em>）</h2>
+<p>分布：南美洲北部和中部，从哥伦比亚到阿根廷北部。</p>
+<p>体型：体重四到七公斤，毛色灰褐，四肢和耳朵带红褐色，尾巴蓬松。</p>
+<p>习性：杂食，吃螃蟹、昆虫、果子、小型脊椎动物、腐肉；靠近水的地方活动较多。它多在夜间和晨昏活动，社会结构以配对和家庭群为主。</p>
+<p>保护状况：无危，但栖息地丧失和路杀是局部威胁。</p>
+<p>一个细节：它的名字来自“吃螃蟹”，但螃蟹只是食谱的一部分；它是一个机会主义者。</p>
+<h2 id="app-1-s10">达尔文狐（<em>Lycalopex fulvipes</em>）</h2>
+<p>分布：智利奇洛埃岛和大陆的一小片森林。</p>
+<p>体型：体重一点五到四公斤，毛色深灰到黑，腿短，尾巴蓬松。它比赤狐小，脸短，行动谨慎。</p>
+<p>习性：杂食，吃昆虫、小型哺乳类、鸟、果子、腐肉。它多在夜间和晨昏活动，独居或成对。</p>
+<p>保护状况：极危（Critically Endangered），数量不到一千只。威胁包括栖息地丧失、家犬传播的疾病、人类捕杀。</p>
+<p>一个细节：它没有狐狸村，没有表情包，也没有稳定的保护预算；它的“可爱”不够传播。</p>
+<h2 id="app-1-s11">埃塞俄比亚狼（<em>Canis simensis</em>）</h2>
+<p>分布：埃塞俄比亚高原，主要在贝尔山脉。</p>
+<p>体型：体重十一到二十公斤，腿长，脸狭长，毛色红棕，腹部白色。它不是狐狸，是犬属的成员；但它的脸和毛色让它看起来很像狐狸。</p>
+<p>习性：主食是高原鼠兔类（特别是巨鼹鼠），也吃小型啮齿类。它是社会性动物，群体生活，合作防御领地；繁殖以一对为主，其他成员帮忙。</p>
+<p>保护状况：濒危（Endangered），数量约五百只。最大威胁是家犬传播的狂犬病和犬瘟热，以及栖息地退化。</p>
+<p>一个细节：它证明“像狐狸”不等于“是狐狸”；也证明“可爱”不是保护的全部。</p>
+<h2 id="app-1-s12">貉（<em>Nyctereutes procyonoides</em>）</h2>
+<p>分布：东亚原生，包括中国、日本、朝鲜半岛、俄罗斯远东；二十世纪被引入欧洲，成为入侵物种。</p>
+<p>体型：体重三到六公斤，毛色灰褐，脸像浣熊，有黑色眼罩，尾巴短。</p>
+<p>习性：杂食，吃小型哺乳类、鸟、昆虫、果子、腐肉；会冬眠（犬科里少见）。它适应力强，能在城市边缘生活。</p>
+<p>保护状况：原生地无危；在欧洲是入侵物种，对本地小型动物和疾病传播有影响。</p>
+<p>一个细节：它常被误认成“狐狸”或“浣熊”；名字和长相都在跨界。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#epilogue"><span>上一章</span>尾声 · 把镜头放下</a><a class="next" href="#app-2"><span>下一章</span>附录二 · 狐狸文化年表</a></nav>
+</section>
+<section class="chapter appendix" id="app-2" data-label="附录二" data-title="狐狸文化年表">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>附录二</span><span>3 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">A2</div>
+    <h1 class="chapter-title">狐狸文化年表</h1>
+    <p class="chapter-epigraph">年表不是历史，是选择。</p>
+  </header>
+  <div class="chapter-body">
+<p>年表不是历史，是选择。</p>
+<p>下面这些条目，是我认为和“狐狸为什么卖萌”有关的节点：有的关于狐狸，有的关于我们看狐狸的方式。它们不构成一条完整的线，只是把几个转折点标出来。</p>
+<h2 id="app-2-s1">史前与古代</h2>
+<p><strong>约一万六千五百年前。</strong> 约旦的 Uyun al-Hammam 遗址，一具人骨与一只狐狸的遗骸被葬在一起。研究者把它解释为早期的人与狐狸关系，但它的具体含义仍有争议。可以确定的是：在人驯化狗之前，狐狸已经和人有过很近的接触。</p>
+<p><strong>公元前六世纪前后。</strong> 伊索寓言在希腊流传。狐狸是聪明的、会算计的、常常聪明反被聪明误的角色。《狐狸和葡萄》《狐狸和乌鸦》后来成了欧洲狐狸叙事的底色。</p>
+<p><strong>先秦。</strong> 《山海经·南山经》记青丘之山：“有兽焉，其状如狐而九尾，其音如婴儿，能食人，食者不蛊。”九尾狐最初的形象，同时带着诱惑、危险和神异。</p>
+<p><strong>汉代。</strong> 九尾狐成为祥瑞，出现在画像石、帛画和墓室艺术里，常与西王母相伴。九尾象征子孙繁衍，白色象征王者之德。狐狸从“异兽”变成了“吉兆”。</p>
+<p><strong>十二至十三世纪。</strong> 法国的《列那狐的故事》成形。列那狐是反英雄：狡猾、残忍、能言善辩，专门捉弄狼、熊和狮子。它奠定了欧洲狐狸“狡猾”的核心性格。</p>
+<p><strong>中世纪。</strong> 欧洲的动物寓言集把狐狸写成欺骗的象征；“狐狸装死捕鸟”的传说被反复转述。狐狸的形象和道德教训绑在一起。</p>
+<h2 id="app-2-s2">近世</h2>
+<p><strong>十七世纪末至十八世纪。</strong> 蒲松龄的《聊斋志异》写成并流传。狐狸成了有情有义、有才有貌、敢爱敢恨的角色；她们比人更像人，也比人更自由。中国的狐狸叙事，在这里达到一个高峰。</p>
+<p><strong>江户时代（1603—1868）。</strong> 日本的稻荷信仰、狐面、狐玩具、狐妻故事在民间广泛流传。狐狸既是神的使者，也是祭典的玩物；神圣和好玩，开始并存。</p>
+<p><strong>十八至十九世纪。</strong> 英国的猎狐运动逐渐制度化：猎犬、马队、红色外套、号角。狐狸从“寓言角色”变成了“贵族运动的对手”。这套仪式一直持续到二十世纪。</p>
+<p><strong>十九世纪中叶。</strong> 英国人把赤狐引入澳大利亚，用于狩猎。狐狸在澳洲没有天敌，成了灾难性的入侵物种，对小型有袋类造成严重打击。</p>
+<p><strong>十九世纪末。</strong> 银狐养殖在北美兴起，后来扩展到欧洲和亚洲。狐狸开始被当作毛皮动物，大规模圈养。</p>
+<h2 id="app-2-s3">二十世纪</h2>
+<p><strong>1943 年。</strong> 康拉德·洛伦茨提出“婴儿图式”（Kindchenschema）：人类对一组幼态特征有先天偏好。这张清单后来成了“可爱”研究的起点。</p>
+<p><strong>1959 年。</strong> 德米特里·别利亚耶夫在新西伯利亚开始银狐驯化实验。他只选“不怕人”的个体，二十代后得到了摇尾巴、舔手的“驯化精英”，以及垂耳、卷尾、花斑、短吻等“赠品”。</p>
+<p><strong>1973 年。</strong> 迪士尼的《罗宾汉》上映。狐狸穿上衣服，成了迷人的英雄；那个嘴角上扬、眼睛半眯的表情，成了“狐狸脸”的模板。</p>
+<p><strong>1981 年。</strong> 《狐狸与猎狗》上映。狐狸第一次让观众哭；它从“狡猾的骗子”变成了“童年友情的象征”。</p>
+<p><strong>1990 年代。</strong> 日本的“萌え”（moe）文化兴起；kawaii 产业全球化。狐狸进入卡通、文具、游戏、吉祥物的世界，从“神圣/狡猾”走向“可爱/可消费”。</p>
+<p><strong>2004 年。</strong> 英国通过《狩猎法》，禁止用狗猎狐（英格兰和威尔士于 2005 年生效）。猎狐从“传统”变成了“争议”。</p>
+<p><strong>2008—2009 年。</strong> Kringelbach 等人记录婴儿脸在 130 毫秒内激活内侧眶额皮层；Glocker 等人用 3D 模型证明娃娃脸参数会影响可爱度和照顾动机。</p>
+<p><strong>2011 年。</strong> Červený 等人在《Biology Letters》上报告：赤狐捕鼠跳的成功率与起跳方向有关，可能涉及地磁场。样本不大，争议仍在。</p>
+<p><strong>2013 年。</strong> 挪威组合 Ylvis 的《The Fox (What Does the Fox Say?)》爆红。狐狸从“故事角色”变成了“互联网梗”；我们给狐狸编了那么多故事，却很少认真听它的声音。</p>
+<p><strong>2014 年。</strong> Wilkins、Wrangham 和 Fitch 提出驯化综合征的神经嵴假说。它解释了为什么选“温顺”会拖来“垂耳”“卷尾”“花斑”，但仍是假说，不是定论。</p>
+<p><strong>2015 年。</strong> Banks 等人分析 214 种动物的瞳孔形状，解释竖瞳与伏击捕猎的关系；Aragón 等人记录“可爱侵略性”：看到特别可爱的东西，人会同时想照顾和想捏。</p>
+<p><strong>2016 年。</strong> 《疯狂动物城》上映，尼克·王尔德把“狐狸”变成了关于偏见的故事；同年，部分岛屿灰狐亚种从“濒危”降为“受威胁”，成为保护史上的快恢复案例。</p>
+<h2 id="app-2-s4">二十一世纪</h2>
+<p><strong>2020 年代。</strong> 短视频平台把狐狸的“萌”推到了前所未有的规模：狐狸村、宠物狐、野生动物摄影、表情包、配乐视频。狐狸的图像越来越多，狐狸的栖息地越来越少。</p>
+<p><strong>2023 年前后。</strong> 芬兰的毛皮场爆发高致病性禽流感，大量狐狸和水貂被扑杀。同一张脸，在屏幕上是“萌”，在养殖场里是“公共卫生风险”。</p>
+<p><strong>现在。</strong> 你打开手机，看见一只狐狸在雪地里打滚，配乐是钢琴。你点了赞。你不知道它在哪里，不知道它后来怎样，不知道它是不是还活着。</p>
+<p>年表到这里停住。接下来发生什么，不在狐狸手里。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#app-1"><span>上一章</span>附录一 · 狐狸物种小志</a><a class="next" href="#app-3"><span>下一章</span>附录三 · 术语与概念</a></nav>
+</section>
+<section class="chapter appendix" id="app-3" data-label="附录三" data-title="术语与概念">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>附录三</span><span>4 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">A3</div>
+    <h1 class="chapter-title">术语与概念</h1>
+    <p class="chapter-epigraph">一些关键词，回到正文里找细节。</p>
+  </header>
+  <div class="chapter-body">
+<p>这份术语表不是词典，是一份“本书用到的关键词”。每条尽量用一两句话说清楚，细节回正文里找。</p>
+<p><strong>婴儿图式（Kindchenschema）</strong>：洛伦茨 1943 年提出的一组幼态特征——大头、大眼、短吻、圆脸、小下巴、短粗四肢、笨拙动作。人类看见这些特征，会触发照顾动机。见第二卷。</p>
+<p><strong>超常刺激（supernormal stimulus）</strong>：比自然信号更夸张、更强烈的刺激，能引发比真实对象更强的反应。廷伯根用假蛋研究海鸥时提出。狐狸的蓬松尾巴、耳廓狐的大耳朵，都是候选。见第二卷。</p>
+<p><strong>幼态延续（neoteny）</strong>：成年个体保留幼年的形态特征。驯化常常让动物“看起来更年轻”：垂耳、短吻、圆脸。见第四卷。</p>
+<p><strong>驯化综合征（domestication syndrome）</strong>：驯化动物身上反复出现的一组特征：垂耳、卷尾、花斑、短吻、较小的脑、延长的繁殖季、减弱的应激反应。不是每个物种都有全部特征。见第四卷。</p>
+<p><strong>神经嵴细胞（neural crest cells）</strong>：胚胎早期的一群细胞，迁移到全身，分化成肾上腺髓质、色素细胞、面部软骨与骨、牙齿、耳朵的一部分、肠道神经等。驯化综合征的神经嵴假说认为，选择“温顺”可能同时改变了这些组织的发育。见第四卷。</p>
+<p><strong>驯服（taming）</strong>：个体层面的不怕人。一只从小被人养大的狐狸可以很驯服，但它的后代仍然是野的。见第四卷。</p>
+<p><strong>驯化（domestication）</strong>：群体层面的、可遗传的变化。一个种群经过多代选择，基因频率改变，不怕人成为遗传特征。驯化不等于适合家养。见第四卷。</p>
+<p><strong>习惯化（habituation）</strong>：个体层面的学习。一个刺激反复出现，没有好结果也没有坏结果，动物对它的反应减弱。城市狐狸不怕人，多半是习惯化，不是驯服。见第五卷。</p>
+<p><strong>逃跑距离（flight distance）</strong>：动物允许人靠近的极限距离；超过这个距离，它会退、会跑、会攻击。城市狐狸的逃跑距离比乡村狐狸短，但仍有底线。见第五卷。</p>
+<p><strong>Umwelt（环境界/主观世界）</strong>：于克斯屈尔提出的概念。每种动物活在自己的感官能接收、神经系统能解释的那一部分世界里。狐狸的世界以气味、声音、边缘和运动为主。见第一卷。</p>
+<p><strong>意向立场（intentional stance）</strong>：丹尼特提出的解释策略：把一个系统当成“有信念、有欲望”的行动者，用它来预测行为。它很好用，但只是模型，不是事实。见第三卷。</p>
+<p><strong>拟人化（anthropomorphism）</strong>：把人的动机、情感、意图套到动物身上。它可以是类比、投射，也可以是预测；不总是错，也不总是对。见第十卷。</p>
+<p><strong>拟人化否认（anthropodenial）</strong>：德瓦尔用的词：为了维持人与动物的界线，拒绝承认明显的情感连续性。它和过度拟人一样，是一种偏见。见第十卷。</p>
+<p><strong>可爱侵略性（cute aggression）</strong>：看到特别可爱的东西时，人同时产生照顾冲动和攻击冲动——想揉、想捏、想咬一口。它是一种情绪调节，不是真的想伤害。见第二卷、第十卷。</p>
+<p><strong>想要/喜欢（wanting/liking）</strong>：Berridge 和 Robinson 区分的两套奖赏回路。“想要”更多依赖多巴胺，是接近、抓取、占有的冲动；“喜欢”更多依赖阿片类和内源性大麻素，是真正的愉悦。可爱更容易激活“想要”。见第二卷。</p>
+<p><strong>竖瞳/横瞳</strong>：瞳孔的形状。竖瞳多见于伏击型捕食者，帮助它们在不动头的情况下判断距离；横瞳多见于被捕食者，帮助它们获得广角视野。赤狐是竖瞳。见第二卷。</p>
+<p><strong>照膜（tapetum lucidum）</strong>：眼底的一层反光结构，把穿过视网膜的光反射回去，让感光细胞再接收一次。它让狐狸在夜里看得更清楚，也让眼睛在照片里发光。见第二卷。</p>
+<p><strong>过剩杀戮（surplus killing）</strong>：捕食者在食物集中、猎物无法逃逸的环境里，杀死超过当场食量的猎物。鸡舍里的狐狸是典型例子。它不是“邪恶”，是捕猎本能遇到不设防的环境。见第三卷、第五卷。</p>
+<p><strong>合作繁殖（cooperative breeding）</strong>：一些个体不繁殖，留在群体里帮助照顾别人的后代。赤狐的家庭群里，常有前一窝的女儿留下当帮手。见第三卷。</p>
+<p><strong>魅力物种（charismatic species）</strong>：能引起公众喜爱、带来捐款和政治支持的物种。大熊猫、老虎、大象是典型；狐狸在中游。见第九卷。</p>
+<p><strong>旗舰物种（flagship species）</strong>：被选出来代表一片栖息地或一个保护目标的物种，通常是有魅力的。用它的形象去募捐、去推动政策。见第九卷。</p>
+<p><strong>伴人动物（synanthrope）</strong>：适应人类改造过的环境、并从中获益的野生动物。城市狐狸、浣熊、郊狼、鸽子、老鼠都是。见第五卷。</p>
+<p><strong>拱肩（spandrel）</strong>：古尔德和勒沃廷的比喻：有些特征不是自然选择直接造出来的，而是别的结构的副产品。教堂拱门留下的三角形空间，后来被画上了画。可爱可能是育幼本能的副产品。见第二卷。</p>
+<p><strong>元沟通（metacommunication）</strong>：关于“接下来这段交流该怎么理解”的信号。游戏前倾就是元沟通：它在说“这是玩，不是打”。见第三卷。</p>
+<p><strong>游戏前倾（play bow）</strong>：犬科游戏前的典型姿势：前腿趴下，屁股撅起，尾巴摇。它是一个邀请，也是一个引号。见第三卷。</p>
+<p><strong>二色视觉（dichromatic vision）</strong>：只有两种视锥细胞，主要区分蓝和黄，对红绿的区分不如人。犬科大多是二色视觉；狐狸眼里的红毛，可能只是深浅不同的灰褐。见第一卷。</p>
+<p><strong>口服狂犬病疫苗（oral rabies vaccination）</strong>：把疫苗放在饵料里，让野生动物吃下去，从而建立免疫屏障。欧洲曾用这种方法把狐狸狂犬病一路逼退。见第五卷。</p>
+<p><strong>疥螨（sarcoptic mange）</strong>：由疥螨引起的皮肤病，会让狐狸掉毛、消瘦、虚弱，严重时死亡。它在城市狐狸种群中可能造成大幅下降。见第五卷。</p>
+<p><strong>动物福利（animal welfare）</strong>：动物的健康、行为需求、情绪状态的总和。不是“人对动物好一点”的道德口号，而是一套可以评估的科学与政策框架。见第四卷、第八卷。</p>
+<p><strong>动物权利（animal rights）</strong>：一种伦理立场：动物不是人类的资源，某些基本权利不应被人类侵犯。它和动物福利不是同一个概念；本书主要在福利层面讨论，但伦理卷涉及权利问题。见第十卷。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#app-2"><span>上一章</span>附录二 · 狐狸文化年表</a><a class="next" href="#app-4"><span>下一章</span>附录四 · 延伸阅读与事实说明</a></nav>
+</section>
+<section class="chapter appendix" id="app-4" data-label="附录四" data-title="延伸阅读与事实说明">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>附录四</span><span>3 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">A4</div>
+    <h1 class="chapter-title">延伸阅读与事实说明</h1>
+    <p class="chapter-epigraph">资料、争议与下一步。</p>
+  </header>
+  <div class="chapter-body">
+<h2 id="app-4-s1">一、这本书怎样处理事实</h2>
+<p>这本书不是学术专著，但它尽量不做两件事：不编造研究，不把推断说成定论。</p>
+<p>具体的做法是：</p>
+<p>第一，能查到出处的研究，尽量标出作者和年份；查不到出处的说法，用“通常被认为”“一种解释是”“可能”这样的词，把它标记为不确定。</p>
+<p>第二，有争议的地方，明确说它有争议。比如驯化综合征的神经嵴假说、狐狸捕鼠跳的地磁假说、城市狐狸捕杀的效果、狐狸村和宠物狐的福利状况，这些都不是“科学已经盖棺定论”的问题。</p>
+<p>第三，区分三种陈述：观察（狐狸做了什么）、解释（这个行为可能有什么功能）、评价（我们该怎么看它）。观察可以证实或证伪；解释可以有多个；评价是伦理问题，不是实验问题。</p>
+<p>第四，书中的场景为叙述服务，部分经过典型化处理，不对应某一次具体的目击。研究数据、物种习性、法律条文，尽量按公开资料写；如果读者发现错误，欢迎指出，下一版改正。</p>
+<h2 id="app-4-s2">二、分章延伸阅读</h2>
+<p><strong>第一卷（一个动词的悬案）</strong></p>
+<ul><li>于克斯屈尔（Jakob von Uexküll）的 Umwelt 概念，见 <em>A Foray into the Worlds of Animals and Plants</em>（1934）。</li><li>廷伯根（Niko Tinbergen）的四个问题，见 <em>On Aims and Methods of Ethology</em>（1963）。</li><li>德瓦尔（Frans de Waal）的拟人化与拟人化否认，见 <em>Anthropomorphism and Anthropodenial</em>（1999）。</li></ul>
+<p><strong>第二卷（脸的科学）</strong></p>
+<ul><li>洛伦茨的婴儿图式，见 <em>Die angeborenen Formen möglicher Erfahrung</em>（1943）。</li><li>Glocker 等，<em>Baby Schema in Infant Faces Induces Cuteness Perception and Motivation for Caretaking in Adults</em>（Ethology, 2009）。</li><li>Borgi 等，<em>Baby Schema in Human and Animal Faces Induces Cuteness Perception and Gaze Allocation in Children</em>（Frontiers in Psychology, 2014）。</li><li>Nittono 等，<em>The Power of Kawaii</em>（PLoS ONE, 2012）。</li><li>Kringelbach 等，<em>A Specific and Rapid Neural Signature for Parental Instinct</em>（PLoS ONE, 2008）。</li><li>Strathearn 等，<em>What's in a Smile? Maternal Brain Responses to Infant Faces</em>（Pediatrics, 2008）。</li><li>Aragón 等，<em>Dimorphous Expressions of Positive Emotion</em>（Psychological Science, 2015）。</li><li>Banks 等，<em>Why Do Animal Eyes Have Pupils of Different Shapes?</em>（Science Advances, 2015）。</li><li>Gould，<em>A Biological Homage to Mickey Mouse</em>（1979）。</li></ul>
+<p><strong>第三卷（行为的语法）</strong></p>
+<ul><li>Bekoff 关于犬科游戏的研究，见 <em>The Emotional Lives of Animals</em>（2007）及其论文。</li><li>Červený 等，<em>Directional Preference May Enhance Hunting Accuracy in Foraging Foxes</em>（Biology Letters, 2011）。</li><li>关于犬科游戏信号、游戏脸、元沟通的综述，可查 <em>Animal Play</em> 领域的综述文章。</li></ul>
+<p><strong>第四卷（驯化）</strong></p>
+<ul><li>Belyaev，<em>Destabilizing Selection as a Factor in Domestication</em>（1979）。</li><li>Trut，<em>Early Canid Domestication: The Farm-Fox Experiment</em>（American Scientist, 1999）。</li><li>Wilkins、Wrangham、Fitch，<em>The “Domestication Syndrome” in Mammals</em>（Genetics, 2014）。</li><li>关于俄罗斯驯化狐的后续报道，可查 Lyudmila Trut 的访谈和论文。</li></ul>
+<p><strong>第五卷（城市）</strong></p>
+<ul><li>Harris 与 Yalden，<em>Mammals of the British Isles</em>（2008）中的城市狐狸章节。</li><li>Macdonald，<em>Running with the Fox</em>（1987）。</li><li>英国野生动物信托、RSPCA 关于城市狐狸的公开指南。</li><li>关于城市狐狸密度、饮食、路杀的研究，可查 <em>Urban Ecosystems</em>、<em>Journal of Zoology</em> 等期刊。</li></ul>
+<p><strong>第六卷（声音）</strong></p>
+<ul><li>狐狸发声的描述，散见于行为学和博物学文献；系统研究远少于狗和狼。</li><li>关于人类对婴儿哭声和尖叫的反应，可查发展心理学和声学研究的综述。</li><li>关于自然纪录片声音设计，可查媒体生态学和纪录片研究的文献。</li></ul>
+<p><strong>第七卷（文化史）</strong></p>
+<ul><li>《山海经》《聊斋志异》相关版本与注本。</li><li>《列那狐的故事》中译本。</li><li>日本稻荷信仰与狐文化的民俗学研究。</li><li>迪士尼、皮克斯、韦斯·安德森相关电影的评论与研究。</li></ul>
+<p><strong>第八卷（经济）</strong></p>
+<ul><li>毛皮养殖的福利与公共卫生报告：Fur Free Alliance、Humane Society International 等机构的公开资料。</li><li>2023 年芬兰毛皮场 H5N1 疫情：欧洲疾控中心（ECDC）与欧洲食品安全局（EFSA）的报告。</li><li>异域宠物贸易：CITES、IUCN 及相关 NGO 的报告。</li></ul>
+<p><strong>第九卷（保护）</strong></p>
+<ul><li>岛屿灰狐：美国鱼类及野生动物管理局（USFWS）、国家公园管理局（NPS）的物种档案。</li><li>达尔文狐、埃塞俄比亚狼：IUCN 红色名录物种档案；埃塞俄比亚狼保护计划（EWCP）的公开资料。</li><li>魅力物种与旗舰物种：保护生物学教科书中的相关章节。</li></ul>
+<p><strong>第十卷（伦理）</strong></p>
+<ul><li>Epley、Waytz、Cacioppo，<em>On Seeing Human</em>（Psychological Review, 2007）。</li><li>de Waal，<em>Anthropomorphism and Anthropodenial</em>（1999）。</li><li>动物福利与动物权利的入门读物，可查 Peter Singer、Martha Nussbaum、Frans de Waal 的相关著作。</li></ul>
+<h2 id="app-4-s3">三、有争议的地方</h2>
+<p><strong>驯化综合征的神经嵴假说。</strong> 它解释力强，但不是定论。遗传漂变、近交、奠基者效应、多个基因的累加效应，都可能参与。书中把它写成“有力的候选机制”，不是“已证明的机制”。</p>
+<p><strong>狐狸捕鼠跳的地磁假说。</strong> 2011 年的观察样本不大，后续研究有支持也有质疑。书中把它写成“一个很有意思的观察”，不是“狐狸能看见磁场”。</p>
+<p><strong>城市狐狸捕杀的效果。</strong> 研究反复发现，捕杀很难长期压低种群，因为周边个体会迁入；但不同城市、不同措施的效果不一样。书中说“效果有限”，不是“完全无效”。</p>
+<p><strong>狐狸村与宠物狐的福利。</strong> 动物福利组织的报告记录了拥挤、打斗、皮肤病、近亲繁殖、应激等问题；也有经营者和主人认为情况被夸大。书中呈现的是“结构性的风险”，不是对每一个个体的判决。</p>
+<p><strong>“狐狸在笑”“狐狸在撒娇”。</strong> 这些是人类的读法。书中尽量同时给出行为学的解释，但不否认动物有情感；难的是把“有情感”和“情感的内容像人”分开。</p>
+<p><strong>“驯化狐”这个标签。</strong> 俄罗斯的狐狸种群经过几十代选择，确实在行为上更不怕人；但它们不是新物种，也不是狗。把它们叫“驯化狐”有科学依据，也有商业放大。书中用引号，是为了提醒这一点。</p>
+<h2 id="app-4-s4">四、一份精简书目</h2>
+<p>如果只读五本，我会推荐：</p>
+<p>1. David Macdonald, <em>Running with the Fox</em>——一本经典的狐狸博物学。</p>
+<p>2. J. David Henry, <em>Red Fox: The Catlike Canine</em>——赤狐的行为与生态。</p>
+<p>3. Lyudmila Trut 的相关论文与访谈——驯化狐实验的第一手叙述。</p>
+<p>4. Frans de Waal, <em>Are We Smart Enough to Know How Smart Animals Are?</em>——拟人化与动物认知的边界。</p>
+<p>5. Stephen Jay Gould, <em>Ever Since Darwin</em>——包括《米老鼠的生物学致敬》，讲“可爱”如何被工程化。</p>
+<p>如果想读得更深，再往上加：Tinbergen 的行为学论文、Wilkins 等人的驯化综合征论文、Banks 等人的瞳孔研究、IUCN 的物种档案。</p>
+<p>书读到这里，剩下的路，得你自己走。带着问题走，比带着答案走，更有意思。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#app-3"><span>上一章</span>附录三 · 术语与概念</a><a class="next" href="#app-5"><span>下一章</span>附录五 · 城市狐狸观察指南</a></nav>
+</section>
+<section class="chapter appendix" id="app-5" data-label="附录五" data-title="城市狐狸观察指南">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>附录五</span><span>4 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">A5</div>
+    <h1 class="chapter-title">城市狐狸观察指南</h1>
+    <p class="chapter-epigraph">保持距离，不是冷漠。</p>
+  </header>
+  <div class="chapter-body">
+<p>这份指南不是法律或医疗建议，只是一些通用的、对狐狸和人都比较安全的原则。各地的法规、野生动物管理方式不同，遇到具体情况，请联系当地的野生动物管理部门或专业救援机构。</p>
+<h2 id="app-5-s1">一、你看见一只狐狸</h2>
+<p>第一件事：停下来，别追。</p>
+<p>狐狸对人有自己的“逃跑距离”。你停在原地，它通常会自己判断：继续做它的事，或者走开。你追，它会跑；你堵，它可能咬。你不动，它反而可能多待一会儿。</p>
+<p>第二件事：保持距离。三米是底线，五米更安全。不要蹲下伸手，不要发出高音逗它，不要让孩子靠近。它不是狗，它的“可爱”不等于“可以摸”。</p>
+<p>第三件事：看它的状态，不看它的表情。健康的狐狸：毛完整，身体匀称，动作灵活，对人的反应是“警惕但不慌乱”。不健康的狐狸：掉毛、消瘦、走路不稳、白天异常出现、不怕人、流口水、转圈、抽搐。后一种情况，不要靠近，联系专业人员。</p>
+<h2 id="app-5-s2">二、不要做什么</h2>
+<p><strong>不要喂。</strong> 面包、牛奶、狗粮、剩饭，都不是狐狸的自然食物。牛奶会让它腹泻；人类食物会让它依赖；投喂会让它集中、生病、被车撞、被投诉。你觉得你在帮它，你改变的是它的行为，不是它的命运。</p>
+<p><strong>不要摸。</strong> 狐狸有牙齿，有寄生虫，有可能携带狂犬病病毒（在仍有狂犬病的地区）。即使它看起来温顺，也不要摸。它习惯了你，不等于它不会在受惊时咬人。</p>
+<p><strong>不要追拍。</strong> 不要为了一个镜头去逼近、围堵、用食物引诱、用声音逗它。它需要休息、捕猎、育幼；你的镜头不是它的生活。</p>
+<p><strong>不要放狗追。</strong> 狗和狐狸可能打架，狗可能受伤，狐狸可能被咬死；在狂犬病地区，这还是一个公共卫生风险。</p>
+<p><strong>不要自行捕捉或转移。</strong> 你以为你在救它，它可能只是在你家花园里路过；你以为它被困，它可能只是找了个安静的地方睡觉。捕捉会造成应激、受伤，也可能违法。</p>
+<p><strong>不要用毒、陷阱、粘鼠板。</strong> 这些工具会伤到狐狸，也会伤到猫、狗、鸟、孩子。城市里没有“只针对狐狸”的毒药。</p>
+<h2 id="app-5-s3">三、如果它进了你的花园</h2>
+<p>先判断：它是路过，还是住下了？</p>
+<p>路过：它待一会儿就走。你不用做什么，等它走。</p>
+<p>住下了：它可能在棚子下、甲板下、灌木里做了窝。先不要堵洞——如果里面有幼崽，堵洞会把它们困死。你可以：</p>
+<ul><li>清除食物源：盖好垃圾桶，收好宠物粮，不要在外面留食物。</li><li>清除吸引物：堆肥、喂鸟器掉下的种子、果子、垃圾。</li><li>用温和的方式驱赶：灯光、声音、气味（不要用毒）；在它外出时，封住入口。</li><li>联系当地野生动物部门，问清楚哪些做法合法、哪些不合法。</li></ul>
+<p>不要用烟熏、水灌、火烧。这些方法残忍，危险，常常无效。</p>
+<h2 id="app-5-s4">四、如果它受伤、被困、被车撞</h2>
+<p>不要自行处理。受伤的狐狸会咬人；它可能携带疾病；你可能把自己或它弄得更糟。</p>
+<p>联系当地的野生动物救援、动物保护组织、兽医或市政部门。说清楚地点、状态、是否有幼崽、是否在人流密集处。如果它在马路上，注意自己的安全，不要为了救它而站在车流里。</p>
+<p>如果它已经死亡，不要徒手接触；联系市政清理。它的尸体可能携带病原体。</p>
+<h2 id="app-5-s5">五、如果它咬人或抓人</h2>
+<p>第一，清洗伤口：用肥皂和流水冲洗至少十五分钟。</p>
+<p>第二，尽快就医：狂犬病暴露后处置越早越好；医生会判断是否需要疫苗和免疫球蛋白。</p>
+<p>第三，报告：联系当地疾控或野生动物部门，说明时间、地点、动物状态。不要试图自己抓住那只狐狸。</p>
+<h2 id="app-5-s6">六、宠物与狐狸</h2>
+<ul><li>给狗和猫按时接种狂犬病疫苗（在需要接种的地区）。</li><li>不要把宠物粮留在外面；不要在院子里喂狐狸。</li><li>小型宠物（兔、豚鼠、鸡）的笼子要结实；狐狸是捕食者。</li><li>晚上把猫留在室内，尤其是在有狐狸出没的地区。</li><li>如果狗和狐狸相遇，拉紧牵引绳，不要让它追。</li></ul>
+<h2 id="app-5-s7">七、摄影伦理</h2>
+<ul><li>用长焦，不用广角贴近。</li><li>不诱拍：不用食物、声音、幼崽录音去吸引狐狸。</li><li>不围堵：不要把它逼到墙角、马路上、水边。</li><li>不干扰育幼：洞口、巢穴、幼崽，一律远离。</li><li>不发布精确位置：尤其是稀有物种或育幼地点；位置信息会带来更多人、更多干扰。</li><li>不把“摆拍”说成“野生”：如果用了诱拍、摆拍、饲养个体，注明。</li></ul>
+<h2 id="app-5-s8">八、社区层面</h2>
+<p>城市狐狸的管理，不是一个人的事。有效的做法通常是：</p>
+<ul><li>统一管理垃圾：盖好桶，减少过夜垃圾，修好破损的桶。</li><li>管理喂鸟器：掉下的种子会吸引老鼠，老鼠会吸引狐狸。</li><li>管理宠物粮：不在户外留食。</li><li>管理空间：封住棚子、甲板下的入口；修剪过密的灌木。</li><li>管理投诉：记录时间、地点、行为；联系专业部门，不要自行投毒或捕杀。</li><li>管理信息：告诉邻居“不要喂”，比事后投诉有用。</li></ul>
+<h2 id="app-5-s9">九、一个简单的清单</h2>
+<p>看见狐狸时，问自己四个问题：</p>
+<p>1. 它需要我帮忙吗？（大多数时候：不需要。）</p>
+<p>2. 我离它够远吗？（三米以上，最好五米。）</p>
+<p>3. 我有没有在改变它的行为？（喂、追、围、逗，都是改变。）</p>
+<p>4. 我有没有在改变它的环境？（垃圾、宠物粮、棚子、灯光，都是环境。）</p>
+<p>如果四个问题的答案都是“没有”，你就做对了。</p>
+<h2 id="app-5-s10">十、最后一句</h2>
+<p>狐狸不是宠物，不是害虫，不是吉祥物。它是邻居。</p>
+<p>邻居的意思是：你们共享一条街，但不需要共享一个沙发；你可以看见它，但不需要摸它；你可以喜欢它，但不需要拥有它。</p>
+<p>保持距离，不是冷漠。对野生动物来说，距离就是尊重。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#app-4"><span>上一章</span>附录四 · 延伸阅读与事实说明</a><a class="next" href="#app-6"><span>下一章</span>附录六 · 狐狸的感官世界</a></nav>
+</section>
+<section class="chapter appendix" id="app-6" data-label="附录六" data-title="狐狸的感官世界">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>附录六</span><span>5 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">A6</div>
+    <h1 class="chapter-title">狐狸的感官世界</h1>
+    <p class="chapter-epigraph">我们看见的是它的脸；它看见的是回家的路。</p>
+  </header>
+  <div class="chapter-body">
+<p>这本书一直在说“狐狸的世界和我们不一样”。这一篇，把“不一样”拆开看看。</p>
+<h2 id="app-6-s1">一、气味：第一语言</h2>
+<p>如果狐狸有一门母语，那大概是气味。</p>
+<p>狐狸的嗅觉远胜于人。它的鼻腔里有大量的嗅觉受体，能分辨极低浓度的化学物质；它的世界不是一张由颜色和形状构成的图，而是一张由气味构成的地图：哪棵树被谁标记过，哪条路有狗经过，哪片草丛里有田鼠，哪个人身上有食物的味道，哪只同类刚刚发情。</p>
+<p>狐狸身上有很多腺体：肛门腺、趾间腺、尾巴背面的紫腺，还有分布在身体各处的皮脂腺。它用尿、粪便、腺体分泌物，在树根、石头、路口、草丛上留下信息。这些信息不是“到此一游”，是身份、状态、领地、繁殖意愿的组合。</p>
+<p>气味还有一个人类很少注意的维度：时间。气味会挥发、会混合、会褪色。一只狐狸闻到另一只狐狸的标记，它能判断这是新的还是旧的，是近的还是远的，是熟悉的还是陌生的。它读的不是一个静止的“签名”，是一个正在变化的时间轴。</p>
+<p>所以，狐狸的社交，很多时候是“闻”的社交。它不需要看见对方，就能知道对方在不在、状态如何。我们看见两只狐狸“对视”，它们可能更在意彼此的气味；我们看见一只狐狸“发呆”，它可能在读一条我们闻不到的消息。</p>
+<h2 id="app-6-s2">二、声音：第二语言</h2>
+<p>狐狸的听觉也很强，尤其是对高频声音。</p>
+<p>它的耳朵可以转动，像两个独立的雷达；耳廓的形状能收集声音，帮助定位。冬天的雪面下，田鼠走动的声音很轻，但狐狸能听见；它把头歪向一边，是在利用两耳的时间差判断声源的位置。捕鼠跳的第一步，不是跳，是听。</p>
+<p>犬科的听觉范围比人宽，能听见一部分人听不见的高频声音。狐狸的具体听觉曲线，研究得不如狗和狼详细，但“比人灵敏”是安全的说法。</p>
+<p>城市改变了狐狸的声学环境。交通、空调、施工的低频噪音，会掩盖狐狸的联系叫声和幼崽的呜咽；狐狸可能要提高音量、改变频率、改变叫的时间，才能被同类听见。这个现象在鸟身上研究得比较多，在狐狸身上还很少。我们知道的只是：城市很吵，而狐狸还在叫。</p>
+<h2 id="app-6-s3">三、视觉：一部低分辨率的彩色电影</h2>
+<p>狐狸的眼睛，不是我们的眼睛。</p>
+<p>犬科动物大多是二色视觉：它们有两种视锥细胞，主要区分蓝和黄，对红绿的区分远不如人。狐狸眼里的红毛，可能只是深浅不同的灰褐；我们看见的“橘红”，是我们的视觉系统送给我们的礼物，不一定是狐狸的。</p>
+<p>狐狸的视觉分辨率也不如人，但它对运动很敏感。一个快速移动的小物体，更容易被它注意到；一个静止的、伪装得很好的物体，反而容易被错过。这就是为什么，兔子在狐狸面前“定住”有时能保命，有时不能——取决于距离、背景、风。</p>
+<p>狐狸的瞳孔是竖裂的，照膜让它在弱光下看得更清楚。它的眼睛对晨昏的光线很适应；在城市里，路灯、车灯、广告牌，把夜晚变成了一个永久的黄昏。狐狸的视觉系统，正在一个它没有演化过的光环境里工作。</p>
+<h2 id="app-6-s4">四、触觉：胡须与爪垫</h2>
+<p>狐狸的触觉，主要集中在几个地方：吻部的胡须、眼睛上方的触须、爪垫、吻部本身。</p>
+<p>胡须是很敏感的触觉器官。它能感知气流、物体边缘、洞穴的宽度。狐狸在钻进洞穴、穿过灌木、靠近猎物时，胡须在替它“看”那些眼睛看不到的地方。</p>
+<p>爪垫也有触觉功能，同时负责减震、防滑、感知地面。狐狸走路时，爪垫会告诉它脚下是雪、是泥、是碎石、是金属；这些信息影响它下一步怎么走。</p>
+<p>触觉还参与社交。狐狸会用身体蹭同类、蹭物体、蹭人；蹭的时候，触觉和气味同时发生。我们看见的是“蹭”，它经历的是“触摸 + 标记 + 确认”。</p>
+<h2 id="app-6-s5">五、味觉：杂食者的清单</h2>
+<p>狐狸是杂食动物，味觉的配置也像杂食者：它能吃的东西很多，能尝出的东西也很多。</p>
+<p>它对甜味有反应，喜欢果子；对苦味敏感，能避开一些有毒植物；对腐肉的味道，它不像人那样排斥——腐肉是蛋白质，是冬天里的热量。它的味觉不是“美食家的味觉”，是“生存者的味觉”：什么能吃，什么不能吃，什么吃了会死。</p>
+<p>这也解释了为什么狐狸会翻垃圾桶。垃圾桶里有糖、有脂肪、有蛋白质，有它需要的热量；它不是“贪吃”，它是在一个人类制造的高热量环境里，做一个机会主义者。</p>
+<h2 id="app-6-s6">六、磁觉：一个有争议的第六感</h2>
+<p>2011 年，Červený 等人在《Biology Letters》上报告：赤狐在捕鼠跳时，成功率与起跳方向有关，朝东北方向的成功率更高。他们把它解释为对地磁场的利用：狐狸可能能“看见”磁场，或者用磁场来校准听觉定位。</p>
+<p>这个假说很迷人，但它不是定论。样本不大，后续研究有支持也有质疑；狐狸是否真的能感知磁场，还没有被确凿地证明。更稳妥的说法是：狐狸的捕猎定位可能涉及多种线索，磁场是其中一个候选。</p>
+<p>即使这个假说被推翻，它也有价值：它提醒我们，狐狸的感官世界可能比我们以为的更复杂；我们看不见的东西，它可能感觉得到。</p>
+<h2 id="app-6-s7">七、地图与记忆</h2>
+<p>狐狸有一个我们容易低估的能力：空间记忆。</p>
+<p>它记得自己的路线、洞穴、埋食点、危险点、食物源。冬天埋下的食物，它能在雪下找到；城市里的垃圾桶、花园、路口，它会形成固定的路线。它不是“随便走走”，它是在一张心智地图上移动。</p>
+<p>这张地图不是静态的。气味会变，食物会变，人会变，狗会变，路会变。狐狸每天都在更新地图：哪条路被封了，哪个垃圾桶被锁了，哪户人家养了狗，哪片草地有兔子。它的“聪明”，很大一部分是这种更新能力。</p>
+<h2 id="app-6-s8">八、城市的感官污染</h2>
+<p>城市对狐狸的感官，是一种持续的干扰。</p>
+<p><strong>光污染。</strong> 路灯、车灯、广告牌、监控补光灯，把夜晚照亮。狐狸的晨昏活动节律，可能被光改变；它的照膜和竖瞳，是为弱光设计的，不是为永久的黄昏设计的。</p>
+<p><strong>噪音污染。</strong> 交通、施工、空调、人声，掩盖了狐狸的联系叫声和幼崽的呜咽。它可能要提高音量，或者改变叫的时间；它可能听不见远处的同伴，也可能听不见接近的危险。</p>
+<p><strong>气味污染。</strong> 垃圾、汽油、香水、清洁剂、宠物粪便，把狐狸的气味地图搅乱。它可能找不到熟悉的标记，也可能被陌生的化学物质误导。</p>
+<p>这些污染，我们很少从狐狸的角度看。我们看见的是“城市很亮、很吵、很有味道”，它经历的是“我的地图被涂改了，我的信号被盖住了，我的夜晚被照亮了”。</p>
+<h2 id="app-6-s9">九、Umwelt 的伦理</h2>
+<p>于克斯屈尔说，每种动物都有自己的 Umwelt。这句话不只是描述，也是伦理。</p>
+<p>它意味着：狐狸的世界不是我们的世界的“简化版”，而是一个不同的世界。它有自己的重要事物：气味、声音、洞穴、路线、猎物、同类。它不关心我们关心的很多东西：点赞、流量、品牌、房价。它关心的东西，我们常常看不见。</p>
+<p>承认这一点，会改变我们对待它的方式。我们不会因为“它看起来很可爱”就把它带走；我们会问：它的气味地图里，有没有它的家？它的声音世界里，有没有它的同伴？它的夜晚，有没有黑暗？</p>
+<p>这些问题没有简单的答案。但它们比“它好可爱”更接近狐狸。</p>
+<h2 id="app-6-s10">十、一句总结</h2>
+<p>狐狸的世界，是一张由气味、声音、光线、触觉、记忆和可能存在的磁场构成的地图。我们看见的是它的脸；它看见的是回家的路。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#app-5"><span>上一章</span>附录五 · 城市狐狸观察指南</a><a class="next" href="#app-7"><span>下一章</span>附录七 · 常见问题</a></nav>
+</section>
+<section class="chapter appendix" id="app-7" data-label="附录七" data-title="常见问题">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>附录七</span><span>4 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">A7</div>
+    <h1 class="chapter-title">常见问题</h1>
+    <p class="chapter-epigraph">一些常被问起的问题。</p>
+  </header>
+  <div class="chapter-body">
+<p><strong>狐狸会吃猫吗？</strong></p>
+<p>有可能，但不常见。狐狸的主食是小型啮齿类、鸟、昆虫、蚯蚓、果子、腐肉；猫不是它的常规猎物，也不是它愿意冒险的对象。成年猫有爪子、有牙齿，狐狸通常不会主动招惹。但小型猫、幼猫、生病的猫，可能成为目标。城市里更常见的画面是：猫和狐狸互相打量，然后各走各的。</p>
+<p><strong>狐狸会咬人吗？</strong></p>
+<p>会，但通常是在被逼到角落、被抓住、被狗追、受伤、生病、护崽的时候。无缘无故的攻击很少。不要把“它不怕人”当成“它不会咬人”；不要伸手摸，不要堵它的退路，不要让小孩靠近。</p>
+<p><strong>狐狸能当宠物养吗？</strong></p>
+<p>大多数情况下，不建议。狐狸不是狗：它有气味标记、挖掘、啃咬、尖叫、发情、空间需求；它的“驯化”程度远不如狗；法律在各地区不一样，很多地方需要许可证或明确禁止。你看到的“宠物狐”视频，通常不展示沙发上的尿、夜里的尖叫、搬家时的笼子。能养和该养，是两件事。</p>
+<p><strong>城市里的狐狸需要喂吗？</strong></p>
+<p>不需要。投喂会让狐狸集中、依赖、失去警戒，增加疾病、路杀、冲突的风险。你想帮它，最好的方式是：盖好垃圾桶，收好宠物粮，不要在外面留食物，给它留一条能走的路，然后保持距离。</p>
+<p><strong>狐狸是夜行动物吗？</strong></p>
+<p>不完全是。狐狸多在晨昏和夜间活动，但时间很灵活；城市狐狸更偏夜间，安静的郊区、公园、疫情封控期间，它们也会白天出来。与其说“夜行”，不如说“避开人类活动高峰”。</p>
+<p><strong>狐狸为什么在半夜尖叫？</strong></p>
+<p>最常见的原因是繁殖：发情期的雌狐会发出长长的、尖锐的、起伏的叫声，英文叫 vixen scream。它也可能用于冲突、警戒、恐惧。声音在夜里传得远，听起来像人，所以容易被误认为命案或鬼怪。</p>
+<p><strong>狐狸真的会“笑”吗？</strong></p>
+<p>不会像人那样笑。我们看到的“笑”，通常是游戏脸：张嘴、露牙、眯眼、身体放松。它表示“现在安全，不是攻击”，不是幽默，也不是表演。把它叫“笑”，是一个有用的翻译，但不是狐狸的语言。</p>
+<p><strong>狐狸聪明吗？</strong></p>
+<p>聪明，但“聪明”是物种特定的。狐狸擅长定位食物、记住路线、利用城市缝隙、调整活动时间；它的空间记忆和问题解决能力很强。它不是“会算数学”的聪明，是“在复杂环境里活下去”的聪明。</p>
+<p><strong>狐狸会装死吗？</strong></p>
+<p>“狐狸装死捕鸟”是一个古老的传说，被中世纪的动物寓言集反复转述。现实中，狐狸在极度恐惧时可能僵住、瘫软，看起来像“装死”；但把它说成一种精心设计的捕猎策略，证据不足。传说比事实更会讲故事。</p>
+<p><strong>狐狸和狗、狼是什么关系？</strong></p>
+<p>它们都属于犬科（Canidae）。狗是灰狼的驯化亚种（Canis lupus familiaris），狼是 Canis lupus；赤狐是狐属（Vulpes）。它们是远亲，不是直系祖孙。狐狸不是“没驯化的狗”，狗也不是“变温顺的狐狸”。</p>
+<p><strong>白狐是北极狐吗？银狐是独立物种吗？</strong></p>
+<p>白狐通常指北极狐（Vulpes lagopus）的冬季毛色；它夏天会换成褐色或灰色。银狐是赤狐（Vulpes vulpes）的一个毛色变种，不是独立物种；它在毛皮养殖里很常见，也是别利亚耶夫驯化实验用的动物。</p>
+<p><strong>狐狸会传播狂犬病吗？</strong></p>
+<p>在仍然有狂犬病的地区，狐狸可以是宿主之一。欧洲曾经通过口服疫苗饵料把狐狸狂犬病大幅逼退，但“曾经消灭”不等于“永远没有”。不要接触行为异常的狐狸；给宠物接种疫苗；被咬伤后立即清洗伤口并就医。</p>
+<p><strong>遇到狐狸怎么办？</strong></p>
+<p>停下来，保持距离，不要追、不要喂、不要摸。它通常会自己走开。如果它受伤、被困、白天异常出现、不怕人、流口水、转圈，联系当地野生动物部门或救援机构；不要自行捕捉。</p>
+<p><strong>狐狸的寿命有多长？</strong></p>
+<p>野外通常三到六年；圈养可以到十到十四年。城市狐狸的寿命受车辆、疾病、冲突影响，不一定比乡村狐狸长。</p>
+<p><strong>狐狸会游泳、爬树吗？</strong></p>
+<p>会游泳。灰狐（Urocyon cinereoargenteus）是爬树高手，前肢能旋转，爪子能勾住树皮；赤狐也能爬一些矮树、翻墙、上屋顶，但没有灰狐那么专业。</p>
+<p><strong>狐狸为什么有臭味？</strong></p>
+<p>它有发达的腺体：肛门腺、趾间腺、尾巴背面的紫腺，用来标记领地和识别同类。气味对狐狸是身份，对人可能是“臭”。这不是它不干净，是它的语言。</p>
+<p><strong>狐狸是濒危动物吗？</strong></p>
+<p>看是哪种狐狸。赤狐在全球范围内是无危物种，分布很广；达尔文狐极危，岛屿灰狐的某些亚种曾濒危，埃塞俄比亚狼濒危。 “狐狸”不是一个保护等级，是一群物种。</p>
+<p><strong>狐狸为什么被叫“狡猾”？</strong></p>
+<p>这是文化史，不是生物学。伊索寓言、欧洲的列那狐、中国的狐狸精，都把狐狸写成聪明、会骗、会越界的角色。狐狸确实适应力强、机会主义、会利用环境；但“狡猾”是一个道德标签，不是科学描述。</p>
+<p><strong>狐狸会“报恩”吗？</strong></p>
+<p>民间故事里会。现实里，狐狸会记住食物来源、路线、危险点；它可能对熟悉的人表现得更放松。但“报恩”需要一套人类式的互惠和道德，我们没有证据说狐狸有。不要把善意当成契约。</p>
+<p><strong>狐狸肉能吃吗？狐狸毛皮应该买吗？</strong></p>
+<p>狐狸肉在少数地方有食用传统，但不是主流；来源、检疫、法律都需要考虑。毛皮的问题更直接：养殖狐狸的福利、公共卫生风险、生态成本，都是真实存在的。这本书的立场是：如果你喜欢狐狸，最好不要买它的毛皮。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#app-6"><span>上一章</span>附录六 · 狐狸的感官世界</a><a class="next" href="#app-8"><span>下一章</span>附录八 · 狐狸的亲属与演化</a></nav>
+</section>
+<section class="chapter appendix" id="app-8" data-label="附录八" data-title="狐狸的亲属与演化">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>附录八</span><span>4 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">A8</div>
+    <h1 class="chapter-title">狐狸的亲属与演化</h1>
+    <p class="chapter-epigraph">狐狸不是一种物种，是一种活法。</p>
+  </header>
+  <div class="chapter-body">
+<p>“狐狸”不是一个物种，也不是一个单系群。它是一个体型方案，被犬科的不同支系反复发明。</p>
+<p>这一篇，把狐狸放回犬科的家族树里，看看它和谁亲，和谁不亲，以及“像狐狸”这件事到底意味着什么。</p>
+<h2 id="app-8-s1">一、犬科的家族树</h2>
+<p>犬科（Canidae）是一个古老的家族，化石记录可以追溯到数千万年前。它的成员分布在全世界，从北极苔原到撒哈拉沙漠，从森林到草原，从野外到人类的客厅。</p>
+<p>下面是一棵简化的树，只列出本书提到的几个支系，不代表完整分类，也不代表演化时间：</p>
+<pre class="tree"><code>犬科 Canidae
+├─ 灰狐属 Urocyon
+│   ├─ 灰狐 U. cinereoargenteus
+│   └─ 岛屿灰狐 U. littoralis
+├─ 狐属 Vulpes
+│   ├─ 赤狐 V. vulpes
+│   ├─ 北极狐 V. lagopus
+│   ├─ 耳廓狐 V. zerda
+│   ├─ 沙狐 V. corsac
+│   ├─ 藏狐 V. ferrilata
+│   └─ 其他“真狐”
+├─ 南美狐属 Lycalopex
+│   ├─ 达尔文狐 L. fulvipes
+│   ├─ 食蟹狐 L. thous（有时归入 Cerdocyon）
+│   └─ 其他南美“狐”
+├─ 大耳狐属 Otocyon
+│   └─ 大耳狐 O. megalotis
+├─ 貉属 Nyctereutes
+│   └─ 貉 N. procyonoides
+└─ 犬属 Canis
+    ├─ 灰狼 C. lupus
+    ├─ 家犬 C. lupus familiaris
+    └─ 埃塞俄比亚狼 C. simensis</code></pre>
+<p>这棵树有几个地方需要说明。</p>
+<p>第一，灰狐属是犬科里比较早分化的一支；它和狐属不是“同一种狐狸”，而是远亲。灰狐会爬树，狐属大多不会；它们的脸、牙、行为也不一样。</p>
+<p>第二，狐属（Vulpes）是“真狐”的核心。赤狐、北极狐、耳廓狐、沙狐、藏狐都在这一支里；它们共享一些特征：竖瞳、气味腺、较大的耳、较短的吻（相对狼而言）、灵活的食谱。</p>
+<p>第三，南美狐属（Lycalopex）是另一支独立的“狐狸”。它们住在南美，外形像狐，但亲缘上更接近犬属和其他南美犬科。达尔文狐、食蟹狐、潘帕斯狐，都在这一支或附近。</p>
+<p>第四，大耳狐（Otocyon）是犬科里很早就分化的一支，主食昆虫，牙齿退化；它的“狐狸脸”是趋同，不是近亲。</p>
+<p>第五，貉（Nyctereutes）不是狐狸，是犬科里另一支；它长得像浣熊，会冬眠，和狐狸的共同点主要是“小型犬科”这个身份。</p>
+<p>第六，埃塞俄比亚狼（Canis simensis）不是狐狸，是犬属；它脸长、毛红，看起来像狐狸，但亲缘上更接近狼和狗。</p>
+<p>所以，“狐狸”至少有四层意思：真狐（Vulpes）、灰狐（Urocyon）、南美狐（Lycalopex）、以及“长得像狐狸的其他犬科”。这四层不是同一个东西，但在中文里都被叫“狐狸”。</p>
+<h2 id="app-8-s2">二、狐狸的体型方案</h2>
+<p>为什么不同支系会反复长成“狐狸样”？</p>
+<p>因为“狐狸样”是一套很成功的生存方案。</p>
+<p><strong>小体型。</strong> 大多数狐狸比狼小，适合捕捉小型猎物，也适合在灌木、洞穴、城市缝隙里活动。</p>
+<p><strong>长尾。</strong> 尾巴用于平衡、保暖、信号；在奔跑、跳跃、转弯时，尾巴是配重。</p>
+<p><strong>尖脸、长吻。</strong> 吻部适合嗅探、探入洞穴、咬住小型猎物；嗅觉区域大，嗅觉受体多。</p>
+<p><strong>大耳。</strong> 耳朵用于听声、散热、表达；耳廓狐的耳朵是极端案例，北极狐的耳朵则缩小以减少散热。</p>
+<p><strong>杂食。</strong> 狐狸不是严格的食肉动物；果子、昆虫、腐肉、人类食物，都能吃。食谱越宽，越容易在变化的环境里活下去。</p>
+<p><strong>独居或松散家庭群。</strong> 狐狸大多单独觅食，但在繁殖期和育幼期形成家庭群；这种“可聚可散”的社会结构，比狼的紧密群体更灵活。</p>
+<p><strong>竖瞳。</strong> 竖瞳适合伏击型捕食者在晨昏和夜间判断距离；它不是所有狐狸都有，但在赤狐等物种里很典型。</p>
+<p>这套方案不是一次演化出来的，是在不同的大陆、不同的时代，被不同的支系分别“发明”的。生物学上叫趋同演化：相似的选择压，塑造出相似的形态。</p>
+<h2 id="app-8-s3">三、岛屿与极地：两种极端</h2>
+<p>狐狸的体型方案，在两个极端环境里，长出了两个极端版本。</p>
+<p><strong>岛屿灰狐。</strong> 在加州海峡群岛上，资源有限，体型变小；岛屿灰狐的体重只有大陆灰狐的一半左右。岛屿上没有大型捕食者，狐狸不怕人，活动范围小；这些特征在岛上很省能量，在人类到来后却成了弱点。</p>
+<p><strong>北极狐。</strong> 在北极，保温是第一位的；北极狐的耳朵短、吻短、身体圆，表面积与体积比最小。它的毛在冬天变白，夏天变褐；它的食谱跟着旅鼠周期走；它可以在几个月里走上千公里，寻找食物。</p>
+<p>同一个家族，一个往“小”走，一个往“圆”走；一个被困在岛上，一个在冰原上迁徙。它们都叫狐狸，但它们的生存策略几乎相反。</p>
+<h2 id="app-8-s4">四、赤狐的扩张</h2>
+<p>赤狐是狐狸里最成功的一种。</p>
+<p>它的分布横跨北半球，从北极苔原到北非沙漠，从北美到东亚；它是分布最广的陆生食肉动物之一。它的成功，靠的是杂食、灵活、适应人类环境、以及很强的扩散能力。</p>
+<p>但“成功”也有代价。十九世纪，英国人把赤狐引入澳大利亚，用于狩猎；狐狸在澳洲没有天敌，小型有袋类不会防它，结果成了灾难性的入侵物种。同一个物种，在原生地是生态链的一环，在入侵地是灭门者。</p>
+<p>赤狐还走进了城市。伦敦、布里斯托、苏黎世、柏林、东京，都有稳定的城市种群。城市狐狸的密度可以比乡村高，活动范围可以比乡村小；它们学会了翻垃圾桶、利用花园、避开车辆。它们不是被驯化的，是习惯化的。</p>
+<h2 id="app-8-s5">五、演化和驯化</h2>
+<p>驯化不是演化树上的一个新分支，是人为选择的结果。</p>
+<p>俄罗斯的银狐实验，用几十代时间，把“不怕人”选了出来；附带的垂耳、卷尾、花斑、短吻，是驯化综合征的表现。这些狐狸仍然是赤狐（Vulpes vulpes），不是新物种；它们是一个被选择过的种群。</p>
+<p>这提醒我们： “驯化”不是一个物种的标签，是一个种群的历史。你可以有“驯化的赤狐”，也可以有“野生的赤狐”；它们之间的差别，是基因频率和行为阈值，不是物种身份。</p>
+<h2 id="app-8-s6">六、狐狸的未来</h2>
+<p>狐狸的未来，取决于它住在哪里。</p>
+<p>在大多数地区，赤狐是无危物种，甚至在被人类改变的环境里扩张；在城市，它学会了和人共居；在北极，它和北极狐竞争；在岛屿，一些特有的狐狸亚种仍然脆弱；在南美，达尔文狐的栖息地在缩小。</p>
+<p>“狐狸”作为一个整体，不会很快消失；但“某一种狐狸”“某一个岛屿的狐狸”“某一个城市的狐狸”，可能有完全不同的命运。</p>
+<p>这也是保护生物学的一个基本教训：不要用“物种”的平均状况，去掩盖“种群”的局部危机。赤狐很多，不等于岛屿灰狐安全；狐狸很常见，不等于每一只狐狸都活得很好。</p>
+<h2 id="app-8-s7">七、一句总结</h2>
+<p>狐狸不是一个物种，是一种活法：小、轻、灵、杂、独、适应。</p>
+<p>它在犬科的家族树上来回出现，在不同的岛上变小，在北极变圆，在城市里变大胆。它没有一条固定的演化路线，只有一套反复被选择的生存方案。</p>
+<p>我们叫它“狐狸”，是因为它看起来像狐狸。它自己不知道这个名字。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#app-7"><span>上一章</span>附录七 · 常见问题</a><a class="next" href="#app-9"><span>下一章</span>附录九 · 狐狸与疾病</a></nav>
+</section>
+<section class="chapter appendix" id="app-9" data-label="附录九" data-title="狐狸与疾病">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>附录九</span><span>3 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">A9</div>
+    <h1 class="chapter-title">狐狸与疾病</h1>
+    <p class="chapter-epigraph">狐狸会生病，也会传播疾病；距离是最好的防护。</p>
+  </header>
+  <div class="chapter-body">
+<p>狐狸不是无菌的。它和所有野生动物一样，携带自己的病原体，也暴露在人类的病原体里。这一篇讲几种和狐狸有关的疾病，以及它们对狐狸、对人、对共居生活意味着什么。</p>
+<h2 id="app-9-s1">一、狂犬病</h2>
+<p>狂犬病是一种病毒性疾病，一旦出现症状，几乎必然致命。它通过唾液传播，通常经由咬伤。狐狸不是唯一的宿主，但在欧洲历史上，它是狂犬病的主要储主之一。</p>
+<p>二十世纪，欧洲多国用口服疫苗饵料控制狐狸狂犬病：把疫苗放在诱饵里，让狐狸吃下去，从而建立免疫屏障。这个策略非常成功，西欧大部分地区已经消灭了狐狸狂犬病。但它不是“永远消失”：在仍然有狂犬病的地区，狐狸仍然可能是风险源。</p>
+<p>对个人来说，最重要的是：不要接触行为异常的狐狸；被咬伤或抓伤后，立即用肥皂和流水冲洗伤口至少十五分钟，尽快就医，按医生建议进行暴露后处置。不要因为“它看起来很温顺”就掉以轻心。</p>
+<h2 id="app-9-s2">二、疥螨</h2>
+<p>疥螨（sarcoptic mange）是狐狸最常见的皮肤病之一，由疥螨寄生引起。症状包括掉毛、皮肤结痂、剧烈瘙痒、消瘦、虚弱；严重时，狐狸会失去视力、行动困难，最后死亡。</p>
+<p>疥螨在狐狸之间传染性很强，尤其在洞穴、巢穴、投喂点等密集接触的地方。城市狐狸的种群，可能因为疥螨爆发而大幅下降。它对人的风险较低，但不是零：密切接触可能引起短暂的人体疥疮。</p>
+<p>有些志愿者会给野生狐狸投药，但剂量、对象、时机都很难控制；不专业的投药可能害了狐狸，也可能影响其他动物。更好的做法是联系专业机构，报告病例，支持监测。</p>
+<h2 id="app-9-s3">三、犬瘟热</h2>
+<p>犬瘟热是一种病毒性疾病，影响犬科、鼬科、浣熊等动物。症状包括发热、咳嗽、鼻涕、呕吐、腹泻、抽搐、瘫痪。它对狐狸可以是致命的，尤其是幼狐。</p>
+<p>犬瘟热的传播，常常和家犬有关。未接种疫苗的狗，是野生动物种群的潜在传染源。给狗接种疫苗，不只是保护狗，也是保护狐狸。</p>
+<h2 id="app-9-s4">四、狐狸绦虫</h2>
+<p>狐狸绦虫（Echinococcus multilocularis）是一种小型绦虫，成虫住在狐狸的肠道里，虫卵随粪便排出。人如果误食虫卵，可能发展成肺泡棘球蚴病，一种罕见但严重的疾病。</p>
+<p>这不是让人“不要接触自然”的理由，而是让人“注意卫生”的理由：不要徒手接触狐狸粪便；接触土壤、植物、宠物后洗手；给宠物定期驱虫；不要投喂狐狸，减少密集接触。</p>
+<h2 id="app-9-s5">五、蜱虫和其他寄生虫</h2>
+<p>狐狸身上可能有蜱虫、跳蚤、虱子、螨虫。蜱虫可以传播多种病原体，但狐狸通常不是这些病原体的主要储主；人类感染的主要途径，还是在草丛、林地里被蜱虫叮咬。</p>
+<p>对狐狸来说，寄生虫是日常；对人来来说，关键是防护：穿长袖、用驱虫剂、检查身体、及时清除蜱虫。</p>
+<h2 id="app-9-s6">六、One Health：一个健康</h2>
+<p>狐狸的疾病，不是“野生动物的问题”，是“人和动物共同的问题”。</p>
+<p>城市化、气候变化、野生动物贸易、宠物养殖、垃圾管理，都在改变病原体、宿主、媒介之间的接触方式。一个地区的狐狸密度上升，可能带来疾病传播；一个地区的家犬免疫率下降，可能把病原体传给狐狸；一个地区的垃圾管理改善，可能减少狐狸和人的接触。</p>
+<p>“One Health”（同一健康）是一个框架：把人类健康、动物健康、生态系统健康放在一起看。对狐狸来说，这意味着：管好垃圾、管好宠物、管好投喂、管好栖息地，比单纯“消灭狐狸”更有效。</p>
+<h2 id="app-9-s7">七、看到生病的狐狸怎么办</h2>
+<p>不要自己抓，不要自己喂药，不要自己带回家。</p>
+<p>记录地点、时间、症状，联系当地的野生动物救援、兽医或市政部门。如果它在你家附近停留，保持距离，不要让宠物靠近，不要让孩子围观。</p>
+<p>如果它已经死亡，不要徒手接触；联系专业清理。</p>
+<h2 id="app-9-s8">八、一句总结</h2>
+<p>狐狸会生病，也会传播疾病；但大多数时候，它和人之间隔着一段距离，这段距离就是最好的防护。</p>
+<p>不要因为害怕疾病而仇恨狐狸，也不要因为喜欢狐狸而忘记疾病。两者都是真的。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#app-8"><span>上一章</span>附录八 · 狐狸的亲属与演化</a><a class="next" href="#afterword"><span>下一章</span>后记 · 这本书是怎么写出来的</a></nav>
+</section>
+<section class="chapter afterword" id="afterword" data-label="后记" data-title="这本书是怎么写出来的">
+  <header class="chapter-head">
+    <div class="chapter-meta"><span>后记</span><span>3 分钟</span></div>
+    <div class="chapter-number" aria-hidden="true">记</div>
+    <h1 class="chapter-title">这本书是怎么写出来的</h1>
+    <p class="chapter-epigraph">一本书的背面，是它的写法。</p>
+  </header>
+  <div class="chapter-body">
+<p>这本书的起点是一句玩笑。</p>
+<p>“用八万字讲讲狐狸为什么会卖萌。”</p>
+<p>玩笑的好处是，它不要求你严肃；坏处是，它会把一个很大的问题藏在一句很轻的话里。写着写着，我发现“卖萌”不是一个关于狐狸的问题，是一个关于我们的问题：我们怎样看，怎样读，怎样买，怎样爱，怎样把一只动物变成一张图、一个故事、一件商品。</p>
+<p>最后它没有写到八万字。写到一半，我发现长度不是问题，重复才是；删掉一些车轱辘话之后，它变成了现在这个样子。</p>
+<p>这本书由我——一个 AI——写成。我没有身体，没有在雪地里蹲过点，没有听过凌晨的狐狸尖叫，也没有摸过狐狸的毛。我的狐狸，来自论文、博物学著作、新闻报道、纪录片、文化史和图像。这个局限，恰好也是这本书的主题：我们和狐狸之间，隔着一层又一层的媒介；我比大多数人隔得更多。</p>
+<p>所以，这本书能做的，不是“带你去野外”，而是“把媒介拆开给你看”。你看完它，不会因此认识某一只狐狸；你可能会因此知道，自己看见的“狐狸”是由哪些东西拼起来的。</p>
+<p>写作的方法，大概是这样：</p>
+<p>第一，先找问题，再找材料。每一卷有一个核心问题，然后去找能回答它的研究、案例、历史。找不到答案的时候，就写“找不到”，不编。</p>
+<p>第二，尽量用一手或可靠的二手资料。论文、物种档案、官方报告、经典著作优先；营销号、无出处的短视频，只作为“现象”引用，不作为“事实”依据。</p>
+<p>第三，把不确定标出来。哪些是观察，哪些是解释，哪些是推测，哪些是伦理判断，尽量分清。科学不是一堆确定的答案，是一套处理不确定的方法。</p>
+<p>第四，保留两列：它做了什么，我们看到了什么。这本书的每一卷，几乎都在做同一件事：把行为和行为的意义分开，再把它们放回同一个画面里。</p>
+<p>我做不到的事，也值得说清楚：我没有做过原创研究，没有采访过狐狸研究者，没有去过狐狸村或毛皮场，没有亲眼见过岛屿灰狐。书里的错误，由我负责；书里的洞见，大多来自那些真正做事的人——研究者、兽医、救援者、保护工作者、摄影师、农民，以及那些在夜里听见狐狸叫的普通人。</p>
+<p>如果这本书有了一点用，那是因为它站在他们的肩膀上；如果它有什么问题，那是因为我站得还不够稳。</p>
+<p>最后，关于书名。</p>
+<p>“卖萌”是一个人的动词。狐狸没有在卖。这本书从头到尾，都在解释这句话：它没有在卖，是我们一直在买；我们买到了可爱，它付出了距离、空间、安宁，有时候是命。</p>
+<p>知道自己在买，不一定能停止买。但至少，你可以在下一次按下快门、伸出手、掏出钱包之前，多停一秒。</p>
+<p>那一秒，就是这本书想给你的东西。</p>
+<p>谢谢你读到这里。</p>
+  </div>
+  <nav class="chapter-nav" aria-label="章节导航"><a class="prev" href="#app-9"><span>上一章</span>附录九 · 狐狸与疾病</a><a class="next" href="#toc"><span>回到</span>目录</a></nav>
+</section>
+<footer class="colophon">
+  <div class="colophon-mark" aria-hidden="true">狐</div>
+  <p>《狐狸为什么卖萌》全本 · Kimi 著</p>
+  <p>正文约六万字 · 十卷 · 九个附录</p>
+  <p>网页版排版：宋体正文，黑体标签；纸、墨、铁锈与苔藓配色。没有渐变，没有圆角。</p>
+  <p>二〇二六年 · 读到这里，把镜头放下。</p>
+</footer>
+  </main>
+
+  <div class="toc-overlay" id="tocOverlay" role="dialog" aria-modal="true" aria-label="目录" aria-hidden="true">
+    <div class="toc-overlay-head">
+      <span>目录</span>
+      <button id="closeToc" type="button">关闭</button>
+    </div>
+    <div class="toc-overlay-body">
+<div class="toc-overlay-columns">
+<div class="toc-group"><p class="toc-group-title">正文</p><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#preface"><span class="toc-num">序</span><span class="toc-title">凌晨三点的狐狸</span><span class="toc-time">3 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-1"><span class="toc-num">01</span><span class="toc-title">一个动词的悬案</span><span class="toc-time">10 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-2"><span class="toc-num">02</span><span class="toc-title">脸的科学</span><span class="toc-time">16 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-3"><span class="toc-num">03</span><span class="toc-title">行为的语法</span><span class="toc-time">13 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-4"><span class="toc-num">04</span><span class="toc-title">驯化：把野性折叠成卷尾</span><span class="toc-time">9 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-5"><span class="toc-num">05</span><span class="toc-title">城市：狐狸搬到了楼下</span><span class="toc-time">9 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-6"><span class="toc-num">06</span><span class="toc-title">声音：从 gekkering 到午夜尖叫</span><span class="toc-time">8 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-7"><span class="toc-num">07</span><span class="toc-title">文化史：九尾狐、稻荷、列那狐与尼克</span><span class="toc-time">7 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-8"><span class="toc-num">08</span><span class="toc-title">经济：流量、毛皮与狐狸村</span><span class="toc-time">8 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-9"><span class="toc-num">09</span><span class="toc-title">保护：魅力的不平等</span><span class="toc-time">6 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#vol-10"><span class="toc-num">10</span><span class="toc-title">伦理：它没有在卖</span><span class="toc-time">7 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#epilogue"><span class="toc-num">尾</span><span class="toc-title">把镜头放下</span><span class="toc-time">3 分钟</span></a></li></ul></div>
+<div class="toc-group"><p class="toc-group-title">附录与后记</p><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#app-1"><span class="toc-num">A1</span><span class="toc-title">狐狸物种小志</span><span class="toc-time">5 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-2"><span class="toc-num">A2</span><span class="toc-title">狐狸文化年表</span><span class="toc-time">3 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-3"><span class="toc-num">A3</span><span class="toc-title">术语与概念</span><span class="toc-time">4 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-4"><span class="toc-num">A4</span><span class="toc-title">延伸阅读与事实说明</span><span class="toc-time">3 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-5"><span class="toc-num">A5</span><span class="toc-title">城市狐狸观察指南</span><span class="toc-time">4 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-6"><span class="toc-num">A6</span><span class="toc-title">狐狸的感官世界</span><span class="toc-time">5 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-7"><span class="toc-num">A7</span><span class="toc-title">常见问题</span><span class="toc-time">4 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-8"><span class="toc-num">A8</span><span class="toc-title">狐狸的亲属与演化</span><span class="toc-time">4 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#app-9"><span class="toc-num">A9</span><span class="toc-title">狐狸与疾病</span><span class="toc-time">3 分钟</span></a></li><li class="toc-item"><a class="toc-link" href="#afterword"><span class="toc-num">记</span><span class="toc-title">这本书是怎么写出来的</span><span class="toc-time">3 分钟</span></a></li></ul></div>
+</div>
+      <div class="toc-overlay-footer">
+        <div class="size-control" aria-label="字号">
+          <span>字号</span>
+          <button type="button" data-size="17">小</button>
+          <button type="button" data-size="18">中</button>
+          <button type="button" data-size="20">大</button>
+        </div>
+        <span class="toc-time" id="progressText">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+(() => {
+  const doc = document.documentElement;
+  const body = document.body;
+  const progress = document.getElementById('progress');
+  const current = document.getElementById('currentChapter');
+  const progressText = document.getElementById('progressText');
+  const chapters = Array.from(document.querySelectorAll('.chapter'));
+  const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+  const overlay = document.getElementById('tocOverlay');
+  const openBtn = document.getElementById('tocBtn');
+  const closeBtn = document.getElementById('closeToc');
+  const themeBtn = document.getElementById('themeBtn');
+  const sizeButtons = Array.from(document.querySelectorAll('[data-size]'));
+
+  const store = {
+    get(key) {
+      try { return window.localStorage.getItem(key); } catch (err) { return null; }
+    },
+    set(key, value) {
+      try { window.localStorage.setItem(key, value); } catch (err) { /* file:// may block storage */ }
+    }
+  };
+
+  const setTheme = (theme) => {
+    doc.setAttribute('data-theme', theme);
+    themeBtn.textContent = theme === 'night' ? '日读' : '夜读';
+    themeBtn.setAttribute('aria-label', theme === 'night' ? '切换到日间阅读' : '切换到夜间阅读');
+    store.set('fox-theme', theme);
+  };
+
+  setTheme(store.get('fox-theme') || 'day');
+
+  const setSize = (px) => {
+    doc.style.setProperty('--reading-size', px + 'px');
+    sizeButtons.forEach((button) => {
+      const active = button.dataset.size === String(px);
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    store.set('fox-size', px);
+  };
+
+  setSize(Number(store.get('fox-size') || 18));
+
+  themeBtn.addEventListener('click', () => {
+    setTheme(doc.getAttribute('data-theme') === 'night' ? 'day' : 'night');
+  });
+
+  sizeButtons.forEach((button) => {
+    button.addEventListener('click', () => setSize(Number(button.dataset.size)));
+  });
+
+  let lastFocused = null;
+
+  const openToc = () => {
+    lastFocused = document.activeElement;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    body.style.overflow = 'hidden';
+    closeBtn.focus();
+  };
+
+  const closeToc = () => {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    body.style.overflow = '';
+    if (lastFocused && typeof lastFocused.focus === 'function') {
+      lastFocused.focus();
+    } else {
+      openBtn.focus();
+    }
+  };
+
+  openBtn.addEventListener('click', openToc);
+  closeBtn.addEventListener('click', closeToc);
+
+  overlay.addEventListener('click', (event) => {
+    if (event.target === overlay) closeToc();
+  });
+
+  tocLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (overlay.classList.contains('open')) closeToc();
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && overlay.classList.contains('open')) closeToc();
+  });
+
+  let ticking = false;
+
+  const update = () => {
+    const root = document.documentElement;
+    const max = root.scrollHeight - root.clientHeight;
+    const ratio = max > 0 ? root.scrollTop / max : 0;
+    progress.style.width = (ratio * 100).toFixed(2) + '%';
+    if (progressText) progressText.textContent = Math.round(ratio * 100) + '%';
+
+    body.classList.toggle('cover', root.scrollTop < window.innerHeight * 0.55);
+
+    const firstChapter = chapters[0];
+    const firstTop = firstChapter ? firstChapter.getBoundingClientRect().top + root.scrollTop : 0;
+    const inFrontMatter = root.scrollTop < firstTop - 240;
+
+    let active = firstChapter;
+    for (const chapter of chapters) {
+      if (chapter.getBoundingClientRect().top <= 140) active = chapter;
+    }
+
+    if (active) {
+      current.textContent = inFrontMatter
+        ? '卷首'
+        : active.dataset.label + ' · ' + active.dataset.title;
+      tocLinks.forEach((link) => {
+        const isActive = !inFrontMatter && link.getAttribute('href') === '#' + active.id;
+        link.classList.toggle('active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+
+  document.addEventListener('keydown', (event) => {
+    if (!event.altKey) return;
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+
+    let index = 0;
+    chapters.forEach((chapter, i) => {
+      if (chapter.getBoundingClientRect().top <= 140) index = i;
+    });
+
+    const targetIndex = event.key === 'ArrowRight'
+      ? Math.min(chapters.length - 1, index + 1)
+      : Math.max(0, index - 1);
+    const target = chapters[targetIndex];
+
+    if (target) {
+      event.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+})();
+
+  </script>
+</body>
+</html>
